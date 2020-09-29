@@ -19,18 +19,18 @@ class WebhookClean
      */
     protected $helper;
     /**
-     * @var \SqualoMail\SqmMcMagentoTwo\Model\MailChimpWebhookRequest
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\SqmMcWebhookRequest
      */
     protected $webhooks;
 
     /**
      * WebhookClean constructor.
      * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
-     * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpWebhookRequest $webhookRequest
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\SqmMcWebhookRequest $webhookRequest
      */
     public function __construct(
         \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
-        \SqualoMail\SqmMcMagentoTwo\Model\MailChimpWebhookRequest $webhookRequest
+        \SqualoMail\SqmMcMagentoTwo\Model\SqmMcWebhookRequest $webhookRequest
     ) {
         $this->helper   = $helper;
         $this->webhooks = $webhookRequest;

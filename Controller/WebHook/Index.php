@@ -34,7 +34,7 @@ class Index extends Action implements CsrfAwareActionInterface
      */
     protected $_helper;
     /**
-     * @var \SqualoMail\SqmMcMagentoTwo\Model\MailChimpWebhookRequestFactory
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\SqmMcWebhookRequestFactory
      */
     protected $_chimpWebhookRequestFactory;
     private $_remoteAddress;
@@ -43,13 +43,13 @@ class Index extends Action implements CsrfAwareActionInterface
      * Index constructor.
      * @param Context $context
      * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
-     * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpWebhookRequestFactory $chimpWebhookRequestFactory
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\SqmMcWebhookRequestFactory $chimpWebhookRequestFactory
      * @param \Magento\Framework\HTTP\PhpEnvironment\RemoteAddress $remoteAddress
      */
     public function __construct(
         Context $context,
         \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
-        \SqualoMail\SqmMcMagentoTwo\Model\MailChimpWebhookRequestFactory $chimpWebhookRequestFactory,
+        \SqualoMail\SqmMcMagentoTwo\Model\SqmMcWebhookRequestFactory $chimpWebhookRequestFactory,
         \Magento\Framework\HTTP\PhpEnvironment\RemoteAddress $remoteAddress
     ) {
     

@@ -33,7 +33,7 @@ class UpgradeData implements UpgradeDataInterface
      */
     protected $_insterestGroupCollectionFactory;
     /**
-     * @var \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpWebhookRequest\CollectionFactory
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcWebhookRequest\CollectionFactory
      */
     protected $_webhookCollectionFactory;
     /**
@@ -50,7 +50,7 @@ class UpgradeData implements UpgradeDataInterface
      * @param ResourceConnection $resource
      * @param DeploymentConfig $deploymentConfig
      * @param \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcInterestGroup\CollectionFactory $interestGroupCollectionFactory
-     * @param \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpWebhookRequest\CollectionFactory $webhookCollectionFactory
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcWebhookRequest\CollectionFactory $webhookCollectionFactory
      * @param \Magento\Config\Model\ResourceModel\Config\Data\CollectionFactory $configFactory
      * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      */
@@ -58,7 +58,7 @@ class UpgradeData implements UpgradeDataInterface
         ResourceConnection $resource,
         DeploymentConfig $deploymentConfig,
         \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcInterestGroup\CollectionFactory $interestGroupCollectionFactory,
-        \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpWebhookRequest\CollectionFactory $webhookCollectionFactory,
+        \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcWebhookRequest\CollectionFactory $webhookCollectionFactory,
         \Magento\Config\Model\ResourceModel\Config\Data\CollectionFactory $configFactory,
         \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
     ) {
@@ -124,7 +124,7 @@ class UpgradeData implements UpgradeDataInterface
             }
             // convert table mailchimp_webhook_request
             /**
-             * @var \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpWebhookRequest $webhookItem
+             * @var \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcWebhookRequest $webhookItem
              */
             $lastId = 0;
             $done = false;

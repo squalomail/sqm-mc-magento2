@@ -8,15 +8,15 @@
  * @copyright Ebizmarts (http://ebizmarts.com)
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @date: 5/26/17 11:32 AM
- * @file: MailChimpWebhookRequest.php
+ * @file: SqmMcWebhookRequest.php
  */
 
 namespace SqualoMail\SqmMcMagentoTwo\Model;
 
-class MailChimpWebhookRequest extends \Magento\Framework\Model\AbstractModel
+class SqmMcWebhookRequest extends \Magento\Framework\Model\AbstractModel
 {
     protected function _construct()
     {
-        $this->_init(\SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpWebhookRequest::class);
+        $this->_init(\SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcWebhookRequest::class);
     }
 }

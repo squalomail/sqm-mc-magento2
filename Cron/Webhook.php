@@ -39,7 +39,7 @@ class Webhook
      */
     protected $_subscriberFactory;
     /**
-     * @var \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpWebhookRequest\CollectionFactory
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcWebhookRequest\CollectionFactory
      */
     protected $_webhookCollection;
     /**
@@ -60,7 +60,7 @@ class Webhook
      * Webhook constructor.
      * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      * @param \Magento\Newsletter\Model\SubscriberFactory $subscriberFactory
-     * @param \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpWebhookRequest\CollectionFactory $webhookCollection
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcWebhookRequest\CollectionFactory $webhookCollection
      * @param \SqualoMail\SqmMcMagentoTwo\Model\SqmMcInterestGroupFactory $interestGroupFactory
      * @param \Magento\Store\Model\StoreManager $storeManager
      * @param \Magento\Customer\Model\CustomerFactory $customer
@@ -68,7 +68,7 @@ class Webhook
     public function __construct(
         \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
         \Magento\Newsletter\Model\SubscriberFactory $subscriberFactory,
-        \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpWebhookRequest\CollectionFactory $webhookCollection,
+        \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcWebhookRequest\CollectionFactory $webhookCollection,
         \SqualoMail\SqmMcMagentoTwo\Model\SqmMcInterestGroupFactory $interestGroupFactory,
         \Magento\Store\Model\StoreManager $storeManager,
         \Magento\Customer\Model\CustomerFactory $customer
@@ -89,13 +89,13 @@ class Webhook
     {
         $this->_loadGroups();
         /**
-         * @var $collection \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpWebhookRequest\Collection
+         * @var $collection \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcWebhookRequest\Collection
          */
         $collection = $this->_webhookCollection->create();
         $collection->addFieldToFilter('processed', ['eq'=>self::NOT_PROCESSED]);
         $collection->getSelect()->limit(self::BATCH_LIMIT);
         /**
-         * @var $item \SqualoMail\SqmMcMagentoTwo\Model\MailChimpWebhookRequest
+         * @var $item \SqualoMail\SqmMcMagentoTwo\Model\SqmMcWebhookRequest
          */
         foreach ($collection as $item) {
             try {
