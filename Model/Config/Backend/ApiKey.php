@@ -81,17 +81,17 @@ class ApiKey extends \Magento\Framework\App\Config\Value
         }
         if ($active && $this->isValueChanged()) {
             $mailchimpStore = $this->_helper->getConfigValue(
-                \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_MAILCHIMP_STORE,
+                \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_SQM_MC_STORE,
                 $this->getScopeId(),
                 $this->getScope()
             );
             $this->resourceConfig->deleteConfig(
-                \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_MAILCHIMP_STORE,
+                \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_SQM_MC_STORE,
                 $this->getScope(),
                 $this->getScopeId()
             );
             foreach ($this->_storeManager->getStores() as $storeId => $val) {
-                if ($this->_helper->getConfigValue(\SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_MAILCHIMP_STORE, $storeId) ==
+                if ($this->_helper->getConfigValue(\SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_SQM_MC_STORE, $storeId) ==
                     $mailchimpStore) {
                     $found++;
                 }

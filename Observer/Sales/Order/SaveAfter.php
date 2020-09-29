@@ -37,7 +37,7 @@ class SaveAfter implements \Magento\Framework\Event\ObserverInterface
     {
         $order = $observer->getEvent()->getOrder();
         $mailchimpStoreId = $this->_helper->getConfigValue(
-            \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_MAILCHIMP_STORE,
+            \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_SQM_MC_STORE,
             $order->getStoreId()
         );
         $this->_helper->saveEcommerceData(

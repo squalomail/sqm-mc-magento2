@@ -48,7 +48,7 @@ class Mailchimpjs extends \Magento\Framework\View\Element\Template
         $storeId = $this->_storeManager->getStore()->getId();
 
         $url = $this->_scopeConfig->getValue(
-            \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_MAILCHIMP_JS_URL, ScopeInterface::SCOPE_STORES,
+            \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_SQM_MC_JS_URL, ScopeInterface::SCOPE_STORES,
             $storeId
         );
         $active = $this->_scopeConfig->getValue(

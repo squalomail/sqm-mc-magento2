@@ -134,7 +134,7 @@ class Ecommerce
                 $this->_storeManager->setCurrentStore($storeId);
                 $listId = $this->_helper->getGeneralList($storeId);
                 $mailchimpStoreId = $this->_helper->getConfigValue(
-                    \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_MAILCHIMP_STORE,
+                    \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_SQM_MC_STORE,
                     $storeId
                 );
                 if ($mailchimpStoreId != -1 && $mailchimpStoreId != '') {
@@ -165,7 +165,7 @@ class Ecommerce
         $syncs = [];
         foreach ($this->_storeManager->getStores() as $storeId => $val) {
             $mailchimpStoreId = $this->_helper->getConfigValue(
-                \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_MAILCHIMP_STORE,
+                \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_SQM_MC_STORE,
                 $storeId
             );
             if ($mailchimpStoreId != -1 && $mailchimpStoreId != '') {

@@ -35,7 +35,7 @@ class Invoice
         InvoiceInterface $invoice
     ) {
         $mailchimpStoreId = $this->_helper->getConfigValue(
-            \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_MAILCHIMP_STORE,
+            \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_SQM_MC_STORE,
             $invoice->getStoreId()
         );
         $this->_helper->saveEcommerceData(

@@ -91,10 +91,10 @@ class Getresponse extends \Magento\Backend\App\Action
             }
             $baseDir = $this->_helper->getBaseDir();
             if ($this->_driver->isDirectory($baseDir . DIRECTORY_SEPARATOR . 'var' . DIRECTORY_SEPARATOR .
-                \SqualoMail\SqmMcMagentoTwo\Model\Api\Result::MAILCHIMP_TEMP_DIR . DIRECTORY_SEPARATOR . $batchId)) {
+                \SqualoMail\SqmMcMagentoTwo\Model\Api\Result::SQM_MC_TEMP_DIR . DIRECTORY_SEPARATOR . $batchId)) {
                 $this->_driver->deleteDirectory(
                     $baseDir . DIRECTORY_SEPARATOR . 'var' . DIRECTORY_SEPARATOR .
-                    \SqualoMail\SqmMcMagentoTwo\Model\Api\Result::MAILCHIMP_TEMP_DIR . DIRECTORY_SEPARATOR . $batchId
+                    \SqualoMail\SqmMcMagentoTwo\Model\Api\Result::SQM_MC_TEMP_DIR . DIRECTORY_SEPARATOR . $batchId
                 );
             }
         } while (!count($fileContent) && $counter<self::MAX_RETRIES);

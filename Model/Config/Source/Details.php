@@ -73,7 +73,7 @@ class Details implements \Magento\Framework\Option\ArrayInterface
                     $this->_options['list_subscribers'] = $optionsList['stats']['member_count'];
                 }
                 $mailchimpStoreId = $this->_helper->getConfigValue(
-                    \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_MAILCHIMP_STORE,
+                    \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_SQM_MC_STORE,
                     $storeId,
                     $scope
                 );

@@ -74,7 +74,7 @@ class PromoCodes
     public function sendCoupons($magentoStoreId)
     {
         $mailchimpStoreId = $this->_helper->getConfigValue(
-            \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_MAILCHIMP_STORE,
+            \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_SQM_MC_STORE,
             $magentoStoreId
         );
         $batchArray = [];

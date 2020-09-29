@@ -35,7 +35,7 @@ class Ship
         ShipmentInterface $shipment
     ) {
         $mailchimpStoreId = $this->_helper->getConfigValue(
-            \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_MAILCHIMP_STORE,
+            \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_SQM_MC_STORE,
             $shipment->getStoreId()
         );
         $this->_helper->saveEcommerceData(

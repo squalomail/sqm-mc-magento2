@@ -27,8 +27,8 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     const XML_PATH_WEBHOOK_DELETE    = 'mailchimp/general/webhook_delete';
     const XML_PATH_LOG               = 'mailchimp/general/log';
     const XML_PATH_MAPPING           = 'mailchimp/general/mapping';
-    const XML_MAILCHIMP_STORE        = 'mailchimp/general/monkeystore';
-    const XML_MAILCHIMP_JS_URL       = 'mailchimp/general/mailchimpjsurl';
+    const XML_SQM_MC_STORE        = 'mailchimp/general/monkeystore';
+    const XML_SQM_MC_JS_URL       = 'mailchimp/general/mailchimpjsurl';
     const XML_PATH_CONFIRMATION_FLAG = 'newsletter/subscription/confirm';
     const XML_PATH_STORE             = 'mailchimp/ecommerce/store';
     const XML_PATH_ECOMMERCE_ACTIVE  = 'mailchimp/ecommerce/active';
@@ -545,7 +545,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     public function deleteStore($mailchimpStore)
     {
         try {
-//            $storeId = $this->getConfigValue(self::XML_MAILCHIMP_STORE);
+//            $storeId = $this->getConfigValue(self::XML_SQM_MC_STORE);
             $this->getApi()->ecommerce->stores->delete($mailchimpStore);
             $this->cancelAllPendingBatches($mailchimpStore);
         } catch (\SqualoMailMc_Error $e) {
@@ -932,7 +932,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
                 if (isset($storeData['connected_site']['site_script']['url'])) {
                     $url = $storeData['connected_site']['site_script']['url'];
                     $this->_config->saveConfig(
-                        self::XML_MAILCHIMP_JS_URL,
+                        self::XML_SQM_MC_JS_URL,
                         $url,
                         $scope,
                         $storeId
@@ -946,16 +946,16 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     }
     public function getJsUrl($storeId)
     {
-        $url = $this->getConfigValue(self::XML_MAILCHIMP_JS_URL, $storeId);
+        $url = $this->getConfigValue(self::XML_SQM_MC_JS_URL, $storeId);
         if ($this->getConfigValue(self::XML_PATH_ACTIVE, $storeId) && !$url) {
-            $mailChimpStoreId = $this->getConfigValue(self::XML_MAILCHIMP_STORE, $storeId);
+            $mailChimpStoreId = $this->getConfigValue(self::XML_SQM_MC_STORE, $storeId);
             try {
                 $api = $this->getApi($storeId);
                 $storeData = $api->ecommerce->stores->get($mailChimpStoreId);
                 if (isset($storeData['connected_site']['site_script']['url'])) {
                     $url = $storeData['connected_site']['site_script']['url'];
                     $this->_config->saveConfig(
-                        self::XML_MAILCHIMP_JS_URL,
+                        self::XML_SQM_MC_JS_URL,
                         $url,
                         \Magento\Store\Model\ScopeInterface::SCOPE_STORES,
                         $storeId

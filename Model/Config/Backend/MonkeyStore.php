@@ -108,7 +108,7 @@ class MonkeyStore extends \Magento\Framework\App\Config\Value
 
             $createWebhook = true;
             $this->_helper->deleteConfig(
-                \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_MAILCHIMP_JS_URL,
+                \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_SQM_MC_JS_URL,
                 $this->getScopeId(),
                 $this->getScope()
             );
@@ -116,7 +116,7 @@ class MonkeyStore extends \Magento\Framework\App\Config\Value
 
             foreach ($this->_storeManager->getStores() as $storeId => $val) {
                 $mstoreId = $this->_helper->getConfigValue(
-                    \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_MAILCHIMP_STORE,
+                    \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_SQM_MC_STORE,
                     $storeId
                 );
                 if ($mstoreId == $mailchimpStore) {

@@ -77,14 +77,14 @@ class DeleteStore extends \Magento\Backend\App\Action
         }
 
         $mailchimpStore = $this->helper->getConfigValue(
-            \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_MAILCHIMP_STORE,
+            \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_SQM_MC_STORE,
             $storeId,
             $scope
         );
         $resultJson = $this->resultJsonFactory->create();
         try {
             $this->helper->deleteStore($mailchimpStore);
-            $this->_config->deleteConfig(\SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_MAILCHIMP_STORE, $scope, $storeId);
+            $this->_config->deleteConfig(\SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_SQM_MC_STORE, $scope, $storeId);
         } catch (ValidatorException $e) {
             $valid = 0;
             $message = $e->getMessage();

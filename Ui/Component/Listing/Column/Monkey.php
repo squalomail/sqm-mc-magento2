@@ -104,7 +104,7 @@ class Monkey extends Column
                 $params = ['_secure' => $this->_requestInterfase->isSecure()];
                 if ($this->_helper->getConfigValue(\SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_ACTIVE, $order->getStoreId())) {
                     $mailchimpStoreId = $this->_helper->getConfigValue(
-                        \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_MAILCHIMP_STORE,
+                        \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_SQM_MC_STORE,
                         $order->getStoreId()
                     );
                     $syncData = $this->_helper->getChimpSyncEcommerce(
