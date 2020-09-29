@@ -1,9 +1,9 @@
 <?php
 /**
- * Ebizmarts_mc-magento22 Magento component
+ * SqualoMail_sqm-mc-magento22 Magento component
  *
  * @category    SqualoMail
- * @package     Ebizmarts_mc-magento2
+ * @package     SqualoMail_sqm-mc-magento2
  * @author      Ebizmarts Team <info@ebizmarts.com>
  * @copyright   Ebizmarts (http://ebizmarts.com)
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
