@@ -1,7 +1,7 @@
 /**
  * SqualoMail_SqmMcMagentoTwo Magento JS component
  *
- * @category    Ebizmarts
+ * @category    SqualoMail
  * @package     SqualoMail_SqmMcMagentoTwo
  * @author      Ebizmarts Team <info@ebizmarts.com>
  * @copyright   Ebizmarts (http://ebizmarts.com)

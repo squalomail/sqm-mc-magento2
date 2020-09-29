@@ -2,7 +2,7 @@
 /**
  * Ebizmarts_mc-magento22 Magento component
  *
- * @category    Ebizmarts
+ * @category    SqualoMail
  * @package     Ebizmarts_mc-magento22
  * @author      Ebizmarts Team <info@ebizmarts.com>
  * @copyright   Ebizmarts (http://ebizmarts.com)

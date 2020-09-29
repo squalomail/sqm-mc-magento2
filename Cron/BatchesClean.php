@@ -2,7 +2,7 @@
 /**
  * MailChimp Magento Component
  *
- * @category Ebizmarts
+ * @category SqualoMail
  * @package MailChimp
  * @author Ebizmarts Team <info@ebizmarts.com>
  * @copyright Ebizmarts (http://ebizmarts.com)
