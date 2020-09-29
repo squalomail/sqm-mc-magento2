@@ -40,7 +40,7 @@ class Save extends \SqualoMail\SqmMcMagentoTwo\Controller\Adminhtml\Stores
                 } else {
                     return $resultRedirect->setPath('mailchimp/stores');
                 }
-            } catch (\Mailchimp_Error $e) {
+            } catch (\SqualoMailMc_Error $e) {
                 $this->messageManager->addErrorMessage(__('Store could not be saved.'.$e->getMessage()));
                 $this->_helper->log($e->getFriendlyMessage());
                 return $resultRedirect->setPath('mailchimp/stores/edit', ['id'=>$storeId]);

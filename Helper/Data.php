@@ -123,7 +123,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     private $_config;
     /**
-     * @var \Mailchimp
+     * @var \SqualoMailMc
      */
     private $_api;
 
@@ -221,7 +221,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      * @param \Magento\Framework\App\State $state
      * @param \Magento\Framework\Module\ModuleList\Loader $loader
      * @param \Magento\Config\Model\ResourceModel\Config $config
-     * @param \Mailchimp $api
+     * @param \SqualoMailMc $api
      * @param \Magento\Framework\App\Cache\TypeListInterface $cacheTypeList
      * @param \Magento\Customer\Model\ResourceModel\CustomerRepository $customer
      * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpErrors $mailChimpErrors
@@ -251,7 +251,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         \Magento\Framework\App\State $state,
         \Magento\Framework\Module\ModuleList\Loader $loader,
         \Magento\Config\Model\ResourceModel\Config $config,
-        \Mailchimp $api,
+        \SqualoMailMc $api,
         \Magento\Framework\App\Cache\TypeListInterface $cacheTypeList,
         \Magento\Customer\Model\ResourceModel\CustomerRepository $customer,
         \SqualoMail\SqmMcMagentoTwo\Model\MailChimpErrors $mailChimpErrors,
@@ -337,7 +337,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 
     /**
      * @param null $store
-     * @return \Mailchimp
+     * @return \SqualoMailMc
      */
     public function getApi($store = null, $scope = null)
     {
@@ -416,7 +416,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     /**
      * @param $apiKey
      * @param bool $encrypted
-     * @return \Mailchimp
+     * @return \SqualoMailMc
      * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function getApiByApiKey($apiKey, $encrypted = false)
@@ -548,7 +548,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 //            $storeId = $this->getConfigValue(self::XML_MAILCHIMP_STORE);
             $this->getApi()->ecommerce->stores->delete($mailchimpStore);
             $this->cancelAllPendingBatches($mailchimpStore);
-        } catch (\Mailchimp_Error $e) {
+        } catch (\SqualoMailMc_Error $e) {
             $this->log($e->getFriendlyMessage());
         } catch (Exception $e) {
             $this->log($e->getMessage());
@@ -609,7 +609,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
                     self::PLATFORM
                 );
                 return $mailchimpStoreId;
-            } catch (\Mailchimp_Error $e) {
+            } catch (\SqualoMailMc_Error $e) {
                 $this->log($e->getFriendlyMessage());
             } catch (Exception $e) {
                 return null;
@@ -751,7 +751,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             if (isset($store['list_id'])) {
                 return $store['list_id'];
             }
-        } catch (\Mailchimp_Error $e) {
+        } catch (\SqualoMailMc_Error $e) {
             $this->log($e->getFriendlyMessage());
         }
         return null;
@@ -865,10 +865,10 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 
             try {
                 $apiStores = $this->_api->ecommerce->stores->get(null, null, null, self::MAXSTORES);
-            } catch (\Mailchimp_Error $mailchimpError) {
+            } catch (\SqualoMailMc_Error $mailchimpError) {
                 $this->log($mailchimpError->getFriendlyMessage());
                 continue;
-            } catch (\Mailchimp_HttpError $mailchimpError) {
+            } catch (\SqualoMailMc_HttpError $mailchimpError) {
                 $this->log($mailchimpError->getMessage());
                 continue;
             }
@@ -914,7 +914,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
                         $mstore->setMcAccountName($mcUserName[$apiKey]);
                         $mstore->getResource()->save($mstore);
                     }
-                } catch (\Mailchimp_Error $e) {
+                } catch (\SqualoMailMc_Error $e) {
                     $this->log($e->getFriendlyMessage());
                 }
             }
@@ -938,7 +938,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
                         $storeId
                     );
                 }
-            } catch (\Mailchimp_Error $e) {
+            } catch (\SqualoMailMc_Error $e) {
                 $this->log($e->getFriendlyMessage());
             }
         }
@@ -961,7 +961,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
                         $storeId
                     );
                 }
-            } catch (\Mailchimp_Error $e) {
+            } catch (\SqualoMailMc_Error $e) {
                 $this->log($e->getFriendlyMessage());
             }
         }
@@ -1000,7 +1000,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             '_secure' => true]);
             // the urlencode of the hookUrl not work
             $ret = $api->lists->webhooks->add($listId, $hookUrl, $events, $sources);
-        } catch (\Mailchimp_Error $e) {
+        } catch (\SqualoMailMc_Error $e) {
             $this->log($e->getFriendlyMessage());
             $ret ['message']= $e->getMessage();
         }
@@ -1024,7 +1024,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
                     }
                 }
             }
-        } catch (\Mailchimp_Error $e) {
+        } catch (\SqualoMailMc_Error $e) {
             $this->log($e->getFriendlyMessage());
         }
     }
@@ -1127,7 +1127,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
                 $this->log(__('Error retrieving interest groups for store ').$storeId);
                 $rc = [];
             }
-        } catch (\Mailchimp_Error $e) {
+        } catch (\SqualoMailMc_Error $e) {
             $this->log($e->getFriendlyMessage());
         }
         return $rc;

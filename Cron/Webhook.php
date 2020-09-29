@@ -252,13 +252,13 @@ class Webhook
                         $api = $this->_helper->getApi($stores[0]);
                         $member = $api->lists->members->get($listId, hash('md5', strtolower($email)));
                         if ($member) {
-                            if ($member['status'] == \Mailchimp::SUBSCRIBED) {
+                            if ($member['status'] == \SqualoMailMc::SUBSCRIBED) {
                                 $this->_subscribeMember($subscriber, \Magento\Newsletter\Model\Subscriber::STATUS_SUBSCRIBED);
-                            } elseif ($member['status'] == \Mailchimp::UNSUBSCRIBED) {
+                            } elseif ($member['status'] == \SqualoMailMc::UNSUBSCRIBED) {
                                 $this->_subscribeMember($subscriber, \Magento\Newsletter\Model\Subscriber::STATUS_UNSUBSCRIBED);
                             }
                         }
-                    } catch (\Mailchimp_Error $e) {
+                    } catch (\SqualoMailMc_Error $e) {
                         $this->_helper->log($e->getFriendlyMessage());
                     }
                 }

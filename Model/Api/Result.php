@@ -165,7 +165,7 @@ class Result
                     self::MAILCHIMP_TEMP_DIR . DIRECTORY_SEPARATOR . $batchId . '/' . $batchId . '.tar');
                 $this->_driver->deleteFile($fileName . '.tar.gz');
             }
-        } catch (\Mailchimp_Error $e) {
+        } catch (\SqualoMailMc_Error $e) {
             $this->_helper->log($e->getFriendlyMessage());
             return false;
         } catch (\Exception $e) {

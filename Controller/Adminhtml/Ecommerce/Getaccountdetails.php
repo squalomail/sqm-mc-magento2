@@ -86,7 +86,7 @@ class Getaccountdetails extends Action
                     $options['nostore'] = ['label' => __('This MailChimp account is not connected to Magento.'), 'value' => ''];
                 }
             }
-        } catch (\Mailchimp_Error $e) {
+        } catch (\SqualoMailMc_Error $e) {
             $this->_helper->log($e->getFriendlyMessage());
             $options['error'] = ['label' => 'Error', 'value' => __('--- Invalid API Key ---')];
         }

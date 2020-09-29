@@ -144,7 +144,7 @@ class MonkeyStore extends \Magento\Framework\App\Config\Value
             $api = $this->_helper->getApiByApiKey($apiKey);
             $store = $api->ecommerce->stores->get($store);
             return $store['list_id'];
-        } catch (\Mailchimp_Error $e) {
+        } catch (\SqualoMailMc_Error $e) {
             $this->_helper->log($e->getFriendlyMessage());
         }
         return null;

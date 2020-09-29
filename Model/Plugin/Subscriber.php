@@ -80,7 +80,7 @@ class Subscriber
                         null,
                         'unsubscribed'
                     );
-                } catch (\Mailchimp_Error $e) {
+                } catch (\SqualoMailMc_Error $e) {
                     $this->_helper->log($e->getFriendlyMessage());
                 }
             }
@@ -132,7 +132,7 @@ class Subscriber
                             $email,
                             $status
                         );
-                    } catch (\Mailchimp_Error $e) {
+                    } catch (\SqualoMailMc_Error $e) {
                         $this->_helper->log($e->getFriendlyMessage());
                     }
                 }
@@ -183,7 +183,7 @@ class Subscriber
                         $email,
                         $status
                     );
-                } catch (\Mailchimp_Error $e) {
+                } catch (\SqualoMailMc_Error $e) {
                     $this->_helper->log($e->getFriendlyMessage());
                 }
             }
@@ -211,7 +211,7 @@ class Subscriber
                     null,
                     'unsubscribed'
                 );
-            } catch (\Mailchimp_Error $e) {
+            } catch (\SqualoMailMc_Error $e) {
                 $this->_helper->log($e->getFriendlyMessage());
             }
         }
@@ -243,7 +243,7 @@ class Subscriber
                     } else {
                         $api->lists->members->delete($this->_helper->getDefaultList($storeId), $md5HashEmail);
                     }
-                } catch (\Mailchimp_Error $e) {
+                } catch (\SqualoMailMc_Error $e) {
                     $this->_helper->log($e->getFriendlyMessage());
                 }
             }

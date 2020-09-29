@@ -44,7 +44,7 @@ class MonkeyStore implements \Magento\Framework\Option\ArrayInterface
                     null,
                     \SqualoMail\SqmMcMagentoTwo\Helper\Data::MAXSTORES
                 );
-            } catch (\Mailchimp_Error $e) {
+            } catch (\SqualoMailMc_Error $e) {
                 $helper->log($e->getFriendlyMessage());
             }
         }

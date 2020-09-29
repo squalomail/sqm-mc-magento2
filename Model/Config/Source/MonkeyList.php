@@ -42,7 +42,7 @@ class MonkeyList implements \Magento\Framework\Option\ArrayInterface
                 $this->options = $helper->getApi($storeId, $scope)->lists->getLists(
                     $helper->getConfigValue(\SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_LIST, $storeId, $scope)
                 );
-            } catch (\Mailchimp_Error $e) {
+            } catch (\SqualoMailMc_Error $e) {
                 $helper->log($e->getFriendlyMessage());
             }
         }

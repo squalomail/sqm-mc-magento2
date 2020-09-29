@@ -77,7 +77,7 @@ class MailchimpMap extends \Magento\Framework\View\Element\Html\Select
             foreach ($merge['merge_fields'] as $item) {
                 $ret[$item['tag']] = $item['tag'] . ' (' . $item['name'] . ' : ' . $item['type'] . ')';
             }
-        } catch (\Mailchimp_Error $e) {
+        } catch (\SqualoMailMc_Error $e) {
             $this->_helper->log($e->getFriendlyMessage());
         }
         return $ret;
