@@ -265,7 +265,7 @@ class Result
     private function _updateSyncData($mailchimpStoreId, $listId, $type, $id, $error, $status)
     {
         /**
-         * @var \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerce $chimpSync
+         * @var \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncEcommerce $chimpSync
          */
         if ($type == \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_SUBSCRIBER) {
             $mailchimpStore = $listId;

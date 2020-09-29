@@ -17,7 +17,7 @@ use Magento\Framework\Event\Observer;
 class DeleteAfter implements \Magento\Framework\Event\ObserverInterface
 {
     /**
-     * @var \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerce
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncEcommerce
      */
     protected $_ecommerce;
     /**
@@ -27,11 +27,11 @@ class DeleteAfter implements \Magento\Framework\Event\ObserverInterface
 
     /**
      * SaveAfter constructor.
-     * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerce $ecommerce
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncEcommerce $ecommerce
      * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      */
     public function __construct(
-        \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerce $ecommerce,
+        \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncEcommerce $ecommerce,
         \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
     ) {
 

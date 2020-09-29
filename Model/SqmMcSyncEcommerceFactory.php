@@ -8,25 +8,25 @@
  * @copyright Ebizmarts (http://ebizmarts.com)
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @date: 2/28/17 7:24 PM
- * @file: MailChimpSyncEcommerceFactory.php
+ * @file: SqmMcSyncEcommerceFactory.php
  */
 
 namespace SqualoMail\SqmMcMagentoTwo\Model;
 
-class MailChimpSyncEcommerceFactory
+class SqmMcSyncEcommerceFactory
 {
 
     protected $_objectManager;
     protected $_instanceName;
 
     /**
-     * MailChimpSyncEcommerceFactory constructor.
+     * SqmMcSyncEcommerceFactory constructor.
      * @param \Magento\Framework\ObjectManagerInterface $objectManager
      * @param string $instanceName
      */
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $objectManager,
-        $instanceName = \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerce::class
+        $instanceName = \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncEcommerce::class
     ) {
     
         $this->_objectManager   = $objectManager;
@@ -35,7 +35,7 @@ class MailChimpSyncEcommerceFactory
 
     /**
      * @param array $data
-     * @return \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerce
+     * @return \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncEcommerce
      */
     public function create(array $data = [])
     {

@@ -91,7 +91,7 @@ class Order
      * @param Customer $apiCustomer
      * @param \Magento\Catalog\Model\ProductFactory $productFactory
      * @param \Magento\Directory\Model\CountryFactory $countryFactory
-     * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerce $chimpSyncEcommerce
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncEcommerce $chimpSyncEcommerce
      * @param \Magento\SalesRule\Model\Coupon $couponRepository
      * @param RuleRepository $ruleRepository
      * @param \Magento\Framework\Url $urlHelper
@@ -105,7 +105,7 @@ class Order
         \SqualoMail\SqmMcMagentoTwo\Model\Api\Customer $apiCustomer,
         \Magento\Catalog\Model\ProductFactory $productFactory,
         \Magento\Directory\Model\CountryFactory $countryFactory,
-        \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerce $chimpSyncEcommerce,
+        \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncEcommerce $chimpSyncEcommerce,
         \Magento\SalesRule\Model\Coupon $couponRepository,
         \Magento\SalesRule\Model\RuleRepository $ruleRepository,
         \Magento\Framework\Url $urlHelper

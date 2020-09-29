@@ -48,7 +48,7 @@ class Ecommerce
      */
     private $_mailChimpSyncBatchesFactory;
     /**
-     * @var \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerce
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncEcommerce
      */
     private $_chimpSyncEcommerce;
     /**
@@ -81,7 +81,7 @@ class Ecommerce
      * @param \SqualoMail\SqmMcMagentoTwo\Model\Api\PromoCodes $apiPromoCodes
      * @param \SqualoMail\SqmMcMagentoTwo\Model\Api\PromoRules $apiPromoRules
      * @param \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncBatchesFactory $mailChimpSyncBatchesFactory
-     * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerce $chimpSyncEcommerce
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncEcommerce $chimpSyncEcommerce
      * @param \Magento\Framework\Filesystem\DirectoryList $dir
      */
     public function __construct(
@@ -96,7 +96,7 @@ class Ecommerce
         \SqualoMail\SqmMcMagentoTwo\Model\Api\PromoCodes $apiPromoCodes,
         \SqualoMail\SqmMcMagentoTwo\Model\Api\PromoRules $apiPromoRules,
         \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncBatchesFactory $mailChimpSyncBatchesFactory,
-        \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerce $chimpSyncEcommerce,
+        \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncEcommerce $chimpSyncEcommerce,
         \Magento\Framework\Filesystem\DirectoryList $dir
     ) {
 

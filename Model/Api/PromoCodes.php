@@ -32,7 +32,7 @@ class PromoCodes
      */
     protected $_ruleCollection;
     /**
-     * @var \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerceFactory
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncEcommerceFactory
      */
     private $_chimpSyncEcommerce;
     /**
@@ -40,7 +40,7 @@ class PromoCodes
      */
     private $_promoRules;
     /**
-     * @var \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpSyncEcommerce\CollectionFactory
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcSyncEcommerce\CollectionFactory
      */
     private $_syncCollection;
 
@@ -49,17 +49,17 @@ class PromoCodes
      * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      * @param \Magento\SalesRule\Model\ResourceModel\Coupon\CollectionFactory $couponCollection
      * @param \Magento\SalesRule\Model\ResourceModel\Rule\CollectionFactory $ruleCollection
-     * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerceFactory $chimpSyncEcommerce
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncEcommerceFactory $chimpSyncEcommerce
      * @param PromoRules $promoRules
-     * @param \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpSyncEcommerce\CollectionFactory $syncCollection
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcSyncEcommerce\CollectionFactory $syncCollection
      */
     public function __construct(
         \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
         \Magento\SalesRule\Model\ResourceModel\Coupon\CollectionFactory $couponCollection,
         \Magento\SalesRule\Model\ResourceModel\Rule\CollectionFactory $ruleCollection,
-        \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerceFactory $chimpSyncEcommerce,
+        \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncEcommerceFactory $chimpSyncEcommerce,
         \SqualoMail\SqmMcMagentoTwo\Model\Api\PromoRules $promoRules,
-        \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpSyncEcommerce\CollectionFactory $syncCollection
+        \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcSyncEcommerce\CollectionFactory $syncCollection
     ) {
     
         $this->_helper              = $helper;
@@ -95,7 +95,7 @@ class PromoCodes
         $collection->getSelect()->limit(self::MAX);
         $counter = 0;
         /**
-         * @var $syncCoupon \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerce
+         * @var $syncCoupon \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncEcommerce
          */
         foreach ($collection as $coupon) {
             $couponId = $coupon->getRelatedId();

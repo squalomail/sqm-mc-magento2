@@ -50,7 +50,7 @@ class Product
      */
     protected $_batchId;
     /**
-     * @var \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerceFactory
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncEcommerceFactory
      */
     protected $_chimpSyncEcommerce;
     /**
@@ -79,7 +79,7 @@ class Product
      * @param \Magento\Catalog\Helper\Image $imageHelper
      * @param \Magento\CatalogInventory\Api\StockRegistryInterface $stockRegistry
      * @param \Magento\Catalog\Model\CategoryRepository $categoryRepository
-     * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerceFactory $chimpSyncEcommerce
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncEcommerceFactory $chimpSyncEcommerce
      * @param \Magento\ConfigurableProduct\Model\Product\Type\Configurable $configurable
      * @param \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $categoryCollection
      * @param \Magento\Catalog\Helper\Data $taxHelper
@@ -92,7 +92,7 @@ class Product
         \Magento\Catalog\Helper\Image $imageHelper,
         \Magento\CatalogInventory\Api\StockRegistryInterface $stockRegistry,
         \Magento\Catalog\Model\CategoryRepository $categoryRepository,
-        \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerceFactory $chimpSyncEcommerce,
+        \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncEcommerceFactory $chimpSyncEcommerce,
         \Magento\ConfigurableProduct\Model\Product\Type\Configurable $configurable,
         \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $categoryCollection,
         \Magento\Catalog\Helper\Data $taxHelper,

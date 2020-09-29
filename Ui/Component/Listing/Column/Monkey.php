@@ -42,7 +42,7 @@ class Monkey extends Column
      */
     protected $_helper;
     /**
-     * @var \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpSyncEcommerce\CollectionFactory
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcSyncEcommerce\CollectionFactory
      */
     protected $_syncCommerceCF;
     /**
@@ -63,7 +63,7 @@ class Monkey extends Column
      * @param \Magento\Framework\App\RequestInterface $requestInterface
      * @param SearchCriteriaBuilder $criteria
      * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
-     * @param \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpSyncEcommerce\CollectionFactory $syncCommerceCF
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcSyncEcommerce\CollectionFactory $syncCommerceCF
      * @param \SqualoMail\SqmMcMagentoTwo\Model\SqmMcErrorsFactory $mailChimpErrorsFactory
      * @param \Magento\Sales\Model\OrderFactory $orderFactory
      * @param array $components
@@ -77,7 +77,7 @@ class Monkey extends Column
         \Magento\Framework\App\RequestInterface $requestInterface,
         SearchCriteriaBuilder $criteria,
         \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
-        \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpSyncEcommerce\CollectionFactory $syncCommerceCF,
+        \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcSyncEcommerce\CollectionFactory $syncCommerceCF,
         \SqualoMail\SqmMcMagentoTwo\Model\SqmMcErrorsFactory $mailChimpErrorsFactory,
         \Magento\Sales\Model\OrderFactory $orderFactory,
         array $components = [],

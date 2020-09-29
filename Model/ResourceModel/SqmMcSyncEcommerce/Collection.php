@@ -10,15 +10,15 @@
  * @date: 12/1/16 2:36 PM
  * @file: Collection.php
  */
-namespace SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpSyncEcommerce;
+namespace SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcSyncEcommerce;
 
 class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
 {
     protected function _construct()
     {
         $this->_init(
-            \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerce::class,
-            \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpSyncEcommerce::class
+            \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncEcommerce::class,
+            \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcSyncEcommerce::class
         );
     }
 }

@@ -18,7 +18,7 @@ use Magento\Framework\Event\Observer;
 class SaveAfter implements \Magento\Framework\Event\ObserverInterface
 {
     /**
-     * @var \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerce
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncEcommerce
      */
     protected $_ecommerce;
     /**
@@ -29,12 +29,12 @@ class SaveAfter implements \Magento\Framework\Event\ObserverInterface
 
     /**
      * SaveAfter constructor.
-     * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerce $ecommerce
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncEcommerce $ecommerce
      * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      * @param \Magento\Framework\Stdlib\DateTime\DateTime $date
      */
     public function __construct(
-        \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerce $ecommerce,
+        \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncEcommerce $ecommerce,
         \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
         \Magento\Framework\Stdlib\DateTime\DateTime $date
     ) {

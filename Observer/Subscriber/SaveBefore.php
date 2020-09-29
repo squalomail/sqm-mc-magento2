@@ -17,7 +17,7 @@ use Magento\Framework\Event\Observer;
 class SaveBefore implements \Magento\Framework\Event\ObserverInterface
 {
     /**
-     * @var \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerce
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncEcommerce
      */
     protected $_ecommerce;
     /**
@@ -31,12 +31,12 @@ class SaveBefore implements \Magento\Framework\Event\ObserverInterface
 
     /**
      * SaveBefore constructor.
-     * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerce $ecommerce
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncEcommerce $ecommerce
      * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      * @param \SqualoMail\SqmMcMagentoTwo\Model\Api\Subscriber $subscriberApi
      */
     public function __construct(
-        \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerce $ecommerce,
+        \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncEcommerce $ecommerce,
         \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
         \SqualoMail\SqmMcMagentoTwo\Model\Api\Subscriber $subscriberApi
     ) {

@@ -37,7 +37,7 @@ class PromoRules
      */
     private $_helper;
     /**
-     * @var \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerceFactory
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncEcommerceFactory
      */
     private $_chimpSyncEcommerce;
     /**
@@ -45,7 +45,7 @@ class PromoRules
      */
     private $_ruleRepo;
     /**
-     * @var \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpSyncEcommerce\CollectionFactory
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcSyncEcommerce\CollectionFactory
      */
     protected $_syncCollection;
 
@@ -54,15 +54,15 @@ class PromoRules
      * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      * @param \Magento\SalesRule\Model\ResourceModel\Rule\CollectionFactory $collection
      * @param \Magento\SalesRule\Model\RuleRepository $ruleRepo
-     * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerceFactory $chimpSyncEcommerce
-     * @param \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpSyncEcommerce\CollectionFactory $syncCollection
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncEcommerceFactory $chimpSyncEcommerce
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcSyncEcommerce\CollectionFactory $syncCollection
      */
     public function __construct(
         \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
         \Magento\SalesRule\Model\ResourceModel\Rule\CollectionFactory $collection,
         \Magento\SalesRule\Model\RuleRepository $ruleRepo,
-        \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerceFactory $chimpSyncEcommerce,
-        \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpSyncEcommerce\CollectionFactory $syncCollection
+        \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncEcommerceFactory $chimpSyncEcommerce,
+        \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcSyncEcommerce\CollectionFactory $syncCollection
     ) {
     
         $this->_helper              = $helper;
@@ -96,7 +96,7 @@ class PromoRules
         $count = 0;
         $api = $this->_helper->getApi($magentoStoreId);
         /**
-         * @var $rule \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerce
+         * @var $rule \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncEcommerce
          */
         foreach ($collection as $rule) {
             $ruleId = $rule->getData('related_id');
