@@ -144,7 +144,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     private $_mailChimpSyncE;
     /**
-     * @var \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncBatches
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncBatches
      */
     private $_syncBatches;
     /**
@@ -227,7 +227,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      * @param \SqualoMail\SqmMcMagentoTwo\Model\SqmMcErrors $mailChimpErrors
      * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerceFactory $mailChimpSyncEcommerce
      * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerce $mailChimpSyncE
-     * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncBatches $syncBatches
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncBatches $syncBatches
      * @param \SqualoMail\SqmMcMagentoTwo\Model\SqmMcStoresFactory $mailChimpStoresFactory
      * @param \SqualoMail\SqmMcMagentoTwo\Model\SqmMcStores $mailChimpStores
      * @param \Magento\Customer\Model\ResourceModel\Attribute\CollectionFactory $attCollection
@@ -257,7 +257,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         \SqualoMail\SqmMcMagentoTwo\Model\SqmMcErrors $mailChimpErrors,
         \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerceFactory $mailChimpSyncEcommerce,
         \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerce $mailChimpSyncE,
-        \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncBatches $syncBatches,
+        \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncBatches $syncBatches,
         \SqualoMail\SqmMcMagentoTwo\Model\SqmMcStoresFactory $mailChimpStoresFactory,
         \SqualoMail\SqmMcMagentoTwo\Model\SqmMcStores $mailChimpStores,
         \Magento\Customer\Model\ResourceModel\Attribute\CollectionFactory $attCollection,

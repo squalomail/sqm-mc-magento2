@@ -17,7 +17,7 @@ class Result
 {
     const MAILCHIMP_TEMP_DIR = 'Mailchimp';
     /**
-     * @var \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpSyncBatches\CollectionFactory
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcSyncBatches\CollectionFactory
      */
     private $_batchCollection;
     /**
@@ -44,7 +44,7 @@ class Result
     /**
      * Result constructor.
      * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
-     * @param \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpSyncBatches\CollectionFactory $batchCollection
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcSyncBatches\CollectionFactory $batchCollection
      * @param \SqualoMail\SqmMcMagentoTwo\Model\SqmMcErrorsFactory $chimpErrors
      * @param \Magento\Framework\Archive $archive
      * @param \Magento\Framework\Filesystem\Driver\File $driver
@@ -52,7 +52,7 @@ class Result
      */
     public function __construct(
         \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
-        \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpSyncBatches\CollectionFactory $batchCollection,
+        \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcSyncBatches\CollectionFactory $batchCollection,
         \SqualoMail\SqmMcMagentoTwo\Model\SqmMcErrorsFactory $chimpErrors,
         \Magento\Framework\Archive $archive,
         \Magento\Framework\Filesystem\Driver\File $driver,
@@ -74,7 +74,7 @@ class Result
             ->addFieldToFilter('status', ['eq' => 'pending'])
             ->addFieldToFilter('mailchimp_store_id', ['eq' => $mailchimpStoreId]);
         /**
-         * @var $item \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncBatches
+         * @var $item \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncBatches
          */
         $item = null;
         foreach ($collection as $item) {

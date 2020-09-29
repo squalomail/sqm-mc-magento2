@@ -19,18 +19,18 @@ class BatchesClean
      */
     protected $helper;
     /**
-     * @var \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncBatches
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncBatches
      */
     protected $mailChimpSyncBatches;
 
     /**
      * BatchesClean constructor.
      * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
-     * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncBatches $mailChimpSyncBatches
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncBatches $mailChimpSyncBatches
      */
     public function __construct(
         \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
-        \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncBatches $_mailChimpSyncBatches
+        \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncBatches $_mailChimpSyncBatches
     ) {
         $this->helper               = $helper;
         $this->mailChimpSyncBatches = $_mailChimpSyncBatches;
