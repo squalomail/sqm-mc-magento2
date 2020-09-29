@@ -117,7 +117,7 @@ class Monkey extends Column
                         $syncData->getRelatedId() != $order->getId() ||
                         $syncData->getType() != \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_ORDER) {
                         $url = $this->_assetRepository->getUrlWithParams(
-                            'Ebizmarts_MailChimp::images/no.png',
+                            'SqualoMail_SqmMcMagentoTwo::images/no.png',
                             $params
                         );
                         $text = __('Syncing');
@@ -126,21 +126,21 @@ class Monkey extends Column
                         switch ($sync) {
                             case \SqualoMail\SqmMcMagentoTwo\Helper\Data::SYNCED:
                                 $url = $this->_assetRepository->getUrlWithParams(
-                                    'Ebizmarts_MailChimp::images/yes.png',
+                                    'SqualoMail_SqmMcMagentoTwo::images/yes.png',
                                     $params
                                 );
                                 $text = __('Synced');
                                 break;
                             case \SqualoMail\SqmMcMagentoTwo\Helper\Data::WAITINGSYNC:
                                 $url = $this->_assetRepository->getUrlWithParams(
-                                    'Ebizmarts_MailChimp::images/waiting.png',
+                                    'SqualoMail_SqmMcMagentoTwo::images/waiting.png',
                                     $params
                                 );
                                 $text = __('Waiting');
                                 break;
                             case \SqualoMail\SqmMcMagentoTwo\Helper\Data::SYNCERROR:
                                 $url = $this->_assetRepository->getUrlWithParams(
-                                    'Ebizmarts_MailChimp::images/error.png',
+                                    'SqualoMail_SqmMcMagentoTwo::images/error.png',
                                     $params
                                 );
                                 $text = __('Error');
@@ -151,14 +151,14 @@ class Monkey extends Column
                                 break;
                             case \SqualoMail\SqmMcMagentoTwo\Helper\Data::NEEDTORESYNC:
                                 $url = $this->_assetRepository->getUrlWithParams(
-                                    'Ebizmarts_MailChimp::images/resync.png',
+                                    'SqualoMail_SqmMcMagentoTwo::images/resync.png',
                                     $params
                                 );
                                 $text = __('Resyncing');
                                 break;
                             case \SqualoMail\SqmMcMagentoTwo\Helper\Data::NOTSYNCED:
                                 $url = $this->_assetRepository->getUrlWithParams(
-                                    'Ebizmarts_MailChimp::images/never.png',
+                                    'SqualoMail_SqmMcMagentoTwo::images/never.png',
                                     $params
                                 );
                                 $text = __('With error');
@@ -172,7 +172,7 @@ class Monkey extends Column
                     $item['mailchimp_sync'] =
                         "<div style='width: 50%;margin: 0 auto;text-align: center'><img src='".$url."' style='border: none; width: 5rem; text-align: center; max-width: 100%' title='$alt' />$text</div>";
                     if ($status) {
-                        $url = $this->_assetRepository->getUrlWithParams('Ebizmarts_MailChimp::images/freddie.png', $params);
+                        $url = $this->_assetRepository->getUrlWithParams('SqualoMail_SqmMcMagentoTwo::images/freddie.png', $params);
                         $item['mailchimp_status'] =
                             "<div style='width: 50%;margin: 0 auto'><img src='".$url."' style='border: none; width: 5rem; text-align: center; max-width: 100%'/></div>";
                     }

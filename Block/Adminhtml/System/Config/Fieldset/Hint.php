@@ -1,9 +1,9 @@
 <?php
 /**
- * Ebizmarts_MailChimp Magento JS component
+ * SqualoMail_SqmMcMagentoTwo Magento JS component
  *
  * @category    Ebizmarts
- * @package     Ebizmarts_MailChimp
+ * @package     SqualoMail_SqmMcMagentoTwo
  * @author      Ebizmarts Team <info@ebizmarts.com>
  * @copyright   Ebizmarts (http://ebizmarts.com)
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
@@ -17,7 +17,7 @@ class Hint extends \Magento\Backend\Block\Template implements
     /**
      * @var string
      */
-    protected $_template = 'Ebizmarts_MailChimp::system/config/fieldset/hint.phtml';
+    protected $_template = 'SqualoMail_SqmMcMagentoTwo::system/config/fieldset/hint.phtml';
     /**
      * @var \Magento\Framework\App\ProductMetadataInterface
      */
@@ -67,7 +67,7 @@ class Hint extends \Magento\Backend\Block\Template implements
 
     public function getModuleVersion()
     {
-        return $this->_moduleVersion->getModuleVersion('Ebizmarts_MailChimp');
+        return $this->_moduleVersion->getModuleVersion('SqualoMail_SqmMcMagentoTwo');
     }
     public function getHasApiKey()
     {

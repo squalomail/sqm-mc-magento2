@@ -107,6 +107,6 @@ class Getresponse extends \Magento\Backend\App\Action
     }
     protected function _isAllowed()
     {
-        return $this->_authorization->isAllowed('Ebizmarts_MailChimp::error_grid');
+        return $this->_authorization->isAllowed('SqualoMail_SqmMcMagentoTwo::error_grid');
     }
 }

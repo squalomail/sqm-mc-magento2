@@ -73,6 +73,6 @@ class Get extends Action
     }
     protected function _isAllowed()
     {
-        return $this->_authorization->isAllowed('Ebizmarts_MailChimp::stores_edit');
+        return $this->_authorization->isAllowed('SqualoMail_SqmMcMagentoTwo::stores_edit');
     }
 }

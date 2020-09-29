@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <!--
 /**
- * Ebizmarts_MailChimp
+ * SqualoMail_SqmMcMagentoTwo
  *
  * @category    Ebizmarts
- * @package     Ebizmarts_MailChimp
+ * @package     SqualoMail_SqmMcMagentoTwo
  * @author      Ebizmarts Team <info@ebizmarts.com>
  * @copyright   Ebizmarts (http://ebizmarts.com)
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
@@ -14,10 +14,10 @@
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceBlock name="head.additional">
-            <block class="SqualoMail\SqmMcMagentoTwo\Block\Mailchimpjs" name="mailchimp.block.mcjs" template="Ebizmarts_MailChimp::mailchimpjs.phtml" ifconfig="mailchimp/general/active"/>
+            <block class="SqualoMail\SqmMcMagentoTwo\Block\Mailchimpjs" name="mailchimp.block.mcjs" template="SqualoMail_SqmMcMagentoTwo::mailchimpjs.phtml" ifconfig="mailchimp/general/active"/>
         </referenceBlock>
         <referenceContainer name="content">
-            <block class="SqualoMail\SqmMcMagentoTwo\Block\Catcher" name="mailchimp.block.catcher" template="Ebizmarts_MailChimp::catcher.phtml" ifconfig="mailchimp/general/active"/>
+            <block class="SqualoMail\SqmMcMagentoTwo\Block\Catcher" name="mailchimp.block.catcher" template="SqualoMail_SqmMcMagentoTwo::catcher.phtml" ifconfig="mailchimp/general/active"/>
         </referenceContainer>
     </body>
 </page>

@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <!--
 /**
- * Ebizmarts_MailChimp
+ * SqualoMail_SqmMcMagentoTwo
  *
  * @category    Ebizmarts
- * @package     Ebizmarts_MailChimp
+ * @package     SqualoMail_SqmMcMagentoTwo
  * @author      Ebizmarts Team <info@ebizmarts.com>
  * @copyright   Ebizmarts (http://ebizmarts.com)
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
@@ -13,7 +13,7 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceContainer name="order.success.additional.info">
-            <block class="SqualoMail\SqmMcMagentoTwo\Block\Checkout\Success" ifconfig="mailchimp/general/interest_in_success" name="mailchimp.order.success" template="Ebizmarts_MailChimp::checkout/order/success.phtml"/>
+            <block class="SqualoMail\SqmMcMagentoTwo\Block\Checkout\Success" ifconfig="mailchimp/general/interest_in_success" name="mailchimp.order.success" template="SqualoMail_SqmMcMagentoTwo::checkout/order/success.phtml"/>
         </referenceContainer>
     </body>
 </page>

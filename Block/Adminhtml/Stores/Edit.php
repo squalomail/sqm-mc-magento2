@@ -42,7 +42,7 @@ class Edit extends Container
     {
         $this->_objectId = 'id';
         $this->_controller = 'adminhtml_stores';
-        $this->_blockGroup = 'Ebizmarts_MailChimp';
+        $this->_blockGroup = 'SqualoMail_SqmMcMagentoTwo';
 
         parent::_construct();
 

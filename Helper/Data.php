@@ -1,9 +1,9 @@
 <?php
 /**
- * Ebizmarts_MailChimp Magento JS component
+ * SqualoMail_SqmMcMagentoTwo Magento JS component
  *
  * @category    Ebizmarts
- * @package     Ebizmarts_MailChimp
+ * @package     SqualoMail_SqmMcMagentoTwo
  * @author      Ebizmarts Team <info@ebizmarts.com>
  * @copyright   Ebizmarts (http://ebizmarts.com)
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
@@ -537,8 +537,8 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     {
         $modules = $this->_loader->load();
         $v = "";
-        if (isset($modules['Ebizmarts_MailChimp'])) {
-            $v = $modules['Ebizmarts_MailChimp']['setup_version'];
+        if (isset($modules['SqualoMail_SqmMcMagentoTwo'])) {
+            $v = $modules['SqualoMail_SqmMcMagentoTwo']['setup_version'];
         }
         return $v;
     }

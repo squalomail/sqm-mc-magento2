@@ -51,13 +51,13 @@ class Edit extends \SqualoMail\SqmMcMagentoTwo\Controller\Adminhtml\Stores
 
         /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
         $resultPage = $this->_resultPageFactory->create();
-        $resultPage->setActiveMenu('Ebizmarts_MailChimp::main_menu');
+        $resultPage->setActiveMenu('SqualoMail_SqmMcMagentoTwo::main_menu');
         $resultPage->getConfig()->getTitle()->prepend(__('Mailchimp Store'));
 
         return $resultPage;
     }
     protected function _isAllowed()
     {
-        return $this->_authorization->isAllowed('Ebizmarts_MailChimp::stores_edit');
+        return $this->_authorization->isAllowed('SqualoMail_SqmMcMagentoTwo::stores_edit');
     }
 }
