@@ -11,7 +11,7 @@
  * @file: WebhookDelete.php
  */
 
-namespace Ebizmarts\MailChimp\Model\Config\Source;
+namespace SqualoMail\SqmMcMagentoTwo\Model\Config\Source;
 
 class WebhookDelete implements \Magento\Framework\Option\ArrayInterface
 {

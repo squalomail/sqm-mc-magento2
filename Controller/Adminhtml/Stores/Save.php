@@ -11,9 +11,9 @@
  * @file: Save.php
  */
 
-namespace Ebizmarts\MailChimp\Controller\Adminhtml\Stores;
+namespace SqualoMail\SqmMcMagentoTwo\Controller\Adminhtml\Stores;
 
-class Save extends \Ebizmarts\MailChimp\Controller\Adminhtml\Stores
+class Save extends \SqualoMail\SqmMcMagentoTwo\Controller\Adminhtml\Stores
 {
     public function execute()
     {
@@ -29,7 +29,7 @@ class Save extends \Ebizmarts\MailChimp\Controller\Adminhtml\Stores
             }
             try {
                 $formData['storeid'] = $this->_updateMailchimp($formData);
-                $formData['platform'] = \Ebizmarts\MailChimp\Helper\Data::PLATFORM;
+                $formData['platform'] = \SqualoMail\SqmMcMagentoTwo\Helper\Data::PLATFORM;
                 $storeModel->setData($formData);
                 $storeModel->getResource()->save($storeModel);
                 if ($returnToEdit) {
@@ -73,7 +73,7 @@ class Save extends \Ebizmarts\MailChimp\Controller\Adminhtml\Stores
         if ($storeId) {
             $api->ecommerce->stores->edit(
                 $storeId,
-                \Ebizmarts\MailChimp\Helper\Data::PLATFORM,
+                \SqualoMail\SqmMcMagentoTwo\Helper\Data::PLATFORM,
                 $domain,
                 $name,
                 $emailAddress,
@@ -95,7 +95,7 @@ class Save extends \Ebizmarts\MailChimp\Controller\Adminhtml\Stores
                 $formData['list_id'],
                 $name,
                 $currencyCode,
-                \Ebizmarts\MailChimp\Helper\Data::PLATFORM,
+                \SqualoMail\SqmMcMagentoTwo\Helper\Data::PLATFORM,
                 $domain,
                 $emailAddress,
                 null,

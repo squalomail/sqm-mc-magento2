@@ -11,12 +11,12 @@
  * @file: MailchimpMap.php
  */
 
-namespace Ebizmarts\MailChimp\Block\Adminhtml\System\Config\Form\Field;
+namespace SqualoMail\SqmMcMagentoTwo\Block\Adminhtml\System\Config\Form\Field;
 
 class MailchimpMap extends \Magento\Framework\View\Element\Html\Select
 {
     /**
-     * @var \Ebizmarts\MailChimp\Helper\Data
+     * @var \SqualoMail\SqmMcMagentoTwo\Helper\Data
      */
     protected $_helper;
     /**
@@ -32,13 +32,13 @@ class MailchimpMap extends \Magento\Framework\View\Element\Html\Select
      * MailchimpMap constructor.
      * @param \Magento\Framework\View\Element\Context $context
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
-     * @param \Ebizmarts\MailChimp\Helper\Data $helper
+     * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      * @param array $data
      */
     public function __construct(
         \Magento\Framework\View\Element\Context $context,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
-        \Ebizmarts\MailChimp\Helper\Data $helper,
+        \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
         array $data = []
     ) {
     
@@ -66,13 +66,13 @@ class MailchimpMap extends \Magento\Framework\View\Element\Html\Select
         try {
             $merge = $api->lists->mergeFields->getAll(
                 $this->_helper->getConfigValue(
-                    \Ebizmarts\MailChimp\Helper\Data::XML_PATH_LIST,
+                    \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_LIST,
                     $storeId,
                     $scope
                 ),
                 null,
                 null,
-                \Ebizmarts\MailChimp\Helper\Data::MAX_MERGEFIELDS
+                \SqualoMail\SqmMcMagentoTwo\Helper\Data::MAX_MERGEFIELDS
             );
             foreach ($merge['merge_fields'] as $item) {
                 $ret[$item['tag']] = $item['tag'] . ' (' . $item['name'] . ' : ' . $item['type'] . ')';

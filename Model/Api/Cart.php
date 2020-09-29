@@ -10,7 +10,7 @@
  * @date: 3/7/17 12:42 PM
  * @file: Cart.php
  */
-namespace Ebizmarts\MailChimp\Model\Api;
+namespace SqualoMail\SqmMcMagentoTwo\Model\Api;
 
 use Symfony\Component\Config\Definition\Exception\Exception;
 
@@ -26,7 +26,7 @@ class Cart
     protected $_token = null;
 
     /**
-     * @var \Ebizmarts\MailChimp\Helper\Data
+     * @var \SqualoMail\SqmMcMagentoTwo\Helper\Data
      */
     protected $_helper;
     /**
@@ -60,7 +60,7 @@ class Cart
 
     /**
      * Cart constructor.
-     * @param \Ebizmarts\MailChimp\Helper\Data $helper
+     * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      * @param \Magento\Quote\Model\ResourceModel\Quote\CollectionFactory $quoteColletcion
      * @param \Magento\Customer\Model\CustomerFactory $customerFactory
      * @param Product $apiProduct
@@ -70,11 +70,11 @@ class Cart
      * @param \Magento\Framework\Url $urlHelper
      */
     public function __construct(
-        \Ebizmarts\MailChimp\Helper\Data $helper,
+        \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
         \Magento\Quote\Model\ResourceModel\Quote\CollectionFactory $quoteColletcion,
         \Magento\Customer\Model\CustomerFactory $customerFactory,
-        \Ebizmarts\MailChimp\Model\Api\Product $apiProduct,
-        \Ebizmarts\MailChimp\Model\Api\Customer $apiCustomer,
+        \SqualoMail\SqmMcMagentoTwo\Model\Api\Product $apiProduct,
+        \SqualoMail\SqmMcMagentoTwo\Model\Api\Customer $apiCustomer,
         \Magento\Directory\Model\CountryFactory $countryFactory,
         \Magento\Sales\Model\ResourceModel\Order\CollectionFactory $orderCollectionFactory,
         \Magento\Framework\Url $urlHelper
@@ -99,24 +99,24 @@ class Cart
     {
         $allCarts = [];
         if (!$this->_helper->getConfigValue(
-            \Ebizmarts\MailChimp\Helper\Data::XML_ABANDONEDCART_ACTIVE,
+            \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_ABANDONEDCART_ACTIVE,
             $magentoStoreId
         )
         ) {
             return $allCarts;
         }
         $mailchimpStoreId = $this->_helper->getConfigValue(
-            \Ebizmarts\MailChimp\Helper\Data::XML_MAILCHIMP_STORE,
+            \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_MAILCHIMP_STORE,
             $magentoStoreId
         );
 
         $this->_firstDate = $this->_helper->getConfigValue(
-            \Ebizmarts\MailChimp\Helper\Data::XML_ABANDONEDCART_FIRSTDATE,
+            \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_ABANDONEDCART_FIRSTDATE,
             $magentoStoreId
         );
         if (!$this->_firstDate) {
             $this->_firstDate = $this->_helper->getConfigValue(
-                \Ebizmarts\MailChimp\Helper\Data::XML_PATH_IS_SYNC . "/$mailchimpStoreId",
+                \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_IS_SYNC . "/$mailchimpStoreId",
                 0,
                 'default'
             );
@@ -124,7 +124,7 @@ class Cart
         $this->_counter = 0;
 
         $date = $this->_helper->getDateMicrotime();
-        $this->_batchId =  \Ebizmarts\MailChimp\Helper\Data::IS_QUOTE.'_'.$date;
+        $this->_batchId =  \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_QUOTE.'_'.$date;
         // get all the carts converted in orders (must be deleted on mailchimp)
         $allCarts = array_merge($allCarts, $this->_getConvertedQuotes($mailchimpStoreId, $magentoStoreId));
         // get all the carts modified but not converted in orders
@@ -149,7 +149,7 @@ class Cart
         //join with mailchimp_ecommerce_sync_data table to filter by sync data.
         $convertedCarts->getSelect()->joinLeft(
             ['m4m' => $this->_helper->getTableName('mailchimp_sync_ecommerce')],
-            "m4m.related_id = main_table.entity_id and m4m.type = '".\Ebizmarts\MailChimp\Helper\Data::IS_QUOTE."'
+            "m4m.related_id = main_table.entity_id and m4m.type = '".\SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_QUOTE."'
             AND m4m.mailchimp_store_id = '" . $mailchimpStoreId . "'",
             ['m4m.*']
         );
@@ -226,7 +226,7 @@ class Cart
         //join with mailchimp_ecommerce_sync_data table to filter by sync data.
         $modifiedCarts->getSelect()->joinLeft(
             ['m4m' => $this->_helper->getTableName('mailchimp_sync_ecommerce')],
-            "m4m.related_id = main_table.entity_id and m4m.type = '".\Ebizmarts\MailChimp\Helper\Data::IS_QUOTE."'
+            "m4m.related_id = main_table.entity_id and m4m.type = '".\SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_QUOTE."'
             AND m4m.mailchimp_store_id = '" . $mailchimpStoreId . "'",
             ['m4m.*']
         );
@@ -308,7 +308,7 @@ class Cart
                 $cartJson = $this->_makeCart($cart, $mailchimpStoreId, $magentoStoreId);
                 if ($cartJson!==false) {
                     if (!empty($cartJson)) {
-                        $this->_helper->modifyCounter(\Ebizmarts\MailChimp\Helper\Data::QUO_MOD);
+                        $this->_helper->modifyCounter(\SqualoMail\SqmMcMagentoTwo\Helper\Data::QUO_MOD);
                         $allCarts[$this->_counter]['method'] = 'PATCH';
                         $allCarts[$this->_counter]['path'] = '/ecommerce/stores/' . $mailchimpStoreId .
                             '/carts/' . $cartId;
@@ -359,7 +359,7 @@ class Cart
         //join with mailchimp_ecommerce_sync_data table to filter by sync data.
         $newCarts->getSelect()->joinLeft(
             ['m4m' => $this->_helper->getTableName('mailchimp_sync_ecommerce')],
-            "m4m.related_id = main_table.entity_id and m4m.type = '" . \Ebizmarts\MailChimp\Helper\Data::IS_QUOTE . "'
+            "m4m.related_id = main_table.entity_id and m4m.type = '" . \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_QUOTE . "'
             AND m4m.mailchimp_store_id = '" . $mailchimpStoreId . "'",
             ['m4m.*']
         );
@@ -443,7 +443,7 @@ class Cart
             $cartJson = $this->_makeCart($cart, $mailchimpStoreId, $magentoStoreId);
             if ($cartJson!==false) {
                 if (!empty($cartJson)) {
-                    $this->_helper->modifyCounter(\Ebizmarts\MailChimp\Helper\Data::QUO_NEW);
+                    $this->_helper->modifyCounter(\SqualoMail\SqmMcMagentoTwo\Helper\Data::QUO_NEW);
                     $allCarts[$this->_counter]['method'] = 'POST';
                     $allCarts[$this->_counter]['path'] = '/ecommerce/stores/' . $mailchimpStoreId . '/carts';
                     $allCarts[$this->_counter]['operation_id'] = $this->_batchId . '_' . $cartId;
@@ -489,7 +489,7 @@ class Cart
         $allCartsForEmail->addFieldToFilter('customer_email', ['eq' => $email]);
         $allCartsForEmail->getSelect()->joinLeft(
             ['m4m' => $this->_helper->getTableName('mailchimp_sync_ecommerce')],
-            "m4m.related_id = main_table.entity_id and m4m.type = '".\Ebizmarts\MailChimp\Helper\Data::IS_QUOTE."'
+            "m4m.related_id = main_table.entity_id and m4m.type = '".\SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_QUOTE."'
             AND m4m.mailchimp_store_id = '" . $mailchimpStoreId . "'",
             ['m4m.*']
         );
@@ -684,7 +684,7 @@ class Cart
         $this->_helper->saveEcommerceData(
             $storeId,
             $entityId,
-            \Ebizmarts\MailChimp\Helper\Data::IS_QUOTE,
+            \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_QUOTE,
             $sync_delta,
             $sync_error,
             $sync_modified,

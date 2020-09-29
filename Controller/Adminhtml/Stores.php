@@ -11,13 +11,13 @@
  * @file: Stores.php
  */
 
-namespace Ebizmarts\MailChimp\Controller\Adminhtml;
+namespace SqualoMail\SqmMcMagentoTwo\Controller\Adminhtml;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\Registry;
 use Magento\Framework\View\Result\PageFactory;
-use Ebizmarts\MailChimp\Model\MailChimpStoresFactory;
+use SqualoMail\SqmMcMagentoTwo\Model\MailChimpStoresFactory;
 
 class Stores extends Action
 {
@@ -34,7 +34,7 @@ class Stores extends Action
      */
     protected $_mailchimpStoresFactory;
     /**
-     * @var \Ebizmarts\MailChimp\Helper\Data
+     * @var \SqualoMail\SqmMcMagentoTwo\Helper\Data
      */
     protected $_helper;
 
@@ -44,14 +44,14 @@ class Stores extends Action
      * @param Registry $registry
      * @param PageFactory $resultPageFactory
      * @param MailChimpStoresFactory $storesFactory
-     * @param \Ebizmarts\MailChimp\Helper\Data $helper
+     * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      */
     public function __construct(
         Context $context,
         Registry $registry,
         PageFactory $resultPageFactory,
         MailChimpStoresFactory $storesFactory,
-        \Ebizmarts\MailChimp\Helper\Data $helper
+        \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
     ) {
 
         parent::__construct($context);

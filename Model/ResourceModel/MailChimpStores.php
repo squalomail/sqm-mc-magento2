@@ -11,7 +11,7 @@
  * @file: MailChimpStores.php
  */
 
-namespace Ebizmarts\MailChimp\Model\ResourceModel;
+namespace SqualoMail\SqmMcMagentoTwo\Model\ResourceModel;
 
 use Magento\Framework\DB\Select;
 use Magento\Framework\Model\ResourceModel\Db\AbstractDb;

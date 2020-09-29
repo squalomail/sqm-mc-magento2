@@ -113,7 +113,7 @@
                 </item>
             </argument>
         </column>
-        <actionsColumn name="actions" class="\Ebizmarts\MailChimp\Ui\Component\Errors\Grid\Column\Batch">
+        <actionsColumn name="actions" class="\SqualoMail\SqmMcMagentoTwo\Ui\Component\Errors\Grid\Column\Batch">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="indexField" xsi:type="string">id</item>

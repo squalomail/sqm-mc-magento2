@@ -11,7 +11,7 @@
  * @file: Info.php
  */
 
-namespace Ebizmarts\MailChimp\Block\Adminhtml\Stores\Edit\Tab;
+namespace SqualoMail\SqmMcMagentoTwo\Block\Adminhtml\Stores\Edit\Tab;
 
 use Magento\Backend\Block\Widget\Form\Generic;
 use Magento\Backend\Block\Widget\Tab\TabInterface;
@@ -38,7 +38,7 @@ class Info extends Generic implements TabInterface
      */
     protected $_locale;
     /**
-     * @var \Ebizmarts\MailChimp\Model\Config\Source\ApiKey
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\Config\Source\ApiKey
      */
     protected $_apikey;
 
@@ -51,7 +51,7 @@ class Info extends Generic implements TabInterface
      * @param \Magento\Config\Model\Config\Source\Yesno $yesno
      * @param \Magento\Config\Model\Config\Source\Locale\Currency $currency
      * @param \Magento\Config\Model\Config\Source\Locale $locale
-     * @param \Ebizmarts\MailChimp\Model\Config\Source\ApiKey $apiKey
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\Config\Source\ApiKey $apiKey
      * @param array $data
      */
     public function __construct(
@@ -62,7 +62,7 @@ class Info extends Generic implements TabInterface
         \Magento\Config\Model\Config\Source\Yesno $yesno,
         \Magento\Config\Model\Config\Source\Locale\Currency $currency,
         \Magento\Config\Model\Config\Source\Locale $locale,
-        \Ebizmarts\MailChimp\Model\Config\Source\ApiKey $apiKey,
+        \SqualoMail\SqmMcMagentoTwo\Model\Config\Source\ApiKey $apiKey,
         array $data = []
     ) {
     

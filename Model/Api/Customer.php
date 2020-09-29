@@ -11,7 +11,7 @@
  * @file: Customer.php
  */
 
-namespace Ebizmarts\MailChimp\Model\Api;
+namespace SqualoMail\SqmMcMagentoTwo\Model\Api;
 
 use Magento\Directory\Model\CountryFactory;
 use Magento\Framework\Exception\State\ExpiredException;
@@ -21,7 +21,7 @@ class Customer
 {
     const MAX           = 100;
     /**
-     * @var \Ebizmarts\MailChimp\Helper\Data
+     * @var \SqualoMail\SqmMcMagentoTwo\Helper\Data
      */
     protected $_helper;
     /**
@@ -56,7 +56,7 @@ class Customer
 
     /**
      * Customer constructor.
-     * @param \Ebizmarts\MailChimp\Helper\Data $helper
+     * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      * @param \Magento\Customer\Model\CustomerFactory $customerFactory
      * @param \Magento\Customer\Model\ResourceModel\Customer\CollectionFactory $collection
      * @param \Magento\Sales\Model\ResourceModel\Order\CollectionFactory $orderCollection
@@ -65,7 +65,7 @@ class Customer
      * @param \Magento\Newsletter\Model\SubscriberFactory $subscriberFactory
      */
     public function __construct(
-        \Ebizmarts\MailChimp\Helper\Data $helper,
+        \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
         \Magento\Customer\Model\CustomerFactory $customerFactory,
         \Magento\Customer\Model\ResourceModel\Customer\CollectionFactory $collection,
         \Magento\Sales\Model\ResourceModel\Order\CollectionFactory $orderCollection,
@@ -77,7 +77,7 @@ class Customer
         $this->_helper              = $helper;
         $this->_collection          = $collection;
         $this->_orderCollection     = $orderCollection;
-        $this->_batchId             = \Ebizmarts\MailChimp\Helper\Data::IS_CUSTOMER. '_' .
+        $this->_batchId             = \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_CUSTOMER. '_' .
             $this->_helper->getGmtTimeStamp();
         $this->_address             = $address;
         $this->_customerFactory     = $customerFactory;
@@ -87,15 +87,15 @@ class Customer
     public function sendCustomers($storeId)
     {
         $mailchimpStoreId = $this->_helper->getConfigValue(
-            \Ebizmarts\MailChimp\Helper\Data::XML_MAILCHIMP_STORE,
+            \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_MAILCHIMP_STORE,
             $storeId
         );
-        $listId = $this->_helper->getConfigValue(\Ebizmarts\MailChimp\Helper\Data::XML_PATH_LIST, $storeId);
+        $listId = $this->_helper->getConfigValue(\SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_LIST, $storeId);
         $collection = $this->_collection->create();
         $collection->addFieldToFilter('store_id', ['eq'=>$storeId]);
         $collection->getSelect()->joinLeft(
             ['m4m' => $this->_helper->getTableName('mailchimp_sync_ecommerce')],
-            "m4m.related_id = e.entity_id and m4m.type = '".\Ebizmarts\MailChimp\Helper\Data::IS_CUSTOMER.
+            "m4m.related_id = e.entity_id and m4m.type = '".\SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_CUSTOMER.
             "' and m4m.mailchimp_store_id = '".$mailchimpStoreId."'",
             ['m4m.*']
         );
@@ -117,9 +117,9 @@ class Customer
             if ($customerJson!==false) {
                 if (!empty($customerJson)) {
                     if ($item->getMailchimpSyncModified() == 1) {
-                        $this->_helper->modifyCounter(\Ebizmarts\MailChimp\Helper\Data::CUS_MOD);
+                        $this->_helper->modifyCounter(\SqualoMail\SqmMcMagentoTwo\Helper\Data::CUS_MOD);
                     } else {
-                        $this->_helper->modifyCounter(\Ebizmarts\MailChimp\Helper\Data::CUS_NEW);
+                        $this->_helper->modifyCounter(\SqualoMail\SqmMcMagentoTwo\Helper\Data::CUS_NEW);
                     }
                     $customerMailchimpId = hash('md5', strtolower($customer->getEmail()));
                     $customerArray[$counter]['method'] = "PUT";
@@ -258,7 +258,7 @@ class Customer
 
     public function getOptin($storeId = 0)
     {
-        if ($this->_helper->getConfigValue(\Ebizmarts\MailChimp\Helper\Data::XML_ECOMMERCE_OPTIN, $storeId)) {
+        if ($this->_helper->getConfigValue(\SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_ECOMMERCE_OPTIN, $storeId)) {
             $optin = true;
         } else {
             $optin = false;
@@ -275,7 +275,7 @@ class Customer
         $this->_helper->saveEcommerceData(
             $storeId,
             $entityId,
-            \Ebizmarts\MailChimp\Helper\Data::IS_CUSTOMER,
+            \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_CUSTOMER,
             $sync_delta,
             $sync_error,
             $sync_modified

@@ -10,14 +10,14 @@
  * @date: 11/8/17 5:07 PM
  * @file: SafeAfter.php
  */
-namespace Ebizmarts\MailChimp\Observer\Customer;
+namespace SqualoMail\SqmMcMagentoTwo\Observer\Customer;
 
 use Magento\Framework\Event\Observer;
 
 class SaveBefore implements \Magento\Framework\Event\ObserverInterface
 {
     /**
-     * @var \Ebizmarts\MailChimp\Helper\Data
+     * @var \SqualoMail\SqmMcMagentoTwo\Helper\Data
      */
     protected $_helper;
     /**
@@ -27,11 +27,11 @@ class SaveBefore implements \Magento\Framework\Event\ObserverInterface
 
     /**
      * SaveBefore constructor.
-     * @param \Ebizmarts\MailChimp\Helper\Data $helper
+     * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      * @param \Magento\Newsletter\Model\SubscriberFactory $subscriberFactory
      */
     public function __construct(
-        \Ebizmarts\MailChimp\Helper\Data $helper,
+        \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
         \Magento\Newsletter\Model\SubscriberFactory $subscriberFactory
     ) {
 
@@ -46,16 +46,16 @@ class SaveBefore implements \Magento\Framework\Event\ObserverInterface
          */
         $customer = $observer->getCustomer();
         $storeId  = $customer->getStoreId();
-        if ($this->_helper->getConfigValue(\Ebizmarts\MailChimp\Helper\Data::XML_PATH_ACTIVE)) {
-            if ($this->_helper->getConfigValue(\Ebizmarts\MailChimp\Helper\Data::XML_PATH_ECOMMERCE_ACTIVE)) {
+        if ($this->_helper->getConfigValue(\SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_ACTIVE)) {
+            if ($this->_helper->getConfigValue(\SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_ECOMMERCE_ACTIVE)) {
                 $mailchimpStoreId = $this->_helper->getConfigValue(
-                    \Ebizmarts\MailChimp\Helper\Data::XML_MAILCHIMP_STORE,
+                    \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_MAILCHIMP_STORE,
                     $storeId
                 );
                 $this->_helper->saveEcommerceData(
                     $mailchimpStoreId,
                     $customer->getId(),
-                    \Ebizmarts\MailChimp\Helper\Data::IS_CUSTOMER,
+                    \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_CUSTOMER,
                     null,
                     null,
                     1
@@ -66,7 +66,7 @@ class SaveBefore implements \Magento\Framework\Event\ObserverInterface
             if ($subscriber->getEmail() == $customer->getEmail()) {
                 $this->_helper->markRegisterAsModified(
                     $subscriber->getId(),
-                    \Ebizmarts\MailChimp\Helper\Data::IS_SUBSCRIBER
+                    \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_SUBSCRIBER
                 );
             }
         }

@@ -10,7 +10,7 @@
  * @date: 4/20/17 3:20 PM
  * @file: Get.php
  */
-namespace Ebizmarts\MailChimp\Controller\Adminhtml\Stores;
+namespace SqualoMail\SqmMcMagentoTwo\Controller\Adminhtml\Stores;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
@@ -21,7 +21,7 @@ class Get extends Action
     const MAX_STORES = 200;
 
     /**
-     * @var \Ebizmarts\MailChimp\Helper\Data
+     * @var \SqualoMail\SqmMcMagentoTwo\Helper\Data
      */
     protected $_helper;
     /**
@@ -32,11 +32,11 @@ class Get extends Action
     /**
      * Get constructor.
      * @param Context $context
-     * @param \Ebizmarts\MailChimp\Helper\Data $helper
+     * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      */
     public function __construct(
         Context $context,
-        \Ebizmarts\MailChimp\Helper\Data $helper
+        \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
     ) {
 
         parent::__construct($context);
@@ -55,7 +55,7 @@ class Get extends Action
             $result['valid'] = 1;
             $result['stores'] = [];
             foreach ($stores['stores'] as $store) {
-                if ($store['platform'] == \Ebizmarts\MailChimp\Helper\Data::PLATFORM) {
+                if ($store['platform'] == \SqualoMail\SqmMcMagentoTwo\Helper\Data::PLATFORM) {
                     if ($store['list_id']=='') {
                         continue;
                     }

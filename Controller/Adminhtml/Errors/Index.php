@@ -10,7 +10,7 @@
  * @date: 10/28/16 4:58 PM
  * @file: Index.php
  */
-namespace Ebizmarts\MailChimp\Controller\Adminhtml\Errors;
+namespace SqualoMail\SqmMcMagentoTwo\Controller\Adminhtml\Errors;
 
 class Index extends \Magento\Backend\App\Action
 {

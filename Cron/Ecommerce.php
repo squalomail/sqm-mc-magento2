@@ -11,7 +11,7 @@
  * @file: Ecommerce.php
  */
 
-namespace Ebizmarts\MailChimp\Cron;
+namespace SqualoMail\SqmMcMagentoTwo\Cron;
 
 class Ecommerce
 {
@@ -20,47 +20,47 @@ class Ecommerce
      */
     private $_storeManager;
     /**
-     * @var \Ebizmarts\MailChimp\Helper\Data
+     * @var \SqualoMail\SqmMcMagentoTwo\Helper\Data
      */
     private $_helper;
     /**
-     * @var \Ebizmarts\MailChimp\Model\Api\Product
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\Api\Product
      */
     private $_apiProduct;
     /**
-     * @var \Ebizmarts\MailChimp\Model\Api\Result
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\Api\Result
      */
     private $_apiResult;
     /**
-     * @var \Ebizmarts\MailChimp\Model\Api\Customer
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\Api\Customer
      */
     private $_apiCustomer;
     /**
-     * @var \Ebizmarts\MailChimp\Model\Api\Order
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\Api\Order
      */
     private $_apiOrder;
     /**
-     * @var \Ebizmarts\MailChimp\Model\Api\Cart
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\Api\Cart
      */
     private $_apiCart;
     /**
-     * @var \Ebizmarts\MailChimp\Model\MailChimpSyncBatchesFactory
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncBatchesFactory
      */
     private $_mailChimpSyncBatchesFactory;
     /**
-     * @var \Ebizmarts\MailChimp\Model\MailChimpSyncEcommerce
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerce
      */
     private $_chimpSyncEcommerce;
     /**
-     * @var \Ebizmarts\MailChimp\Model\Api\Subscriber
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\Api\Subscriber
      */
     private $_apiSubscribers;
     /**
-     * @var \Ebizmarts\MailChimp\Model\Api\PromoCodes
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\Api\PromoCodes
      */
     private $_apiPromoCodes;
     /**
-     * @var \Ebizmarts\MailChimp\Model\Api\PromoRules
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\Api\PromoRules
      */
     private $_apiPromoRules;
     /**
@@ -71,32 +71,32 @@ class Ecommerce
     /**
      * Ecommerce constructor.
      * @param \Magento\Store\Model\StoreManager $storeManager
-     * @param \Ebizmarts\MailChimp\Helper\Data $helper
-     * @param \Ebizmarts\MailChimp\Model\Api\Product $apiProduct
-     * @param \Ebizmarts\MailChimp\Model\Api\Result $apiResult
-     * @param \Ebizmarts\MailChimp\Model\Api\Customer $apiCustomer
-     * @param \Ebizmarts\MailChimp\Model\Api\Order $apiOrder
-     * @param \Ebizmarts\MailChimp\Model\Api\Cart $apiCart
-     * @param \Ebizmarts\MailChimp\Model\Api\Subscriber $apiSubscriber
-     * @param \Ebizmarts\MailChimp\Model\Api\PromoCodes $apiPromoCodes
-     * @param \Ebizmarts\MailChimp\Model\Api\PromoRules $apiPromoRules
-     * @param \Ebizmarts\MailChimp\Model\MailChimpSyncBatchesFactory $mailChimpSyncBatchesFactory
-     * @param \Ebizmarts\MailChimp\Model\MailChimpSyncEcommerce $chimpSyncEcommerce
+     * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\Api\Product $apiProduct
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\Api\Result $apiResult
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\Api\Customer $apiCustomer
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\Api\Order $apiOrder
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\Api\Cart $apiCart
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\Api\Subscriber $apiSubscriber
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\Api\PromoCodes $apiPromoCodes
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\Api\PromoRules $apiPromoRules
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncBatchesFactory $mailChimpSyncBatchesFactory
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerce $chimpSyncEcommerce
      * @param \Magento\Framework\Filesystem\DirectoryList $dir
      */
     public function __construct(
         \Magento\Store\Model\StoreManager $storeManager,
-        \Ebizmarts\MailChimp\Helper\Data $helper,
-        \Ebizmarts\MailChimp\Model\Api\Product $apiProduct,
-        \Ebizmarts\MailChimp\Model\Api\Result $apiResult,
-        \Ebizmarts\MailChimp\Model\Api\Customer $apiCustomer,
-        \Ebizmarts\MailChimp\Model\Api\Order $apiOrder,
-        \Ebizmarts\MailChimp\Model\Api\Cart $apiCart,
-        \Ebizmarts\MailChimp\Model\Api\Subscriber $apiSubscriber,
-        \Ebizmarts\MailChimp\Model\Api\PromoCodes $apiPromoCodes,
-        \Ebizmarts\MailChimp\Model\Api\PromoRules $apiPromoRules,
-        \Ebizmarts\MailChimp\Model\MailChimpSyncBatchesFactory $mailChimpSyncBatchesFactory,
-        \Ebizmarts\MailChimp\Model\MailChimpSyncEcommerce $chimpSyncEcommerce,
+        \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
+        \SqualoMail\SqmMcMagentoTwo\Model\Api\Product $apiProduct,
+        \SqualoMail\SqmMcMagentoTwo\Model\Api\Result $apiResult,
+        \SqualoMail\SqmMcMagentoTwo\Model\Api\Customer $apiCustomer,
+        \SqualoMail\SqmMcMagentoTwo\Model\Api\Order $apiOrder,
+        \SqualoMail\SqmMcMagentoTwo\Model\Api\Cart $apiCart,
+        \SqualoMail\SqmMcMagentoTwo\Model\Api\Subscriber $apiSubscriber,
+        \SqualoMail\SqmMcMagentoTwo\Model\Api\PromoCodes $apiPromoCodes,
+        \SqualoMail\SqmMcMagentoTwo\Model\Api\PromoRules $apiPromoRules,
+        \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncBatchesFactory $mailChimpSyncBatchesFactory,
+        \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerce $chimpSyncEcommerce,
         \Magento\Framework\Filesystem\DirectoryList $dir
     ) {
 
@@ -126,7 +126,7 @@ class Ecommerce
         );
 
         foreach ($this->_storeManager->getStores() as $storeId => $val) {
-            if ($this->_helper->getConfigValue(\Ebizmarts\MailChimp\Helper\Data::XML_PATH_ACTIVE, $storeId)) {
+            if ($this->_helper->getConfigValue(\SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_ACTIVE, $storeId)) {
                 if (!$this->_ping($storeId)) {
                     $this->_helper->log('MailChimp is not available');
                     return;
@@ -134,7 +134,7 @@ class Ecommerce
                 $this->_storeManager->setCurrentStore($storeId);
                 $listId = $this->_helper->getGeneralList($storeId);
                 $mailchimpStoreId = $this->_helper->getConfigValue(
-                    \Ebizmarts\MailChimp\Helper\Data::XML_MAILCHIMP_STORE,
+                    \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_MAILCHIMP_STORE,
                     $storeId
                 );
                 if ($mailchimpStoreId != -1 && $mailchimpStoreId != '') {
@@ -165,12 +165,12 @@ class Ecommerce
         $syncs = [];
         foreach ($this->_storeManager->getStores() as $storeId => $val) {
             $mailchimpStoreId = $this->_helper->getConfigValue(
-                \Ebizmarts\MailChimp\Helper\Data::XML_MAILCHIMP_STORE,
+                \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_MAILCHIMP_STORE,
                 $storeId
             );
             if ($mailchimpStoreId != -1 && $mailchimpStoreId != '') {
                 $dateSync = $this->_helper->getConfigValue(
-                    \Ebizmarts\MailChimp\Helper\Data::XML_PATH_IS_SYNC,
+                    \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_IS_SYNC,
                     $storeId
                 );
                 if (isset($syncs[$mailchimpStoreId])) {
@@ -188,7 +188,7 @@ class Ecommerce
         }
         foreach ($syncs as $mailchimpStoreId => $val) {
             if ($val && !$this->_helper->getConfigValue(
-                \Ebizmarts\MailChimp\Helper\Data::XML_PATH_IS_SYNC . "/$mailchimpStoreId",
+                \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_IS_SYNC . "/$mailchimpStoreId",
                 0,
                 'default'
             )
@@ -207,7 +207,7 @@ class Ecommerce
         $batchArray = [];
         $this->_helper->resetCounters();
         $results = $this->_apiSubscribers->sendSubscribers($storeId, $listId);
-        if ($this->_helper->getConfigValue(\Ebizmarts\MailChimp\Helper\Data::XML_PATH_ECOMMERCE_ACTIVE, $storeId)) {
+        if ($this->_helper->getConfigValue(\SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_ECOMMERCE_ACTIVE, $storeId)) {
             $this->_helper->log('Generate Products payload');
             $products = $this->_apiProduct->_sendProducts($storeId);
             $countProducts = count($products);
@@ -223,14 +223,14 @@ class Ecommerce
             $countOrders = count($orders);
             $results = array_merge($results, $orders);
 
-            if ($this->_helper->getConfigValue(\Ebizmarts\MailChimp\Helper\Data::XML_PATH_IS_SYNC, $storeId)) {
+            if ($this->_helper->getConfigValue(\SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_IS_SYNC, $storeId)) {
                 $this->_helper->log('Generate Carts payload');
                 $carts = $this->_apiCart->createBatchJson($storeId);
                 $results = array_merge($results, $carts);
             } else {
                 $this->_helper->log('No Carts will be synced until the store is completely synced');
             }
-            if ($this->_helper->getConfigValue(\Ebizmarts\MailChimp\Helper\Data::XML_SEND_PROMO, $storeId)) {
+            if ($this->_helper->getConfigValue(\SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_SEND_PROMO, $storeId)) {
                 $this->_helper->log('Generate Rules payload');
                 $rules = $this->_apiPromoRules->sendRules($storeId);
                 $results = array_merge($results, $rules);
@@ -257,7 +257,7 @@ class Ecommerce
                         $syncBatches = $this->_mailChimpSyncBatchesFactory->create();
                         $syncBatches->setStoreId($storeId);
                         $syncBatches->setBatchId($batchResponse['id']);
-                        $syncBatches->setStatus(\Ebizmarts\MailChimp\Helper\Data::BATCH_PENDING);
+                        $syncBatches->setStatus(\SqualoMail\SqmMcMagentoTwo\Helper\Data::BATCH_PENDING);
                         $syncBatches->setMailchimpStoreId($mailchimpStoreId);
                         $syncBatches->setModifiedDate($this->_helper->getGmtDate());
                         $syncBatches->getResource()->save($syncBatches);
@@ -281,7 +281,7 @@ class Ecommerce
         $syncing = $this->_helper->getMCMinSyncing($storeId);
         if ($countTotal == 0 && $syncing) {
             $this->_helper->saveConfigValue(
-                \Ebizmarts\MailChimp\Helper\Data::XML_PATH_IS_SYNC,
+                \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_IS_SYNC,
                 date('Y-m-d'),
                 $storeId
             );
@@ -298,7 +298,7 @@ class Ecommerce
     {
         $this->apiUpdateSyncFlag($storeId, $mailchimpStoreId);
         $this->_helper->saveConfigValue(
-            \Ebizmarts\MailChimp\Helper\Data::XML_PATH_IS_SYNC . "/$mailchimpStoreId",
+            \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_IS_SYNC . "/$mailchimpStoreId",
             date('Y-m-d'),
             0,
             'default'
@@ -390,12 +390,12 @@ class Ecommerce
         $type = null;
         $relatedId = null;
         $types = [
-            \Ebizmarts\MailChimp\Helper\Data::IS_ORDER,
-            \Ebizmarts\MailChimp\Helper\Data::IS_PRODUCT,
-            \Ebizmarts\MailChimp\Helper\Data::IS_PROMO_CODE,
-            \Ebizmarts\MailChimp\Helper\Data::IS_PROMO_RULE,
-            \Ebizmarts\MailChimp\Helper\Data::IS_CUSTOMER,
-            \Ebizmarts\MailChimp\Helper\Data::IS_SUBSCRIBER
+            \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_ORDER,
+            \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_PRODUCT,
+            \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_PROMO_CODE,
+            \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_PROMO_RULE,
+            \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_CUSTOMER,
+            \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_SUBSCRIBER
         ];
         $connection = $this->_chimpSyncEcommerce->getResource()->getConnection();
         $tableName = $this->_chimpSyncEcommerce->getResource()->getMainTable();
@@ -408,7 +408,7 @@ class Ecommerce
                         if (!in_array($type, $types)) {
                             $type = '';
                         } else {
-                            if ($type == \Ebizmarts\MailChimp\Helper\Data::IS_SUBSCRIBER) {
+                            if ($type == \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_SUBSCRIBER) {
                                 $storeId = $listId;
                             } else {
                                 $storeId = $mailchimpStoreId;
@@ -426,7 +426,7 @@ class Ecommerce
                             'mailchimp_sync_modified' => 0,
                             'mailchimp_sync_delta' => $this->_helper->getGmtDate(),
                             'mailchimp_sync_error' => __('Json error'),
-                            'mailchimp_sent' => \Ebizmarts\MailChimp\Helper\Data::NOTSYNCED
+                            'mailchimp_sent' => \SqualoMail\SqmMcMagentoTwo\Helper\Data::NOTSYNCED
                             ],
                             "batch_id is null and mailchimp_store_id = '$storeId' and type ='$type' and related_id = $relatedId"
                         );

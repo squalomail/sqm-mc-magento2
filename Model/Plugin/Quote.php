@@ -10,7 +10,7 @@
  * @date: 4/25/17 7:40 PM
  * @file: Quote.php
  */
-namespace Ebizmarts\MailChimp\Model\Plugin;
+namespace SqualoMail\SqmMcMagentoTwo\Model\Plugin;
 
 class Quote
 {
@@ -19,18 +19,18 @@ class Quote
      */
     protected $_cookieManager;
     /**
-     * @var \Ebizmarts\MailChimp\Helper\Data
+     * @var \SqualoMail\SqmMcMagentoTwo\Helper\Data
      */
     protected $_helper;
 
     /**
      * Quote constructor.
      * @param \Magento\Framework\Stdlib\CookieManagerInterface $cookieManager
-     * @param \Ebizmarts\MailChimp\Helper\Data $helper
+     * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      */
     public function __construct(
         \Magento\Framework\Stdlib\CookieManagerInterface $cookieManager,
-        \Ebizmarts\MailChimp\Helper\Data $helper
+        \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
     ) {
     
         $this->_cookieManager = $cookieManager;

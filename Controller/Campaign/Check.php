@@ -11,7 +11,7 @@
  * @file: Check.php
  */
 
-namespace Ebizmarts\MailChimp\Controller\Campaign;
+namespace SqualoMail\SqmMcMagentoTwo\Controller\Campaign;
 
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\Controller\ResultFactory;
@@ -19,7 +19,7 @@ use Magento\Framework\Controller\ResultFactory;
 class Check extends \Magento\Framework\App\Action\Action
 {
     /**
-     * @var \Ebizmarts\MailChimp\Helper\Data
+     * @var \SqualoMail\SqmMcMagentoTwo\Helper\Data
      */
     protected $_helper;
     /**
@@ -31,11 +31,11 @@ class Check extends \Magento\Framework\App\Action\Action
     /**
      * Get constructor.
      * @param Context $context
-     * @param \Ebizmarts\MailChimp\Helper\Data $helper
+     * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      */
     public function __construct(
         Context $context,
-        \Ebizmarts\MailChimp\Helper\Data $helper,
+        \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
         \Magento\Store\Model\StoreManagerInterface $storeManager
     ) {
 
@@ -56,7 +56,7 @@ class Check extends \Magento\Framework\App\Action\Action
             try {
                 $campaign =$api->campaigns->get($mc_cid);
                 $mailchimpList = $this->_helper->getConfigValue(
-                    \Ebizmarts\MailChimp\Helper\Data::XML_PATH_LIST,
+                    \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_LIST,
                     $magentoStoreId
                 );
                 if ($mailchimpList == $campaign['recipients']['list_id']) {

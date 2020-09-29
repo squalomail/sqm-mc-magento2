@@ -11,7 +11,7 @@
  * @file: Order.php
  */
 
-namespace Ebizmarts\MailChimp\Model\Api;
+namespace SqualoMail\SqmMcMagentoTwo\Model\Api;
 
 use Magento\SalesRule\Model\RuleRepository;
 use Symfony\Component\Config\Definition\Exception\Exception;
@@ -32,7 +32,7 @@ class Order
     protected $_api = null;
 
     /**
-     * @var \Ebizmarts\MailChimp\Helper\Data
+     * @var \SqualoMail\SqmMcMagentoTwo\Helper\Data
      */
     protected $_helper;
     /**
@@ -52,7 +52,7 @@ class Order
      */
     protected $_product;
     /**
-     * @var \Ebizmarts\MailChimp\Model\Api\Customer
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\Api\Customer
      */
     protected $_apiCustomer;
     /**
@@ -83,7 +83,7 @@ class Order
 
     /**
      * Order constructor.
-     * @param \Ebizmarts\MailChimp\Helper\Data $helper
+     * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      * @param \Magento\Sales\Model\OrderRepository $order
      * @param \Magento\Sales\Model\ResourceModel\Order\CollectionFactory $orderCollectionFactory
      * @param \Magento\Catalog\Model\ResourceModel\Product $product
@@ -91,21 +91,21 @@ class Order
      * @param Customer $apiCustomer
      * @param \Magento\Catalog\Model\ProductFactory $productFactory
      * @param \Magento\Directory\Model\CountryFactory $countryFactory
-     * @param \Ebizmarts\MailChimp\Model\MailChimpSyncEcommerce $chimpSyncEcommerce
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerce $chimpSyncEcommerce
      * @param \Magento\SalesRule\Model\Coupon $couponRepository
      * @param RuleRepository $ruleRepository
      * @param \Magento\Framework\Url $urlHelper
      */
     public function __construct(
-        \Ebizmarts\MailChimp\Helper\Data $helper,
+        \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
         \Magento\Sales\Model\OrderRepository $order,
         \Magento\Sales\Model\ResourceModel\Order\CollectionFactory $orderCollectionFactory,
         \Magento\Catalog\Model\ResourceModel\Product $product,
-        \Ebizmarts\MailChimp\Model\Api\Product $apiProduct,
-        \Ebizmarts\MailChimp\Model\Api\Customer $apiCustomer,
+        \SqualoMail\SqmMcMagentoTwo\Model\Api\Product $apiProduct,
+        \SqualoMail\SqmMcMagentoTwo\Model\Api\Customer $apiCustomer,
         \Magento\Catalog\Model\ProductFactory $productFactory,
         \Magento\Directory\Model\CountryFactory $countryFactory,
-        \Ebizmarts\MailChimp\Model\MailChimpSyncEcommerce $chimpSyncEcommerce,
+        \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerce $chimpSyncEcommerce,
         \Magento\SalesRule\Model\Coupon $couponRepository,
         \Magento\SalesRule\Model\RuleRepository $ruleRepository,
         \Magento\Framework\Url $urlHelper
@@ -120,7 +120,7 @@ class Order
         $this->_apiCustomer     = $apiCustomer;
         $this->_countryFactory  = $countryFactory;
         $this->_chimpSyncEcommerce  = $chimpSyncEcommerce;
-        $this->_batchId         = \Ebizmarts\MailChimp\Helper\Data::IS_ORDER. '_' . $this->_helper->getGmtTimeStamp();
+        $this->_batchId         = \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_ORDER. '_' . $this->_helper->getGmtTimeStamp();
         $this->_counter = 0;
         $this->_urlHelper    = $urlHelper;
         $this->couponRepository = $couponRepository;
@@ -137,7 +137,7 @@ class Order
     public function sendOrders($magentoStoreId)
     {
         $batchArray = [];
-        $this->_firstDate = $this->_helper->getConfigValue(\Ebizmarts\MailChimp\Helper\Data::XML_ECOMMERCE_FIRSTDATE, $magentoStoreId);
+        $this->_firstDate = $this->_helper->getConfigValue(\SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_ECOMMERCE_FIRSTDATE, $magentoStoreId);
 
         // get all the orders modified
         $batchArray = array_merge($batchArray, $this->_getModifiedOrders($magentoStoreId));
@@ -153,7 +153,7 @@ class Order
     {
         $batchArray = [];
         $mailchimpStoreId = $this->_helper->getConfigValue(
-            \Ebizmarts\MailChimp\Helper\Data::XML_MAILCHIMP_STORE,
+            \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_MAILCHIMP_STORE,
             $magentoStoreId
         );
         $modifiedOrders = $this->_getCollection();
@@ -162,7 +162,7 @@ class Order
         //join with mailchimp_ecommerce_sync_data table to filter by sync data.
         $modifiedOrders->getSelect()->joinLeft(
             ['m4m' => $this->_helper->getTableName('mailchimp_sync_ecommerce')],
-            "m4m.related_id = main_table.entity_id and m4m.type = '".\Ebizmarts\MailChimp\Helper\Data::IS_ORDER.
+            "m4m.related_id = main_table.entity_id and m4m.type = '".\SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_ORDER.
             "' and m4m.mailchimp_store_id = '".$mailchimpStoreId."'",
             ['m4m.*']
         );
@@ -199,7 +199,7 @@ class Order
                 $orderJson = $this->generatePOSTPayload($order, $mailchimpStoreId, $magentoStoreId, true);
                 if ($orderJson!==false) {
                     if (!empty($orderJson)) {
-                        $this->_helper->modifyCounter(\Ebizmarts\MailChimp\Helper\Data::ORD_MOD);
+                        $this->_helper->modifyCounter(\SqualoMail\SqmMcMagentoTwo\Helper\Data::ORD_MOD);
                         $batchArray[$this->_counter]['method'] = "PATCH";
                         $batchArray[$this->_counter]['path'] = '/ecommerce/stores/' . $mailchimpStoreId . '/orders/' .
                             $order->getIncrementId();
@@ -232,7 +232,7 @@ class Order
     {
         $batchArray = [];
         $mailchimpStoreId = $this->_helper->getConfigValue(
-            \Ebizmarts\MailChimp\Helper\Data::XML_MAILCHIMP_STORE,
+            \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_MAILCHIMP_STORE,
             $magentoStoreId
         );
         $newOrders = $this->_getCollection();
@@ -244,7 +244,7 @@ class Order
         }
         $newOrders->getSelect()->joinLeft(
             ['m4m' => $this->_helper->getTableName('mailchimp_sync_ecommerce')],
-            "m4m.related_id = main_table.entity_id and m4m.type = '".\Ebizmarts\MailChimp\Helper\Data::IS_ORDER.
+            "m4m.related_id = main_table.entity_id and m4m.type = '".\SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_ORDER.
             "' and m4m.mailchimp_store_id = '".$mailchimpStoreId."'",
             ['m4m.*']
         );
@@ -279,7 +279,7 @@ class Order
                 $orderJson = $this->generatePOSTPayload($order, $mailchimpStoreId, $magentoStoreId);
                 if ($orderJson!==false) {
                     if (!empty($orderJson)) {
-                        $this->_helper->modifyCounter(\Ebizmarts\MailChimp\Helper\Data::ORD_NEW);
+                        $this->_helper->modifyCounter(\SqualoMail\SqmMcMagentoTwo\Helper\Data::ORD_NEW);
                         $batchArray[$this->_counter]['method'] = "POST";
                         $batchArray[$this->_counter]['path'] = '/ecommerce/stores/' . $mailchimpStoreId . '/orders';
                         $batchArray[$this->_counter]['operation_id'] = $this->_batchId . '_' . $orderId;
@@ -380,7 +380,7 @@ class Order
             $productSyncData = $this->_helper->getChimpSyncEcommerce(
                 $mailchimpStoreId,
                 $item->getProductId(),
-                \Ebizmarts\MailChimp\Helper\Data::IS_PRODUCT
+                \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_PRODUCT
             );
             if ($item->getProductType() == \Magento\ConfigurableProduct\Model\Product\Type\Configurable::TYPE_CODE) {
                 $options = $item->getProductOptions();
@@ -690,14 +690,14 @@ class Order
     protected function _updateOrder($storeId, $entityId, $sync_delta = null, $sync_error = null, $sync_modified = null)
     {
         if (!empty($sync_error)) {
-            $sent = \Ebizmarts\MailChimp\Helper\Data::NOTSYNCED;
+            $sent = \SqualoMail\SqmMcMagentoTwo\Helper\Data::NOTSYNCED;
         } else {
-            $sent = \Ebizmarts\MailChimp\Helper\Data::WAITINGSYNC;
+            $sent = \SqualoMail\SqmMcMagentoTwo\Helper\Data::WAITINGSYNC;
         }
         $this->_helper->saveEcommerceData(
             $storeId,
             $entityId,
-            \Ebizmarts\MailChimp\Helper\Data::IS_ORDER,
+            \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_ORDER,
             $sync_delta,
             $sync_error,
             $sync_modified,

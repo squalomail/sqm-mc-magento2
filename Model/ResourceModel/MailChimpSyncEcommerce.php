@@ -11,7 +11,7 @@
  * @file: MailChimpSyncEcommerce.php
  */
 
-namespace Ebizmarts\MailChimp\Model\ResourceModel;
+namespace SqualoMail\SqmMcMagentoTwo\Model\ResourceModel;
 
 use Magento\Framework\DB\Select;
 use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
@@ -22,7 +22,7 @@ class MailChimpSyncEcommerce extends AbstractDb
     {
         $this->_init('mailchimp_sync_ecommerce', 'id');
     }
-    public function getByStoreIdType(\Ebizmarts\MailChimp\Model\MailChimpSyncEcommerce $chimp, $storeId, $id, $type)
+    public function getByStoreIdType(\SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerce $chimp, $storeId, $id, $type)
     {
         $connection = $this->getConnection();
         $bind = ['store_id' => $storeId, 'type' => $type, 'related_id' => $id];
@@ -38,7 +38,7 @@ class MailChimpSyncEcommerce extends AbstractDb
         return $chimp;
     }
     public function markAllAsDeleted(
-        \Ebizmarts\MailChimp\Model\MailChimpSyncEcommerce $chimp,
+        \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerce $chimp,
         $id,
         $type,
         $relatedDeletedId
@@ -51,7 +51,7 @@ class MailChimpSyncEcommerce extends AbstractDb
         );
         return $this;
     }
-    public function markAllAsModified(\Ebizmarts\MailChimp\Model\MailChimpSyncEcommerce $chimp, $id, $type)
+    public function markAllAsModified(\SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerce $chimp, $id, $type)
     {
         $connection = $this->getConnection();
         $connection->update(
@@ -62,7 +62,7 @@ class MailChimpSyncEcommerce extends AbstractDb
         return $this;
     }
     public function deleteAllByIdType(
-        \Ebizmarts\MailChimp\Model\MailChimpSyncEcommerce $chimp,
+        \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerce $chimp,
         $id,
         $type,
         $mailchimpStoreId
@@ -74,7 +74,7 @@ class MailChimpSyncEcommerce extends AbstractDb
         );
         return $this;
     }
-    public function deleteAllByBatchId(\Ebizmarts\MailChimp\Model\MailChimpSyncEcommerce $chimp, $batchId)
+    public function deleteAllByBatchId(\SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerce $chimp, $batchId)
     {
         $connection = $this->getConnection();
         $connection->delete($this->getTable('mailchimp_sync_ecommerce'), ['batch_id = ?' => $batchId]);

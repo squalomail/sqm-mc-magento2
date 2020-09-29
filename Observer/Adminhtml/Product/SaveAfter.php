@@ -10,12 +10,12 @@
  * @date: 1/18/18 12:30 PM
  * @file: SaveAfter.php
  */
-namespace Ebizmarts\MailChimp\Observer\Adminhtml\Product;
+namespace SqualoMail\SqmMcMagentoTwo\Observer\Adminhtml\Product;
 
 class SaveAfter implements \Magento\Framework\Event\ObserverInterface
 {
     /**
-     * @var \Ebizmarts\MailChimp\Helper\Data
+     * @var \SqualoMail\SqmMcMagentoTwo\Helper\Data
      */
     protected $helper;
     /**
@@ -25,11 +25,11 @@ class SaveAfter implements \Magento\Framework\Event\ObserverInterface
 
     /**
      * SaveAfter constructor.
-     * @param \Ebizmarts\MailChimp\Helper\Data $helper
+     * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      * @param \Magento\ConfigurableProduct\Model\ResourceModel\Product\Type\Configurable $configurable
      */
     public function __construct(
-        \Ebizmarts\MailChimp\Helper\Data $helper,
+        \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
         \Magento\ConfigurableProduct\Model\ResourceModel\Product\Type\Configurable $configurable
     ) {
 
@@ -44,7 +44,7 @@ class SaveAfter implements \Magento\Framework\Event\ObserverInterface
          */
         $product = $observer->getProduct();
         $mailchimpStore = $this->helper->getConfigValue(
-            \Ebizmarts\MailChimp\Helper\Data::XML_MAILCHIMP_STORE,
+            \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_MAILCHIMP_STORE,
             $product->getStoreId()
         );
         if ($product->getTypeId() == \Magento\Catalog\Model\Product\Type::TYPE_SIMPLE) {
@@ -61,6 +61,6 @@ class SaveAfter implements \Magento\Framework\Event\ObserverInterface
     }
     protected function _updateProduct($entityId)
     {
-        $this->helper->markRegisterAsModified($entityId, \Ebizmarts\MailChimp\Helper\Data::IS_PRODUCT);
+        $this->helper->markRegisterAsModified($entityId, \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_PRODUCT);
     }
 }

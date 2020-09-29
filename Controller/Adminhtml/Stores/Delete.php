@@ -11,9 +11,9 @@
  * @file: Delete.php
  */
 
-namespace Ebizmarts\MailChimp\Controller\Adminhtml\Stores;
+namespace SqualoMail\SqmMcMagentoTwo\Controller\Adminhtml\Stores;
 
-class Delete extends \Ebizmarts\MailChimp\Controller\Adminhtml\Stores
+class Delete extends \SqualoMail\SqmMcMagentoTwo\Controller\Adminhtml\Stores
 {
     public function execute()
     {

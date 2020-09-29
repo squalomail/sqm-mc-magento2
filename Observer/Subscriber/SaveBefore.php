@@ -10,35 +10,35 @@
  * @date: 11/9/17 5:20 PM
  * @file: SaveBefore.php
  */
-namespace Ebizmarts\MailChimp\Observer\Subscriber;
+namespace SqualoMail\SqmMcMagentoTwo\Observer\Subscriber;
 
 use Magento\Framework\Event\Observer;
 
 class SaveBefore implements \Magento\Framework\Event\ObserverInterface
 {
     /**
-     * @var \Ebizmarts\MailChimp\Model\MailChimpSyncEcommerce
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerce
      */
     protected $_ecommerce;
     /**
-     * @var \Ebizmarts\MailChimp\Helper\Data
+     * @var \SqualoMail\SqmMcMagentoTwo\Helper\Data
      */
     protected $_helper;
     /**
-     * @var \Ebizmarts\MailChimp\Model\Api\Subscriber
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\Api\Subscriber
      */
     protected $_subscriberApi;
 
     /**
      * SaveBefore constructor.
-     * @param \Ebizmarts\MailChimp\Model\MailChimpSyncEcommerce $ecommerce
-     * @param \Ebizmarts\MailChimp\Helper\Data $helper
-     * @param \Ebizmarts\MailChimp\Model\Api\Subscriber $subscriberApi
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerce $ecommerce
+     * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\Api\Subscriber $subscriberApi
      */
     public function __construct(
-        \Ebizmarts\MailChimp\Model\MailChimpSyncEcommerce $ecommerce,
-        \Ebizmarts\MailChimp\Helper\Data $helper,
-        \Ebizmarts\MailChimp\Model\Api\Subscriber $subscriberApi
+        \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerce $ecommerce,
+        \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
+        \SqualoMail\SqmMcMagentoTwo\Model\Api\Subscriber $subscriberApi
     ) {
 
         $this->_ecommerce           = $ecommerce;

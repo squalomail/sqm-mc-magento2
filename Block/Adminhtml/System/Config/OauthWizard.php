@@ -9,7 +9,7 @@
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
-namespace Ebizmarts\MailChimp\Block\Adminhtml\System\Config;
+namespace SqualoMail\SqmMcMagentoTwo\Block\Adminhtml\System\Config;
 
 class OauthWizard extends \Magento\Config\Block\System\Config\Form\Field
 {

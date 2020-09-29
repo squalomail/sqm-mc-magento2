@@ -11,31 +11,31 @@
  * @file: Rule.php
  */
 
-namespace Ebizmarts\MailChimp\Observer\SalesRule\Rule;
+namespace SqualoMail\SqmMcMagentoTwo\Observer\SalesRule\Rule;
 
 use Magento\Framework\Event\Observer;
 
 class SaveAfter implements \Magento\Framework\Event\ObserverInterface
 {
     /**
-     * @var \Ebizmarts\MailChimp\Model\MailChimpSyncEcommerce
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerce
      */
     protected $_ecommerce;
     /**
-     * @var \Ebizmarts\MailChimp\Helper\Data
+     * @var \SqualoMail\SqmMcMagentoTwo\Helper\Data
      */
     protected $_helper;
     protected $_date;
 
     /**
      * SaveAfter constructor.
-     * @param \Ebizmarts\MailChimp\Model\MailChimpSyncEcommerce $ecommerce
-     * @param \Ebizmarts\MailChimp\Helper\Data $helper
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerce $ecommerce
+     * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      * @param \Magento\Framework\Stdlib\DateTime\DateTime $date
      */
     public function __construct(
-        \Ebizmarts\MailChimp\Model\MailChimpSyncEcommerce $ecommerce,
-        \Ebizmarts\MailChimp\Helper\Data $helper,
+        \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerce $ecommerce,
+        \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
         \Magento\Framework\Stdlib\DateTime\DateTime $date
     ) {
 
@@ -51,6 +51,6 @@ class SaveAfter implements \Magento\Framework\Event\ObserverInterface
          */
         $rule = $observer->getEvent()->getRule();
         $ruleId = $rule->getRuleId();
-        $this->_helper->markRegisterAsModified($ruleId, \Ebizmarts\MailChimp\Helper\Data::IS_PROMO_RULE);
+        $this->_helper->markRegisterAsModified($ruleId, \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_PROMO_RULE);
     }
 }

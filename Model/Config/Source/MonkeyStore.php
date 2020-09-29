@@ -11,7 +11,7 @@
  * @file: MonkeyStore.php
  */
 
-namespace Ebizmarts\MailChimp\Model\Config\Source;
+namespace SqualoMail\SqmMcMagentoTwo\Model\Config\Source;
 
 class MonkeyStore implements \Magento\Framework\Option\ArrayInterface
 {
@@ -19,11 +19,11 @@ class MonkeyStore implements \Magento\Framework\Option\ArrayInterface
 
     /**
      * MonkeyStore constructor.
-     * @param \Ebizmarts\MailChimp\Helper\Data $helper
+     * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      * @param \Magento\Framework\App\RequestInterface $request
      */
     public function __construct(
-        \Ebizmarts\MailChimp\Helper\Data $helper,
+        \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
         \Magento\Framework\App\RequestInterface $request
     ) {
         $storeId = (int) $request->getParam("store", 0);
@@ -42,7 +42,7 @@ class MonkeyStore implements \Magento\Framework\Option\ArrayInterface
                     null,
                     null,
                     null,
-                    \Ebizmarts\MailChimp\Helper\Data::MAXSTORES
+                    \SqualoMail\SqmMcMagentoTwo\Helper\Data::MAXSTORES
                 );
             } catch (\Mailchimp_Error $e) {
                 $helper->log($e->getFriendlyMessage());
@@ -55,7 +55,7 @@ class MonkeyStore implements \Magento\Framework\Option\ArrayInterface
             $rc = [];
             $rc[] = ['value' => -1, 'label' => 'Select one Mailchimp Store'];
             foreach ($this->options['stores'] as $store) {
-                if ($store['platform'] == \Ebizmarts\MailChimp\Helper\Data::PLATFORM) {
+                if ($store['platform'] == \SqualoMail\SqmMcMagentoTwo\Helper\Data::PLATFORM) {
                     if ($store['list_id']=='') {
                         continue;
                     }

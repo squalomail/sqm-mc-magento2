@@ -11,7 +11,7 @@
  * @file: Mailchimp.php
  */
 
-namespace Ebizmarts\MailChimp\Block\Adminhtml\Customer\Edit\Tabs;
+namespace SqualoMail\SqmMcMagentoTwo\Block\Adminhtml\Customer\Edit\Tabs;
 
 use Magento\Customer\Controller\RegistryConstants;
 use Magento\Ui\Component\Layout\Tabs\TabInterface;
@@ -35,7 +35,7 @@ class Mailchimp extends \Magento\Backend\Block\Template implements TabInterface
      * @param \Magento\Framework\Registry $registry
      * @param \Magento\Framework\Data\FormFactory $formFactory
      * @param \Magento\Store\Model\System\Store $systemStore
-     * @param \Ebizmarts\MailChimp\Helper\Data $helper
+     * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      * @param array $data
      */
     public function __construct(
@@ -43,7 +43,7 @@ class Mailchimp extends \Magento\Backend\Block\Template implements TabInterface
         \Magento\Framework\Registry $registry,
         \Magento\Framework\Data\FormFactory $formFactory,
         \Magento\Store\Model\System\Store $systemStore,
-        \Ebizmarts\MailChimp\Helper\Data $helper,
+        \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
         array $data = []
     ) {
         $this->_coreRegistry = $registry;

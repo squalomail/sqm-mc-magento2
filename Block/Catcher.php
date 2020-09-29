@@ -10,7 +10,7 @@
  * @date: 4/25/17 3:35 PM
  * @file: Catcher.php
  */
-namespace Ebizmarts\MailChimp\Block;
+namespace SqualoMail\SqmMcMagentoTwo\Block;
 
 use Magento\Framework\View\Element\Template;
 

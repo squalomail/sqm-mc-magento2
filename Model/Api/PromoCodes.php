@@ -10,7 +10,7 @@
  * @date: 10/6/17 1:15 PM
  * @file: Coupon.php
  */
-namespace Ebizmarts\MailChimp\Model\Api;
+namespace SqualoMail\SqmMcMagentoTwo\Model\Api;
 
 use Magento\TestFramework\Inspection\Exception;
 
@@ -20,7 +20,7 @@ class PromoCodes
     protected $_batchId;
     protected $_token;
     /**
-     * @var \Ebizmarts\MailChimp\Helper\Data
+     * @var \SqualoMail\SqmMcMagentoTwo\Helper\Data
      */
     private $_helper;
     /**
@@ -32,7 +32,7 @@ class PromoCodes
      */
     protected $_ruleCollection;
     /**
-     * @var \Ebizmarts\MailChimp\Model\MailChimpSyncEcommerceFactory
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerceFactory
      */
     private $_chimpSyncEcommerce;
     /**
@@ -40,33 +40,33 @@ class PromoCodes
      */
     private $_promoRules;
     /**
-     * @var \Ebizmarts\MailChimp\Model\ResourceModel\MailChimpSyncEcommerce\CollectionFactory
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpSyncEcommerce\CollectionFactory
      */
     private $_syncCollection;
 
     /**
      * PromoCodes constructor.
-     * @param \Ebizmarts\MailChimp\Helper\Data $helper
+     * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      * @param \Magento\SalesRule\Model\ResourceModel\Coupon\CollectionFactory $couponCollection
      * @param \Magento\SalesRule\Model\ResourceModel\Rule\CollectionFactory $ruleCollection
-     * @param \Ebizmarts\MailChimp\Model\MailChimpSyncEcommerceFactory $chimpSyncEcommerce
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerceFactory $chimpSyncEcommerce
      * @param PromoRules $promoRules
-     * @param \Ebizmarts\MailChimp\Model\ResourceModel\MailChimpSyncEcommerce\CollectionFactory $syncCollection
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpSyncEcommerce\CollectionFactory $syncCollection
      */
     public function __construct(
-        \Ebizmarts\MailChimp\Helper\Data $helper,
+        \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
         \Magento\SalesRule\Model\ResourceModel\Coupon\CollectionFactory $couponCollection,
         \Magento\SalesRule\Model\ResourceModel\Rule\CollectionFactory $ruleCollection,
-        \Ebizmarts\MailChimp\Model\MailChimpSyncEcommerceFactory $chimpSyncEcommerce,
-        \Ebizmarts\MailChimp\Model\Api\PromoRules $promoRules,
-        \Ebizmarts\MailChimp\Model\ResourceModel\MailChimpSyncEcommerce\CollectionFactory $syncCollection
+        \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerceFactory $chimpSyncEcommerce,
+        \SqualoMail\SqmMcMagentoTwo\Model\Api\PromoRules $promoRules,
+        \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpSyncEcommerce\CollectionFactory $syncCollection
     ) {
     
         $this->_helper              = $helper;
         $this->_couponCollection    = $couponCollection;
         $this->_ruleCollection      = $ruleCollection;
         $this->_chimpSyncEcommerce  = $chimpSyncEcommerce;
-        $this->_batchId             = \Ebizmarts\MailChimp\Helper\Data::IS_PROMO_CODE. '_' .
+        $this->_batchId             = \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_PROMO_CODE. '_' .
             $this->_helper->getGmtTimeStamp();
         $this->_promoRules          = $promoRules;
         $this->_syncCollection      = $syncCollection;
@@ -74,7 +74,7 @@ class PromoCodes
     public function sendCoupons($magentoStoreId)
     {
         $mailchimpStoreId = $this->_helper->getConfigValue(
-            \Ebizmarts\MailChimp\Helper\Data::XML_MAILCHIMP_STORE,
+            \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_MAILCHIMP_STORE,
             $magentoStoreId
         );
         $batchArray = [];
@@ -90,12 +90,12 @@ class PromoCodes
         $websiteId = $this->_helper->getWebsiteId($magentoStoreId);
         $collection = $this->_syncCollection->create();
         $collection->addFieldToFilter('mailchimp_store_id', ['eq'=>$mailchimpStoreId])
-            ->addFieldToFilter('type', ['eq'=>\Ebizmarts\MailChimp\Helper\Data::IS_PROMO_CODE])
+            ->addFieldToFilter('type', ['eq'=>\SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_PROMO_CODE])
             ->addFieldToFilter('mailchimp_sync_deleted', ['eq'=>1]);
         $collection->getSelect()->limit(self::MAX);
         $counter = 0;
         /**
-         * @var $syncCoupon \Ebizmarts\MailChimp\Model\MailChimpSyncEcommerce
+         * @var $syncCoupon \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerce
          */
         foreach ($collection as $coupon) {
             $couponId = $coupon->getRelatedId();
@@ -108,7 +108,7 @@ class PromoCodes
             $syncCoupon =$this->_helper->getChimpSyncEcommerce(
                 $mailchimpStoreId,
                 $couponId,
-                \Ebizmarts\MailChimp\Helper\Data::IS_PROMO_CODE
+                \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_PROMO_CODE
             );
             $syncCoupon->getResource()->delete($syncCoupon);
         }
@@ -133,7 +133,7 @@ class PromoCodes
             $collection->getSelect()->joinLeft(
                 ['m4m' => $this->_helper->getTableName('mailchimp_sync_ecommerce')],
                 "m4m.related_id = main_table.coupon_id and m4m.type = '" .
-                \Ebizmarts\MailChimp\Helper\Data::IS_PROMO_CODE .
+                \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_PROMO_CODE .
                 "' and m4m.mailchimp_store_id = '" . $mailchimpStoreId . "'",
                 ['m4m.*']
             );
@@ -155,7 +155,7 @@ class PromoCodes
                     $promoRule = $this->_helper->getChimpSyncEcommerce(
                         $mailchimpStoreId,
                         $ruleId,
-                        \Ebizmarts\MailChimp\Helper\Data::IS_PROMO_RULE
+                        \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_PROMO_RULE
                     );
                     if (!$promoRule->getMailchimpSyncDelta() ||
                         $promoRule->getMailchimpSyncDelta() < $this->_helper->getMCMinSyncDateFlag($magentoStoreId)) {
@@ -258,7 +258,7 @@ class PromoCodes
         $this->_helper->saveEcommerceData(
             $storeId,
             $entityId,
-            \Ebizmarts\MailChimp\Helper\Data::IS_PROMO_CODE,
+            \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_PROMO_CODE,
             $sync_delta,
             $sync_error,
             $sync_modified,

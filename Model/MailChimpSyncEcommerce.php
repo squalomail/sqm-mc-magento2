@@ -11,14 +11,14 @@
  * @file: MailChimpSyncEcommerce.php
  */
 
-namespace Ebizmarts\MailChimp\Model;
+namespace SqualoMail\SqmMcMagentoTwo\Model;
 
 class MailChimpSyncEcommerce extends \Magento\Framework\Model\AbstractModel
 {
     protected function _construct()
     {
         parent::_construct();
-        $this->_init(\Ebizmarts\MailChimp\Model\ResourceModel\MailChimpSyncEcommerce::class);
+        $this->_init(\SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpSyncEcommerce::class);
     }
 
     public function getByStoreIdType($storeId, $id, $type)

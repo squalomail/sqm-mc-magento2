@@ -10,12 +10,12 @@
  * @date: 10/17/16 4:07 PM
  * @file: MailChimpSyncBatches.php
  */
-namespace Ebizmarts\MailChimp\Model;
+namespace SqualoMail\SqmMcMagentoTwo\Model;
 
 class MailChimpSyncBatches extends \Magento\Framework\Model\AbstractModel
 {
     protected function _construct()
     {
-        $this->_init(\Ebizmarts\MailChimp\Model\ResourceModel\MailChimpSyncBatches::class);
+        $this->_init(\SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpSyncBatches::class);
     }
 }

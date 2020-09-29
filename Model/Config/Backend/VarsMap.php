@@ -11,16 +11,16 @@
  * @file: VarsMap.php
  */
 
-namespace Ebizmarts\MailChimp\Model\Config\Backend;
+namespace SqualoMail\SqmMcMagentoTwo\Model\Config\Backend;
 
 class VarsMap extends \Magento\Framework\App\Config\Value
 {
     /**
-     * @var \Ebizmarts\MailChimp\Helper\VarsMap
+     * @var \SqualoMail\SqmMcMagentoTwo\Helper\VarsMap
      */
     private $_varsHelper;
     /**
-     * @var \Ebizmarts\MailChimp\Helper\Data
+     * @var \SqualoMail\SqmMcMagentoTwo\Helper\Data
      */
     private $_helper;
 
@@ -30,8 +30,8 @@ class VarsMap extends \Magento\Framework\App\Config\Value
      * @param \Magento\Framework\Registry $registry
      * @param \Magento\Framework\App\Config\ScopeConfigInterface $config
      * @param \Magento\Framework\App\Cache\TypeListInterface $cacheTypeList
-     * @param \Ebizmarts\MailChimp\Helper\VarsMap $varsMap
-     * @param \Ebizmarts\MailChimp\Helper\Data $helper
+     * @param \SqualoMail\SqmMcMagentoTwo\Helper\VarsMap $varsMap
+     * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      * @param \Magento\Framework\Model\ResourceModel\AbstractResource|null $resource
      * @param \Magento\Framework\Data\Collection\AbstractDb|null $resourceCollection
      * @param array $data
@@ -41,8 +41,8 @@ class VarsMap extends \Magento\Framework\App\Config\Value
         \Magento\Framework\Registry $registry,
         \Magento\Framework\App\Config\ScopeConfigInterface $config,
         \Magento\Framework\App\Cache\TypeListInterface $cacheTypeList,
-        \Ebizmarts\MailChimp\Helper\VarsMap $varsMap,
-        \Ebizmarts\MailChimp\Helper\Data $helper,
+        \SqualoMail\SqmMcMagentoTwo\Helper\VarsMap $varsMap,
+        \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
         \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
         \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
         array $data = []

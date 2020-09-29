@@ -11,12 +11,12 @@
  * @file: AccountManagement.php
  */
 
-namespace Ebizmarts\MailChimp\Model\Plugin;
+namespace SqualoMail\SqmMcMagentoTwo\Model\Plugin;
 
 class AccountManagement
 {
     /**
-     * @var \Ebizmarts\MailChimp\Helper\Data
+     * @var \SqualoMail\SqmMcMagentoTwo\Helper\Data
      */
     protected $_helper;
     /**
@@ -34,13 +34,13 @@ class AccountManagement
 
     /**
      * AccountManagement constructor.
-     * @param \Ebizmarts\MailChimp\Helper\Data $helper
+     * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      * @param \Magento\Checkout\Model\Session $checkoutSession
      * @param \Magento\Quote\Model\QuoteFactory $quote
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      */
     public function __construct(
-        \Ebizmarts\MailChimp\Helper\Data $helper,
+        \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
         \Magento\Checkout\Model\Session $checkoutSession,
         \Magento\Quote\Model\QuoteFactory $quote,
         \Magento\Store\Model\StoreManagerInterface $storeManager

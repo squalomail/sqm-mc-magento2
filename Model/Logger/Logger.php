@@ -9,7 +9,7 @@
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
-namespace Ebizmarts\MailChimp\Model\Logger;
+namespace SqualoMail\SqmMcMagentoTwo\Model\Logger;
 
 class Logger extends \Monolog\Logger
 {

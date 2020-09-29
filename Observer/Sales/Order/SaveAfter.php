@@ -11,23 +11,23 @@
  * @file: SaveAfter.php
  */
 
-namespace Ebizmarts\MailChimp\Observer\Sales\Order;
+namespace SqualoMail\SqmMcMagentoTwo\Observer\Sales\Order;
 
 use Magento\Framework\Event\Observer;
 
 class SaveAfter implements \Magento\Framework\Event\ObserverInterface
 {
     /**
-     * @var \Ebizmarts\MailChimp\Helper\Data
+     * @var \SqualoMail\SqmMcMagentoTwo\Helper\Data
      */
     protected $_helper;
 
     /**
      * SaveAfter constructor.
-     * @param \Ebizmarts\MailChimp\Helper\Data $helper
+     * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      */
     public function __construct(
-        \Ebizmarts\MailChimp\Helper\Data $helper
+        \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
     ) {
     
         $this->_helper      = $helper;
@@ -37,19 +37,19 @@ class SaveAfter implements \Magento\Framework\Event\ObserverInterface
     {
         $order = $observer->getEvent()->getOrder();
         $mailchimpStoreId = $this->_helper->getConfigValue(
-            \Ebizmarts\MailChimp\Helper\Data::XML_MAILCHIMP_STORE,
+            \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_MAILCHIMP_STORE,
             $order->getStoreId()
         );
         $this->_helper->saveEcommerceData(
             $mailchimpStoreId,
             $order->getId(),
-            \Ebizmarts\MailChimp\Helper\Data::IS_ORDER,
+            \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_ORDER,
             null,
             null,
             1,
             null,
             null,
-            \Ebizmarts\MailChimp\Helper\Data::NEEDTORESYNC
+            \SqualoMail\SqmMcMagentoTwo\Helper\Data::NEEDTORESYNC
         );
     }
 }

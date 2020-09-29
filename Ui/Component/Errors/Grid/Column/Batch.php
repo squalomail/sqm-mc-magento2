@@ -11,7 +11,7 @@
  * @file: Batch.php
  */
 
-namespace Ebizmarts\MailChimp\Ui\Component\Errors\Grid\Column;
+namespace SqualoMail\SqmMcMagentoTwo\Ui\Component\Errors\Grid\Column;
 
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Framework\View\Element\UiComponentFactory;

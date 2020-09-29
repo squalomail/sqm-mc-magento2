@@ -11,7 +11,7 @@
  * @file: Date.php
  */
 
-namespace Ebizmarts\MailChimp\Block\Adminhtml\System\Config;
+namespace SqualoMail\SqmMcMagentoTwo\Block\Adminhtml\System\Config;
 
 class Date extends \Magento\Config\Block\System\Config\Form\Field
 {

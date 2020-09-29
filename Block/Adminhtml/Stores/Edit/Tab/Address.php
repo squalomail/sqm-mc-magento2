@@ -10,7 +10,7 @@
  * @date: 4/12/17 5:07 PM
  * @file: Address.php
  */
-namespace Ebizmarts\MailChimp\Block\Adminhtml\Stores\Edit\Tab;
+namespace SqualoMail\SqmMcMagentoTwo\Block\Adminhtml\Stores\Edit\Tab;
 
 use Magento\Backend\Block\Widget\Form\Generic;
 use Magento\Backend\Block\Widget\Tab\TabInterface;

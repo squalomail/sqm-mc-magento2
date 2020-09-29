@@ -11,17 +11,17 @@
  * @file: Result.php
  */
 
-namespace Ebizmarts\MailChimp\Model\Api;
+namespace SqualoMail\SqmMcMagentoTwo\Model\Api;
 
 class Result
 {
     const MAILCHIMP_TEMP_DIR = 'Mailchimp';
     /**
-     * @var \Ebizmarts\MailChimp\Model\ResourceModel\MailChimpSyncBatches\CollectionFactory
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpSyncBatches\CollectionFactory
      */
     private $_batchCollection;
     /**
-     * @var \Ebizmarts\MailChimp\Helper\Data
+     * @var \SqualoMail\SqmMcMagentoTwo\Helper\Data
      */
     private $_helper;
     /**
@@ -29,7 +29,7 @@ class Result
      */
     private $_archive;
     /**
-     * @var \Ebizmarts\MailChimp\Model\MailChimpErrorsFactory
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\MailChimpErrorsFactory
      */
     private $_chimpErrors;
     /**
@@ -43,17 +43,17 @@ class Result
 
     /**
      * Result constructor.
-     * @param \Ebizmarts\MailChimp\Helper\Data $helper
-     * @param \Ebizmarts\MailChimp\Model\ResourceModel\MailChimpSyncBatches\CollectionFactory $batchCollection
-     * @param \Ebizmarts\MailChimp\Model\MailChimpErrorsFactory $chimpErrors
+     * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpSyncBatches\CollectionFactory $batchCollection
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpErrorsFactory $chimpErrors
      * @param \Magento\Framework\Archive $archive
      * @param \Magento\Framework\Filesystem\Driver\File $driver
      * @param \Magento\Framework\HTTP\Client\CurlFactory $curlFactory
      */
     public function __construct(
-        \Ebizmarts\MailChimp\Helper\Data $helper,
-        \Ebizmarts\MailChimp\Model\ResourceModel\MailChimpSyncBatches\CollectionFactory $batchCollection,
-        \Ebizmarts\MailChimp\Model\MailChimpErrorsFactory $chimpErrors,
+        \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
+        \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpSyncBatches\CollectionFactory $batchCollection,
+        \SqualoMail\SqmMcMagentoTwo\Model\MailChimpErrorsFactory $chimpErrors,
         \Magento\Framework\Archive $archive,
         \Magento\Framework\Filesystem\Driver\File $driver,
         \Magento\Framework\HTTP\Client\CurlFactory $curlFactory
@@ -74,7 +74,7 @@ class Result
             ->addFieldToFilter('status', ['eq' => 'pending'])
             ->addFieldToFilter('mailchimp_store_id', ['eq' => $mailchimpStoreId]);
         /**
-         * @var $item \Ebizmarts\MailChimp\Model\MailChimpSyncBatches
+         * @var $item \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncBatches
          */
         $item = null;
         foreach ($collection as $item) {
@@ -82,11 +82,11 @@ class Result
                 $files = $this->getBatchResponse($item->getBatchId(), $storeId);
                 if (is_array($files) && count($files)) {
                     $this->processEachResponseFile($files, $item->getBatchId(), $mailchimpStoreId, $storeId);
-                    $item->setStatus(\Ebizmarts\MailChimp\Helper\Data::BATCH_COMPLETED);
+                    $item->setStatus(\SqualoMail\SqmMcMagentoTwo\Helper\Data::BATCH_COMPLETED);
                     $item->setModifiedDate($this->_helper->getGmtDate());
                     $item->getResource()->save($item);
                 } elseif ($files === false) {
-                    $item->setStatus(\Ebizmarts\MailChimp\Helper\Data::BATCH_ERROR);
+                    $item->setStatus(\SqualoMail\SqmMcMagentoTwo\Helper\Data::BATCH_ERROR);
                     $item->getResource()->save($item);
                     $this->_helper->deleteAllByBatchId($item->getBatchId());
                     continue;
@@ -193,7 +193,7 @@ class Result
                                 $type,
                                 $id,
                                 null,
-                                \Ebizmarts\MailChimp\Helper\Data::SYNCED
+                                \SqualoMail\SqmMcMagentoTwo\Helper\Data::SYNCED
                             );
                             continue;
                         }
@@ -218,7 +218,7 @@ class Result
                             $type,
                             $id,
                             $error,
-                            \Ebizmarts\MailChimp\Helper\Data::SYNCERROR
+                            \SqualoMail\SqmMcMagentoTwo\Helper\Data::SYNCERROR
                         );
                         $mailchimpErrors->setType($response->type);
                         $mailchimpErrors->setTitle($response->title);
@@ -239,7 +239,7 @@ class Result
                             $type,
                             $id,
                             null,
-                            \Ebizmarts\MailChimp\Helper\Data::SYNCED
+                            \SqualoMail\SqmMcMagentoTwo\Helper\Data::SYNCED
                         );
                     }
                 }
@@ -265,9 +265,9 @@ class Result
     private function _updateSyncData($mailchimpStoreId, $listId, $type, $id, $error, $status)
     {
         /**
-         * @var \Ebizmarts\MailChimp\Model\MailChimpSyncEcommerce $chimpSync
+         * @var \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerce $chimpSync
          */
-        if ($type == \Ebizmarts\MailChimp\Helper\Data::IS_SUBSCRIBER) {
+        if ($type == \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_SUBSCRIBER) {
             $mailchimpStore = $listId;
         } else {
             $mailchimpStore = $mailchimpStoreId;

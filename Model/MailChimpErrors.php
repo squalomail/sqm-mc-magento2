@@ -11,13 +11,13 @@
  * @file: MailChimpErrors.php
  */
 
-namespace Ebizmarts\MailChimp\Model;
+namespace SqualoMail\SqmMcMagentoTwo\Model;
 
 class MailChimpErrors extends \Magento\Framework\Model\AbstractModel
 {
     protected function _construct()
     {
-        $this->_init(\Ebizmarts\MailChimp\Model\ResourceModel\MailChimpErrors::class);
+        $this->_init(\SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpErrors::class);
     }
     public function getByStoreIdType($storeId, $id, $type)
     {

@@ -10,7 +10,7 @@
  * @date: 11/13/17 4:41 PM
  * @file: Success.php
  */
-namespace Ebizmarts\MailChimp\Block\Checkout;
+namespace SqualoMail\SqmMcMagentoTwo\Block\Checkout;
 
 class Success extends \Magento\Framework\View\Element\Template
 {
@@ -19,7 +19,7 @@ class Success extends \Magento\Framework\View\Element\Template
      */
     protected $_checkoutSession;
     /**
-     * @var \Ebizmarts\MailChimp\Helper\Data
+     * @var \SqualoMail\SqmMcMagentoTwo\Helper\Data
      */
     protected $_helper;
     /**
@@ -27,7 +27,7 @@ class Success extends \Magento\Framework\View\Element\Template
      */
     protected $_subscriberFactory;
     /**
-     * @var \Ebizmarts\MailChimp\Model\MailChimpInterestGroupFactory
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\MailChimpInterestGroupFactory
      */
     protected $_interestGroupFactory;
     /**
@@ -39,17 +39,17 @@ class Success extends \Magento\Framework\View\Element\Template
      * Success constructor.
      * @param \Magento\Framework\View\Element\Template\Context $context
      * @param \Magento\Checkout\Model\Session $checkoutSession
-     * @param \Ebizmarts\MailChimp\Helper\Data $helper
+     * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      * @param \Magento\Newsletter\Model\SubscriberFactory $subscriberFactory
-     * @param \Ebizmarts\MailChimp\Model\MailChimpInterestGroupFactory $interestGroupFactory
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpInterestGroupFactory $interestGroupFactory
      * @param array $data
      */
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
         \Magento\Checkout\Model\Session $checkoutSession,
-        \Ebizmarts\MailChimp\Helper\Data $helper,
+        \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
         \Magento\Newsletter\Model\SubscriberFactory $subscriberFactory,
-        \Ebizmarts\MailChimp\Model\MailChimpInterestGroupFactory $interestGroupFactory,
+        \SqualoMail\SqmMcMagentoTwo\Model\MailChimpInterestGroupFactory $interestGroupFactory,
         array $data
     ) {
     
@@ -82,11 +82,11 @@ class Success extends \Magento\Framework\View\Element\Template
     }
     public function getMessageBefore()
     {
-        return $this->_helper->getConfigValue(\Ebizmarts\MailChimp\Helper\Data::XML_INTEREST_SUCCESS_HTML_BEFORE);
+        return $this->_helper->getConfigValue(\SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_INTEREST_SUCCESS_HTML_BEFORE);
     }
     public function getMessageAfter()
     {
-        return $this->_helper->getConfigValue(\Ebizmarts\MailChimp\Helper\Data::XML_INTEREST_SUCCESS_HTML_AFTER);
+        return $this->_helper->getConfigValue(\SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_INTEREST_SUCCESS_HTML_AFTER);
     }
     public function getFormUrl()
     {

@@ -11,7 +11,7 @@
  * @file: Form.php
  */
 
-namespace Ebizmarts\MailChimp\Block\Adminhtml\Stores\Edit;
+namespace SqualoMail\SqmMcMagentoTwo\Block\Adminhtml\Stores\Edit;
 
 use Magento\Backend\Block\Widget\Form\Generic;
 

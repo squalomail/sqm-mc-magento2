@@ -11,7 +11,7 @@
  * @file: Coupon.php
  */
 
-namespace Ebizmarts\MailChimp\Model\Plugin;
+namespace SqualoMail\SqmMcMagentoTwo\Model\Plugin;
 
 class Coupon
 {
@@ -19,10 +19,10 @@ class Coupon
 
     /**
      * Coupon constructor.
-     * @param \Ebizmarts\MailChimp\Helper\Data $helper
+     * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      */
     public function __construct(
-        \Ebizmarts\MailChimp\Helper\Data $helper
+        \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
     ) {
 
         $this->_helper  = $helper;
@@ -31,7 +31,7 @@ class Coupon
     {
         $this->_helper->markEcommerceAsDeleted(
             $coupon->getCouponId(),
-            \Ebizmarts\MailChimp\Helper\Data::IS_PROMO_CODE,
+            \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_PROMO_CODE,
             $coupon->getRuleId()
         );
     }

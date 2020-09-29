@@ -11,24 +11,24 @@
  * @file: ResetErrors.php
  */
 
-namespace Ebizmarts\MailChimp\Block\Adminhtml\System\Config;
+namespace SqualoMail\SqmMcMagentoTwo\Block\Adminhtml\System\Config;
 
 class ResetErrors extends \Magento\Config\Block\System\Config\Form\Field
 {
     /**
-     * @var \Ebizmarts\MailChimp\Helper\Data
+     * @var \SqualoMail\SqmMcMagentoTwo\Helper\Data
      */
     private $_helper;
 
     /**
      * ResetErrors constructor.
      * @param \Magento\Backend\Block\Template\Context $context
-     * @param \Ebizmarts\MailChimp\Helper\Data $helper
+     * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      * @param array $data
      */
     public function __construct(
         \Magento\Backend\Block\Template\Context $context,
-        \Ebizmarts\MailChimp\Helper\Data $helper,
+        \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
         array $data = []
     ) {
     

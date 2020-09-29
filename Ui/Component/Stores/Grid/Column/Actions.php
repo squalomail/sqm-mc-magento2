@@ -10,7 +10,7 @@
  * @date: 4/5/17 11:19 AM
  * @file: Actions.php
  */
-namespace Ebizmarts\MailChimp\Ui\Component\Stores\Grid\Column;
+namespace SqualoMail\SqmMcMagentoTwo\Ui\Component\Stores\Grid\Column;
 
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Framework\View\Element\UiComponentFactory;

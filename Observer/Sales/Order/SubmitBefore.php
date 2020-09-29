@@ -10,7 +10,7 @@
  * @date: 3/14/17 11:26 PM
  * @file: SaveBefore.php
  */
-namespace Ebizmarts\MailChimp\Observer\Sales\Order;
+namespace SqualoMail\SqmMcMagentoTwo\Observer\Sales\Order;
 
 use Magento\Framework\Event\Observer;
 

@@ -11,7 +11,7 @@
  * @file: GetAccountDetails.php
  */
 
-namespace Ebizmarts\MailChimp\Controller\Adminhtml\Ecommerce;
+namespace SqualoMail\SqmMcMagentoTwo\Controller\Adminhtml\Ecommerce;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
@@ -20,7 +20,7 @@ use Magento\Framework\Controller\ResultFactory;
 class Getaccountdetails extends Action
 {
     /**
-     * @var \Ebizmarts\MailChimp\Helper\Data
+     * @var \SqualoMail\SqmMcMagentoTwo\Helper\Data
      */
     protected $_helper;
     /**
@@ -36,12 +36,12 @@ class Getaccountdetails extends Action
      * Getaccountdetails constructor.
      * @param Context $context
      * @param \Magento\Store\Model\StoreManager $storeManager
-     * @param \Ebizmarts\MailChimp\Helper\Data $helper
+     * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      */
     public function __construct(
         Context $context,
         \Magento\Store\Model\StoreManager $storeManager,
-        \Ebizmarts\MailChimp\Helper\Data $helper
+        \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
     ) {
 
         parent::__construct($context);

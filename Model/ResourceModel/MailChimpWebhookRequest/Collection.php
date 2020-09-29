@@ -10,15 +10,15 @@
  * @date: 5/26/17 11:36 AM
  * @file: Collection.php
  */
-namespace Ebizmarts\MailChimp\Model\ResourceModel\MailChimpWebhookRequest;
+namespace SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpWebhookRequest;
 
 class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
 {
     protected function _construct()
     {
         $this->_init(
-            \Ebizmarts\MailChimp\Model\MailChimpWebhookRequest::class,
-            \Ebizmarts\MailChimp\Model\ResourceModel\MailChimpWebhookRequest::class
+            \SqualoMail\SqmMcMagentoTwo\Model\MailChimpWebhookRequest::class,
+            \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpWebhookRequest::class
         );
     }
 }

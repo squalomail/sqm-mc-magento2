@@ -11,20 +11,20 @@
  * @file: Edit.php
  */
 
-namespace Ebizmarts\MailChimp\Controller\Adminhtml\Stores;
+namespace SqualoMail\SqmMcMagentoTwo\Controller\Adminhtml\Stores;
 
-use Ebizmarts\MailChimp\Model\MailChimpStoresFactory;
+use SqualoMail\SqmMcMagentoTwo\Model\MailChimpStoresFactory;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\Registry;
 use Magento\Framework\View\Result\PageFactory;
 
-class Edit extends \Ebizmarts\MailChimp\Controller\Adminhtml\Stores
+class Edit extends \SqualoMail\SqmMcMagentoTwo\Controller\Adminhtml\Stores
 {
 
     public function execute()
     {
         $storeId = $this->getRequest()->getParam('id');
-        /** @var \Ebizmarts\MailChimp\Model\MailChimpStores $model */
+        /** @var \SqualoMail\SqmMcMagentoTwo\Model\MailChimpStores $model */
         $model = $this->_mailchimpStoresFactory->create();
 
         if ($storeId) {

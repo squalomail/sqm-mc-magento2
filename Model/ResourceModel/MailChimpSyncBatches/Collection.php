@@ -11,15 +11,15 @@
  * @file: Collection.php
  */
 
-namespace Ebizmarts\MailChimp\Model\ResourceModel\MailChimpSyncBatches;
+namespace SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpSyncBatches;
 
 class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
 {
     protected function _construct()
     {
         $this->_init(
-            \Ebizmarts\MailChimp\Model\MailChimpSyncBatches::class,
-            \Ebizmarts\MailChimp\Model\ResourceModel\MailChimpSyncBatches::class
+            \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncBatches::class,
+            \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpSyncBatches::class
         );
     }
 }

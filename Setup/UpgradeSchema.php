@@ -10,7 +10,7 @@
  * @date: 10/31/16 5:23 PM
  * @file: UpgradeSchema.php
  */
-namespace Ebizmarts\MailChimp\Setup;
+namespace SqualoMail\SqmMcMagentoTwo\Setup;
 
 use Magento\Framework\Setup\UpgradeSchemaInterface;
 use Magento\Framework\Setup\SchemaSetupInterface;

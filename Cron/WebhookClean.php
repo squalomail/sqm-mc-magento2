@@ -10,27 +10,27 @@
  * @date: 22/11/18 10:02 AM
  * @file: WebhookClean.php
  */
-namespace Ebizmarts\MailChimp\Cron;
+namespace SqualoMail\SqmMcMagentoTwo\Cron;
 
 class WebhookClean
 {
     /**
-     * @var \Ebizmarts\MailChimp\Helper\Data
+     * @var \SqualoMail\SqmMcMagentoTwo\Helper\Data
      */
     protected $helper;
     /**
-     * @var \Ebizmarts\MailChimp\Model\MailChimpWebhookRequest
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\MailChimpWebhookRequest
      */
     protected $webhooks;
 
     /**
      * WebhookClean constructor.
-     * @param \Ebizmarts\MailChimp\Helper\Data $helper
-     * @param \Ebizmarts\MailChimp\Model\MailChimpWebhookRequest $webhookRequest
+     * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpWebhookRequest $webhookRequest
      */
     public function __construct(
-        \Ebizmarts\MailChimp\Helper\Data $helper,
-        \Ebizmarts\MailChimp\Model\MailChimpWebhookRequest $webhookRequest
+        \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
+        \SqualoMail\SqmMcMagentoTwo\Model\MailChimpWebhookRequest $webhookRequest
     ) {
         $this->helper   = $helper;
         $this->webhooks = $webhookRequest;

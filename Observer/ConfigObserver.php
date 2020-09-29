@@ -11,7 +11,7 @@
  * @file: ConfigObserver.php
  */
 
-namespace Ebizmarts\MailChimp\Observer;
+namespace SqualoMail\SqmMcMagentoTwo\Observer;
 
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\Event\Observer as EventObserver;
@@ -23,7 +23,7 @@ class ConfigObserver implements ObserverInterface
      */
     protected $_storeManager;
     /**
-     * @var \Ebizmarts\MailChimp\Helper\Data
+     * @var \SqualoMail\SqmMcMagentoTwo\Helper\Data
      */
     protected $_helper;
     /**
@@ -35,12 +35,12 @@ class ConfigObserver implements ObserverInterface
      * ConfigObserver constructor.
      * @param \Magento\Store\Model\StoreManager $storeManager
      * @param \Magento\Framework\Registry $registry
-     * @param \Ebizmarts\MailChimp\Helper\Data $helper
+     * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      */
     public function __construct(
         \Magento\Store\Model\StoreManager $storeManager,
         \Magento\Framework\Registry $registry,
-        \Ebizmarts\MailChimp\Helper\Data $helper
+        \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
     ) {
     
         $this->_helper          = $helper;
@@ -55,7 +55,7 @@ class ConfigObserver implements ObserverInterface
         $mustDelete = true;
 
         foreach ($this->_storeManager->getStores() as $storeId => $val) {
-            $listId = $this->_helper->getConfigValue(\Ebizmarts\MailChimp\Helper\Data::XML_PATH_LIST, $storeId);
+            $listId = $this->_helper->getConfigValue(\SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_LIST, $storeId);
             if ($listId == $oldListId) {
                 $mustDelete = false;
             }

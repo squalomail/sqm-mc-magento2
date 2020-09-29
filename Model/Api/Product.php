@@ -10,7 +10,7 @@ mc-magento2 Magento Component
 @Date: 10/10/16 5:22 PM
 @file: Product.php
  */
-namespace Ebizmarts\MailChimp\Model\Api;
+namespace SqualoMail\SqmMcMagentoTwo\Model\Api;
 
 class Product
 {
@@ -22,7 +22,7 @@ class Product
     protected $_childtUrl   = null;
     protected $productPrice = null;
     /**
-     * @var \Ebizmarts\MailChimp\Helper\Data
+     * @var \SqualoMail\SqmMcMagentoTwo\Helper\Data
      */
     protected $_helper;
     /**
@@ -50,7 +50,7 @@ class Product
      */
     protected $_batchId;
     /**
-     * @var \Ebizmarts\MailChimp\Model\MailChimpSyncEcommerceFactory
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerceFactory
      */
     protected $_chimpSyncEcommerce;
     /**
@@ -75,11 +75,11 @@ class Product
      * Product constructor.
      * @param \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollection
      * @param \Magento\Catalog\Model\ProductRepository $productRepository
-     * @param \Ebizmarts\MailChimp\Helper\Data $helper
+     * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      * @param \Magento\Catalog\Helper\Image $imageHelper
      * @param \Magento\CatalogInventory\Api\StockRegistryInterface $stockRegistry
      * @param \Magento\Catalog\Model\CategoryRepository $categoryRepository
-     * @param \Ebizmarts\MailChimp\Model\MailChimpSyncEcommerceFactory $chimpSyncEcommerce
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerceFactory $chimpSyncEcommerce
      * @param \Magento\ConfigurableProduct\Model\Product\Type\Configurable $configurable
      * @param \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $categoryCollection
      * @param \Magento\Catalog\Helper\Data $taxHelper
@@ -88,11 +88,11 @@ class Product
     public function __construct(
         \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollection,
         \Magento\Catalog\Model\ProductRepository $productRepository,
-        \Ebizmarts\MailChimp\Helper\Data $helper,
+        \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
         \Magento\Catalog\Helper\Image $imageHelper,
         \Magento\CatalogInventory\Api\StockRegistryInterface $stockRegistry,
         \Magento\Catalog\Model\CategoryRepository $categoryRepository,
-        \Ebizmarts\MailChimp\Model\MailChimpSyncEcommerceFactory $chimpSyncEcommerce,
+        \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerceFactory $chimpSyncEcommerce,
         \Magento\ConfigurableProduct\Model\Product\Type\Configurable $configurable,
         \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $categoryCollection,
         \Magento\Catalog\Helper\Data $taxHelper,
@@ -110,7 +110,7 @@ class Product
         $this->_option              = $option;
         $this->_categoryCollection  = $categoryCollection;
         $this->taxHelper            = $taxHelper;
-        $this->_batchId             = \Ebizmarts\MailChimp\Helper\Data::IS_PRODUCT. '_' .
+        $this->_batchId             = \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_PRODUCT. '_' .
             $this->_helper->getGmtTimeStamp();
     }
     public function _sendProducts($magentoStoreId)
@@ -118,11 +118,11 @@ class Product
         $batchArray = [];
         $counter = 0;
         $mailchimpStoreId = $this->_helper->getConfigValue(
-            \Ebizmarts\MailChimp\Helper\Data::XML_MAILCHIMP_STORE,
+            \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_MAILCHIMP_STORE,
             $magentoStoreId
         );
         $this->includingTaxes = $this->_helper->getConfigValue(
-            \Ebizmarts\MailChimp\Helper\Data::XML_INCLUDING_TAXES,
+            \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_INCLUDING_TAXES,
             $magentoStoreId
         );
         $this->_markSpecialPrices($magentoStoreId, $mailchimpStoreId);
@@ -130,7 +130,7 @@ class Product
         $collection->addStoreFilter($magentoStoreId);
         $collection->getSelect()->joinLeft(
             ['m4m' => $this->_helper->getTableName('mailchimp_sync_ecommerce')],
-            "m4m.related_id = e.entity_id and m4m.type = '".\Ebizmarts\MailChimp\Helper\Data::IS_PRODUCT.
+            "m4m.related_id = e.entity_id and m4m.type = '".\SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_PRODUCT.
             "' and m4m.mailchimp_store_id = '".$mailchimpStoreId."'",
             ['m4m.*']
         );
@@ -286,7 +286,7 @@ class Product
             return [];
 
         } else {
-            $this->_helper->modifyCounter(\Ebizmarts\MailChimp\Helper\Data::PRO_NEW);
+            $this->_helper->modifyCounter(\SqualoMail\SqmMcMagentoTwo\Helper\Data::PRO_NEW);
             $data = [];
             $data['method'] = "POST";
             $data['path'] = "/ecommerce/stores/" . $mailchimpStoreId . "/products";
@@ -317,7 +317,7 @@ class Product
                 $productSync = $this->_chimpSyncEcommerce->create()->getByStoreIdType(
                     $mailchimpStoreId,
                     $parentId,
-                    \Ebizmarts\MailChimp\Helper\Data::IS_PRODUCT
+                    \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_PRODUCT
                 );
                 if ($productSync->getMailchimpSyncDelta()) {
                     $variendata = [];
@@ -366,7 +366,7 @@ class Product
             $this->_helper->log("$jsonErrorMsg for product [".$product->getId()."]");
             return [];
         }
-        $this->_helper->modifyCounter(\Ebizmarts\MailChimp\Helper\Data::PRO_MOD);
+        $this->_helper->modifyCounter(\SqualoMail\SqmMcMagentoTwo\Helper\Data::PRO_MOD);
         $data = [];
         $data['method'] = "PATCH";
         $data['path'] = "/ecommerce/stores/" . $mailchimpStoreId . "/products/".$product->getId();
@@ -553,7 +553,7 @@ class Product
     public function sendModifiedProduct(\Magento\Sales\Model\Order $order, $mailchimpStoreId, $magentoStoreId)
     {
         $data = [];
-        $batchId = \Ebizmarts\MailChimp\Helper\Data::IS_PRODUCT . '_' . $this->_helper->getGmtTimeStamp();
+        $batchId = \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_PRODUCT . '_' . $this->_helper->getGmtTimeStamp();
         $items = $order->getAllVisibleItems();
         foreach ($items as $item) {
             //@todo get from the store not the default
@@ -561,7 +561,7 @@ class Product
             $productSyncData = $this->_chimpSyncEcommerce->create()->getByStoreIdType(
                 $mailchimpStoreId,
                 $product->getId(),
-                \Ebizmarts\MailChimp\Helper\Data::IS_PRODUCT
+                \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_PRODUCT
             );
             if ($product->getId()!=$item->getProductId() || (
                     $product->getTypeId() != \Magento\Catalog\Model\Product\Type::TYPE_SIMPLE &&
@@ -591,7 +591,7 @@ class Product
     public function sendQuoteModifiedProduct(\Magento\Quote\Model\Quote $quote, $mailchimpStoreId, $magentoStoreId)
     {
         $data = [];
-        $batchId = \Ebizmarts\MailChimp\Helper\Data::IS_PRODUCT . '_' . $this->_helper->getGmtTimeStamp();
+        $batchId = \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_PRODUCT . '_' . $this->_helper->getGmtTimeStamp();
         $items = $quote->getAllVisibleItems();
         /**
          * @var $item \Magento\Quote\Model\Quote\Item
@@ -602,7 +602,7 @@ class Product
             $productSyncData = $this->_chimpSyncEcommerce->create()->getByStoreIdType(
                 $mailchimpStoreId,
                 $product->getId(),
-                \Ebizmarts\MailChimp\Helper\Data::IS_PRODUCT
+                \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_PRODUCT
             );
             if ($product->getId()!=$item->getProductId() || (
                     $product->getTypeId() != \Magento\Catalog\Model\Product\Type::TYPE_SIMPLE &&
@@ -656,7 +656,7 @@ class Product
         $this->_helper->saveEcommerceData(
             $storeId,
             $entityId,
-            \Ebizmarts\MailChimp\Helper\Data::IS_PRODUCT,
+            \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_PRODUCT,
             $sync_delta,
             $sync_error,
             $sync_modified

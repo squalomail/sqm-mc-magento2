@@ -10,27 +10,27 @@
  * @date: 22/11/18 10:02 AM
  * @file: BatchesClean.php
  */
-namespace Ebizmarts\MailChimp\Cron;
+namespace SqualoMail\SqmMcMagentoTwo\Cron;
 
 class BatchesClean
 {
     /**
-     * @var \Ebizmarts\MailChimp\Helper\Data
+     * @var \SqualoMail\SqmMcMagentoTwo\Helper\Data
      */
     protected $helper;
     /**
-     * @var \Ebizmarts\MailChimp\Model\MailChimpSyncBatches
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncBatches
      */
     protected $mailChimpSyncBatches;
 
     /**
      * BatchesClean constructor.
-     * @param \Ebizmarts\MailChimp\Helper\Data $helper
-     * @param \Ebizmarts\MailChimp\Model\MailChimpSyncBatches $mailChimpSyncBatches
+     * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncBatches $mailChimpSyncBatches
      */
     public function __construct(
-        \Ebizmarts\MailChimp\Helper\Data $helper,
-        \Ebizmarts\MailChimp\Model\MailChimpSyncBatches $_mailChimpSyncBatches
+        \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
+        \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncBatches $_mailChimpSyncBatches
     ) {
         $this->helper               = $helper;
         $this->mailChimpSyncBatches = $_mailChimpSyncBatches;

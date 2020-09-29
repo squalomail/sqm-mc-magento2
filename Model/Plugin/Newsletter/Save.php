@@ -11,12 +11,12 @@
  * @file: Save.php
  */
 
-namespace Ebizmarts\MailChimp\Model\Plugin\Newsletter;
+namespace SqualoMail\SqmMcMagentoTwo\Model\Plugin\Newsletter;
 
 class Save
 {
     /**
-     * @var \Ebizmarts\MailChimp\Helper\Data
+     * @var \SqualoMail\SqmMcMagentoTwo\Helper\Data
      */
     protected $helper;
     /**
@@ -32,23 +32,23 @@ class Save
      */
     protected $request;
     /**
-     * @var \Ebizmarts\MailChimp\Model\MailChimpInterestGroupFactory
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\MailChimpInterestGroupFactory
      */
     protected $interestGroupFactory;
 
     /**
      * Save constructor.
-     * @param \Ebizmarts\MailChimp\Helper\Data $helper
+     * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      * @param \Magento\Customer\Model\Session $customerSession
      * @param \Magento\Newsletter\Model\SubscriberFactory $subscriberFactory
-     * @param \Ebizmarts\MailChimp\Model\MailChimpInterestGroupFactory $interestGroupFactory
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpInterestGroupFactory $interestGroupFactory
      * @param \Magento\Framework\App\Request\Http $request
      */
     public function __construct(
-        \Ebizmarts\MailChimp\Helper\Data $helper,
+        \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
         \Magento\Customer\Model\Session $customerSession,
         \Magento\Newsletter\Model\SubscriberFactory $subscriberFactory,
-        \Ebizmarts\MailChimp\Model\MailChimpInterestGroupFactory $interestGroupFactory,
+        \SqualoMail\SqmMcMagentoTwo\Model\MailChimpInterestGroupFactory $interestGroupFactory,
         \Magento\Framework\App\Request\Http $request
     ) {
     
@@ -107,7 +107,7 @@ class Save
         $this->helper->saveEcommerceData(
             $listId,
             $entityId,
-            \Ebizmarts\MailChimp\Helper\Data::IS_SUBSCRIBER,
+            \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_SUBSCRIBER,
             $sync_delta,
             $sync_error,
             $sync_modified

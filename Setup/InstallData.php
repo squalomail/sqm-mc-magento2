@@ -11,7 +11,7 @@
  * @file: InstallSchema.php
  */
 
-namespace Ebizmarts\MailChimp\Setup;
+namespace SqualoMail\SqmMcMagentoTwo\Setup;
 
 use Magento\Eav\Setup\EavSetupFactory;
 

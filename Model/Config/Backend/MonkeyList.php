@@ -11,12 +11,12 @@
  * @file: MonkeyList.php
  */
 
-namespace Ebizmarts\MailChimp\Model\Config\Backend;
+namespace SqualoMail\SqmMcMagentoTwo\Model\Config\Backend;
 
 class MonkeyList extends \Magento\Framework\App\Config\Value
 {
     /**
-     * @var \Ebizmarts\MailChimp\Helper\Data
+     * @var \SqualoMail\SqmMcMagentoTwo\Helper\Data
      */
     private $_helper;
     /**
@@ -42,7 +42,7 @@ class MonkeyList extends \Magento\Framework\App\Config\Value
      * @param \Magento\Framework\Model\ResourceModel\AbstractResource|null $resource
      * @param \Magento\Framework\Data\Collection\AbstractDb|null $resourceCollection
      * @param \Magento\Framework\Stdlib\DateTime\DateTime $date
-     * @param \Ebizmarts\MailChimp\Helper\Data $helper
+     * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      * @param \Magento\Store\Model\StoreManager $storeManager
      * @param array $data
      */
@@ -55,7 +55,7 @@ class MonkeyList extends \Magento\Framework\App\Config\Value
         \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
         \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
         \Magento\Framework\Stdlib\DateTime\DateTime $date,
-        \Ebizmarts\MailChimp\Helper\Data $helper,
+        \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
         \Magento\Store\Model\StoreManager $storeManager,
         array $data = []
     ) {

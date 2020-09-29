@@ -10,7 +10,7 @@
  * @date: 10/7/16 3:36 PM
  * @file: InstallSchema.php
  */
-namespace Ebizmarts\MailChimp\Setup;
+namespace SqualoMail\SqmMcMagentoTwo\Setup;
 
 use Magento\Framework\Setup\InstallSchemaInterface;
 use Magento\Framework\Setup\ModuleContextInterface;

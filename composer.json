@@ -1,17 +1,17 @@
 {
-  "name": "mailchimp/mc-magento2",
+  "name": "squalomail/sqm-mc-magento2",
   "autoload": {
-    "psr-4": {"Ebizmarts\\MailChimp\\":""},
+    "psr-4": {"SqualoMail\\SqmMcMagentoTwo\\":""},
     "files": ["registration.php"]
   },
-  "description": "Connect MailChimp with Magento",
+  "description": "Connect SqualoMail with Magento",
   "type": "magento2-module",
   "version": "102.3.41",
   "authors": [
     {
-      "name": "Ebizmarts Corp",
-      "email": "mailchimp@ebizmarts-desk.zendesk.com",
-      "homepage": "http://ebizmarts.com"
+      "name": "SqualoMail",
+      "email": "info@squalomail.com",
+      "homepage": "https://www.squalomail.com"
     }
   ],
   "license": [
@@ -19,13 +19,11 @@
     "AFL-3.0"
   ],
   "support": {
-    "email": "mailchimp@ebizmarts-desk.zendesk.com",
-    "wiki": "https://connect.mailchimp.com/integrations/magento",
-    "forum": "http://ebizmarts.com/forums/view/6"
+    "email": "info@squalomail.com"
   },
   "require" : {
     "magento/framework": "102.0.*||103.0.*",
-    "ebizmarts/mailchimp-lib": ">=3.0.27",
+    "squalomail/sqm-mc-api-lib": ">=3.0.0",
     "ext-json": "*"
   }
 }

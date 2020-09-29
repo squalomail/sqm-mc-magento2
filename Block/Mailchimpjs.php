@@ -11,14 +11,14 @@
  * @file: Mailchimpjs.php
  */
 
-namespace Ebizmarts\MailChimp\Block;
+namespace SqualoMail\SqmMcMagentoTwo\Block;
 
 use Magento\Store\Model\ScopeInterface;
 
 class Mailchimpjs extends \Magento\Framework\View\Element\Template
 {
     /**
-     * @var \Ebizmarts\MailChimp\Helper\Data
+     * @var \SqualoMail\SqmMcMagentoTwo\Helper\Data
      */
     protected $_helper;
 
@@ -30,12 +30,12 @@ class Mailchimpjs extends \Magento\Framework\View\Element\Template
     /**
      * Mailchimpjs constructor.
      * @param \Magento\Framework\View\Element\Template\Context $context
-     * @param \Ebizmarts\MailChimp\Helper\Data $helper
+     * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      * @param array $data
      */
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
-        \Ebizmarts\MailChimp\Helper\Data $helper,
+        \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
         array $data
     ) {
         parent::__construct($context, $data);
@@ -48,11 +48,11 @@ class Mailchimpjs extends \Magento\Framework\View\Element\Template
         $storeId = $this->_storeManager->getStore()->getId();
 
         $url = $this->_scopeConfig->getValue(
-            \Ebizmarts\MailChimp\Helper\Data::XML_MAILCHIMP_JS_URL, ScopeInterface::SCOPE_STORES,
+            \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_MAILCHIMP_JS_URL, ScopeInterface::SCOPE_STORES,
             $storeId
         );
         $active = $this->_scopeConfig->getValue(
-            \Ebizmarts\MailChimp\Helper\Data::XML_PATH_ACTIVE, ScopeInterface::SCOPE_STORES,
+            \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_ACTIVE, ScopeInterface::SCOPE_STORES,
             $storeId
         );
 

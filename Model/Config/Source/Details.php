@@ -10,7 +10,7 @@
  */
 
 
-namespace Ebizmarts\MailChimp\Model\Config\Source;
+namespace SqualoMail\SqmMcMagentoTwo\Model\Config\Source;
 
 class Details implements \Magento\Framework\Option\ArrayInterface
 {
@@ -19,7 +19,7 @@ class Details implements \Magento\Framework\Option\ArrayInterface
      */
     private $_options = null;
     /**
-     * @var \Ebizmarts\MailChimp\Helper\Data
+     * @var \SqualoMail\SqmMcMagentoTwo\Helper\Data
      */
     private $_helper  = null;
     /**
@@ -31,13 +31,13 @@ class Details implements \Magento\Framework\Option\ArrayInterface
 
     /**
      * Details constructor.
-     * @param \Ebizmarts\MailChimp\Helper\Data $helper
+     * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      * @param \Magento\Framework\Message\ManagerInterface $message
      * @param \Magento\Store\Model\StoreManager $storeManager
      * @param \Magento\Framework\App\RequestInterface $request
      */
     public function __construct(
-        \Ebizmarts\MailChimp\Helper\Data $helper,
+        \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
         \Magento\Framework\Message\ManagerInterface $message,
         \Magento\Store\Model\StoreManager $storeManager,
         \Magento\Framework\App\RequestInterface $request
@@ -62,7 +62,7 @@ class Details implements \Magento\Framework\Option\ArrayInterface
                 $this->_options = $api->root->info();
                 $optionsList = $api->lists->getLists(
                     $this->_helper->getConfigValue(
-                        \Ebizmarts\MailChimp\Helper\Data::XML_PATH_LIST,
+                        \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_LIST,
                         $storeId,
                         $scope
                     )
@@ -73,13 +73,13 @@ class Details implements \Magento\Framework\Option\ArrayInterface
                     $this->_options['list_subscribers'] = $optionsList['stats']['member_count'];
                 }
                 $mailchimpStoreId = $this->_helper->getConfigValue(
-                    \Ebizmarts\MailChimp\Helper\Data::XML_MAILCHIMP_STORE,
+                    \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_MAILCHIMP_STORE,
                     $storeId,
                     $scope
                 );
                 if ($mailchimpStoreId && $mailchimpStoreId!=-1 &&
                     $this->_helper->getConfigValue(
-                        \Ebizmarts\MailChimp\Helper\Data::XML_PATH_ECOMMERCE_ACTIVE,
+                        \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_ECOMMERCE_ACTIVE,
                         $storeId,
                         $scope
                     )
@@ -161,7 +161,7 @@ class Details implements \Magento\Framework\Option\ArrayInterface
     private function getDateSync($mailchimpStoreId)
     {
         return $this->_helper->getConfigValue(
-            \Ebizmarts\MailChimp\Helper\Data::XML_PATH_IS_SYNC."/$mailchimpStoreId",
+            \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_IS_SYNC."/$mailchimpStoreId",
             0,
             "default"
         );

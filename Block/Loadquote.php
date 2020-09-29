@@ -6,7 +6,7 @@
  * @author    info@ebizmarts.com
  */
 
-namespace Ebizmarts\MailChimp\Block;
+namespace SqualoMail\SqmMcMagentoTwo\Block;
 
 use Magento\Framework\View\Element\Template;
 

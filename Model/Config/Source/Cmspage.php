@@ -11,7 +11,7 @@
  * @file: Cmspage.php
  */
 
-namespace Ebizmarts\MailChimp\Model\Config\Source;
+namespace SqualoMail\SqmMcMagentoTwo\Model\Config\Source;
 
 class Cmspage
 {

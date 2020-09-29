@@ -10,13 +10,13 @@
  * @date: 5/15/17 11:02 AM
  * @file: Subscriber.php
  */
-namespace Ebizmarts\MailChimp\Model\Api;
+namespace SqualoMail\SqmMcMagentoTwo\Model\Api;
 
 class Subscriber
 {
     const BATCH_LIMIT = 100;
     /**
-     * @var \Ebizmarts\MailChimp\Helper\Data
+     * @var \SqualoMail\SqmMcMagentoTwo\Helper\Data
      */
     protected $_helper;
     /**
@@ -35,13 +35,13 @@ class Subscriber
 
     /**
      * Subscriber constructor.
-     * @param \Ebizmarts\MailChimp\Helper\Data $helper
+     * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      * @param \Magento\Newsletter\Model\ResourceModel\Subscriber\CollectionFactory $subscriberCollection
      * @param \Magento\Newsletter\Model\SubscriberFactory $subscriberFactory
      * @param \Magento\Framework\Message\ManagerInterface $message
      */
     public function __construct(
-        \Ebizmarts\MailChimp\Helper\Data $helper,
+        \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
         \Magento\Newsletter\Model\ResourceModel\Subscriber\CollectionFactory $subscriberCollection,
         \Magento\Newsletter\Model\SubscriberFactory $subscriberFactory,
         \Magento\Framework\Message\ManagerInterface $message
@@ -64,7 +64,7 @@ class Subscriber
         $collection->getSelect()->joinLeft(
             ['m4m' => $this->_helper->getTableName('mailchimp_sync_ecommerce')],
             "m4m.related_id = main_table.subscriber_id and m4m.type = '".
-            \Ebizmarts\MailChimp\Helper\Data::IS_SUBSCRIBER.
+            \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_SUBSCRIBER.
             "' and m4m.mailchimp_store_id = '".$listId."'",
             ['m4m.*']
         );
@@ -74,7 +74,7 @@ class Subscriber
         $collection->getSelect()->limit(self::BATCH_LIMIT);
         $subscriberArray = [];
         $date = $this->_helper->getDateMicrotime();
-        $batchId = \Ebizmarts\MailChimp\Helper\Data::IS_SUBSCRIBER . '_' . $date;
+        $batchId = \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_SUBSCRIBER . '_' . $date;
         $counter = 0;
         /**
          * @var $subscriber \Magento\Newsletter\Model\Subscriber
@@ -88,9 +88,9 @@ class Subscriber
             if ($subscriberJson!==false) {
                 if (!empty($subscriberJson)) {
                     if ($subscriber->getMailchimpSyncModified() == 1) {
-                        $this->_helper->modifyCounter(\Ebizmarts\MailChimp\Helper\Data::SUB_MOD);
+                        $this->_helper->modifyCounter(\SqualoMail\SqmMcMagentoTwo\Helper\Data::SUB_MOD);
                     } else {
-                        $this->_helper->modifyCounter(\Ebizmarts\MailChimp\Helper\Data::SUB_NEW);
+                        $this->_helper->modifyCounter(\SqualoMail\SqmMcMagentoTwo\Helper\Data::SUB_NEW);
                     }
                     $subscriberArray[$counter]['method'] = "PUT";
                     $subscriberArray[$counter]['path'] = "/lists/" . $listId . "/members/" . $md5HashEmail;
@@ -205,7 +205,7 @@ class Subscriber
         $this->_helper->saveEcommerceData(
             $listId,
             $entityId,
-            \Ebizmarts\MailChimp\Helper\Data::IS_SUBSCRIBER,
+            \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_SUBSCRIBER,
             $sync_delta,
             $sync_error,
             $sync_modified

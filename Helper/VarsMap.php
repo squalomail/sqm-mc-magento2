@@ -11,7 +11,7 @@
  * @file: VarsMap.php
  */
 
-namespace Ebizmarts\MailChimp\Helper;
+namespace SqualoMail\SqmMcMagentoTwo\Helper;
 
 class VarsMap extends \Magento\Framework\App\Helper\AbstractHelper
 {
@@ -30,7 +30,7 @@ class VarsMap extends \Magento\Framework\App\Helper\AbstractHelper
     public function __construct(
         \Magento\Framework\App\Helper\Context $context,
         \Magento\Framework\Math\Random $mathRandom,
-        \Ebizmarts\MailChimp\Helper\Data $helper
+        \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
     ) {
     
         $this->_helper      = $helper;

@@ -11,12 +11,12 @@
  * @file: SaveAfter.php
  */
 
-namespace Ebizmarts\MailChimp\Observer\Adminhtml\Customer;
+namespace SqualoMail\SqmMcMagentoTwo\Observer\Adminhtml\Customer;
 
 class SaveAfter implements \Magento\Framework\Event\ObserverInterface
 {
     /**
-     * @var \Ebizmarts\MailChimp\Helper\Data
+     * @var \SqualoMail\SqmMcMagentoTwo\Helper\Data
      */
     protected $helper;
     /**
@@ -24,20 +24,20 @@ class SaveAfter implements \Magento\Framework\Event\ObserverInterface
      */
     protected $subscriberFactory;
     /**
-     * @var \Ebizmarts\MailChimp\Model\MailChimpInterestGroupFactory
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\MailChimpInterestGroupFactory
      */
     protected $interestGroupFactory;
 
     /**
      * SaveAfter constructor.
-     * @param \Ebizmarts\MailChimp\Helper\Data $helper
+     * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      * @param \Magento\Newsletter\Model\SubscriberFactory $subscriberFactory
-     * @param \Ebizmarts\MailChimp\Model\MailChimpInterestGroupFactory $interestGroupFactory
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpInterestGroupFactory $interestGroupFactory
      */
     public function __construct(
-        \Ebizmarts\MailChimp\Helper\Data $helper,
+        \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
         \Magento\Newsletter\Model\SubscriberFactory $subscriberFactory,
-        \Ebizmarts\MailChimp\Model\MailChimpInterestGroupFactory $interestGroupFactory
+        \SqualoMail\SqmMcMagentoTwo\Model\MailChimpInterestGroupFactory $interestGroupFactory
     ) {
     
         $this->helper               = $helper;
@@ -74,7 +74,7 @@ class SaveAfter implements \Magento\Framework\Event\ObserverInterface
                     $interestGroup->getResource()->save($interestGroup);
                     $this->helper->markRegisterAsModified(
                         $subscriber->getId(),
-                        \Ebizmarts\MailChimp\Helper\Data::IS_SUBSCRIBER
+                        \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_SUBSCRIBER
                     );
                 } else {
                     $this->subscriberFactory->create()->subscribe($customer->getEmail());
@@ -95,10 +95,10 @@ class SaveAfter implements \Magento\Framework\Event\ObserverInterface
             if ($subscriber->getEmail() == $customer->getEmail()) {
                 $this->helper->markRegisterAsModified(
                     $subscriber->getId(),
-                    \Ebizmarts\MailChimp\Helper\Data::IS_SUBSCRIBER
+                    \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_SUBSCRIBER
                 );
             }
         }
-        $this->helper->markRegisterAsModified($customer->getId(), \Ebizmarts\MailChimp\Helper\Data::IS_CUSTOMER);
+        $this->helper->markRegisterAsModified($customer->getId(), \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_CUSTOMER);
     }
 }

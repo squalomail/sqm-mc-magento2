@@ -10,29 +10,29 @@
  * @date: 10/19/17 5:26 PM
  * @file: DeleteAfter.php
  */
-namespace Ebizmarts\MailChimp\Observer\SalesRule\Rule;
+namespace SqualoMail\SqmMcMagentoTwo\Observer\SalesRule\Rule;
 
 use Magento\Framework\Event\Observer;
 
 class DeleteAfter implements \Magento\Framework\Event\ObserverInterface
 {
     /**
-     * @var \Ebizmarts\MailChimp\Model\MailChimpSyncEcommerce
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerce
      */
     protected $_ecommerce;
     /**
-     * @var \Ebizmarts\MailChimp\Helper\Data
+     * @var \SqualoMail\SqmMcMagentoTwo\Helper\Data
      */
     protected $_helper;
 
     /**
      * SaveAfter constructor.
-     * @param \Ebizmarts\MailChimp\Model\MailChimpSyncEcommerce $ecommerce
-     * @param \Ebizmarts\MailChimp\Helper\Data $helper
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerce $ecommerce
+     * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      */
     public function __construct(
-        \Ebizmarts\MailChimp\Model\MailChimpSyncEcommerce $ecommerce,
-        \Ebizmarts\MailChimp\Helper\Data $helper
+        \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerce $ecommerce,
+        \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
     ) {
 
         $this->_ecommerce   = $ecommerce;
@@ -43,6 +43,6 @@ class DeleteAfter implements \Magento\Framework\Event\ObserverInterface
     {
         $rule = $observer->getEvent()->getRule();
         $ruleId = $rule->getRuleId();
-        $this->_helper->markEcommerceAsDeleted($ruleId, \Ebizmarts\MailChimp\Helper\Data::IS_PROMO_RULE);
+        $this->_helper->markEcommerceAsDeleted($ruleId, \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_PROMO_RULE);
     }
 }

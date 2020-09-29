@@ -9,12 +9,12 @@
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
-namespace Ebizmarts\MailChimp\Model\Plugin;
+namespace SqualoMail\SqmMcMagentoTwo\Model\Plugin;
 
 class Subscriber
 {
     /**
-     * @var \Ebizmarts\MailChimp\Helper\Data
+     * @var \SqualoMail\SqmMcMagentoTwo\Helper\Data
      */
     protected $_helper;
     /**
@@ -30,7 +30,7 @@ class Subscriber
      */
     protected $_storeManager;
     /**
-     * @param \Ebizmarts\MailChimp\Helper\Data $helper
+     * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      * @param \Magento\Customer\Model\ResourceModel\CustomerRepository $customer
      * @param \Magento\Customer\Model\Session $customerSession
      */
@@ -38,13 +38,13 @@ class Subscriber
 
     /**
      * Subscriber constructor.
-     * @param \Ebizmarts\MailChimp\Helper\Data $helper
+     * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      * @param \Magento\Customer\Model\ResourceModel\CustomerRepository $customer
      * @param \Magento\Customer\Model\Session $customerSession
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      */
     public function __construct(
-        \Ebizmarts\MailChimp\Helper\Data $helper,
+        \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
         \Magento\Customer\Model\ResourceModel\CustomerRepository $customer,
         \Magento\Customer\Model\Session $customerSession,
         \Magento\Store\Model\StoreManagerInterface $storeManager
@@ -68,7 +68,7 @@ class Subscriber
     ) {
 
         $storeId = $this->getStoreIdFromSubscriber($subscriber);
-        if ($this->_helper->getConfigValue(\Ebizmarts\MailChimp\Helper\Data::XML_PATH_ACTIVE, $storeId)) {
+        if ($this->_helper->getConfigValue(\SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_ACTIVE, $storeId)) {
             $subscriber->loadByCustomerId($customerId);
             if ($subscriber->isSubscribed()) {
                 $api = $this->_helper->getApi($storeId);
@@ -101,10 +101,10 @@ class Subscriber
     ) {
 
         $storeId = $this->getStoreIdFromSubscriber($subscriber);
-        if ($this->_helper->getConfigValue(\Ebizmarts\MailChimp\Helper\Data::XML_PATH_ACTIVE, $storeId)) {
+        if ($this->_helper->getConfigValue(\SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_ACTIVE, $storeId)) {
             $subscriber->loadByCustomerId($customerId);
             if (!$subscriber->isSubscribed()) {
-                if (!$this->_helper->getConfigValue(\Ebizmarts\MailChimp\Helper\Data::XML_MAGENTO_MAIL, $storeId)) {
+                if (!$this->_helper->getConfigValue(\SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_MAGENTO_MAIL, $storeId)) {
                     $subscriber->setImportMode(true);
                 }
                 if ($this->_helper->isMailChimpEnabled($storeId)) {
@@ -154,8 +154,8 @@ class Subscriber
     ) {
 
         $storeId = $this->getStoreIdFromSubscriber($subscriber);
-        if ($this->_helper->getConfigValue(\Ebizmarts\MailChimp\Helper\Data::XML_PATH_ACTIVE, $storeId)) {
-            if (!$this->_helper->getConfigValue(\Ebizmarts\MailChimp\Helper\Data::XML_MAGENTO_MAIL, $storeId)) {
+        if ($this->_helper->getConfigValue(\SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_ACTIVE, $storeId)) {
+            if (!$this->_helper->getConfigValue(\SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_MAGENTO_MAIL, $storeId)) {
                 $subscriber->setImportMode(true);
             }
             $storeId = $this->_storeManager->getStore()->getId();
@@ -201,7 +201,7 @@ class Subscriber
     ) {
 
         $storeId = $this->getStoreIdFromSubscriber($subscriber);
-        if ($this->_helper->getConfigValue(\Ebizmarts\MailChimp\Helper\Data::XML_PATH_ACTIVE, $storeId)) {
+        if ($this->_helper->getConfigValue(\SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_ACTIVE, $storeId)) {
             $api = $this->_helper->getApi($storeId);
             try {
                 $md5HashEmail = hash('md5', strtolower($subscriber->getSubscriberEmail()));
@@ -228,7 +228,7 @@ class Subscriber
     ) {
 
         $storeId = $this->getStoreIdFromSubscriber($subscriber);
-        if ($this->_helper->getConfigValue(\Ebizmarts\MailChimp\Helper\Data::XML_PATH_ACTIVE, $storeId)) {
+        if ($this->_helper->getConfigValue(\SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_ACTIVE, $storeId)) {
             $api = $this->_helper->getApi($storeId);
             if ($subscriber->isSubscribed()) {
                 try {

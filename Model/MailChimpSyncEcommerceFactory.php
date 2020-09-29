@@ -11,7 +11,7 @@
  * @file: MailChimpSyncEcommerceFactory.php
  */
 
-namespace Ebizmarts\MailChimp\Model;
+namespace SqualoMail\SqmMcMagentoTwo\Model;
 
 class MailChimpSyncEcommerceFactory
 {
@@ -26,7 +26,7 @@ class MailChimpSyncEcommerceFactory
      */
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $objectManager,
-        $instanceName = \Ebizmarts\MailChimp\Model\MailChimpSyncEcommerce::class
+        $instanceName = \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerce::class
     ) {
     
         $this->_objectManager   = $objectManager;
@@ -35,7 +35,7 @@ class MailChimpSyncEcommerceFactory
 
     /**
      * @param array $data
-     * @return \Ebizmarts\MailChimp\Model\MailChimpSyncEcommerce
+     * @return \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerce
      */
     public function create(array $data = [])
     {

@@ -11,12 +11,12 @@
  * @file: Customer.php
  */
 
-namespace Ebizmarts\MailChimp\Block\Adminhtml\Customer\Edit\Tabs\View;
+namespace SqualoMail\SqmMcMagentoTwo\Block\Adminhtml\Customer\Edit\Tabs\View;
 
 class Customer extends \Magento\Backend\Block\Template
 {
     /**
-     * @var \Ebizmarts\MailChimp\Helper\Data
+     * @var \SqualoMail\SqmMcMagentoTwo\Helper\Data
      */
     protected $helper;
     /**
@@ -32,14 +32,14 @@ class Customer extends \Magento\Backend\Block\Template
     /**
      * Customer constructor.
      * @param \Magento\Backend\Block\Template\Context $context
-     * @param \Ebizmarts\MailChimp\Helper\Data $helper
+     * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      * @param \Magento\Newsletter\Model\SubscriberFactory $subscriberFactory
      * @param \Magento\Framework\Registry $registry
      * @param array $data
      */
     public function __construct(
         \Magento\Backend\Block\Template\Context $context,
-        \Ebizmarts\MailChimp\Helper\Data $helper,
+        \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
         \Magento\Newsletter\Model\SubscriberFactory $subscriberFactory,
         \Magento\Framework\Registry $registry,
         array $data

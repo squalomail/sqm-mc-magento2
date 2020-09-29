@@ -11,55 +11,55 @@
  */
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-    <type name="Ebizmarts\MailChimp\Block\Mailchimpjs">
+    <type name="SqualoMail\SqmMcMagentoTwo\Block\Mailchimpjs">
         <arguments>
-            <argument name="helper" xsi:type="object">Ebizmarts\MailChimp\Helper\Data\Proxy</argument> 
+            <argument name="helper" xsi:type="object">SqualoMail\SqmMcMagentoTwo\Helper\Data\Proxy</argument> 
         </arguments> 
     </type>
     <type name="Magento\Quote\Model\Quote">
-        <plugin name="mailchimp-save-quote" type="Ebizmarts\MailChimp\Model\Plugin\Quote" sortOrder="10"/>
+        <plugin name="mailchimp-save-quote" type="SqualoMail\SqmMcMagentoTwo\Model\Plugin\Quote" sortOrder="10"/>
     </type>
     <type name="Magento\Newsletter\Controller\Manage\Save">
-        <plugin name="mailchimp-account-interest-group" type="Ebizmarts\MailChimp\Model\Plugin\Newsletter\Save" sortOrder="10"/>
+        <plugin name="mailchimp-account-interest-group" type="SqualoMail\SqmMcMagentoTwo\Model\Plugin\Newsletter\Save" sortOrder="10"/>
     </type>
-    <type name="Ebizmarts\MailChimp\Model\Logger\Handler">
+    <type name="SqualoMail\SqmMcMagentoTwo\Model\Logger\Handler">
         <arguments>
             <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
         </arguments>
     </type>
-    <type name="Ebizmarts\MailChimp\Model\Logger\Logger">
+    <type name="SqualoMail\SqmMcMagentoTwo\Model\Logger\Logger">
         <arguments>
             <argument name="name" xsi:type="string">MailChimpLogger</argument>
             <argument name="handlers"  xsi:type="array">
-                <item name="system" xsi:type="object">Ebizmarts\MailChimp\Model\Logger\Handler</item>
+                <item name="system" xsi:type="object">SqualoMail\SqmMcMagentoTwo\Model\Logger\Handler</item>
             </argument>
         </arguments>
     </type>
-    <virtualType name="Ebizmarts\MailChimp\Model\ResourceModel\MailChimpErrors\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+    <virtualType name="SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpErrors\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
         <arguments>
             <argument name="mainTable" xsi:type="string">mailchimp_errors</argument>
-            <argument name="resourceModel" xsi:type="string">Ebizmarts\MailChimp\Model\ResourceModel\MailChimpErrors</argument>
+            <argument name="resourceModel" xsi:type="string">SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpErrors</argument>
         </arguments>
     </virtualType>
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
-                <item name="mailchimp_errors_grid_data_source" xsi:type="string">Ebizmarts\MailChimp\Model\ResourceModel\MailChimpErrors\Collection</item>
-                <item name="mailchimp_stores_grid_data_source" xsi:type="string">Ebizmarts\MailChimp\Model\ResourceModel\MailChimpStores\Grid\Collection</item>
+                <item name="mailchimp_errors_grid_data_source" xsi:type="string">SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpErrors\Collection</item>
+                <item name="mailchimp_stores_grid_data_source" xsi:type="string">SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpStores\Grid\Collection</item>
             </argument>
         </arguments>
     </type>
-    <virtualType name="Ebizmarts\MailChimp\Model\ResourceModel\MailChimpStores\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+    <virtualType name="SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpStores\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
         <arguments>
             <argument name="mainTable" xsi:type="string">mailchimp_stores</argument>
-            <argument name="resourceModel" xsi:type="string">Ebizmarts\MailChimp\Model\ResourceModel\MailChimpStores</argument>
+            <argument name="resourceModel" xsi:type="string">SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpStores</argument>
         </arguments>
     </virtualType>
     <type name="Magento\Newsletter\Model\Subscriber">
-        <plugin name="mailchimp-subscriber" type="Ebizmarts\MailChimp\Model\Plugin\Subscriber" sortOrder="10"/>
+        <plugin name="mailchimp-subscriber" type="SqualoMail\SqmMcMagentoTwo\Model\Plugin\Subscriber" sortOrder="10"/>
     </type>
     <type name="Magento\Customer\Model\AccountManagement">
-        <plugin name="abandoned-checkout-save-quote" type="Ebizmarts\MailChimp\Model\Plugin\AccountManagement" sortOrder="10"/>
+        <plugin name="abandoned-checkout-save-quote" type="SqualoMail\SqmMcMagentoTwo\Model\Plugin\AccountManagement" sortOrder="10"/>
     </type>
     <virtualType name="Magento\Sales\Model\ResourceModel\Order\Grid" type="Magento\Sales\Model\ResourceModel\Grid">
         <arguments>
@@ -69,15 +69,15 @@
         </arguments>
     </virtualType>
     <type name="Magento\SalesRule\Model\Coupon">
-        <plugin name="mailchimp-coupon" type="Ebizmarts\MailChimp\Model\Plugin\Coupon" sortOrder="10"/>
+        <plugin name="mailchimp-coupon" type="SqualoMail\SqmMcMagentoTwo\Model\Plugin\Coupon" sortOrder="10"/>
     </type>
     <type name="Magento\Sales\Model\Order\ShipmentRepository">
-        <plugin name="mailchimp_save_shipment" type="Ebizmarts\MailChimp\Model\Plugin\Ship" sortOrder="10"/>
+        <plugin name="mailchimp_save_shipment" type="SqualoMail\SqmMcMagentoTwo\Model\Plugin\Ship" sortOrder="10"/>
     </type>
     <type name="Magento\Sales\Model\Order\InvoiceRepository">
-        <plugin name="mailchimp_save_invoice" type="Ebizmarts\MailChimp\Model\Plugin\Invoice" sortOrder="10"/>
+        <plugin name="mailchimp_save_invoice" type="SqualoMail\SqmMcMagentoTwo\Model\Plugin\Invoice" sortOrder="10"/>
     </type>
     <type name="Magento\Sales\Model\Order\CreditmemoRepository">
-        <plugin name="mailchimp_save_creditmemo" type="Ebizmarts\MailChimp\Model\Plugin\Creditmemo" sortOrder="10"/>
+        <plugin name="mailchimp_save_creditmemo" type="SqualoMail\SqmMcMagentoTwo\Model\Plugin\Creditmemo" sortOrder="10"/>
     </type>
 </config>

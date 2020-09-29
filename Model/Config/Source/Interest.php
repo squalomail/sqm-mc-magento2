@@ -11,7 +11,7 @@
  * @file: Interest.php
  */
 
-namespace Ebizmarts\MailChimp\Model\Config\Source;
+namespace SqualoMail\SqmMcMagentoTwo\Model\Config\Source;
 
 class Interest implements \Magento\Framework\Option\ArrayInterface
 {
@@ -19,11 +19,11 @@ class Interest implements \Magento\Framework\Option\ArrayInterface
 
     /**
      * Interest constructor.
-     * @param \Ebizmarts\MailChimp\Helper\Data $helper
+     * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      * @param \Magento\Framework\App\RequestInterface $request
      */
     public function __construct(
-        \Ebizmarts\MailChimp\Helper\Data $helper,
+        \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
         \Magento\Framework\App\RequestInterface $request
     ) {
     
@@ -40,7 +40,7 @@ class Interest implements \Magento\Framework\Option\ArrayInterface
         if ($helper->getApiKey($storeId, $scope)) {
             try {
                 $this->options = $helper->getApi($storeId, $scope)->lists->interestCategory->getAll(
-                    $helper->getConfigValue(\Ebizmarts\MailChimp\Helper\Data::XML_PATH_LIST, $storeId, $scope)
+                    $helper->getConfigValue(\SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_LIST, $storeId, $scope)
                 );
             } catch (\Mailchimp_Error $e) {
                 $helper->log($e->getFriendlyMessage());

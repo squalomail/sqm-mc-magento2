@@ -11,7 +11,7 @@
  * @file: ResetLocalErrors.php
  */
 
-namespace Ebizmarts\MailChimp\Controller\Adminhtml\Ecommerce;
+namespace SqualoMail\SqmMcMagentoTwo\Controller\Adminhtml\Ecommerce;
 
 use Magento\Framework\Controller\Result\JsonFactory;
 use Magento\Framework\Exception\ValidatorException;
@@ -24,7 +24,7 @@ class ResetLocalErrors extends \Magento\Backend\App\Action
      */
     protected $resultJsonFactory;
     /**
-     * @var \Ebizmarts\MailChimp\Helper\Data
+     * @var \SqualoMail\SqmMcMagentoTwo\Helper\Data
      */
     protected $helper;
     /**
@@ -37,13 +37,13 @@ class ResetLocalErrors extends \Magento\Backend\App\Action
      * @param \Magento\Backend\App\Action\Context $context
      * @param JsonFactory $resultJsonFactory
      * @param \Magento\Store\Model\StoreManagerInterface $storeManagerInterface
-     * @param \Ebizmarts\MailChimp\Helper\Data $helper
+     * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      */
     public function __construct(
         \Magento\Backend\App\Action\Context $context,
         JsonFactory $resultJsonFactory,
         \Magento\Store\Model\StoreManagerInterface $storeManagerInterface,
-        \Ebizmarts\MailChimp\Helper\Data $helper
+        \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
     ) {
     
         parent::__construct($context);
@@ -59,19 +59,19 @@ class ResetLocalErrors extends \Magento\Backend\App\Action
         $params = $this->getRequest()->getParams();
         if (isset($params['website'])) {
             $mailchimpStore = $this->helper->getConfigValue(
-                \Ebizmarts\MailChimp\Helper\Data::XML_MAILCHIMP_STORE,
+                \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_MAILCHIMP_STORE,
                 $params['website'],
                 'website'
             );
         } elseif (isset($params['store'])) {
             $mailchimpStore = $this->helper->getConfigValue(
-                \Ebizmarts\MailChimp\Helper\Data::XML_MAILCHIMP_STORE,
+                \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_MAILCHIMP_STORE,
                 $params['store'],
                 'store'
             );
         } else {
             $mailchimpStore = $this->helper->getConfigValue(
-                \Ebizmarts\MailChimp\Helper\Data::XML_MAILCHIMP_STORE,
+                \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_MAILCHIMP_STORE,
                 $this->storeManager->getStore()
             );
         }

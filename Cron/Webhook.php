@@ -11,7 +11,7 @@
  * @file: Webhook.php
  */
 
-namespace Ebizmarts\MailChimp\Cron;
+namespace SqualoMail\SqmMcMagentoTwo\Cron;
 
 
 class Webhook
@@ -31,7 +31,7 @@ class Webhook
     const DATA_WITH_ERROR       = 3;
     const DATA_NOT_CONVERTED    = 4;
     /**
-     * @var \Ebizmarts\MailChimp\Helper\Data
+     * @var \SqualoMail\SqmMcMagentoTwo\Helper\Data
      */
     protected $_helper;
     /**
@@ -39,7 +39,7 @@ class Webhook
      */
     protected $_subscriberFactory;
     /**
-     * @var \Ebizmarts\MailChimp\Model\ResourceModel\MailChimpWebhookRequest\CollectionFactory
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpWebhookRequest\CollectionFactory
      */
     protected $_webhookCollection;
     /**
@@ -47,7 +47,7 @@ class Webhook
      */
     protected $_customer;
     /**
-     * @var \Ebizmarts\MailChimp\Model\MailChimpInterestGroupFactory
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\MailChimpInterestGroupFactory
      */
     protected $interestGroupFactory;
     /**
@@ -58,18 +58,18 @@ class Webhook
 
     /**
      * Webhook constructor.
-     * @param \Ebizmarts\MailChimp\Helper\Data $helper
+     * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      * @param \Magento\Newsletter\Model\SubscriberFactory $subscriberFactory
-     * @param \Ebizmarts\MailChimp\Model\ResourceModel\MailChimpWebhookRequest\CollectionFactory $webhookCollection
-     * @param \Ebizmarts\MailChimp\Model\MailChimpInterestGroupFactory $interestGroupFactory
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpWebhookRequest\CollectionFactory $webhookCollection
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpInterestGroupFactory $interestGroupFactory
      * @param \Magento\Store\Model\StoreManager $storeManager
      * @param \Magento\Customer\Model\CustomerFactory $customer
      */
     public function __construct(
-        \Ebizmarts\MailChimp\Helper\Data $helper,
+        \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
         \Magento\Newsletter\Model\SubscriberFactory $subscriberFactory,
-        \Ebizmarts\MailChimp\Model\ResourceModel\MailChimpWebhookRequest\CollectionFactory $webhookCollection,
-        \Ebizmarts\MailChimp\Model\MailChimpInterestGroupFactory $interestGroupFactory,
+        \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpWebhookRequest\CollectionFactory $webhookCollection,
+        \SqualoMail\SqmMcMagentoTwo\Model\MailChimpInterestGroupFactory $interestGroupFactory,
         \Magento\Store\Model\StoreManager $storeManager,
         \Magento\Customer\Model\CustomerFactory $customer
     ) {
@@ -89,13 +89,13 @@ class Webhook
     {
         $this->_loadGroups();
         /**
-         * @var $collection \Ebizmarts\MailChimp\Model\ResourceModel\MailChimpWebhookRequest\Collection
+         * @var $collection \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpWebhookRequest\Collection
          */
         $collection = $this->_webhookCollection->create();
         $collection->addFieldToFilter('processed', ['eq'=>self::NOT_PROCESSED]);
         $collection->getSelect()->limit(self::BATCH_LIMIT);
         /**
-         * @var $item \Ebizmarts\MailChimp\Model\MailChimpWebhookRequest
+         * @var $item \SqualoMail\SqmMcMagentoTwo\Model\MailChimpWebhookRequest
          */
         foreach ($collection as $item) {
             try {
@@ -174,7 +174,7 @@ class Webhook
                 $action = isset($data['action']) ? $data['action'] : self::ACTION_DELETE;
                 switch ($action) {
                     case self::ACTION_DELETE:
-                        if ($this->_helper->getConfigValue(\Ebizmarts\MailChimp\Helper\Data::XML_PATH_WEBHOOK_DELETE)) {
+                        if ($this->_helper->getConfigValue(\SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_WEBHOOK_DELETE)) {
                             $sub->getResource()->delete($sub);
                         } elseif ($sub->getSubscriberStatus()!=\Magento\Newsletter\Model\Subscriber::STATUS_UNSUBSCRIBED) {
                             $this->_subscribeMember($sub, \Magento\Newsletter\Model\Subscriber::STATUS_UNSUBSCRIBED);

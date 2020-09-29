@@ -11,14 +11,14 @@
  * @file: MailChimpInterestGroup.php
  */
 
-namespace Ebizmarts\MailChimp\Model;
+namespace SqualoMail\SqmMcMagentoTwo\Model;
 
 class MailChimpInterestGroup extends \Magento\Framework\Model\AbstractModel
 {
     protected function _construct()
     {
         parent::_construct();
-        $this->_init(\Ebizmarts\MailChimp\Model\ResourceModel\MailChimpInterestGroup::class);
+        $this->_init(\SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpInterestGroup::class);
     }
     public function getBySubscriberIdStoreId($subscriberId, $storeId)
     {

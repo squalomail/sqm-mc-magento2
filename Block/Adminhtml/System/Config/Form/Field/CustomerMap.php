@@ -11,7 +11,7 @@
  * @file: CustomerMap.php
  */
 
-namespace Ebizmarts\MailChimp\Block\Adminhtml\System\Config\Form\Field;
+namespace SqualoMail\SqmMcMagentoTwo\Block\Adminhtml\System\Config\Form\Field;
 
 class CustomerMap extends \Magento\Config\Block\System\Config\Form\Field\FieldArray\AbstractFieldArray
 {
@@ -25,7 +25,7 @@ class CustomerMap extends \Magento\Config\Block\System\Config\Form\Field\FieldAr
     {
         if (!$this->_varsRenderer) {
             $this->_varsRenderer = $this->getLayout()->createBlock(
-                \Ebizmarts\MailChimp\Block\Adminhtml\System\Config\Form\Field\VarsMap::class,
+                \SqualoMail\SqmMcMagentoTwo\Block\Adminhtml\System\Config\Form\Field\VarsMap::class,
                 '',
                 ['data' => ['is_render_to_js_template' => true]]
             );
@@ -37,7 +37,7 @@ class CustomerMap extends \Magento\Config\Block\System\Config\Form\Field\FieldAr
     {
         if (!$this->_mailchimpRenderer) {
             $this->_mailchimpRenderer = $this->getLayout()->createBlock(
-                \Ebizmarts\MailChimp\Block\Adminhtml\System\Config\Form\Field\MailchimpMap::class,
+                \SqualoMail\SqmMcMagentoTwo\Block\Adminhtml\System\Config\Form\Field\MailchimpMap::class,
                 '',
                 ['data' => ['is_render_to_js_template' => true]]
             );

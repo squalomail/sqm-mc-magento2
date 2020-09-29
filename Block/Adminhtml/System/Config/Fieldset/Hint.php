@@ -9,7 +9,7 @@
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
-namespace Ebizmarts\MailChimp\Block\Adminhtml\System\Config\Fieldset;
+namespace SqualoMail\SqmMcMagentoTwo\Block\Adminhtml\System\Config\Fieldset;
 
 class Hint extends \Magento\Backend\Block\Template implements
     \Magento\Framework\Data\Form\Element\Renderer\RendererInterface
@@ -23,7 +23,7 @@ class Hint extends \Magento\Backend\Block\Template implements
      */
     private $_metaData;
     /**
-     * @var \Ebizmarts\MailChimp\Helper\Data
+     * @var \SqualoMail\SqmMcMagentoTwo\Helper\Data
      */
     private $_helper;
     /**
@@ -31,7 +31,7 @@ class Hint extends \Magento\Backend\Block\Template implements
      */
     private $_context;
     /**
-     * @var \Ebizmarts\MailChimp\Model\Config\ModuleVersion
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\Config\ModuleVersion
      */
     private $_moduleVersion;
 
@@ -39,15 +39,15 @@ class Hint extends \Magento\Backend\Block\Template implements
      * Hint constructor.
      * @param \Magento\Backend\Block\Template\Context $context
      * @param \Magento\Framework\App\ProductMetadataInterface $productMetaData
-     * @param \Ebizmarts\MailChimp\Helper\Data $helper
-     * @param \Ebizmarts\MailChimp\Model\Config\ModuleVersion $moduleVersion
+     * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\Config\ModuleVersion $moduleVersion
      * @param array $data
      */
     public function __construct(
         \Magento\Backend\Block\Template\Context $context,
         \Magento\Framework\App\ProductMetadataInterface $productMetaData,
-        \Ebizmarts\MailChimp\Helper\Data $helper,
-        \Ebizmarts\MailChimp\Model\Config\ModuleVersion $moduleVersion,
+        \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
+        \SqualoMail\SqmMcMagentoTwo\Model\Config\ModuleVersion $moduleVersion,
         array $data = []
     ) {
         parent::__construct($context, $data);

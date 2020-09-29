@@ -11,7 +11,7 @@
  * @file: Index.php
  */
 
-namespace Ebizmarts\MailChimp\Controller\WebHook;
+namespace SqualoMail\SqmMcMagentoTwo\Controller\WebHook;
 
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\Controller\ResultFactory;
@@ -30,11 +30,11 @@ class Index extends Action implements CsrfAwareActionInterface
      */
     protected $_resultFactory;
     /**
-     * @var \Ebizmarts\MailChimp\Helper\Data
+     * @var \SqualoMail\SqmMcMagentoTwo\Helper\Data
      */
     protected $_helper;
     /**
-     * @var \Ebizmarts\MailChimp\Model\MailChimpWebhookRequestFactory
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\MailChimpWebhookRequestFactory
      */
     protected $_chimpWebhookRequestFactory;
     private $_remoteAddress;
@@ -42,14 +42,14 @@ class Index extends Action implements CsrfAwareActionInterface
     /**
      * Index constructor.
      * @param Context $context
-     * @param \Ebizmarts\MailChimp\Helper\Data $helper
-     * @param \Ebizmarts\MailChimp\Model\MailChimpWebhookRequestFactory $chimpWebhookRequestFactory
+     * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpWebhookRequestFactory $chimpWebhookRequestFactory
      * @param \Magento\Framework\HTTP\PhpEnvironment\RemoteAddress $remoteAddress
      */
     public function __construct(
         Context $context,
-        \Ebizmarts\MailChimp\Helper\Data $helper,
-        \Ebizmarts\MailChimp\Model\MailChimpWebhookRequestFactory $chimpWebhookRequestFactory,
+        \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
+        \SqualoMail\SqmMcMagentoTwo\Model\MailChimpWebhookRequestFactory $chimpWebhookRequestFactory,
         \Magento\Framework\HTTP\PhpEnvironment\RemoteAddress $remoteAddress
     ) {
     
@@ -96,8 +96,8 @@ class Index extends Action implements CsrfAwareActionInterface
         }
         if ($this->getRequest()->getPost('type')) {
             $request = $this->getRequest()->getPost();
-            if ($this->_helper->getConfigValue(\Ebizmarts\MailChimp\Helper\Data::XML_PATH_WEBHOOK_ACTIVE) ||
-                $request['type']==\Ebizmarts\MailChimp\Cron\Webhook::TYPE_SUBSCRIBE) {
+            if ($this->_helper->getConfigValue(\SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_WEBHOOK_ACTIVE) ||
+                $request['type']==\SqualoMail\SqmMcMagentoTwo\Cron\Webhook::TYPE_SUBSCRIBE) {
                 try {
                     $chimpRequest = $this->_chimpWebhookRequestFactory->create();
                     $chimpRequest->setType($request['type']);

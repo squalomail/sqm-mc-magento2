@@ -11,7 +11,7 @@
  * @file: VarsMap.php
  */
 
-namespace Ebizmarts\MailChimp\Block\Adminhtml\System\Config\Form\Field;
+namespace SqualoMail\SqmMcMagentoTwo\Block\Adminhtml\System\Config\Form\Field;
 
 class VarsMap extends \Magento\Framework\View\Element\Html\Select
 {

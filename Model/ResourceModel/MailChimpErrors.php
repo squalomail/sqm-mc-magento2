@@ -10,7 +10,7 @@
  * @date: 10/17/16 1:57 PM
  * @file: MailChimpError.php
  */
-namespace Ebizmarts\MailChimp\Model\ResourceModel;
+namespace SqualoMail\SqmMcMagentoTwo\Model\ResourceModel;
 
 use Magento\Framework\DB\Select;
 use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
@@ -21,7 +21,7 @@ class MailChimpErrors extends AbstractDb
     {
         $this->_init('mailchimp_errors', 'id');
     }
-    public function getByStoreIdType(\Ebizmarts\MailChimp\Model\MailChimpErrors $errors, $storeId, $id, $type)
+    public function getByStoreIdType(\SqualoMail\SqmMcMagentoTwo\Model\MailChimpErrors $errors, $storeId, $id, $type)
     {
         $connection = $this->getConnection();
         $bind = ['store_id' => $storeId, 'regtype' => $type, 'original_id' => $id];

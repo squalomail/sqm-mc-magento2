@@ -11,7 +11,7 @@
  * @file: CreateWebhook.php
  */
 
-namespace Ebizmarts\MailChimp\Controller\Adminhtml\Ecommerce;
+namespace SqualoMail\SqmMcMagentoTwo\Controller\Adminhtml\Ecommerce;
 
 use Magento\Framework\Controller\Result\JsonFactory;
 use Magento\Framework\Exception\ValidatorException;
@@ -24,7 +24,7 @@ class CreateWebhook extends \Magento\Backend\App\Action
      */
     protected $resultJsonFactory;
     /**
-     * @var \Ebizmarts\MailChimp\Helper\Data
+     * @var \SqualoMail\SqmMcMagentoTwo\Helper\Data
      */
     protected $helper;
     /**
@@ -37,14 +37,14 @@ class CreateWebhook extends \Magento\Backend\App\Action
      * @param \Magento\Backend\App\Action\Context $context
      * @param JsonFactory $resultJsonFactory
      * @param \Magento\Store\Model\StoreManagerInterface $storeManagerInterface
-     * @param \Ebizmarts\MailChimp\Helper\Data $helper
+     * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      * @param \Magento\Config\Model\ResourceModel\Config $config
      */
     public function __construct(
         \Magento\Backend\App\Action\Context $context,
         JsonFactory $resultJsonFactory,
         \Magento\Store\Model\StoreManagerInterface $storeManagerInterface,
-        \Ebizmarts\MailChimp\Helper\Data $helper,
+        \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
         \Magento\Config\Model\ResourceModel\Config $config
     ) {
     

@@ -11,7 +11,7 @@
  * @file: PromoRules.php
  */
 
-namespace Ebizmarts\MailChimp\Model\Api;
+namespace SqualoMail\SqmMcMagentoTwo\Model\Api;
 
 use Magento\Cms\Test\Unit\Controller\Adminhtml\Page\MassEnableTest;
 
@@ -33,11 +33,11 @@ class PromoRules
      */
     private $_collection;
     /**
-     * @var \Ebizmarts\MailChimp\Helper\Data
+     * @var \SqualoMail\SqmMcMagentoTwo\Helper\Data
      */
     private $_helper;
     /**
-     * @var \Ebizmarts\MailChimp\Model\MailChimpSyncEcommerceFactory
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerceFactory
      */
     private $_chimpSyncEcommerce;
     /**
@@ -45,38 +45,38 @@ class PromoRules
      */
     private $_ruleRepo;
     /**
-     * @var \Ebizmarts\MailChimp\Model\ResourceModel\MailChimpSyncEcommerce\CollectionFactory
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpSyncEcommerce\CollectionFactory
      */
     protected $_syncCollection;
 
     /**
      * PromoRules constructor.
-     * @param \Ebizmarts\MailChimp\Helper\Data $helper
+     * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      * @param \Magento\SalesRule\Model\ResourceModel\Rule\CollectionFactory $collection
      * @param \Magento\SalesRule\Model\RuleRepository $ruleRepo
-     * @param \Ebizmarts\MailChimp\Model\MailChimpSyncEcommerceFactory $chimpSyncEcommerce
-     * @param \Ebizmarts\MailChimp\Model\ResourceModel\MailChimpSyncEcommerce\CollectionFactory $syncCollection
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerceFactory $chimpSyncEcommerce
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpSyncEcommerce\CollectionFactory $syncCollection
      */
     public function __construct(
-        \Ebizmarts\MailChimp\Helper\Data $helper,
+        \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
         \Magento\SalesRule\Model\ResourceModel\Rule\CollectionFactory $collection,
         \Magento\SalesRule\Model\RuleRepository $ruleRepo,
-        \Ebizmarts\MailChimp\Model\MailChimpSyncEcommerceFactory $chimpSyncEcommerce,
-        \Ebizmarts\MailChimp\Model\ResourceModel\MailChimpSyncEcommerce\CollectionFactory $syncCollection
+        \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerceFactory $chimpSyncEcommerce,
+        \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpSyncEcommerce\CollectionFactory $syncCollection
     ) {
     
         $this->_helper              = $helper;
         $this->_collection          = $collection;
         $this->_chimpSyncEcommerce  = $chimpSyncEcommerce;
         $this->_ruleRepo             = $ruleRepo;
-        $this->_batchId             = \Ebizmarts\MailChimp\Helper\Data::IS_PROMO_RULE. '_' .
+        $this->_batchId             = \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_PROMO_RULE. '_' .
             $this->_helper->getGmtTimeStamp();
         $this->_syncCollection      = $syncCollection;
     }
     public function sendRules($magentoStoreId)
     {
         $mailchimpStoreId = $this->_helper->getConfigValue(
-            \Ebizmarts\MailChimp\Helper\Data::XML_MAILCHIMP_STORE,
+            \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_MAILCHIMP_STORE,
             $magentoStoreId
         );
         $batchArray = [];
@@ -90,13 +90,13 @@ class PromoRules
         $batchArray = [];
         $collection = $this->_syncCollection->create();
         $collection->addFieldToFilter('mailchimp_store_id', ['eq'=>$mailchimpStoreId])
-            ->addFieldToFilter('type', ['eq'=>\Ebizmarts\MailChimp\Helper\Data::IS_PROMO_RULE])
+            ->addFieldToFilter('type', ['eq'=>\SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_PROMO_RULE])
             ->addFieldToFilter('mailchimp_sync_deleted', ['eq'=>1]);
         $collection->getSelect()->limit(self::MAX);
         $count = 0;
         $api = $this->_helper->getApi($magentoStoreId);
         /**
-         * @var $rule \Ebizmarts\MailChimp\Model\MailChimpSyncEcommerce
+         * @var $rule \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerce
          */
         foreach ($collection as $rule) {
             $ruleId = $rule->getData('related_id');
@@ -105,7 +105,7 @@ class PromoRules
                 foreach ($mailchimpRule['promo_codes'] as $promoCode) {
                     $this->_helper->ecommerceDeleteAllByIdType(
                         $promoCode['id'],
-                        \Ebizmarts\MailChimp\Helper\Data::IS_PROMO_CODE,
+                        \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_PROMO_CODE,
                         $mailchimpStoreId
                     );
                 }
@@ -118,7 +118,7 @@ class PromoRules
             }
             $this->_helper->ecommerceDeleteAllByIdType(
                 $ruleId,
-                \Ebizmarts\MailChimp\Helper\Data::IS_PROMO_RULE,
+                \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_PROMO_RULE,
                 $mailchimpStoreId
             );
         }
@@ -136,7 +136,7 @@ class PromoRules
         $collection->getSelect()->joinLeft(
             ['m4m' => $this->_helper->getTableName('mailchimp_sync_ecommerce')],
             "m4m.related_id = main_table.rule_id and m4m.type = '".
-            \Ebizmarts\MailChimp\Helper\Data::IS_PROMO_RULE.
+            \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_PROMO_RULE.
             "' and m4m.mailchimp_store_id = '".$mailchimpStoreId."'",
             ['m4m.*']
         );
@@ -154,7 +154,7 @@ class PromoRules
                 foreach ($mailchimpRule['promo_codes'] as $promoCode) {
                     $this->_helper->ecommerceDeleteAllByIdType(
                         $promoCode['id'],
-                        \Ebizmarts\MailChimp\Helper\Data::IS_PROMO_CODE,
+                        \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_PROMO_CODE,
                         $mailchimpStoreId
                     );
                 }
@@ -163,7 +163,7 @@ class PromoRules
             }
             $this->_helper->ecommerceDeleteAllByIdType(
                 $rule->getRuleId(),
-                \Ebizmarts\MailChimp\Helper\Data::IS_PROMO_RULE,
+                \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_PROMO_RULE,
                 $mailchimpStoreId
             );
             $batchArray[$count]['method'] = 'DELETE';
@@ -323,7 +323,7 @@ class PromoRules
         $this->_helper->saveEcommerceData(
             $storeId,
             $entityId,
-            \Ebizmarts\MailChimp\Helper\Data::IS_PROMO_RULE,
+            \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_PROMO_RULE,
             $sync_delta,
             $sync_error,
             $sync_modified

@@ -11,7 +11,7 @@
  * @file: Edit.php
  */
 
-namespace Ebizmarts\MailChimp\Block\Adminhtml\Stores;
+namespace SqualoMail\SqmMcMagentoTwo\Block\Adminhtml\Stores;
 
 use Magento\Backend\Block\Widget\Form\Container;
 use Magento\Backend\Block\Widget\Context;

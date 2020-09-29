@@ -10,7 +10,7 @@
  * @date: 5/26/17 11:33 AM
  * @file: MailChimpWebhookRequest.php
  */
-namespace Ebizmarts\MailChimp\Model\ResourceModel;
+namespace SqualoMail\SqmMcMagentoTwo\Model\ResourceModel;
 
 use Magento\Framework\DB\Select;
 use Magento\Framework\Model\ResourceModel\Db\AbstractDb;

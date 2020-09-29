@@ -11,7 +11,7 @@
  * @file: Getresponse.php
  */
 
-namespace Ebizmarts\MailChimp\Controller\Adminhtml\Errors;
+namespace SqualoMail\SqmMcMagentoTwo\Controller\Adminhtml\Errors;
 
 use Magento\Framework\Controller\ResultFactory;
 
@@ -23,15 +23,15 @@ class Getresponse extends \Magento\Backend\App\Action
      */
     protected $_resultFactory;
     /**
-     * @var \Ebizmarts\MailChimp\Model\MailChimpErrorsFactory
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\MailChimpErrorsFactory
      */
     protected $_errorsFactory;
     /**
-     * @var \Ebizmarts\MailChimp\Model\Api\Result
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\Api\Result
      */
     protected $_result;
     /**
-     * @var \Ebizmarts\MailChimp\Helper\Data
+     * @var \SqualoMail\SqmMcMagentoTwo\Helper\Data
      */
     protected $_helper;
     /**
@@ -42,16 +42,16 @@ class Getresponse extends \Magento\Backend\App\Action
     /**
      * Getresponse constructor.
      * @param \Magento\Backend\App\Action\Context $context
-     * @param \Ebizmarts\MailChimp\Model\MailChimpErrorsFactory $errorsFactory
-     * @param \Ebizmarts\MailChimp\Helper\Data $helper
-     * @param \Ebizmarts\MailChimp\Model\Api\Result $result
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpErrorsFactory $errorsFactory
+     * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\Api\Result $result
      * @param \Magento\Framework\Filesystem\Driver\File $driver
      */
     public function __construct(
         \Magento\Backend\App\Action\Context $context,
-        \Ebizmarts\MailChimp\Model\MailChimpErrorsFactory $errorsFactory,
-        \Ebizmarts\MailChimp\Helper\Data $helper,
-        \Ebizmarts\MailChimp\Model\Api\Result $result,
+        \SqualoMail\SqmMcMagentoTwo\Model\MailChimpErrorsFactory $errorsFactory,
+        \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
+        \SqualoMail\SqmMcMagentoTwo\Model\Api\Result $result,
         \Magento\Framework\Filesystem\Driver\File $driver
     ) {
         parent::__construct($context);
@@ -91,10 +91,10 @@ class Getresponse extends \Magento\Backend\App\Action
             }
             $baseDir = $this->_helper->getBaseDir();
             if ($this->_driver->isDirectory($baseDir . DIRECTORY_SEPARATOR . 'var' . DIRECTORY_SEPARATOR .
-                \Ebizmarts\MailChimp\Model\Api\Result::MAILCHIMP_TEMP_DIR . DIRECTORY_SEPARATOR . $batchId)) {
+                \SqualoMail\SqmMcMagentoTwo\Model\Api\Result::MAILCHIMP_TEMP_DIR . DIRECTORY_SEPARATOR . $batchId)) {
                 $this->_driver->deleteDirectory(
                     $baseDir . DIRECTORY_SEPARATOR . 'var' . DIRECTORY_SEPARATOR .
-                    \Ebizmarts\MailChimp\Model\Api\Result::MAILCHIMP_TEMP_DIR . DIRECTORY_SEPARATOR . $batchId
+                    \SqualoMail\SqmMcMagentoTwo\Model\Api\Result::MAILCHIMP_TEMP_DIR . DIRECTORY_SEPARATOR . $batchId
                 );
             }
         } while (!count($fileContent) && $counter<self::MAX_RETRIES);

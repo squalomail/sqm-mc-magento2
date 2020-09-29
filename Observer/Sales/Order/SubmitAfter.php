@@ -10,7 +10,7 @@
  * @date: 4/26/17 12:36 PM
  * @file: SubmitAfter.php
  */
-namespace Ebizmarts\MailChimp\Observer\Sales\Order;
+namespace SqualoMail\SqmMcMagentoTwo\Observer\Sales\Order;
 
 use Magento\Framework\Event\Observer;
 
@@ -21,7 +21,7 @@ class SubmitAfter implements \Magento\Framework\Event\ObserverInterface
      */
     protected $_cookieManager;
     /**
-     * @var \Ebizmarts\MailChimp\Helper\Data
+     * @var \SqualoMail\SqmMcMagentoTwo\Helper\Data
      */
     protected $_helper;
     /**
@@ -38,13 +38,13 @@ class SubmitAfter implements \Magento\Framework\Event\ObserverInterface
      * @param \Magento\Framework\Stdlib\CookieManagerInterface $cookieManager
      * @param \Magento\Framework\Stdlib\Cookie\CookieMetadataFactory $metadataFactory
      * @param \Magento\Framework\Session\SessionManagerInterface $sessionManager
-     * @param \Ebizmarts\MailChimp\Helper\Data $helper
+     * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      */
     public function __construct(
         \Magento\Framework\Stdlib\CookieManagerInterface $cookieManager,
         \Magento\Framework\Stdlib\Cookie\CookieMetadataFactory $metadataFactory,
         \Magento\Framework\Session\SessionManagerInterface $sessionManager,
-        \Ebizmarts\MailChimp\Helper\Data $helper
+        \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
     ) {
     
         $this->_cookieManager   = $cookieManager;

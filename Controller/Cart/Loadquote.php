@@ -6,7 +6,7 @@
  * @author    info@ebizmarts.com
  */
  
-namespace Ebizmarts\MailChimp\Controller\Cart;
+namespace SqualoMail\SqmMcMagentoTwo\Controller\Cart;
 
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\Controller\ResultFactory;
@@ -28,7 +28,7 @@ class Loadquote extends Action
      */
     protected $_customerSession;
     /**
-     * @var \Ebizmarts\MailChimp\Helper\Data
+     * @var \SqualoMail\SqmMcMagentoTwo\Helper\Data
      */
     protected $_helper;
     /**
@@ -55,7 +55,7 @@ class Loadquote extends Action
      * @param \Magento\Quote\Model\QuoteFactory $quote
      * @param \Magento\Customer\Model\Session $customerSession
      * @param \Magento\Checkout\Model\Session $checkoutSession
-     * @param \Ebizmarts\MailChimp\Helper\Data $helper
+     * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      * @param \Magento\Framework\Url $urlHelper
      * @param \Magento\Customer\Model\Url $customerUrl
      */
@@ -65,7 +65,7 @@ class Loadquote extends Action
         \Magento\Quote\Model\QuoteFactory $quote,
         \Magento\Customer\Model\Session $customerSession,
         \Magento\Checkout\Model\Session $checkoutSession,
-        \Ebizmarts\MailChimp\Helper\Data $helper,
+        \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
         \Magento\Framework\Url $urlHelper,
         \Magento\Customer\Model\Url $customerUrl
     ) {
@@ -96,20 +96,20 @@ class Loadquote extends Action
             $quote->getResource()->load($quote, $params['id']);
             $magentoStoreId = $quote->getStoreId();
             $mailchimpStoreId = $this->_helper->getConfigValue(
-                \Ebizmarts\MailChimp\Helper\Data::XML_MAILCHIMP_STORE,
+                \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_MAILCHIMP_STORE,
                 $magentoStoreId
             );
             $syncCommerce = $this->_helper->getChimpSyncEcommerce(
                 $mailchimpStoreId,
                 $params['id'],
-                \Ebizmarts\MailChimp\Helper\Data::IS_QUOTE
+                \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_QUOTE
             );
             if (!isset($params['token']) || $params['token'] != $syncCommerce->getMailchimpToken()) {
                 // @error
                 $this->_message->addErrorMessage(__("You can't access this cart"));
                 $url = $this->_urlHelper->getUrl(
                     $this->_helper->getConfigValue(
-                        \Ebizmarts\MailChimp\Helper\Data::XML_ABANDONEDCART_PAGE,
+                        \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_ABANDONEDCART_PAGE,
                         $magentoStoreId
                     )
                 );
@@ -118,7 +118,7 @@ class Loadquote extends Action
                 if (isset($params['mc_cid'])) {
                     $url = $this->_urlHelper->getUrl(
                         $this->_helper->getConfigValue(
-                            \Ebizmarts\MailChimp\Helper\Data::XML_ABANDONEDCART_PAGE,
+                            \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_ABANDONEDCART_PAGE,
                             $magentoStoreId
                         ),
                         ['mc_cid'=> $params['mc_cid']]
@@ -126,7 +126,7 @@ class Loadquote extends Action
                 } else {
                     $url = $this->_urlHelper->getUrl(
                         $this->_helper->getConfigValue(
-                            \Ebizmarts\MailChimp\Helper\Data::XML_ABANDONEDCART_PAGE,
+                            \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_ABANDONEDCART_PAGE,
                             $magentoStoreId
                         )
                     );

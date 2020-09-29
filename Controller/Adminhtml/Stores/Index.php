@@ -10,9 +10,9 @@
  * @date: 3/24/17 10:38 AM
  * @file: Index.php
  */
-namespace Ebizmarts\MailChimp\Controller\Adminhtml\Stores;
+namespace SqualoMail\SqmMcMagentoTwo\Controller\Adminhtml\Stores;
 
-use Ebizmarts\MailChimp\Controller\Adminhtml\Stores;
+use SqualoMail\SqmMcMagentoTwo\Controller\Adminhtml\Stores;
 
 class Index extends Stores
 {

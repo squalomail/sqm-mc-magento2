@@ -10,7 +10,7 @@
  * @date: 10/17/16 2:27 PM
  * @file: MailChimpSyncBatches.php
  */
-namespace Ebizmarts\MailChimp\Model\ResourceModel;
+namespace SqualoMail\SqmMcMagentoTwo\Model\ResourceModel;
 
 use Magento\Framework\DB\Select;
 use Magento\Framework\Model\ResourceModel\Db\AbstractDb;

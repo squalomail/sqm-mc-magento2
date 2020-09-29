@@ -11,7 +11,7 @@
  * @file: MailChimpInterestGroup.php
  */
 
-namespace Ebizmarts\MailChimp\Model\ResourceModel;
+namespace SqualoMail\SqmMcMagentoTwo\Model\ResourceModel;
 
 use Magento\Framework\DB\Select;
 use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
@@ -23,7 +23,7 @@ class MailChimpInterestGroup extends AbstractDb
         $this->_init('mailchimp_interest_group', 'id');
     }
     public function getBySubscriberIdStoreId(
-        \Ebizmarts\MailChimp\Model\MailChimpInterestGroup $mailChimpInterestGroup,
+        \SqualoMail\SqmMcMagentoTwo\Model\MailChimpInterestGroup $mailChimpInterestGroup,
         $subscriberId,
         $storeId
     ) {

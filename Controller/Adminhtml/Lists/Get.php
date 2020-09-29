@@ -10,7 +10,7 @@
  * @date: 4/20/17 3:20 PM
  * @file: Get.php
  */
-namespace Ebizmarts\MailChimp\Controller\Adminhtml\Lists;
+namespace SqualoMail\SqmMcMagentoTwo\Controller\Adminhtml\Lists;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
@@ -21,7 +21,7 @@ class Get extends Action
     const MAX_LISTS = 200;
 
     /**
-     * @var \Ebizmarts\MailChimp\Helper\Data
+     * @var \SqualoMail\SqmMcMagentoTwo\Helper\Data
      */
     protected $_helper;
     /**
@@ -36,12 +36,12 @@ class Get extends Action
     /**
      * Get constructor.
      * @param Context $context
-     * @param \Ebizmarts\MailChimp\Helper\Data $helper
+     * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      * @param \Magento\Framework\Encryption\Encryptor $encryptor
      */
     public function __construct(
         Context $context,
-        \Ebizmarts\MailChimp\Helper\Data $helper,
+        \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
         \Magento\Framework\Encryption\Encryptor $encryptor
     ) {
     

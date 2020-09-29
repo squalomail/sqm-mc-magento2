@@ -10,7 +10,7 @@
  * @date: 3/30/17 1:36 PM
  * @file: ApiKey.php
  */
-namespace Ebizmarts\MailChimp\Model\Config\Source;
+namespace SqualoMail\SqmMcMagentoTwo\Model\Config\Source;
 
 class ApiKey implements \Magento\Framework\Option\ArrayInterface
 {
@@ -20,7 +20,7 @@ class ApiKey implements \Magento\Framework\Option\ArrayInterface
      */
     protected $storeManager;
     /**
-     * @var \Ebizmarts\MailChimp\Helper\Data
+     * @var \SqualoMail\SqmMcMagentoTwo\Helper\Data
      */
     protected $helper;
     /**
@@ -31,14 +31,14 @@ class ApiKey implements \Magento\Framework\Option\ArrayInterface
     /**
      * ApiKey constructor.
      * @param \Magento\Store\Model\StoreManager $storeManager
-     * @param \Ebizmarts\MailChimp\Helper\Data $helper
+     * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      * @param \Magento\Framework\App\RequestInterface $request
      * @param \Magento\Framework\Encryption\Encryptor $encryptor
      * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function __construct(
         \Magento\Store\Model\StoreManager $storeManager,
-        \Ebizmarts\MailChimp\Helper\Data $helper,
+        \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
         \Magento\Framework\App\RequestInterface $request,
         \Magento\Framework\Encryption\Encryptor $encryptor
     ) {

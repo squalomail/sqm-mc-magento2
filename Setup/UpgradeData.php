@@ -10,7 +10,7 @@
  * @date: 10/31/16 3:28 PM
  * @file: UpgradeData.php
  */
-namespace Ebizmarts\MailChimp\Setup;
+namespace SqualoMail\SqmMcMagentoTwo\Setup;
 
 use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
@@ -29,15 +29,15 @@ class UpgradeData implements UpgradeDataInterface
      */
     protected $_deploymentConfig;
     /**
-     * @var \Ebizmarts\MailChimp\Model\ResourceModel\MailChimpInterestGroup\CollectionFactory
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpInterestGroup\CollectionFactory
      */
     protected $_insterestGroupCollectionFactory;
     /**
-     * @var \Ebizmarts\MailChimp\Model\ResourceModel\MailChimpWebhookRequest\CollectionFactory
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpWebhookRequest\CollectionFactory
      */
     protected $_webhookCollectionFactory;
     /**
-     * @var \Ebizmarts\MailChimp\Helper\Data
+     * @var \SqualoMail\SqmMcMagentoTwo\Helper\Data
      */
     protected $_helper;
     /**
@@ -49,18 +49,18 @@ class UpgradeData implements UpgradeDataInterface
      * UpgradeData constructor.
      * @param ResourceConnection $resource
      * @param DeploymentConfig $deploymentConfig
-     * @param \Ebizmarts\MailChimp\Model\ResourceModel\MailChimpInterestGroup\CollectionFactory $interestGroupCollectionFactory
-     * @param \Ebizmarts\MailChimp\Model\ResourceModel\MailChimpWebhookRequest\CollectionFactory $webhookCollectionFactory
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpInterestGroup\CollectionFactory $interestGroupCollectionFactory
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpWebhookRequest\CollectionFactory $webhookCollectionFactory
      * @param \Magento\Config\Model\ResourceModel\Config\Data\CollectionFactory $configFactory
-     * @param \Ebizmarts\MailChimp\Helper\Data $helper
+     * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      */
     public function __construct(
         ResourceConnection $resource,
         DeploymentConfig $deploymentConfig,
-        \Ebizmarts\MailChimp\Model\ResourceModel\MailChimpInterestGroup\CollectionFactory $interestGroupCollectionFactory,
-        \Ebizmarts\MailChimp\Model\ResourceModel\MailChimpWebhookRequest\CollectionFactory $webhookCollectionFactory,
+        \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpInterestGroup\CollectionFactory $interestGroupCollectionFactory,
+        \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpWebhookRequest\CollectionFactory $webhookCollectionFactory,
         \Magento\Config\Model\ResourceModel\Config\Data\CollectionFactory $configFactory,
-        \Ebizmarts\MailChimp\Helper\Data $helper
+        \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
     ) {
     
         $this->_resource            = $resource;
@@ -106,14 +106,14 @@ class UpgradeData implements UpgradeDataInterface
             $connection = $this->_resource->getConnectionByName('default');
             $table = $setup->getTable('core_config_data');
             try {
-                $connection->delete($table, ['path = ?'=> \Ebizmarts\MailChimp\Helper\Data::XML_MERGEVARS]);
+                $connection->delete($table, ['path = ?'=> \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_MERGEVARS]);
             } catch (\Exception $e) {
                 $this->_helper->log($e->getMessage());
             }
 
             // empty table mailchimp_interest_group
             /**
-             * @var \Ebizmarts\MailChimp\Model\ResourceModel\MailChimpInterestGroup $item
+             * @var \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpInterestGroup $item
              */
             $table = $setup->getTable('mailchimp_interest_group');
 
@@ -124,7 +124,7 @@ class UpgradeData implements UpgradeDataInterface
             }
             // convert table mailchimp_webhook_request
             /**
-             * @var \Ebizmarts\MailChimp\Model\ResourceModel\MailChimpWebhookRequest $webhookItem
+             * @var \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpWebhookRequest $webhookItem
              */
             $lastId = 0;
             $done = false;
@@ -138,11 +138,11 @@ class UpgradeData implements UpgradeDataInterface
                 } else {
                     foreach ($webhookCollection as $webhookItem) {
                         try {
-                            $webhookItem->setProcessed(\Ebizmarts\MailChimp\Cron\Webhook::DATA_NOT_CONVERTED);
+                            $webhookItem->setProcessed(\SqualoMail\SqmMcMagentoTwo\Cron\Webhook::DATA_NOT_CONVERTED);
                             $webhookItem->getResource()->save($webhookItem);
                         } catch (\Exception $e) {
                             $this->_helper->log($e->getMessage());
-                            $webhookItem->setProcesed(\Ebizmarts\MailChimp\Cron\Webhook::DATA_WITH_ERROR);
+                            $webhookItem->setProcesed(\SqualoMail\SqmMcMagentoTwo\Cron\Webhook::DATA_WITH_ERROR);
                             $webhookItem->getResource()->save($webhookItem);
                         }
                         $lastId = $webhookItem->getId();
@@ -152,7 +152,7 @@ class UpgradeData implements UpgradeDataInterface
         }
         if (version_compare($context->getVersion(), '102.3.35') < 0) {
             $configCollection = $this->configFactory->create();
-            $configCollection->addFieldToFilter('path', ['eq' => \Ebizmarts\MailChimp\Helper\Data::XML_PATH_APIKEY]);
+            $configCollection->addFieldToFilter('path', ['eq' => \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_APIKEY]);
             /**
              * @var $config \Magento\Config\Model\ResourceModel\Config
              */
@@ -167,7 +167,7 @@ class UpgradeData implements UpgradeDataInterface
             $configCollection = $this->configFactory->create();
             $configCollection->addFieldToFilter(
                 'path',
-                ['eq' => \Ebizmarts\MailChimp\Helper\Data::XML_PATH_APIKEY_LIST]
+                ['eq' => \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_APIKEY_LIST]
             );
             foreach ($configCollection as $config) {
                 $config->getResource()->delete($config);

@@ -9,7 +9,7 @@
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
-namespace Ebizmarts\MailChimp\Helper;
+namespace SqualoMail\SqmMcMagentoTwo\Helper;
 
 use Magento\Framework\App\ResourceConnection;
 use Magento\Framework\Exception\ValidatorException;
@@ -95,7 +95,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     private $_storeManager;
     /**
-     * @var \Ebizmarts\MailChimp\Model\Logger\Logger
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\Logger\Logger
      */
     private $_mlogger;
     /**
@@ -132,27 +132,27 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     private $_customer;
     /**
-     * @var \Ebizmarts\MailChimp\Model\MailChimpErrors
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\MailChimpErrors
      */
     private $_mailChimpErrors;
     /**
-     * @var \Ebizmarts\MailChimp\Model\MailChimpSyncEcommerceFactory
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerceFactory
      */
     private $_mailChimpSyncEcommerce;
     /**
-     * @var \Ebizmarts\MailChimp\Model\MailChimpSyncEcommerce
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerce
      */
     private $_mailChimpSyncE;
     /**
-     * @var \Ebizmarts\MailChimp\Model\MailChimpSyncBatches
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncBatches
      */
     private $_syncBatches;
     /**
-     * @var \Ebizmarts\MailChimp\Model\MailChimpStoresFactory
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\MailChimpStoresFactory
      */
     private $_mailChimpStoresFactory;
     /**
-     * @var \Ebizmarts\MailChimp\Model\MailChimpStores
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\MailChimpStores
      */
     private $_mailChimpStores;
     /**
@@ -193,7 +193,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     protected $_countryInformation;
     /**
-     * @var \Ebizmarts\MailChimp\Model\MailChimpInterestGroupFactory
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\MailChimpInterestGroupFactory
      */
     protected $_interestGroupFactory;
     /**
@@ -216,7 +216,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      * Data constructor.
      * @param \Magento\Framework\App\Helper\Context $context
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
-     * @param \Ebizmarts\MailChimp\Model\Logger\Logger $logger
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\Logger\Logger $logger
      * @param \Magento\Customer\Model\GroupRegistry $groupRegistry
      * @param \Magento\Framework\App\State $state
      * @param \Magento\Framework\Module\ModuleList\Loader $loader
@@ -224,12 +224,12 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      * @param \Mailchimp $api
      * @param \Magento\Framework\App\Cache\TypeListInterface $cacheTypeList
      * @param \Magento\Customer\Model\ResourceModel\CustomerRepository $customer
-     * @param \Ebizmarts\MailChimp\Model\MailChimpErrors $mailChimpErrors
-     * @param \Ebizmarts\MailChimp\Model\MailChimpSyncEcommerceFactory $mailChimpSyncEcommerce
-     * @param \Ebizmarts\MailChimp\Model\MailChimpSyncEcommerce $mailChimpSyncE
-     * @param \Ebizmarts\MailChimp\Model\MailChimpSyncBatches $syncBatches
-     * @param \Ebizmarts\MailChimp\Model\MailChimpStoresFactory $mailChimpStoresFactory
-     * @param \Ebizmarts\MailChimp\Model\MailChimpStores $mailChimpStores
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpErrors $mailChimpErrors
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerceFactory $mailChimpSyncEcommerce
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerce $mailChimpSyncE
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncBatches $syncBatches
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpStoresFactory $mailChimpStoresFactory
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpStores $mailChimpStores
      * @param \Magento\Customer\Model\ResourceModel\Attribute\CollectionFactory $attCollection
      * @param \Magento\Framework\Encryption\Encryptor $encryptor
      * @param \Magento\Newsletter\Model\ResourceModel\Subscriber\CollectionFactory $subscriberCollection
@@ -238,7 +238,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      * @param \Magento\Customer\Model\CustomerFactory $customerFactory
      * @param \Magento\Directory\Api\CountryInformationAcquirerInterface $countryInformation
      * @param ResourceConnection $resource
-     * @param \Ebizmarts\MailChimp\Model\MailChimpInterestGroupFactory $interestGroupFactory
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpInterestGroupFactory $interestGroupFactory
      * @param \Magento\Framework\Serialize\Serializer\Json $serializer
      * @param \Magento\Framework\App\DeploymentConfig $deploymentConfig
      * @param \Magento\Framework\Stdlib\DateTime\DateTime $date
@@ -246,7 +246,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     public function __construct(
         \Magento\Framework\App\Helper\Context $context,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
-        \Ebizmarts\MailChimp\Model\Logger\Logger $logger,
+        \SqualoMail\SqmMcMagentoTwo\Model\Logger\Logger $logger,
         \Magento\Customer\Model\GroupRegistry $groupRegistry,
         \Magento\Framework\App\State $state,
         \Magento\Framework\Module\ModuleList\Loader $loader,
@@ -254,12 +254,12 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         \Mailchimp $api,
         \Magento\Framework\App\Cache\TypeListInterface $cacheTypeList,
         \Magento\Customer\Model\ResourceModel\CustomerRepository $customer,
-        \Ebizmarts\MailChimp\Model\MailChimpErrors $mailChimpErrors,
-        \Ebizmarts\MailChimp\Model\MailChimpSyncEcommerceFactory $mailChimpSyncEcommerce,
-        \Ebizmarts\MailChimp\Model\MailChimpSyncEcommerce $mailChimpSyncE,
-        \Ebizmarts\MailChimp\Model\MailChimpSyncBatches $syncBatches,
-        \Ebizmarts\MailChimp\Model\MailChimpStoresFactory $mailChimpStoresFactory,
-        \Ebizmarts\MailChimp\Model\MailChimpStores $mailChimpStores,
+        \SqualoMail\SqmMcMagentoTwo\Model\MailChimpErrors $mailChimpErrors,
+        \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerceFactory $mailChimpSyncEcommerce,
+        \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerce $mailChimpSyncE,
+        \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncBatches $syncBatches,
+        \SqualoMail\SqmMcMagentoTwo\Model\MailChimpStoresFactory $mailChimpStoresFactory,
+        \SqualoMail\SqmMcMagentoTwo\Model\MailChimpStores $mailChimpStores,
         \Magento\Customer\Model\ResourceModel\Attribute\CollectionFactory $attCollection,
         \Magento\Framework\Encryption\Encryptor $encryptor,
         \Magento\Newsletter\Model\ResourceModel\Subscriber\CollectionFactory $subscriberCollection,
@@ -268,7 +268,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         \Magento\Customer\Model\CustomerFactory $customerFactory,
         \Magento\Directory\Api\CountryInformationAcquirerInterface $countryInformation,
         \Magento\Framework\App\ResourceConnection $resource,
-        \Ebizmarts\MailChimp\Model\MailChimpInterestGroupFactory $interestGroupFactory,
+        \SqualoMail\SqmMcMagentoTwo\Model\MailChimpInterestGroupFactory $interestGroupFactory,
         \Magento\Framework\Serialize\Serializer\Json $serializer,
         \Magento\Framework\App\DeploymentConfig $deploymentConfig,
         \Magento\Framework\Stdlib\DateTime\DateTime $date
@@ -461,7 +461,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     }
     public function getMCMinSyncing($storeId)
     {
-        $ret = $this->getConfigValue(\Ebizmarts\MailChimp\Helper\Data::XML_PATH_IS_SYNC, $storeId);
+        $ret = $this->getConfigValue(\SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_IS_SYNC, $storeId);
         return !$ret;
     }
     public function getCartUrl($storeId, $cartId, $token)
@@ -994,7 +994,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         ];
         try {
             $api = $this->getApiByApiKey($apikey);
-            $hookUrl = $this->_getUrl(\Ebizmarts\MailChimp\Controller\WebHook\Index::WEBHOOK__PATH, [
+            $hookUrl = $this->_getUrl(\SqualoMail\SqmMcMagentoTwo\Controller\WebHook\Index::WEBHOOK__PATH, [
             'wkey' => $this->getWebhooksKey(),
             '_nosid' => true,
             '_secure' => true]);
@@ -1014,7 +1014,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         try {
             $api = $this->getApiByApiKey($apikey);
             $webhooks = $api->lists->webhooks->getAll($listId);
-            $hookUrl = $this->_getUrl(\Ebizmarts\MailChimp\Controller\WebHook\Index::WEBHOOK__PATH, [
+            $hookUrl = $this->_getUrl(\SqualoMail\SqmMcMagentoTwo\Controller\WebHook\Index::WEBHOOK__PATH, [
                 '_nosid' => true,
                 '_secure' => true]);
             if (isset($webhooks['webhooks'])) {
@@ -1138,7 +1138,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             $interest = $this->getInterest($storeId);
         }
         /**
-         * @var $interestGroup \Ebizmarts\MailChimp\Model\MailChimpInterestGroup
+         * @var $interestGroup \SqualoMail\SqmMcMagentoTwo\Model\MailChimpInterestGroup
          */
         $interestGroup = $this->_interestGroupFactory->create();
         $interestGroup->getBySubscriberIdStoreId($subscriberId, $storeId);

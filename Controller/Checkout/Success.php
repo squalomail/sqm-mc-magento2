@@ -11,12 +11,12 @@
  * @file: Success.php
  */
 
-namespace Ebizmarts\MailChimp\Controller\Checkout;
+namespace SqualoMail\SqmMcMagentoTwo\Controller\Checkout;
 
 class Success extends \Magento\Framework\App\Action\Action
 {
     /**
-     * @var \Ebizmarts\MailChimp\Helper\Data
+     * @var \SqualoMail\SqmMcMagentoTwo\Helper\Data
      */
     protected $_helper;
     /**
@@ -32,7 +32,7 @@ class Success extends \Magento\Framework\App\Action\Action
      */
     protected $_subscriberFactory;
     /**
-     * @var \Ebizmarts\MailChimp\Model\MailChimpInterestGroupFactory
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\MailChimpInterestGroupFactory
      */
     protected $_interestGroupFactory;
 
@@ -40,18 +40,18 @@ class Success extends \Magento\Framework\App\Action\Action
      * Success constructor.
      * @param \Magento\Framework\App\Action\Context $context
      * @param \Magento\Framework\View\Result\PageFactory $pageFactory
-     * @param \Ebizmarts\MailChimp\Helper\Data $helper
+     * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      * @param \Magento\Checkout\Model\Session $checkoutSession
      * @param \Magento\Newsletter\Model\SubscriberFactory $subscriberFactory
-     * @param \Ebizmarts\MailChimp\Model\MailChimpInterestGroupFactory $interestGroupFactory
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpInterestGroupFactory $interestGroupFactory
      */
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
         \Magento\Framework\View\Result\PageFactory $pageFactory,
-        \Ebizmarts\MailChimp\Helper\Data $helper,
+        \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
         \Magento\Checkout\Model\Session $checkoutSession,
         \Magento\Newsletter\Model\SubscriberFactory $subscriberFactory,
-        \Ebizmarts\MailChimp\Model\MailChimpInterestGroupFactory $interestGroupFactory
+        \SqualoMail\SqmMcMagentoTwo\Model\MailChimpInterestGroupFactory $interestGroupFactory
     ) {
     
         $this->_pageFactory         =$pageFactory;
@@ -68,7 +68,7 @@ class Success extends \Magento\Framework\App\Action\Action
         $order = $this->_checkoutSession->getLastRealOrder();
         /**
          * @var $subscriber \Magento\Newsletter\Model\Subscriber
-         * @var $interestGroup \Ebizmarts\MailChimp\Model\MailChimpInterestGroup
+         * @var $interestGroup \SqualoMail\SqmMcMagentoTwo\Model\MailChimpInterestGroup
          */
         $subscriber = $this->_subscriberFactory->create();
         $interestGroup = $this->_interestGroupFactory->create();
@@ -115,7 +115,7 @@ class Success extends \Magento\Framework\App\Action\Action
         $this->_helper->saveEcommerceData(
             $listId,
             $entityId,
-            \Ebizmarts\MailChimp\Helper\Data::IS_SUBSCRIBER,
+            \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_SUBSCRIBER,
             $sync_delta,
             $sync_error,
             $sync_modified

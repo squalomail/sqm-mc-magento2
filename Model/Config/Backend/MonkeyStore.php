@@ -11,12 +11,12 @@
  * @file: MonkeyStore.php
  */
 
-namespace Ebizmarts\MailChimp\Model\Config\Backend;
+namespace SqualoMail\SqmMcMagentoTwo\Model\Config\Backend;
 
 class MonkeyStore extends \Magento\Framework\App\Config\Value
 {
     /**
-     * @var \Ebizmarts\MailChimp\Helper\Data
+     * @var \SqualoMail\SqmMcMagentoTwo\Helper\Data
      */
     private $_helper;
     /**
@@ -45,7 +45,7 @@ class MonkeyStore extends \Magento\Framework\App\Config\Value
      * @param \Magento\Framework\Model\ResourceModel\AbstractResource|null $resource
      * @param \Magento\Framework\Data\Collection\AbstractDb|null $resourceCollection
      * @param \Magento\Framework\Stdlib\DateTime\DateTime $date
-     * @param \Ebizmarts\MailChimp\Helper\Data $helper
+     * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      * @param \Magento\Store\Model\StoreManager $storeManager
      * @param array $data
      */
@@ -58,7 +58,7 @@ class MonkeyStore extends \Magento\Framework\App\Config\Value
         \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
         \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
         \Magento\Framework\Stdlib\DateTime\DateTime $date,
-        \Ebizmarts\MailChimp\Helper\Data $helper,
+        \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
         \Magento\Store\Model\StoreManager $storeManager,
         array $data = []
     ) {
@@ -94,21 +94,21 @@ class MonkeyStore extends \Magento\Framework\App\Config\Value
             } else {
                 $newListId = $this->getStore($apiKey, $this->getValue());
                 $this->_helper->saveConfigValue(
-                    \Ebizmarts\MailChimp\Helper\Data::XML_PATH_LIST,
+                    \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_LIST,
                     $newListId,
                     $this->getScopeId(),
                     $this->getScope()
                 );
             }
             $this->oldListId = $this->_helper->getConfigValue(
-                \Ebizmarts\MailChimp\Helper\Data::XML_PATH_LIST,
+                \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_LIST,
                 $this->getScopeId(),
                 $this->getScope()
             );
 
             $createWebhook = true;
             $this->_helper->deleteConfig(
-                \Ebizmarts\MailChimp\Helper\Data::XML_MAILCHIMP_JS_URL,
+                \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_MAILCHIMP_JS_URL,
                 $this->getScopeId(),
                 $this->getScope()
             );
@@ -116,13 +116,13 @@ class MonkeyStore extends \Magento\Framework\App\Config\Value
 
             foreach ($this->_storeManager->getStores() as $storeId => $val) {
                 $mstoreId = $this->_helper->getConfigValue(
-                    \Ebizmarts\MailChimp\Helper\Data::XML_MAILCHIMP_STORE,
+                    \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_MAILCHIMP_STORE,
                     $storeId
                 );
                 if ($mstoreId == $mailchimpStore) {
                     $found++;
                 }
-                $listId = $this->_helper->getConfigValue(\Ebizmarts\MailChimp\Helper\Data::XML_PATH_LIST, $storeId);
+                $listId = $this->_helper->getConfigValue(\SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_LIST, $storeId);
                 if ($listId == $newListId) {
                     $createWebhook = false;
                 }
