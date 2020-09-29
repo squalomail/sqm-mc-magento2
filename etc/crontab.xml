@@ -14,16 +14,16 @@
  -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
     <group id="mailchimp">
-       <job name="ebizmarts_ecommerce" instance="SqualoMail\SqmMcMagentoTwo\Cron\Ecommerce" method="execute">
+       <job name="squalomail_ecommerce" instance="SqualoMail\SqmMcMagentoTwo\Cron\Ecommerce" method="execute">
             <schedule>*/5 * * * *</schedule>
         </job>
-        <job name="ebizmarts_webhooks" instance="SqualoMail\SqmMcMagentoTwo\Cron\Webhook" method="execute">
+        <job name="squalomail_webhooks" instance="SqualoMail\SqmMcMagentoTwo\Cron\Webhook" method="execute">
             <schedule>*/5 * * * *</schedule>
         </job>
-        <job name="ebizmarts_clean_webhooks" instance="SqualoMail\SqmMcMagentoTwo\Cron\WebhookClean" method="execute">
+        <job name="squalomail_clean_webhooks" instance="SqualoMail\SqmMcMagentoTwo\Cron\WebhookClean" method="execute">
             <schedule>0 * * * *</schedule>
         </job>
-        <job name="ebizmarts_clean_batches" instance="SqualoMail\SqmMcMagentoTwo\Cron\BatchesClean" method="execute">
+        <job name="squalomail_clean_batches" instance="SqualoMail\SqmMcMagentoTwo\Cron\BatchesClean" method="execute">
             <schedule>0 * * * *</schedule>
         </job>
     </group>
