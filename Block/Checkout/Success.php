@@ -27,7 +27,7 @@ class Success extends \Magento\Framework\View\Element\Template
      */
     protected $_subscriberFactory;
     /**
-     * @var \SqualoMail\SqmMcMagentoTwo\Model\MailChimpInterestGroupFactory
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\SqmMcInterestGroupFactory
      */
     protected $_interestGroupFactory;
     /**
@@ -41,7 +41,7 @@ class Success extends \Magento\Framework\View\Element\Template
      * @param \Magento\Checkout\Model\Session $checkoutSession
      * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      * @param \Magento\Newsletter\Model\SubscriberFactory $subscriberFactory
-     * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpInterestGroupFactory $interestGroupFactory
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\SqmMcInterestGroupFactory $interestGroupFactory
      * @param array $data
      */
     public function __construct(
@@ -49,7 +49,7 @@ class Success extends \Magento\Framework\View\Element\Template
         \Magento\Checkout\Model\Session $checkoutSession,
         \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
         \Magento\Newsletter\Model\SubscriberFactory $subscriberFactory,
-        \SqualoMail\SqmMcMagentoTwo\Model\MailChimpInterestGroupFactory $interestGroupFactory,
+        \SqualoMail\SqmMcMagentoTwo\Model\SqmMcInterestGroupFactory $interestGroupFactory,
         array $data
     ) {
     

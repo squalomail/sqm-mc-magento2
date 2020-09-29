@@ -6,15 +6,15 @@
  * Time: 5:58 PM
  */
 
-namespace SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpInterestGroup;
+namespace SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcInterestGroup;
 
 class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
 {
     protected function _construct()
     {
         $this->_init(
-            \SqualoMail\SqmMcMagentoTwo\Model\MailChimpInterestGroup::class,
-            \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpInterestGroup::class
+            \SqualoMail\SqmMcMagentoTwo\Model\SqmMcInterestGroup::class,
+            \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcInterestGroup::class
         );
     }
 }

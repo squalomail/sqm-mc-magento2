@@ -193,7 +193,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     protected $_countryInformation;
     /**
-     * @var \SqualoMail\SqmMcMagentoTwo\Model\MailChimpInterestGroupFactory
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\SqmMcInterestGroupFactory
      */
     protected $_interestGroupFactory;
     /**
@@ -238,7 +238,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      * @param \Magento\Customer\Model\CustomerFactory $customerFactory
      * @param \Magento\Directory\Api\CountryInformationAcquirerInterface $countryInformation
      * @param ResourceConnection $resource
-     * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpInterestGroupFactory $interestGroupFactory
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\SqmMcInterestGroupFactory $interestGroupFactory
      * @param \Magento\Framework\Serialize\Serializer\Json $serializer
      * @param \Magento\Framework\App\DeploymentConfig $deploymentConfig
      * @param \Magento\Framework\Stdlib\DateTime\DateTime $date
@@ -268,7 +268,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         \Magento\Customer\Model\CustomerFactory $customerFactory,
         \Magento\Directory\Api\CountryInformationAcquirerInterface $countryInformation,
         \Magento\Framework\App\ResourceConnection $resource,
-        \SqualoMail\SqmMcMagentoTwo\Model\MailChimpInterestGroupFactory $interestGroupFactory,
+        \SqualoMail\SqmMcMagentoTwo\Model\SqmMcInterestGroupFactory $interestGroupFactory,
         \Magento\Framework\Serialize\Serializer\Json $serializer,
         \Magento\Framework\App\DeploymentConfig $deploymentConfig,
         \Magento\Framework\Stdlib\DateTime\DateTime $date
@@ -1138,7 +1138,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             $interest = $this->getInterest($storeId);
         }
         /**
-         * @var $interestGroup \SqualoMail\SqmMcMagentoTwo\Model\MailChimpInterestGroup
+         * @var $interestGroup \SqualoMail\SqmMcMagentoTwo\Model\SqmMcInterestGroup
          */
         $interestGroup = $this->_interestGroupFactory->create();
         $interestGroup->getBySubscriberIdStoreId($subscriberId, $storeId);

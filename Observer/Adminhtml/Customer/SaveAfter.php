@@ -24,7 +24,7 @@ class SaveAfter implements \Magento\Framework\Event\ObserverInterface
      */
     protected $subscriberFactory;
     /**
-     * @var \SqualoMail\SqmMcMagentoTwo\Model\MailChimpInterestGroupFactory
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\SqmMcInterestGroupFactory
      */
     protected $interestGroupFactory;
 
@@ -32,12 +32,12 @@ class SaveAfter implements \Magento\Framework\Event\ObserverInterface
      * SaveAfter constructor.
      * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      * @param \Magento\Newsletter\Model\SubscriberFactory $subscriberFactory
-     * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpInterestGroupFactory $interestGroupFactory
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\SqmMcInterestGroupFactory $interestGroupFactory
      */
     public function __construct(
         \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
         \Magento\Newsletter\Model\SubscriberFactory $subscriberFactory,
-        \SqualoMail\SqmMcMagentoTwo\Model\MailChimpInterestGroupFactory $interestGroupFactory
+        \SqualoMail\SqmMcMagentoTwo\Model\SqmMcInterestGroupFactory $interestGroupFactory
     ) {
     
         $this->helper               = $helper;

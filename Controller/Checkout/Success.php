@@ -32,7 +32,7 @@ class Success extends \Magento\Framework\App\Action\Action
      */
     protected $_subscriberFactory;
     /**
-     * @var \SqualoMail\SqmMcMagentoTwo\Model\MailChimpInterestGroupFactory
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\SqmMcInterestGroupFactory
      */
     protected $_interestGroupFactory;
 
@@ -43,7 +43,7 @@ class Success extends \Magento\Framework\App\Action\Action
      * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      * @param \Magento\Checkout\Model\Session $checkoutSession
      * @param \Magento\Newsletter\Model\SubscriberFactory $subscriberFactory
-     * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpInterestGroupFactory $interestGroupFactory
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\SqmMcInterestGroupFactory $interestGroupFactory
      */
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
@@ -51,7 +51,7 @@ class Success extends \Magento\Framework\App\Action\Action
         \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
         \Magento\Checkout\Model\Session $checkoutSession,
         \Magento\Newsletter\Model\SubscriberFactory $subscriberFactory,
-        \SqualoMail\SqmMcMagentoTwo\Model\MailChimpInterestGroupFactory $interestGroupFactory
+        \SqualoMail\SqmMcMagentoTwo\Model\SqmMcInterestGroupFactory $interestGroupFactory
     ) {
     
         $this->_pageFactory         =$pageFactory;
@@ -68,7 +68,7 @@ class Success extends \Magento\Framework\App\Action\Action
         $order = $this->_checkoutSession->getLastRealOrder();
         /**
          * @var $subscriber \Magento\Newsletter\Model\Subscriber
-         * @var $interestGroup \SqualoMail\SqmMcMagentoTwo\Model\MailChimpInterestGroup
+         * @var $interestGroup \SqualoMail\SqmMcMagentoTwo\Model\SqmMcInterestGroup
          */
         $subscriber = $this->_subscriberFactory->create();
         $interestGroup = $this->_interestGroupFactory->create();

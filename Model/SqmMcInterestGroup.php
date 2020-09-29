@@ -8,17 +8,17 @@
  * @copyright Ebizmarts (http://ebizmarts.com)
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @date: 11/20/17 3:43 PM
- * @file: MailChimpInterestGroup.php
+ * @file: SqmMcInterestGroup.php
  */
 
 namespace SqualoMail\SqmMcMagentoTwo\Model;
 
-class MailChimpInterestGroup extends \Magento\Framework\Model\AbstractModel
+class SqmMcInterestGroup extends \Magento\Framework\Model\AbstractModel
 {
     protected function _construct()
     {
         parent::_construct();
-        $this->_init(\SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpInterestGroup::class);
+        $this->_init(\SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcInterestGroup::class);
     }
     public function getBySubscriberIdStoreId($subscriberId, $storeId)
     {

@@ -29,7 +29,7 @@ class UpgradeData implements UpgradeDataInterface
      */
     protected $_deploymentConfig;
     /**
-     * @var \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpInterestGroup\CollectionFactory
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcInterestGroup\CollectionFactory
      */
     protected $_insterestGroupCollectionFactory;
     /**
@@ -49,7 +49,7 @@ class UpgradeData implements UpgradeDataInterface
      * UpgradeData constructor.
      * @param ResourceConnection $resource
      * @param DeploymentConfig $deploymentConfig
-     * @param \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpInterestGroup\CollectionFactory $interestGroupCollectionFactory
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcInterestGroup\CollectionFactory $interestGroupCollectionFactory
      * @param \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpWebhookRequest\CollectionFactory $webhookCollectionFactory
      * @param \Magento\Config\Model\ResourceModel\Config\Data\CollectionFactory $configFactory
      * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
@@ -57,7 +57,7 @@ class UpgradeData implements UpgradeDataInterface
     public function __construct(
         ResourceConnection $resource,
         DeploymentConfig $deploymentConfig,
-        \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpInterestGroup\CollectionFactory $interestGroupCollectionFactory,
+        \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcInterestGroup\CollectionFactory $interestGroupCollectionFactory,
         \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpWebhookRequest\CollectionFactory $webhookCollectionFactory,
         \Magento\Config\Model\ResourceModel\Config\Data\CollectionFactory $configFactory,
         \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
@@ -113,7 +113,7 @@ class UpgradeData implements UpgradeDataInterface
 
             // empty table mailchimp_interest_group
             /**
-             * @var \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpInterestGroup $item
+             * @var \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcInterestGroup $item
              */
             $table = $setup->getTable('mailchimp_interest_group');
 
