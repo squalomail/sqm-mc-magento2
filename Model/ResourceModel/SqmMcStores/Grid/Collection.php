@@ -4,7 +4,7 @@
  * See COPYING.txt for license details.
  */
 
-namespace SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpStores\Grid;
+namespace SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcStores\Grid;
 
 use Magento\Framework\View\Element\UiComponent\DataProvider\Document;
 use Magento\Framework\Data\Collection\Db\FetchStrategyInterface as FetchStrategy;
@@ -35,7 +35,7 @@ class Collection extends \Magento\Framework\View\Element\UiComponent\DataProvide
         FetchStrategy $fetchStrategy,
         EventManager $eventManager,
         $mainTable = 'mailchimp_stores',
-        $resourceModel = \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpStores::class
+        $resourceModel = \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcStores::class
     ) {
         parent::__construct($entityFactory, $logger, $fetchStrategy, $eventManager, $mainTable, $resourceModel);
     }

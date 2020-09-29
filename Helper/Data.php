@@ -148,11 +148,11 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     private $_syncBatches;
     /**
-     * @var \SqualoMail\SqmMcMagentoTwo\Model\MailChimpStoresFactory
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\SqmMcStoresFactory
      */
     private $_mailChimpStoresFactory;
     /**
-     * @var \SqualoMail\SqmMcMagentoTwo\Model\MailChimpStores
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\SqmMcStores
      */
     private $_mailChimpStores;
     /**
@@ -228,8 +228,8 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerceFactory $mailChimpSyncEcommerce
      * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerce $mailChimpSyncE
      * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncBatches $syncBatches
-     * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpStoresFactory $mailChimpStoresFactory
-     * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpStores $mailChimpStores
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\SqmMcStoresFactory $mailChimpStoresFactory
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\SqmMcStores $mailChimpStores
      * @param \Magento\Customer\Model\ResourceModel\Attribute\CollectionFactory $attCollection
      * @param \Magento\Framework\Encryption\Encryptor $encryptor
      * @param \Magento\Newsletter\Model\ResourceModel\Subscriber\CollectionFactory $subscriberCollection
@@ -258,8 +258,8 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerceFactory $mailChimpSyncEcommerce,
         \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerce $mailChimpSyncE,
         \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncBatches $syncBatches,
-        \SqualoMail\SqmMcMagentoTwo\Model\MailChimpStoresFactory $mailChimpStoresFactory,
-        \SqualoMail\SqmMcMagentoTwo\Model\MailChimpStores $mailChimpStores,
+        \SqualoMail\SqmMcMagentoTwo\Model\SqmMcStoresFactory $mailChimpStoresFactory,
+        \SqualoMail\SqmMcMagentoTwo\Model\SqmMcStores $mailChimpStores,
         \Magento\Customer\Model\ResourceModel\Attribute\CollectionFactory $attCollection,
         \Magento\Framework\Encryption\Encryptor $encryptor,
         \Magento\Newsletter\Model\ResourceModel\Subscriber\CollectionFactory $subscriberCollection,

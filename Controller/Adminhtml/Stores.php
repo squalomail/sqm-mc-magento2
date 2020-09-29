@@ -17,7 +17,7 @@ use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\Registry;
 use Magento\Framework\View\Result\PageFactory;
-use SqualoMail\SqmMcMagentoTwo\Model\MailChimpStoresFactory;
+use SqualoMail\SqmMcMagentoTwo\Model\SqmMcStoresFactory;
 
 class Stores extends Action
 {
@@ -30,7 +30,7 @@ class Stores extends Action
      */
     protected $_resultPageFactory;
     /**
-     * @var MailChimpStoresFactory
+     * @var SqmMcStoresFactory
      */
     protected $_mailchimpStoresFactory;
     /**
@@ -43,14 +43,14 @@ class Stores extends Action
      * @param Context $context
      * @param Registry $registry
      * @param PageFactory $resultPageFactory
-     * @param MailChimpStoresFactory $storesFactory
+     * @param SqmMcStoresFactory $storesFactory
      * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      */
     public function __construct(
         Context $context,
         Registry $registry,
         PageFactory $resultPageFactory,
-        MailChimpStoresFactory $storesFactory,
+        SqmMcStoresFactory $storesFactory,
         \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
     ) {
 

@@ -13,10 +13,10 @@
 
 namespace SqualoMail\SqmMcMagentoTwo\Model;
 
-class MailChimpStores extends \Magento\Framework\Model\AbstractModel
+class SqmMcStores extends \Magento\Framework\Model\AbstractModel
 {
     protected function _construct()
     {
-        $this->_init(\SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpStores::class);
+        $this->_init(\SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcStores::class);
     }
 }

@@ -45,14 +45,14 @@
         <arguments>
             <argument name="collections" xsi:type="array">
                 <item name="mailchimp_errors_grid_data_source" xsi:type="string">SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpErrors\Collection</item>
-                <item name="mailchimp_stores_grid_data_source" xsi:type="string">SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpStores\Grid\Collection</item>
+                <item name="mailchimp_stores_grid_data_source" xsi:type="string">SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcStores\Grid\Collection</item>
             </argument>
         </arguments>
     </type>
-    <virtualType name="SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpStores\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+    <virtualType name="SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcStores\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
         <arguments>
             <argument name="mainTable" xsi:type="string">mailchimp_stores</argument>
-            <argument name="resourceModel" xsi:type="string">SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpStores</argument>
+            <argument name="resourceModel" xsi:type="string">SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcStores</argument>
         </arguments>
     </virtualType>
     <type name="Magento\Newsletter\Model\Subscriber">

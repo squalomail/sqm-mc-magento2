@@ -13,7 +13,7 @@
 
 namespace SqualoMail\SqmMcMagentoTwo\Controller\Adminhtml\Stores;
 
-use SqualoMail\SqmMcMagentoTwo\Model\MailChimpStoresFactory;
+use SqualoMail\SqmMcMagentoTwo\Model\SqmMcStoresFactory;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\Registry;
 use Magento\Framework\View\Result\PageFactory;
@@ -24,7 +24,7 @@ class Edit extends \SqualoMail\SqmMcMagentoTwo\Controller\Adminhtml\Stores
     public function execute()
     {
         $storeId = $this->getRequest()->getParam('id');
-        /** @var \SqualoMail\SqmMcMagentoTwo\Model\MailChimpStores $model */
+        /** @var \SqualoMail\SqmMcMagentoTwo\Model\SqmMcStores $model */
         $model = $this->_mailchimpStoresFactory->create();
 
         if ($storeId) {
