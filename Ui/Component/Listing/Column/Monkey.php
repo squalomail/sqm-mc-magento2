@@ -50,7 +50,7 @@ class Monkey extends Column
      */
     protected $_orderFactory;
     /**
-     * @var \SqualoMail\SqmMcMagentoTwo\Model\MailChimpErrorsFactory
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\SqmMcErrorsFactory
      */
     protected $_mailChimpErrorsFactory;
 
@@ -64,7 +64,7 @@ class Monkey extends Column
      * @param SearchCriteriaBuilder $criteria
      * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      * @param \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpSyncEcommerce\CollectionFactory $syncCommerceCF
-     * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpErrorsFactory $mailChimpErrorsFactory
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\SqmMcErrorsFactory $mailChimpErrorsFactory
      * @param \Magento\Sales\Model\OrderFactory $orderFactory
      * @param array $components
      * @param array $data
@@ -78,7 +78,7 @@ class Monkey extends Column
         SearchCriteriaBuilder $criteria,
         \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
         \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpSyncEcommerce\CollectionFactory $syncCommerceCF,
-        \SqualoMail\SqmMcMagentoTwo\Model\MailChimpErrorsFactory $mailChimpErrorsFactory,
+        \SqualoMail\SqmMcMagentoTwo\Model\SqmMcErrorsFactory $mailChimpErrorsFactory,
         \Magento\Sales\Model\OrderFactory $orderFactory,
         array $components = [],
         array $data = []
@@ -185,7 +185,7 @@ class Monkey extends Column
     private function _getError($orderId, $storeId)
     {
         /**
-         * @var $error \SqualoMail\SqmMcMagentoTwo\Model\MailChimpErrors
+         * @var $error \SqualoMail\SqmMcMagentoTwo\Model\SqmMcErrors
          */
         $error = $this->_mailChimpErrorsFactory->create();
         return $error->getByStoreIdType($storeId, $orderId, \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_ORDER);

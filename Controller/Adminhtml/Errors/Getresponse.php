@@ -23,7 +23,7 @@ class Getresponse extends \Magento\Backend\App\Action
      */
     protected $_resultFactory;
     /**
-     * @var \SqualoMail\SqmMcMagentoTwo\Model\MailChimpErrorsFactory
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\SqmMcErrorsFactory
      */
     protected $_errorsFactory;
     /**
@@ -42,14 +42,14 @@ class Getresponse extends \Magento\Backend\App\Action
     /**
      * Getresponse constructor.
      * @param \Magento\Backend\App\Action\Context $context
-     * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpErrorsFactory $errorsFactory
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\SqmMcErrorsFactory $errorsFactory
      * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      * @param \SqualoMail\SqmMcMagentoTwo\Model\Api\Result $result
      * @param \Magento\Framework\Filesystem\Driver\File $driver
      */
     public function __construct(
         \Magento\Backend\App\Action\Context $context,
-        \SqualoMail\SqmMcMagentoTwo\Model\MailChimpErrorsFactory $errorsFactory,
+        \SqualoMail\SqmMcMagentoTwo\Model\SqmMcErrorsFactory $errorsFactory,
         \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
         \SqualoMail\SqmMcMagentoTwo\Model\Api\Result $result,
         \Magento\Framework\Filesystem\Driver\File $driver

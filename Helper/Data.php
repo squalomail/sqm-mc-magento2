@@ -132,7 +132,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     private $_customer;
     /**
-     * @var \SqualoMail\SqmMcMagentoTwo\Model\MailChimpErrors
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\SqmMcErrors
      */
     private $_mailChimpErrors;
     /**
@@ -224,7 +224,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      * @param \SqualoMailMc $api
      * @param \Magento\Framework\App\Cache\TypeListInterface $cacheTypeList
      * @param \Magento\Customer\Model\ResourceModel\CustomerRepository $customer
-     * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpErrors $mailChimpErrors
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\SqmMcErrors $mailChimpErrors
      * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerceFactory $mailChimpSyncEcommerce
      * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerce $mailChimpSyncE
      * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncBatches $syncBatches
@@ -254,7 +254,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         \SqualoMailMc $api,
         \Magento\Framework\App\Cache\TypeListInterface $cacheTypeList,
         \Magento\Customer\Model\ResourceModel\CustomerRepository $customer,
-        \SqualoMail\SqmMcMagentoTwo\Model\MailChimpErrors $mailChimpErrors,
+        \SqualoMail\SqmMcMagentoTwo\Model\SqmMcErrors $mailChimpErrors,
         \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerceFactory $mailChimpSyncEcommerce,
         \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncEcommerce $mailChimpSyncE,
         \SqualoMail\SqmMcMagentoTwo\Model\MailChimpSyncBatches $syncBatches,

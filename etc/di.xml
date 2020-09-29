@@ -35,16 +35,16 @@
             </argument>
         </arguments>
     </type>
-    <virtualType name="SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpErrors\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+    <virtualType name="SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcErrors\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
         <arguments>
             <argument name="mainTable" xsi:type="string">mailchimp_errors</argument>
-            <argument name="resourceModel" xsi:type="string">SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpErrors</argument>
+            <argument name="resourceModel" xsi:type="string">SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcErrors</argument>
         </arguments>
     </virtualType>
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
-                <item name="mailchimp_errors_grid_data_source" xsi:type="string">SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpErrors\Collection</item>
+                <item name="mailchimp_errors_grid_data_source" xsi:type="string">SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcErrors\Collection</item>
                 <item name="mailchimp_stores_grid_data_source" xsi:type="string">SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcStores\Grid\Collection</item>
             </argument>
         </arguments>

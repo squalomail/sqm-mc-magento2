@@ -8,16 +8,16 @@
  * @copyright Ebizmarts (http://ebizmarts.com)
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @date: 10/21/16 4:55 PM
- * @file: MailChimpErrors.php
+ * @file: SqmMcErrors.php
  */
 
 namespace SqualoMail\SqmMcMagentoTwo\Model;
 
-class MailChimpErrors extends \Magento\Framework\Model\AbstractModel
+class SqmMcErrors extends \Magento\Framework\Model\AbstractModel
 {
     protected function _construct()
     {
-        $this->_init(\SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpErrors::class);
+        $this->_init(\SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcErrors::class);
     }
     public function getByStoreIdType($storeId, $id, $type)
     {

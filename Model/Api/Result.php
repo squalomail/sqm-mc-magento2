@@ -29,7 +29,7 @@ class Result
      */
     private $_archive;
     /**
-     * @var \SqualoMail\SqmMcMagentoTwo\Model\MailChimpErrorsFactory
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\SqmMcErrorsFactory
      */
     private $_chimpErrors;
     /**
@@ -45,7 +45,7 @@ class Result
      * Result constructor.
      * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      * @param \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpSyncBatches\CollectionFactory $batchCollection
-     * @param \SqualoMail\SqmMcMagentoTwo\Model\MailChimpErrorsFactory $chimpErrors
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\SqmMcErrorsFactory $chimpErrors
      * @param \Magento\Framework\Archive $archive
      * @param \Magento\Framework\Filesystem\Driver\File $driver
      * @param \Magento\Framework\HTTP\Client\CurlFactory $curlFactory
@@ -53,7 +53,7 @@ class Result
     public function __construct(
         \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
         \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\MailChimpSyncBatches\CollectionFactory $batchCollection,
-        \SqualoMail\SqmMcMagentoTwo\Model\MailChimpErrorsFactory $chimpErrors,
+        \SqualoMail\SqmMcMagentoTwo\Model\SqmMcErrorsFactory $chimpErrors,
         \Magento\Framework\Archive $archive,
         \Magento\Framework\Filesystem\Driver\File $driver,
         \Magento\Framework\HTTP\Client\CurlFactory $curlFactory
