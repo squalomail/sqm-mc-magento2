@@ -18,10 +18,10 @@
         </referenceContainer>
         <referenceContainer name="left">
             <block class="SqualoMail\SqmMcMagentoTwo\Block\Adminhtml\Stores\Edit\Tabs"
-                   name="squalomail_mailchimp_store.edit.tabs"/>
+                   name="squalomail_sqmmc_store.edit.tabs"/>
         </referenceContainer>
         <referenceContainer name="content">
-            <block class="SqualoMail\SqmMcMagentoTwo\Block\Adminhtml\Stores\Edit" name="squalomail_mailchimp_store.edit"/>
+            <block class="SqualoMail\SqmMcMagentoTwo\Block\Adminhtml\Stores\Edit" name="squalomail_sqmmc_store.edit"/>
         </referenceContainer>
     </body>
 </page>

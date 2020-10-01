@@ -19,6 +19,6 @@ class SqmMcSyncBatches extends AbstractDb
 {
     protected function _construct()
     {
-        $this->_init('mailchimp_sync_batches', 'id');
+        $this->_init('sqmmc_sync_batches', 'id');
     }
 }

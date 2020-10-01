@@ -73,7 +73,7 @@ class Edit extends Container
      */
     public function getHeaderText()
     {
-        $storeRegistry = $this->_coreRegistry->registry('mailchimp_stores');
+        $storeRegistry = $this->_coreRegistry->registry('sqmmc_stores');
         if ($storeRegistry->getId()) {
             $storeTitle = $this->escapeHtml($storeRegistry->getTitle());
             return __("Edit Store '%1'", $storeTitle);

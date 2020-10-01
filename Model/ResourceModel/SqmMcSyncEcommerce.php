@@ -20,16 +20,16 @@ class SqmMcSyncEcommerce extends AbstractDb
 {
     protected function _construct()
     {
-        $this->_init('mailchimp_sync_ecommerce', 'id');
+        $this->_init('sqmmc_sync_ecommerce', 'id');
     }
     public function getByStoreIdType(\SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncEcommerce $chimp, $storeId, $id, $type)
     {
         $connection = $this->getConnection();
         $bind = ['store_id' => $storeId, 'type' => $type, 'related_id' => $id];
         $select = $connection->select()->from(
-            $this->getTable('mailchimp_sync_ecommerce')
+            $this->getTable('sqmmc_sync_ecommerce')
         )->where(
-            'mailchimp_store_id = :store_id AND type = :type AND related_id = :related_id'
+            'sqmmc_store_id = :store_id AND type = :type AND related_id = :related_id'
         );
         $data = $connection->fetchRow($select, $bind);
         if ($data) {
@@ -45,8 +45,8 @@ class SqmMcSyncEcommerce extends AbstractDb
     ) {
         $connection = $this->getConnection();
         $connection->update(
-            $this->getTable('mailchimp_sync_ecommerce'),
-            ['mailchimp_sync_deleted'=>1, 'deleted_related_id'=> $relatedDeletedId],
+            $this->getTable('sqmmc_sync_ecommerce'),
+            ['sqmmc_sync_deleted'=>1, 'deleted_related_id'=> $relatedDeletedId],
             ['related_id = ?'=> $id,'type = ?'=>$type]
         );
         return $this;
@@ -55,8 +55,8 @@ class SqmMcSyncEcommerce extends AbstractDb
     {
         $connection = $this->getConnection();
         $connection->update(
-            $this->getTable('mailchimp_sync_ecommerce'),
-            ['mailchimp_sync_modified'=>1],
+            $this->getTable('sqmmc_sync_ecommerce'),
+            ['sqmmc_sync_modified'=>1],
             ['related_id = ?'=> $id, 'type = ?'=>$type]
         );
         return $this;
@@ -69,15 +69,15 @@ class SqmMcSyncEcommerce extends AbstractDb
     ) {
         $connection = $this->getConnection();
         $connection->delete(
-            $this->getTable('mailchimp_sync_ecommerce'),
-            ['related_id = ?'=> $id, 'type = ?'=>$type, 'mailchimp_store_id = ?' => $mailchimpStoreId]
+            $this->getTable('sqmmc_sync_ecommerce'),
+            ['related_id = ?'=> $id, 'type = ?'=>$type, 'sqmmc_store_id = ?' => $mailchimpStoreId]
         );
         return $this;
     }
     public function deleteAllByBatchId(\SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncEcommerce $chimp, $batchId)
     {
         $connection = $this->getConnection();
-        $connection->delete($this->getTable('mailchimp_sync_ecommerce'), ['batch_id = ?' => $batchId]);
+        $connection->delete($this->getTable('sqmmc_sync_ecommerce'), ['batch_id = ?' => $batchId]);
         return $this;
     }
 }

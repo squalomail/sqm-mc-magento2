@@ -4,15 +4,15 @@
         <observer name="sales_order_save_after" instance="\SqualoMail\SqmMcMagentoTwo\Observer\Sales\Order\SaveAfter"/>
     </event>
     <event name="admin_system_config_changed_section_mailchimp">
-        <observer name="mailchimp_admin_system_config_changed_section_mailchimp" instance="SqualoMail\SqmMcMagentoTwo\Observer\ConfigObserver"/>
+        <observer name="sqmmc_admin_system_config_changed_section_mailchimp" instance="SqualoMail\SqmMcMagentoTwo\Observer\ConfigObserver"/>
     </event>
     <event name="salesrule_rule_save_after">
-        <observer name="mailchimp_salesrule_rule_save_after" instance="\SqualoMail\SqmMcMagentoTwo\Observer\SalesRule\Rule\SaveAfter"/>
+        <observer name="sqmmc_salesrule_rule_save_after" instance="\SqualoMail\SqmMcMagentoTwo\Observer\SalesRule\Rule\SaveAfter"/>
     </event>
     <event name="salesrule_rule_delete_after">
-        <observer name="mailchimp_salesrule_rule_delete_after" instance="\SqualoMail\SqmMcMagentoTwo\Observer\SalesRule\Rule\DeleteAfter"/>
+        <observer name="sqmmc_salesrule_rule_delete_after" instance="\SqualoMail\SqmMcMagentoTwo\Observer\SalesRule\Rule\DeleteAfter"/>
     </event>
     <event name="adminhtml_customer_save_after">
-        <observer name="mailchimp_adminhtml_customer_save_after" instance="\SqualoMail\SqmMcMagentoTwo\Observer\Adminhtml\Customer\SaveAfter" />
+        <observer name="sqmmc_adminhtml_customer_save_after" instance="\SqualoMail\SqmMcMagentoTwo\Observer\Adminhtml\Customer\SaveAfter" />
     </event>
 </config>

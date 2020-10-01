@@ -27,7 +27,7 @@ $interest = $block->getInterest();
                                                type="checkbox"
                                                data-form-part="customer_form"
                                                value="<?php echo $c['id'] ?>"
-                                               id="<?php echo 'mailchimp_group_'.$c['id'] ?>"
+                                               id="<?php echo 'sqmmc_group_'.$c['id'] ?>"
                                                title="<?php echo $c['name'] ?>"
                                             <?php if($c['checked']) { echo 'checked';} ?>
                                         />
@@ -41,7 +41,7 @@ $interest = $block->getInterest();
                                 <select class="admin_field_field field"
                                         data-form-part="customer_form"
                                         name="customer[interestgroup][<?php echo $i['interest']['id'] ?>]"
-                                        id="<?php echo 'mailchimp_group_'.$i['interest']['id'] ?>"
+                                        id="<?php echo 'sqmmc_group_'.$i['interest']['id'] ?>"
                                         title="<?php echo $i['interest']['title'] ?>">
                                     <option value=""></option>
                                     <?php foreach($i['category'] as $c): ?>
@@ -60,7 +60,7 @@ $interest = $block->getInterest();
                                                type="radio"
                                                data-form-part="customer_form"
                                                value="<?php echo $c['id'] ?>"
-                                               id="<?php echo 'mailchimp_group_'.$c['id'] ?>"
+                                               id="<?php echo 'sqmmc_group_'.$c['id'] ?>"
                                                title="<?php echo $c['name'] ?>"
                                             <?php if($c['checked']) { echo 'checked';} ?>
                                         />

@@ -25,7 +25,7 @@ $interest = $block->getInterest();
                                                    name="group[<?php echo $i['interest']['id'] ?>][<?php echo $c['id']?>]"
                                                    type="checkbox"
                                                    value="<?php echo $c['id'] ?>"
-                                                   id="<?php echo 'mailchimp_group_'.$c['id'] ?>"
+                                                   id="<?php echo 'sqmmc_group_'.$c['id'] ?>"
                                                    title="<?php echo $c['name'] ?>"
                                                    <?php if($c['checked']) { echo 'checked';} ?>
                                             />
@@ -38,7 +38,7 @@ $interest = $block->getInterest();
                                     <div class="field no-label">
                                         <select class="field"
                                                 name="group[<?php echo $i['interest']['id'] ?>]"
-                                                id="<?php echo 'mailchimp_group_'.$i['interest']['id'] ?>"
+                                                id="<?php echo 'sqmmc_group_'.$i['interest']['id'] ?>"
                                                 title="<?php echo $i['interest']['title'] ?>">
                                             <option value=""></option>
                                             <?php foreach($i['category'] as $c): ?>
@@ -56,7 +56,7 @@ $interest = $block->getInterest();
                                                        name="group[<?php echo $i['interest']['id'] ?>]"
                                                        type="radio"
                                                        value="<?php echo $c['id'] ?>"
-                                                       id="<?php echo 'mailchimp_group_'.$c['id'] ?>"
+                                                       id="<?php echo 'sqmmc_group_'.$c['id'] ?>"
                                                        title="<?php echo $c['name'] ?>"
                                                     <?php if($c['checked']) { echo 'checked';} ?>
                                                 />

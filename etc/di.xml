@@ -37,21 +37,21 @@
     </type>
     <virtualType name="SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcErrors\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
         <arguments>
-            <argument name="mainTable" xsi:type="string">mailchimp_errors</argument>
+            <argument name="mainTable" xsi:type="string">sqmmc_errors</argument>
             <argument name="resourceModel" xsi:type="string">SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcErrors</argument>
         </arguments>
     </virtualType>
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
-                <item name="mailchimp_errors_grid_data_source" xsi:type="string">SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcErrors\Collection</item>
-                <item name="mailchimp_stores_grid_data_source" xsi:type="string">SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcStores\Grid\Collection</item>
+                <item name="sqmmc_errors_grid_data_source" xsi:type="string">SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcErrors\Collection</item>
+                <item name="sqmmc_stores_grid_data_source" xsi:type="string">SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcStores\Grid\Collection</item>
             </argument>
         </arguments>
     </type>
     <virtualType name="SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcStores\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
         <arguments>
-            <argument name="mainTable" xsi:type="string">mailchimp_stores</argument>
+            <argument name="mainTable" xsi:type="string">sqmmc_stores</argument>
             <argument name="resourceModel" xsi:type="string">SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcStores</argument>
         </arguments>
     </virtualType>
@@ -64,7 +64,7 @@
     <virtualType name="Magento\Sales\Model\ResourceModel\Order\Grid" type="Magento\Sales\Model\ResourceModel\Grid">
         <arguments>
             <argument name="columns" xsi:type="array">
-                <item name="mailchimp_flag" xsi:type="string">sales_order.mailchimp_flag</item>
+                <item name="sqmmc_flag" xsi:type="string">sales_order.sqmmc_flag</item>
             </argument>
         </arguments>
     </virtualType>
@@ -72,12 +72,12 @@
         <plugin name="mailchimp-coupon" type="SqualoMail\SqmMcMagentoTwo\Model\Plugin\Coupon" sortOrder="10"/>
     </type>
     <type name="Magento\Sales\Model\Order\ShipmentRepository">
-        <plugin name="mailchimp_save_shipment" type="SqualoMail\SqmMcMagentoTwo\Model\Plugin\Ship" sortOrder="10"/>
+        <plugin name="sqmmc_save_shipment" type="SqualoMail\SqmMcMagentoTwo\Model\Plugin\Ship" sortOrder="10"/>
     </type>
     <type name="Magento\Sales\Model\Order\InvoiceRepository">
-        <plugin name="mailchimp_save_invoice" type="SqualoMail\SqmMcMagentoTwo\Model\Plugin\Invoice" sortOrder="10"/>
+        <plugin name="sqmmc_save_invoice" type="SqualoMail\SqmMcMagentoTwo\Model\Plugin\Invoice" sortOrder="10"/>
     </type>
     <type name="Magento\Sales\Model\Order\CreditmemoRepository">
-        <plugin name="mailchimp_save_creditmemo" type="SqualoMail\SqmMcMagentoTwo\Model\Plugin\Creditmemo" sortOrder="10"/>
+        <plugin name="sqmmc_save_creditmemo" type="SqualoMail\SqmMcMagentoTwo\Model\Plugin\Creditmemo" sortOrder="10"/>
     </type>
 </config>

@@ -146,15 +146,15 @@ class Cart
         // get only the converted quotes
         $convertedCarts->addFieldToFilter('store_id', ['eq' => $magentoStoreId]);
         $convertedCarts->addFieldToFilter('is_active', ['eq' => 0]);
-        //join with mailchimp_ecommerce_sync_data table to filter by sync data.
+        //join with sqmmc_ecommerce_sync_data table to filter by sync data.
         $convertedCarts->getSelect()->joinLeft(
-            ['m4m' => $this->_helper->getTableName('mailchimp_sync_ecommerce')],
+            ['m4m' => $this->_helper->getTableName('sqmmc_sync_ecommerce')],
             "m4m.related_id = main_table.entity_id and m4m.type = '".\SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_QUOTE."'
-            AND m4m.mailchimp_store_id = '" . $mailchimpStoreId . "'",
+            AND m4m.sqmmc_store_id = '" . $mailchimpStoreId . "'",
             ['m4m.*']
         );
         // be sure that the quotes are already in mailchimp and not deleted
-        $convertedCarts->getSelect()->where("m4m.mailchimp_sync_deleted is null and m4m.related_id is not null");
+        $convertedCarts->getSelect()->where("m4m.sqmmc_sync_deleted is null and m4m.related_id is not null");
         // limit the collection
         $convertedCarts->getSelect()->limit(self::BATCH_LIMIT);
         /**
@@ -223,17 +223,17 @@ class Cart
         $modifiedCarts->addFieldToFilter('is_active', ['eq'=>1]);
         // select carts for the current Magento store id
         $modifiedCarts->addFieldToFilter('store_id', ['eq' => $magentoStoreId]);
-        //join with mailchimp_ecommerce_sync_data table to filter by sync data.
+        //join with sqmmc_ecommerce_sync_data table to filter by sync data.
         $modifiedCarts->getSelect()->joinLeft(
-            ['m4m' => $this->_helper->getTableName('mailchimp_sync_ecommerce')],
+            ['m4m' => $this->_helper->getTableName('sqmmc_sync_ecommerce')],
             "m4m.related_id = main_table.entity_id and m4m.type = '".\SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_QUOTE."'
-            AND m4m.mailchimp_store_id = '" . $mailchimpStoreId . "'",
+            AND m4m.sqmmc_store_id = '" . $mailchimpStoreId . "'",
             ['m4m.*']
         );
         // be sure that the quotes are already in mailchimp and not deleted
         $modifiedCarts->getSelect()->where(
-            "(m4m.mailchimp_sync_deleted is null or m4m.mailchimp_sync_deleted = 0)".
-            " AND m4m.mailchimp_sync_delta < main_table.updated_at"
+            "(m4m.sqmmc_sync_deleted is null or m4m.sqmmc_sync_deleted = 0)".
+            " AND m4m.sqmmc_sync_delta < main_table.updated_at"
         );
         // limit the collection
         $modifiedCarts->getSelect()->limit(self::BATCH_LIMIT);
@@ -356,15 +356,15 @@ class Cart
         if ($this->_firstDate) {
             $newCarts->addFieldToFilter('created_at', ['gt' => $this->_firstDate]);
         }
-        //join with mailchimp_ecommerce_sync_data table to filter by sync data.
+        //join with sqmmc_ecommerce_sync_data table to filter by sync data.
         $newCarts->getSelect()->joinLeft(
-            ['m4m' => $this->_helper->getTableName('mailchimp_sync_ecommerce')],
+            ['m4m' => $this->_helper->getTableName('sqmmc_sync_ecommerce')],
             "m4m.related_id = main_table.entity_id and m4m.type = '" . \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_QUOTE . "'
-            AND m4m.mailchimp_store_id = '" . $mailchimpStoreId . "'",
+            AND m4m.sqmmc_store_id = '" . $mailchimpStoreId . "'",
             ['m4m.*']
         );
         // be sure that the quotes are already in mailchimp and not deleted
-        $newCarts->getSelect()->where("m4m.mailchimp_sync_delta IS NULL");
+        $newCarts->getSelect()->where("m4m.sqmmc_sync_delta IS NULL");
 
         // limit the collection
         $newCarts->getSelect()->limit(self::BATCH_LIMIT);
@@ -488,13 +488,13 @@ class Cart
         $allCartsForEmail->addFieldToFilter('store_id', ['eq' => $magentoStoreId]);
         $allCartsForEmail->addFieldToFilter('customer_email', ['eq' => $email]);
         $allCartsForEmail->getSelect()->joinLeft(
-            ['m4m' => $this->_helper->getTableName('mailchimp_sync_ecommerce')],
+            ['m4m' => $this->_helper->getTableName('sqmmc_sync_ecommerce')],
             "m4m.related_id = main_table.entity_id and m4m.type = '".\SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_QUOTE."'
-            AND m4m.mailchimp_store_id = '" . $mailchimpStoreId . "'",
+            AND m4m.sqmmc_store_id = '" . $mailchimpStoreId . "'",
             ['m4m.*']
         );
         // be sure that the quotes are already in mailchimp and not deleted
-        $allCartsForEmail->getSelect()->where("m4m.mailchimp_sync_deleted = 0");
+        $allCartsForEmail->getSelect()->where("m4m.sqmmc_sync_deleted = 0");
         return $allCartsForEmail;
     }
 

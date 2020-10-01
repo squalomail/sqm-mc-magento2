@@ -27,25 +27,25 @@ define(
 
             _init: function () {
                 var self = this;
-                $('#mailchimp_general_apikey').change(function () {
-                    var apiKey = $('#mailchimp_general_apikey').val();
+                $('#sqmmc_general_apikey').change(function () {
+                    var apiKey = $('#sqmmc_general_apikey').val();
                     self._loadStores(apiKey);
                 });
-                $('#mailchimp_general_monkeystore').change(function () {
+                $('#sqmmc_general_monkeystore').change(function () {
                     self._loadDetails();
                     // self._loadInterest();
                 });
-                $('#row_mailchimp_general_monkeystore').find('.note').append(' <a href="' + self.options.storeGridUrl + '">here</a>');
-                if ($('#mailchimp_general_monkeystore option').length > 1) {
-                    $('#row_mailchimp_general_monkeystore .note').hide();
+                $('#row_sqmmc_general_monkeystore').find('.note').append(' <a href="' + self.options.storeGridUrl + '">here</a>');
+                if ($('#sqmmc_general_monkeystore option').length > 1) {
+                    $('#row_sqmmc_general_monkeystore .note').hide();
                 }
-                $('#mailchimp_general_webhook_create').click(function () {
-                    var apiKey = $('#mailchimp_general_apikey').val();
-                    var listId = $('#mailchimp_general_monkeylist').find(':selected').val();
+                $('#sqmmc_general_webhook_create').click(function () {
+                    var apiKey = $('#sqmmc_general_apikey').val();
+                    var listId = $('#sqmmc_general_monkeylist').find(':selected').val();
                     self._createWebhook(apiKey, listId);
                 });
-                $('#mailchimp_general_resync_subscribers').click(function () {
-                    var mailchimpStoreId = $('#mailchimp_general_monkeystore').find(':selected').val();
+                $('#sqmmc_general_resync_subscribers').click(function () {
+                    var mailchimpStoreId = $('#sqmmc_general_monkeystore').find(':selected').val();
                     self._resyncSubscribers(mailchimpStoreId);
                 });
 
@@ -86,13 +86,13 @@ define(
                 var self = this;
                 var storeUrl = this.options.storeUrl;
                 // remove all items in list combo
-                $('#mailchimp_general_monkeystore').empty();
+                $('#sqmmc_general_monkeystore').empty();
                 // get the selected apikey
-                $('#mailchimp_general_monkeystore').append($('<option>', {
+                $('#sqmmc_general_monkeystore').append($('<option>', {
                     value: -1,
                     text: 'Select one Mailchimp Store'
                 }));
-                $('#mailchimp_general_monkeylist').append($('<option>', {
+                $('#sqmmc_general_monkeylist').append($('<option>', {
                     value: -1,
                     text: 'Select one Mailchimp Store'
                 }));
@@ -108,22 +108,22 @@ define(
                         var unique = data.stores.length;
                         $.each(data.stores, function (i, item) {
                             if (unique == 1) {
-                                $('#mailchimp_general_monkeystore').append($('<option>', {
+                                $('#sqmmc_general_monkeystore').append($('<option>', {
                                     value: item.id,
                                     text: item.name,
                                     selected: "selected"
                                 }));
                             } else {
-                                $('#mailchimp_general_monkeystore').append($('<option>', {
+                                $('#sqmmc_general_monkeystore').append($('<option>', {
                                     value: item.id,
                                     text: item.name
                                 }));
                             }
                         });
-                        if ($('#mailchimp_general_monkeystore option').length > 1) {
-                            $('#row_mailchimp_general_monkeystore').find('.note').hide();
+                        if ($('#sqmmc_general_monkeystore option').length > 1) {
+                            $('#row_sqmmc_general_monkeystore').find('.note').hide();
                         } else {
-                            $('#row_mailchimp_general_monkeystore').find('.note').show();
+                            $('#row_sqmmc_general_monkeystore').find('.note').show();
                         }
                         self._loadDetails();
                     } else {
@@ -138,14 +138,14 @@ define(
             _loadDetails: function () {
                 var detailsUrl = this.options.detailsUrl;
                 var interestUrl = this.options.getInterestUrl;
-                var apiKey = $('#mailchimp_general_apikey').val();
-                var selectedStore = $('#mailchimp_general_monkeystore').find(':selected').val();
+                var apiKey = $('#sqmmc_general_apikey').val();
+                var selectedStore = $('#sqmmc_general_monkeystore').find(':selected').val();
                 var encrypt = 0;
                 if (apiKey == '******') {
                     encrypt = 3;
                 }
-                $('#mailchimp_general_account_details_ul').empty();
-                $('#mailchimp_general_monkeylist').empty();
+                $('#sqmmc_general_account_details_ul').empty();
+                $('#sqmmc_general_monkeylist').empty();
                 $.ajax({
                     url: detailsUrl,
                     data: {'form_key': window.FORM_KEY, 'apikey': apiKey, "store": selectedStore, 'encrypt': encrypt},
@@ -155,18 +155,18 @@ define(
                 }).done(function (data) {
                     $.each(data, function (i, item) {
                         if (item.hasOwnProperty('label')) {
-                            $('#mailchimp_general_account_details_ul').append('<li>' + item.label + ' ' + item.value + '</li>');
+                            $('#sqmmc_general_account_details_ul').append('<li>' + item.label + ' ' + item.value + '</li>');
                         }
                     });
                     if (data.list_id) {
-                        $('#mailchimp_general_monkeylist').append($('<option>', {
+                        $('#sqmmc_general_monkeylist').append($('<option>', {
                             value: data.list_id,
                             text: data.list_name,
                             selected: "selected"
                         }));
                     }
                     var selectedList = data.list_id;
-                    $('#mailchimp_general_interest').empty();
+                    $('#sqmmc_general_interest').empty();
                     $.ajax({
                         url: interestUrl,
                         data: {'form_key': window.FORM_KEY, 'apikey': apiKey, "list": selectedList, "encrypt": encrypt},
@@ -177,13 +177,13 @@ define(
                         if (data.error == 0) {
                             if (data.data.length) {
                                 $.each(data.data, function (i, item) {
-                                    $('#mailchimp_general_interest').append($('<option>', {
+                                    $('#sqmmc_general_interest').append($('<option>', {
                                         value: item.id,
                                         text: item.title
                                     }));
                                 });
                             } else {
-                                $('#mailchimp_general_interest').append($('<optgroup>', {
+                                $('#sqmmc_general_interest').append($('<optgroup>', {
                                     label: '---No Data---'
                                 }));
                             }

@@ -72,7 +72,7 @@ class Result
         $collection
             ->addFieldToFilter('store_id', ['eq' => $storeId])
             ->addFieldToFilter('status', ['eq' => 'pending'])
-            ->addFieldToFilter('mailchimp_store_id', ['eq' => $mailchimpStoreId]);
+            ->addFieldToFilter('sqmmc_store_id', ['eq' => $mailchimpStoreId]);
         /**
          * @var $item \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncBatches
          */

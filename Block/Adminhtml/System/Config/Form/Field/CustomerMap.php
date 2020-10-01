@@ -41,7 +41,7 @@ class CustomerMap extends \Magento\Config\Block\System\Config\Form\Field\FieldAr
                 '',
                 ['data' => ['is_render_to_js_template' => true]]
             );
-            $this->_mailchimpRenderer->setClass('mailchimp_field_select');
+            $this->_mailchimpRenderer->setClass('sqmmc_field_select');
         }
         return $this->_mailchimpRenderer;
     }
@@ -50,7 +50,7 @@ class CustomerMap extends \Magento\Config\Block\System\Config\Form\Field\FieldAr
     {
 //        $this->addColumn('mailchimp', ['label' => __('Mailchimp')]);
         $this->addColumn(
-            'mailchimp_field_id',
+            'sqmmc_field_id',
             ['label' => __('Mailchimp'), 'renderer' => $this->_getMailchimpRenderer()]
         );
         $this->addColumn(
@@ -66,7 +66,7 @@ class CustomerMap extends \Magento\Config\Block\System\Config\Form\Field\FieldAr
         $optionExtraAttr['option_' . $this->_getVarsRenderer()->calcOptionHash($row->getData('customer_field_id'))] =
             'selected="selected"';
         $optionExtraAttr['option_' . $this->_getMailchimpRenderer()->calcOptionHash(
-            $row->getData('mailchimp_field_id')
+            $row->getData('sqmmc_field_id')
         )
         ] =
             'selected="selected"';

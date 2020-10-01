@@ -62,15 +62,15 @@ class Subscriber
         $collection->addFieldToFilter('subscriber_status', ['eq' => 1])
             ->addFieldToFilter('store_id', ['eq' => $storeId]);
         $collection->getSelect()->joinLeft(
-            ['m4m' => $this->_helper->getTableName('mailchimp_sync_ecommerce')],
+            ['m4m' => $this->_helper->getTableName('sqmmc_sync_ecommerce')],
             "m4m.related_id = main_table.subscriber_id and m4m.type = '".
             \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_SUBSCRIBER.
-            "' and m4m.mailchimp_store_id = '".$listId."'",
+            "' and m4m.sqmmc_store_id = '".$listId."'",
             ['m4m.*']
         );
-        $collection->getSelect()->where("m4m.mailchimp_sync_delta IS null ".
-            "OR (m4m.mailchimp_sync_delta > '".$this->_helper->getMCMinSyncDateFlag().
-            "' and m4m.mailchimp_sync_modified = 1)");
+        $collection->getSelect()->where("m4m.sqmmc_sync_delta IS null ".
+            "OR (m4m.sqmmc_sync_delta > '".$this->_helper->getMCMinSyncDateFlag().
+            "' and m4m.sqmmc_sync_modified = 1)");
         $collection->getSelect()->limit(self::BATCH_LIMIT);
         $subscriberArray = [];
         $date = $this->_helper->getDateMicrotime();

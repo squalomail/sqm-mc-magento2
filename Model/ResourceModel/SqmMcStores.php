@@ -20,6 +20,6 @@ class SqmMcStores extends AbstractDb
 {
     protected function _construct()
     {
-        $this->_init('mailchimp_stores', 'id');
+        $this->_init('sqmmc_stores', 'id');
     }
 }

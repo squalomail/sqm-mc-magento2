@@ -2,11 +2,11 @@
 <listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
-            <item name="provider" xsi:type="string">mailchimp_stores_grid.mailchimp_stores_grid_data_source</item>
-            <item name="deps" xsi:type="string">mailchimp_stores_grid.mailchimp_stores_grid_data_source</item>
+            <item name="provider" xsi:type="string">sqmmc_stores_grid.sqmmc_stores_grid_data_source</item>
+            <item name="deps" xsi:type="string">sqmmc_stores_grid.sqmmc_stores_grid_data_source</item>
             <!--Declare the data source name which will be defined below-->
         </item>
-        <item name="spinner" xsi:type="string">mailchimp_stores_columns</item>
+        <item name="spinner" xsi:type="string">sqmmc_stores_columns</item>
         <item name="buttons" xsi:type="array">
             <item name="add" xsi:type="array">
                 <item name="name" xsi:type="string">add</item>
@@ -16,11 +16,11 @@
             </item>
         </item>
     </argument>
-    <dataSource name="mailchimp_stores_grid_data_source">
+    <dataSource name="sqmmc_stores_grid_data_source">
         <!--The data source-->
         <argument name="dataProvider" xsi:type="configurableObject">
             <argument name="class" xsi:type="string">Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider</argument>
-            <argument name="name" xsi:type="string">mailchimp_stores_grid_data_source</argument>
+            <argument name="name" xsi:type="string">sqmmc_stores_grid_data_source</argument>
             <argument name="primaryFieldName" xsi:type="string">id</argument>
             <argument name="requestFieldName" xsi:type="string">id</argument>
             <argument name="data" xsi:type="array">
@@ -65,7 +65,7 @@
         <paging name="listing_paging"/>
     </listingToolbar>
     <!-- ... other block of code -->
-    <columns name="mailchimp_stores_columns">
+    <columns name="sqmmc_stores_columns">
         <!--The list of columns-->
         <column name="mc_account_name">
             <argument name="data" xsi:type="array">

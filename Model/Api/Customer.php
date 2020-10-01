@@ -94,14 +94,14 @@ class Customer
         $collection = $this->_collection->create();
         $collection->addFieldToFilter('store_id', ['eq'=>$storeId]);
         $collection->getSelect()->joinLeft(
-            ['m4m' => $this->_helper->getTableName('mailchimp_sync_ecommerce')],
+            ['m4m' => $this->_helper->getTableName('sqmmc_sync_ecommerce')],
             "m4m.related_id = e.entity_id and m4m.type = '".\SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_CUSTOMER.
-            "' and m4m.mailchimp_store_id = '".$mailchimpStoreId."'",
+            "' and m4m.sqmmc_store_id = '".$mailchimpStoreId."'",
             ['m4m.*']
         );
-        $collection->getSelect()->where("m4m.mailchimp_sync_delta IS null ".
-            "OR (m4m.mailchimp_sync_delta > '".$this->_helper->getMCMinSyncDateFlag().
-            "' and m4m.mailchimp_sync_modified = 1)");
+        $collection->getSelect()->where("m4m.sqmmc_sync_delta IS null ".
+            "OR (m4m.sqmmc_sync_delta > '".$this->_helper->getMCMinSyncDateFlag().
+            "' and m4m.sqmmc_sync_modified = 1)");
         $collection->getSelect()->limit(self::MAX);
         $counter = 0;
         $customerArray = [];

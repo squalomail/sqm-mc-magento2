@@ -129,14 +129,14 @@ class Product
         $collection = $this->_getCollection();
         $collection->addStoreFilter($magentoStoreId);
         $collection->getSelect()->joinLeft(
-            ['m4m' => $this->_helper->getTableName('mailchimp_sync_ecommerce')],
+            ['m4m' => $this->_helper->getTableName('sqmmc_sync_ecommerce')],
             "m4m.related_id = e.entity_id and m4m.type = '".\SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_PRODUCT.
-            "' and m4m.mailchimp_store_id = '".$mailchimpStoreId."'",
+            "' and m4m.sqmmc_store_id = '".$mailchimpStoreId."'",
             ['m4m.*']
         );
-        $collection->getSelect()->where("m4m.mailchimp_sync_delta IS null OR (m4m.mailchimp_sync_delta > '".
+        $collection->getSelect()->where("m4m.sqmmc_sync_delta IS null OR (m4m.sqmmc_sync_delta > '".
             $this->_helper->getMCMinSyncDateFlag().
-            "' and m4m.mailchimp_sync_modified = 1)");
+            "' and m4m.sqmmc_sync_modified = 1)");
         $collection->getSelect()->limit(self::MAX);
         foreach ($collection as $item) {
             /**
@@ -203,12 +203,12 @@ class Product
             'left'
         );
         $collection->getSelect()->joinLeft(
-            ['mc' => $collection->getTable('mailchimp_sync_ecommerce')],
-            "mc.type = 'PRO' AND mc.related_id = e.entity_id AND mc.mailchimp_sync_modified = 0 ".
-            $collection->getConnection()->quoteInto(" AND  mc.mailchimp_store_id = ?", $mailchimpStoreId) .
-            " and mc.mailchimp_sync_delta <  at_special_from_date.value"
+            ['mc' => $collection->getTable('sqmmc_sync_ecommerce')],
+            "mc.type = 'PRO' AND mc.related_id = e.entity_id AND mc.sqmmc_sync_modified = 0 ".
+            $collection->getConnection()->quoteInto(" AND  mc.sqmmc_store_id = ?", $mailchimpStoreId) .
+            " and mc.sqmmc_sync_delta <  at_special_from_date.value"
         );
-        $collection->getSelect()->where('mc.mailchimp_sync_delta is not null');
+        $collection->getSelect()->where('mc.sqmmc_sync_delta is not null');
         foreach ($collection as $item) {
             $this->_updateProduct($mailchimpStoreId, $item->getEntityId(), null, null, 1);
         }
@@ -229,13 +229,13 @@ class Product
             'left'
         );
         $collection2->getSelect()->joinLeft(
-            ['mc' => $collection2->getTable('mailchimp_sync_ecommerce')],
-            "mc.type = 'PRO' and mc.related_id = e.entity_id and mc.mailchimp_sync_modified = 0 ".
-            $collection->getConnection()->quoteInto(" AND  mc.mailchimp_store_id = ?", $mailchimpStoreId) .
-            " and mc.mailchimp_sync_delta < at_special_to_date.value",
+            ['mc' => $collection2->getTable('sqmmc_sync_ecommerce')],
+            "mc.type = 'PRO' and mc.related_id = e.entity_id and mc.sqmmc_sync_modified = 0 ".
+            $collection->getConnection()->quoteInto(" AND  mc.sqmmc_store_id = ?", $mailchimpStoreId) .
+            " and mc.sqmmc_sync_delta < at_special_to_date.value",
             []
         );
-        $collection2->getSelect()->where('mc.mailchimp_sync_delta is not null');
+        $collection2->getSelect()->where('mc.sqmmc_sync_delta is not null');
         foreach ($collection2 as $item) {
             $this->_updateProduct($mailchimpStoreId, $item->getEntityId(), null, null, 1);
         }

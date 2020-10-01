@@ -68,18 +68,18 @@ define(
                             showLoader: false
                         }).done(function (data) {
                             if (data.valid==0) {
-                                $.mage.cookies.clear('mailchimp_campaign_id');
-                                $.mage.cookies.set('mailchimp_landing_page', location);
+                                $.mage.cookies.clear('sqmmc_campaign_id');
+                                $.mage.cookies.set('sqmmc_landing_page', location);
                             } else if (data.valid==1) {
-                                $.mage.cookies.set('mailchimp_campaign_id' , mc_cid);
-                                $.mage.cookies.set('mailchimp_landing_page', location);
+                                $.mage.cookies.set('sqmmc_campaign_id' , mc_cid);
+                                $.mage.cookies.set('sqmmc_landing_page', location);
                             }
                         });
                     }
 
                     if (isMailchimp) {
-                        $.mage.cookies.clear('mailchimp_campaign_id');
-                        $.mage.cookies.set('mailchimp_landing_page', location);
+                        $.mage.cookies.clear('sqmmc_campaign_id');
+                        $.mage.cookies.set('sqmmc_landing_page', location);
                     }
                 });
             },

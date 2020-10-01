@@ -561,7 +561,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         $connection->update(
             $tableName,
             ['status' => $toStatus],
-            "mailchimp_store_id = '" . $mailchimpStore . "' and status = '" . $fromStatus . "'"
+            "sqmmc_store_id = '" . $mailchimpStore . "' and status = '" . $fromStatus . "'"
         );
     }
 
@@ -771,13 +771,13 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             // clean the errors table
             $connection = $this->_mailChimpErrors->getResource()->getConnection();
             $tableName = $this->_mailChimpErrors->getResource()->getMainTable();
-            $connection->delete($tableName, "mailchimp_store_id = '".$mailchimpStore."'");
+            $connection->delete($tableName, "sqmmc_store_id = '".$mailchimpStore."'");
             // clean the syncecommerce table with errors
             $connection = $this->_mailChimpSyncE->getResource()->getConnection();
             $tableName = $this->_mailChimpSyncE->getResource()->getMainTable();
             $connection->delete(
                 $tableName,
-                "mailchimp_store_id = '".$mailchimpStore."' and mailchimp_sync_error is not null"
+                "sqmmc_store_id = '".$mailchimpStore."' and sqmmc_sync_error is not null"
             );
         } catch (\Zend_Db_Exception $e) {
             throw new ValidatorException(__($e->getMessage()));
@@ -1234,8 +1234,8 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         $tableName = $this->_mailChimpSyncE->getResource()->getMainTable();
         $connection->update(
             $tableName,
-            ['mailchimp_sync_modified' => 1],
-            "type = '" . self::IS_SUBSCRIBER . "' and mailchimp_store_id = '$mailchimpList'"
+            ['sqmmc_sync_modified' => 1],
+            "type = '" . self::IS_SUBSCRIBER . "' and sqmmc_store_id = '$mailchimpList'"
         );
     }
     public function decrypt($value)

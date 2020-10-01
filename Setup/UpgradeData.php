@@ -92,7 +92,7 @@ class UpgradeData implements UpgradeDataInterface
             $select = $salesConnection->select()
                 ->from(
                     false,
-                    ['mailchimp_flag' => new \Zend_Db_Expr('IF(mailchimp_abandonedcart_flag OR mailchimp_campaign_id OR mailchimp_landing_page, 1, 0)')]
+                    ['sqmmc_flag' => new \Zend_Db_Expr('IF(sqmmc_abandonedcart_flag OR sqmmc_campaign_id OR sqmmc_landing_page, 1, 0)')]
                 )->join(['O'=>$table], 'O.entity_id = G.entity_id', []);
 
             $query = $salesConnection->updateFromSelect($select, ['G' => $setup->getTable('sales_order_grid')]);
@@ -111,18 +111,18 @@ class UpgradeData implements UpgradeDataInterface
                 $this->_helper->log($e->getMessage());
             }
 
-            // empty table mailchimp_interest_group
+            // empty table sqmmc_interest_group
             /**
              * @var \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcInterestGroup $item
              */
-            $table = $setup->getTable('mailchimp_interest_group');
+            $table = $setup->getTable('sqmmc_interest_group');
 
             try {
                 $connection->delete($table);
             } catch (\Exception $e) {
                 $this->_helper->log($e->getMessage());
             }
-            // convert table mailchimp_webhook_request
+            // convert table sqmmc_webhook_request
             /**
              * @var \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcWebhookRequest $webhookItem
              */

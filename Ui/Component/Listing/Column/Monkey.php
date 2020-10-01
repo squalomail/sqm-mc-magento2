@@ -99,7 +99,7 @@ class Monkey extends Column
     {
         if (isset($dataSource['data']['items'])) {
             foreach ($dataSource['data']['items'] as & $item) {
-                $status = $item['mailchimp_flag'];
+                $status = $item['sqmmc_flag'];
                 $order = $this->_orderFactory->create()->loadByIncrementId($item['increment_id']);
                 $params = ['_secure' => $this->_requestInterfase->isSecure()];
                 if ($this->_helper->getConfigValue(\SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_ACTIVE, $order->getStoreId())) {
@@ -169,11 +169,11 @@ class Monkey extends Column
                                 $text = '';
                         }
                     }
-                    $item['mailchimp_sync'] =
+                    $item['sqmmc_sync'] =
                         "<div style='width: 50%;margin: 0 auto;text-align: center'><img src='".$url."' style='border: none; width: 5rem; text-align: center; max-width: 100%' title='$alt' />$text</div>";
                     if ($status) {
                         $url = $this->_assetRepository->getUrlWithParams('SqualoMail_SqmMcMagentoTwo::images/freddie.png', $params);
-                        $item['mailchimp_status'] =
+                        $item['sqmmc_status'] =
                             "<div style='width: 50%;margin: 0 auto'><img src='".$url."' style='border: none; width: 5rem; text-align: center; max-width: 100%'/></div>";
                     }
                 }

@@ -58,7 +58,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
         }
         if (version_compare($context->getVersion(), '1.0.5') < 0) {
             $table = $connection
-                ->newTable($setup->getTable('mailchimp_stores'))
+                ->newTable($setup->getTable('sqmmc_stores'))
                 ->addColumn(
                     'id',
                     \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
@@ -212,7 +212,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
         if (version_compare($context->getVersion(), '1.0.7') < 0) {
             $checkoutConnection->addColumn(
                 $setup->getTable('quote'),
-                'mailchimp_campaign_id',
+                'sqmmc_campaign_id',
                 [
                     'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
                     'length' => 16,
@@ -223,7 +223,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
 
             $salesConnection->addColumn(
                 $setup->getTable('sales_order'),
-                'mailchimp_campaign_id',
+                'sqmmc_campaign_id',
                 [
                     'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
                     'length' => 16,
@@ -233,7 +233,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
             );
             $checkoutConnection->addColumn(
                 $setup->getTable('quote'),
-                'mailchimp_landing_page',
+                'sqmmc_landing_page',
                 [
                     'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
                     'length' => 512,
@@ -244,7 +244,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
 
             $salesConnection->addColumn(
                 $setup->getTable('sales_order'),
-                'mailchimp_landing_page',
+                'sqmmc_landing_page',
                 [
                     'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
                     'length' => 512,
@@ -255,7 +255,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
         }
         if (version_compare($context->getVersion(), '1.0.8') < 0) {
             $connection->addColumn(
-                $setup->getTable('mailchimp_errors'),
+                $setup->getTable('sqmmc_errors'),
                 'original_id',
                 [
                     'type' => \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
@@ -265,7 +265,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 ]
             );
             $connection->addColumn(
-                $setup->getTable('mailchimp_errors'),
+                $setup->getTable('sqmmc_errors'),
                 'batch_id',
                 [
                     'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
@@ -277,7 +277,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
         }
         if (version_compare($context->getVersion(), '1.0.10') < 0) {
             $connection->addColumn(
-                $setup->getTable('mailchimp_errors'),
+                $setup->getTable('sqmmc_errors'),
                 'store_id',
                 [
                     'type' => \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
@@ -289,7 +289,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
         }
         if (version_compare($context->getVersion(), '1.0.11') < 0) {
             $connection->addColumn(
-                $setup->getTable('mailchimp_stores'),
+                $setup->getTable('sqmmc_stores'),
                 'domain',
                 [
                     'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
@@ -300,9 +300,9 @@ class UpgradeSchema implements UpgradeSchemaInterface
             );
         }
         if (version_compare($context->getVersion(), '1.0.12') < 0) {
-            if ($connection->tableColumnExists($setup->getTable('mailchimp_stores'), 'address_address1')) {
+            if ($connection->tableColumnExists($setup->getTable('sqmmc_stores'), 'address_address1')) {
                 $connection->changecolumn(
-                    $setup->getTable('mailchimp_stores'),
+                    $setup->getTable('sqmmc_stores'),
                     'address_address1',
                     'address_address_one',
                     [
@@ -313,9 +313,9 @@ class UpgradeSchema implements UpgradeSchemaInterface
                     ]
                 );
             }
-            if ($connection->tableColumnExists($setup->getTable('mailchimp_stores'), 'address_address2')) {
+            if ($connection->tableColumnExists($setup->getTable('sqmmc_stores'), 'address_address2')) {
                 $connection->changecolumn(
-                    $setup->getTable('mailchimp_stores'),
+                    $setup->getTable('sqmmc_stores'),
                     'address_address2',
                     'address_address_two',
                     [
@@ -329,7 +329,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
         }
         if (version_compare($context->getVersion(), '1.0.13') < 0) {
             $connection->addColumn(
-                $setup->getTable('mailchimp_stores'),
+                $setup->getTable('sqmmc_stores'),
                 'mc_account_name',
                 [
                     'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
@@ -339,7 +339,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 ]
             );
             $connection->addColumn(
-                $setup->getTable('mailchimp_stores'),
+                $setup->getTable('sqmmc_stores'),
                 'list_name',
                 [
                     'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
@@ -351,7 +351,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
         }
         if (version_compare($context->getVersion(), '1.0.14') < 0) {
             $connection->addColumn(
-                $setup->getTable('mailchimp_sync_ecommerce'),
+                $setup->getTable('sqmmc_sync_ecommerce'),
                 'batch_id',
                 [
                     'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
@@ -363,7 +363,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
         }
         if (version_compare($context->getVersion(), '1.0.15') < 0) {
             $table = $connection
-                ->newTable($setup->getTable('mailchimp_webhook_request'))
+                ->newTable($setup->getTable('sqmmc_webhook_request'))
                 ->addColumn(
                     'id',
                     \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
@@ -404,7 +404,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
         if (version_compare($context->getVersion(), '1.0.24') < 0) {
             $salesConnection->addColumn(
                 $setup->getTable('sales_order_grid'),
-                'mailchimp_flag',
+                'sqmmc_flag',
                 [
                     'type' => \Magento\Framework\DB\Ddl\Table::TYPE_BOOLEAN,
                     'default' => 0,
@@ -413,7 +413,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
             );
             $salesConnection->addColumn(
                 $setup->getTable('sales_order'),
-                'mailchimp_flag',
+                'sqmmc_flag',
                 [
                     'type' => \Magento\Framework\DB\Ddl\Table::TYPE_BOOLEAN,
                     'default' => 0,
@@ -423,12 +423,12 @@ class UpgradeSchema implements UpgradeSchemaInterface
         }
         if (version_compare($context->getVersion(), '1.0.25') < 0) {
             $connection->addIndex(
-                $setup->getTable('mailchimp_sync_ecommerce'),
-                $connection->getIndexName($setup->getTable('mailchimp_sync_ecommerce'), 'related_id', 'index'),
+                $setup->getTable('sqmmc_sync_ecommerce'),
+                $connection->getIndexName($setup->getTable('sqmmc_sync_ecommerce'), 'related_id', 'index'),
                 'related_id'
             );
             $connection->addColumn(
-                $setup->getTable('mailchimp_sync_ecommerce'),
+                $setup->getTable('sqmmc_sync_ecommerce'),
                 'deleted_related_id',
                 [
                     'type' => \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
@@ -440,7 +440,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
         }
         if (version_compare($context->getVersion(), '1.0.26') < 0) {
             $table = $connection
-                ->newTable($setup->getTable('mailchimp_interest_group'))
+                ->newTable($setup->getTable('sqmmc_interest_group'))
                 ->addColumn(
                     'id',
                     \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
@@ -480,22 +480,22 @@ class UpgradeSchema implements UpgradeSchemaInterface
         }
         if (version_compare($context->getVersion(), '1.3.33') < 0) {
             $connection->addIndex(
-                $setup->getTable('mailchimp_sync_ecommerce'),
-                $connection->getIndexName($setup->getTable('mailchimp_sync_ecommerce'), 'type', 'index'),
+                $setup->getTable('sqmmc_sync_ecommerce'),
+                $connection->getIndexName($setup->getTable('sqmmc_sync_ecommerce'), 'type', 'index'),
                 'type'
             );
             $connection->addIndex(
-                $setup->getTable('mailchimp_sync_ecommerce'),
-                $connection->getIndexName($setup->getTable('mailchimp_sync_ecommerce'), 'batch_id', 'index'),
+                $setup->getTable('sqmmc_sync_ecommerce'),
+                $connection->getIndexName($setup->getTable('sqmmc_sync_ecommerce'), 'batch_id', 'index'),
                 'batch_id'
             );
             $connection->addIndex(
-                $setup->getTable('mailchimp_sync_ecommerce'),
-                $connection->getIndexName($setup->getTable('mailchimp_sync_ecommerce'), 'mailchimp_store_id', 'index'),
-                'mailchimp_store_id'
+                $setup->getTable('sqmmc_sync_ecommerce'),
+                $connection->getIndexName($setup->getTable('sqmmc_sync_ecommerce'), 'sqmmc_store_id', 'index'),
+                'sqmmc_store_id'
             );
             $connection->changecolumn(
-                $setup->getTable('mailchimp_stores'),
+                $setup->getTable('sqmmc_stores'),
                 'timezone',
                 'timezone',
                 [
@@ -509,7 +509,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
 
         if (version_compare($context->getVersion(), '102.3.34') < 0) {
             $connection->addColumn(
-                $setup->getTable('mailchimp_sync_batches'),
+                $setup->getTable('sqmmc_sync_batches'),
                 'modified_date',
                 [
                     'type' => \Magento\Framework\DB\Ddl\Table::TYPE_DATETIME,
@@ -518,8 +518,8 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 ]
             );
             $connection->addColumn(
-                $setup->getTable('mailchimp_sync_ecommerce'),
-                'mailchimp_sent',
+                $setup->getTable('sqmmc_sync_ecommerce'),
+                'sqmmc_sent',
                 [
                     'type' => \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
                     'length' => 1,
@@ -530,7 +530,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
         }
         if (version_compare($context->getVersion(), '102.3.35') < 0) {
             $connection->changeColumn(
-                $setup->getTable('mailchimp_stores'),
+                $setup->getTable('sqmmc_stores'),
                 'apikey',
                 'apikey',
                 [

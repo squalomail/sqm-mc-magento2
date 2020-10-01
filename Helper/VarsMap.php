@@ -63,7 +63,7 @@ class VarsMap extends \Magento\Framework\App\Helper\AbstractHelper
         foreach ($value as $row) {
             if (!is_array($row)
                 || !array_key_exists('customer_field_id', $row)
-                || !array_key_exists('mailchimp_field_id', $row)
+                || !array_key_exists('sqmmc_field_id', $row)
             ) {
                 return false;
             }
@@ -77,13 +77,13 @@ class VarsMap extends \Magento\Framework\App\Helper\AbstractHelper
         foreach ($value as $row) {
             if (!is_array($row)
                 || !array_key_exists('customer_field_id', $row)
-                || !array_key_exists('mailchimp_field_id', $row)
+                || !array_key_exists('sqmmc_field_id', $row)
             ) {
                 continue;
             }
             $customer_field_id = $row['customer_field_id'];
-            $mailchimp_field_id = $row['mailchimp_field_id'];
-            $result[$customer_field_id] = $mailchimp_field_id;
+            $sqmmc_field_id = $row['sqmmc_field_id'];
+            $result[$customer_field_id] = $sqmmc_field_id;
         }
         return $result;
     }
@@ -122,7 +122,7 @@ class VarsMap extends \Magento\Framework\App\Helper\AbstractHelper
         $result = [];
         foreach ($value as $customerFieldId => $mailchimpName) {
             $resultId = $this->mathRandom->getUniqueHash('_');
-            $result[$resultId] = ['mailchimp_field_id' => $mailchimpName ,'customer_field_id' => $customerFieldId];
+            $result[$resultId] = ['sqmmc_field_id' => $mailchimpName ,'customer_field_id' => $customerFieldId];
         }
         return $result;
     }

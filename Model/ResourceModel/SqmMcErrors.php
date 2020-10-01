@@ -19,14 +19,14 @@ class SqmMcErrors extends AbstractDb
 {
     protected function _construct()
     {
-        $this->_init('mailchimp_errors', 'id');
+        $this->_init('sqmmc_errors', 'id');
     }
     public function getByStoreIdType(\SqualoMail\SqmMcMagentoTwo\Model\SqmMcErrors $errors, $storeId, $id, $type)
     {
         $connection = $this->getConnection();
         $bind = ['store_id' => $storeId, 'regtype' => $type, 'original_id' => $id];
         $select = $connection->select()->from(
-            $this->getTable('mailchimp_errors')
+            $this->getTable('sqmmc_errors')
         )->where(
             'store_id = :store_id AND regtype = :regtype AND original_id = :original_id'
         );

@@ -47,7 +47,7 @@ class Address extends Generic implements TabInterface
 
     protected function _prepareForm()
     {
-        $model  = $this->_coreRegistry->registry('mailchimp_stores');
+        $model  = $this->_coreRegistry->registry('sqmmc_stores');
         $form   = $this->_formFactory->create();
         $form->setHtmlIdPrefix('stores_');
         $form->setFieldNameSuffix('stores');

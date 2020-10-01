@@ -34,7 +34,7 @@ class Collection extends \Magento\Framework\View\Element\UiComponent\DataProvide
         Logger $logger,
         FetchStrategy $fetchStrategy,
         EventManager $eventManager,
-        $mainTable = 'mailchimp_stores',
+        $mainTable = 'sqmmc_stores',
         $resourceModel = \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcStores::class
     ) {
         parent::__construct($entityFactory, $logger, $fetchStrategy, $eventManager, $mainTable, $resourceModel);

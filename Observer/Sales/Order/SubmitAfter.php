@@ -57,14 +57,14 @@ class SubmitAfter implements \Magento\Framework\Event\ObserverInterface
     {
         try {
             $this->_cookieManager->deleteCookie(
-                'mailchimp_campaign_id',
+                'sqmmc_campaign_id',
                 $this->_cookieMetadataFactory
                     ->createCookieMetadata()
                     ->setPath($this->_sessionManager->getCookiePath())
                     ->setDomain($this->_sessionManager->getCookieDomain())
             );
             $this->_cookieManager->deleteCookie(
-                'mailchimp_landing_page',
+                'sqmmc_landing_page',
                 $this->_cookieMetadataFactory
                     ->createCookieMetadata()
                     ->setPath($this->_sessionManager->getCookiePath())

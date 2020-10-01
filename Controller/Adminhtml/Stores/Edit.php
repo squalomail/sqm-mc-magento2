@@ -47,7 +47,7 @@ class Edit extends \SqualoMail\SqmMcMagentoTwo\Controller\Adminhtml\Stores
         if (isset($model['name'])) {
             $model['name'] = preg_replace('/ \(Warning: not connected\)/', '', $model['name']);
         }
-        $this->_coreRegistry->register('mailchimp_stores', $model);
+        $this->_coreRegistry->register('sqmmc_stores', $model);
 
         /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
         $resultPage = $this->_resultPageFactory->create();

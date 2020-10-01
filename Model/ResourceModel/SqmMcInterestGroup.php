@@ -20,7 +20,7 @@ class SqmMcInterestGroup extends AbstractDb
 {
     protected function _construct()
     {
-        $this->_init('mailchimp_interest_group', 'id');
+        $this->_init('sqmmc_interest_group', 'id');
     }
     public function getBySubscriberIdStoreId(
         \SqualoMail\SqmMcMagentoTwo\Model\SqmMcInterestGroup $mailChimpInterestGroup,
@@ -30,7 +30,7 @@ class SqmMcInterestGroup extends AbstractDb
         $connection = $this->getConnection();
         $bind = ['subscriber_id'=>$subscriberId, 'store_id' => $storeId];
         $select = $connection->select()->from(
-            $this->getTable('mailchimp_interest_group')
+            $this->getTable('sqmmc_interest_group')
         )->where(
             'subscriber_id = :subscriber_id AND store_id = :store_id'
         );

@@ -159,16 +159,16 @@ class Order
         $modifiedOrders = $this->_getCollection();
         // select orders for the current Magento store id
         $modifiedOrders->addFieldToFilter('store_id', ['eq' => $magentoStoreId]);
-        //join with mailchimp_ecommerce_sync_data table to filter by sync data.
+        //join with sqmmc_ecommerce_sync_data table to filter by sync data.
         $modifiedOrders->getSelect()->joinLeft(
-            ['m4m' => $this->_helper->getTableName('mailchimp_sync_ecommerce')],
+            ['m4m' => $this->_helper->getTableName('sqmmc_sync_ecommerce')],
             "m4m.related_id = main_table.entity_id and m4m.type = '".\SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_ORDER.
-            "' and m4m.mailchimp_store_id = '".$mailchimpStoreId."'",
+            "' and m4m.sqmmc_store_id = '".$mailchimpStoreId."'",
             ['m4m.*']
         );
         // be sure that the order are already in mailchimp and not deleted
         $modifiedOrders->getSelect()->where(
-            "m4m.mailchimp_sync_modified = 1 AND m4m.mailchimp_store_id = '".$mailchimpStoreId."'"
+            "m4m.sqmmc_sync_modified = 1 AND m4m.sqmmc_store_id = '".$mailchimpStoreId."'"
         );
         // limit the collection
         $modifiedOrders->getSelect()->limit(self::BATCH_LIMIT);
@@ -243,13 +243,13 @@ class Order
             $newOrders->addFieldToFilter('created_at', ['gt' => $this->_firstDate]);
         }
         $newOrders->getSelect()->joinLeft(
-            ['m4m' => $this->_helper->getTableName('mailchimp_sync_ecommerce')],
+            ['m4m' => $this->_helper->getTableName('sqmmc_sync_ecommerce')],
             "m4m.related_id = main_table.entity_id and m4m.type = '".\SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_ORDER.
-            "' and m4m.mailchimp_store_id = '".$mailchimpStoreId."'",
+            "' and m4m.sqmmc_store_id = '".$mailchimpStoreId."'",
             ['m4m.*']
         );
         // be sure that the quote are not in mailchimp
-        $newOrders->getSelect()->where("m4m.mailchimp_sync_delta IS NULL");
+        $newOrders->getSelect()->where("m4m.sqmmc_sync_delta IS NULL");
         // limit the collection
         $newOrders->getSelect()->limit(self::BATCH_LIMIT);
 

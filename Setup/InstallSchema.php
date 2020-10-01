@@ -58,7 +58,7 @@ class InstallSchema implements InstallSchemaInterface
     {
         $connection = $this->_resource->getConnectionByName('default');
         $table = $connection
-            ->newTable($setup->getTable('mailchimp_sync_batches'))
+            ->newTable($setup->getTable('sqmmc_sync_batches'))
             ->addColumn(
                 'id',
                 \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
@@ -74,7 +74,7 @@ class InstallSchema implements InstallSchemaInterface
                 'Store Id'
             )
             ->addColumn(
-                'mailchimp_store_id',
+                'sqmmc_store_id',
                 \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
                 50,
                 ['unsigned' => true, 'nullable' => false],
@@ -98,7 +98,7 @@ class InstallSchema implements InstallSchemaInterface
         $connection->createTable($table);
 
         $table = $connection
-            ->newTable($setup->getTable('mailchimp_errors'))
+            ->newTable($setup->getTable('sqmmc_errors'))
             ->addColumn(
                 'id',
                 \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
@@ -107,7 +107,7 @@ class InstallSchema implements InstallSchemaInterface
                 'Batch Id'
             )
             ->addColumn(
-                'mailchimp_store_id',
+                'sqmmc_store_id',
                 \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
                 50,
                 ['unsigned' => true, 'nullable' => false],
@@ -152,7 +152,7 @@ class InstallSchema implements InstallSchemaInterface
         $connection->createTable($table);
 
         $table = $connection
-            ->newTable($setup->getTable('mailchimp_sync_ecommerce'))
+            ->newTable($setup->getTable('sqmmc_sync_ecommerce'))
             ->addColumn(
                 'id',
                 \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
@@ -161,7 +161,7 @@ class InstallSchema implements InstallSchemaInterface
                 'Id'
             )
             ->addColumn(
-                'mailchimp_store_id',
+                'sqmmc_store_id',
                 \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
                 50,
                 ['unsigned' => true, 'nullable' => false],
@@ -182,32 +182,32 @@ class InstallSchema implements InstallSchemaInterface
                 'Id of the related entity'
             )
             ->addColumn(
-                'mailchimp_sync_modified',
+                'sqmmc_sync_modified',
                 \Magento\Framework\DB\Ddl\Table::TYPE_BOOLEAN,
                 null,
                 [],
                 'If the entity was modified'
             )
             ->addColumn(
-                'mailchimp_sync_delta',
+                'sqmmc_sync_delta',
                 \Magento\Framework\DB\Ddl\Table::TYPE_DATETIME,
                 null,
                 [],
                 'Sync Delta'
             )->addColumn(
-                'mailchimp_sync_error',
+                'sqmmc_sync_error',
                 \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
                 128,
                 [],
                 'Error on synchronization'
             )->addColumn(
-                'mailchimp_sync_deleted',
+                'sqmmc_sync_deleted',
                 \Magento\Framework\DB\Ddl\Table::TYPE_BOOLEAN,
                 null,
                 [],
                 'If the object was deleted in mailchimp'
             )->addColumn(
-                'mailchimp_token',
+                'sqmmc_token',
                 \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
                 32,
                 [],
@@ -225,7 +225,7 @@ class InstallSchema implements InstallSchemaInterface
 
         $connection->addColumn(
             $setup->getTable('sales_order'),
-            'mailchimp_abandonedcart_flag',
+            'sqmmc_abandonedcart_flag',
             [
                 'type' => \Magento\Framework\DB\Ddl\Table::TYPE_BOOLEAN,
                 'default' => 0,
@@ -240,7 +240,7 @@ class InstallSchema implements InstallSchemaInterface
         }
         $connection->addColumn(
             $setup->getTable('quote'),
-            'mailchimp_abandonedcart_flag',
+            'sqmmc_abandonedcart_flag',
             [
                 'type' => \Magento\Framework\DB\Ddl\Table::TYPE_BOOLEAN,
                 'default' => 0,

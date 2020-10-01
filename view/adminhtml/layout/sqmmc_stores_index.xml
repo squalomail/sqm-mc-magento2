@@ -13,7 +13,7 @@
             </action>
         </referenceBlock>
         <referenceContainer name="content">
-            <uiComponent name="mailchimp_stores_grid"/>
+            <uiComponent name="sqmmc_stores_grid"/>
         </referenceContainer>
     </body>
 </page>

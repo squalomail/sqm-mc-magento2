@@ -19,6 +19,6 @@ class SqmMcWebhookRequest extends AbstractDb
 {
     protected function _construct()
     {
-        $this->_init('mailchimp_webhook_request', 'id');
+        $this->_init('sqmmc_webhook_request', 'id');
     }
 }

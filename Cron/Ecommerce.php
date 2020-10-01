@@ -122,7 +122,7 @@ class Ecommerce
         $tableName = $this->_chimpSyncEcommerce->getResource()->getMainTable();
         $connection->delete(
             $tableName,
-            'batch_id is null and mailchimp_sync_modified != 1 and mailchimp_sync_error is null'
+            'batch_id is null and sqmmc_sync_modified != 1 and sqmmc_sync_error is null'
         );
 
         foreach ($this->_storeManager->getStores() as $storeId => $val) {
@@ -145,18 +145,18 @@ class Ecommerce
                             $tableName,
                             [
                                 'batch_id' => $batchId,
-                                'mailchimp_sync_modified' => 0,
-                                'mailchimp_sync_delta' => $this->_helper->getGmtDate()
+                                'sqmmc_sync_modified' => 0,
+                                'sqmmc_sync_delta' => $this->_helper->getGmtDate()
                             ],
-                            "batch_id is null and mailchimp_store_id = '$mailchimpStoreId' and mailchimp_sync_error is null"
+                            "batch_id is null and sqmmc_store_id = '$mailchimpStoreId' and sqmmc_sync_error is null"
                         );
                         $connection->update(
                             $tableName,
                             [
                                 'batch_id' => $batchId,
-                                'mailchimp_sync_modified' => 0,
-                                'mailchimp_sync_delta' => $this->_helper->getGmtDate()],
-                            "batch_id is null and mailchimp_store_id = '$listId' and mailchimp_sync_error is null"
+                                'sqmmc_sync_modified' => 0,
+                                'sqmmc_sync_delta' => $this->_helper->getGmtDate()],
+                            "batch_id is null and sqmmc_store_id = '$listId' and sqmmc_sync_error is null"
                         );
                     }
                 }
@@ -423,12 +423,12 @@ class Ecommerce
                             $tableName,
                             [
                             'batch_id' => -1,
-                            'mailchimp_sync_modified' => 0,
-                            'mailchimp_sync_delta' => $this->_helper->getGmtDate(),
-                            'mailchimp_sync_error' => __('Json error'),
-                            'mailchimp_sent' => \SqualoMail\SqmMcMagentoTwo\Helper\Data::NOTSYNCED
+                            'sqmmc_sync_modified' => 0,
+                            'sqmmc_sync_delta' => $this->_helper->getGmtDate(),
+                            'sqmmc_sync_error' => __('Json error'),
+                            'sqmmc_sent' => \SqualoMail\SqmMcMagentoTwo\Helper\Data::NOTSYNCED
                             ],
-                            "batch_id is null and mailchimp_store_id = '$storeId' and type ='$type' and related_id = $relatedId"
+                            "batch_id is null and sqmmc_store_id = '$storeId' and type ='$type' and related_id = $relatedId"
                         );
                     }
                 }

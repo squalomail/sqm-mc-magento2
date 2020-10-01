@@ -89,9 +89,9 @@ class PromoCodes
         $batchArray = [];
         $websiteId = $this->_helper->getWebsiteId($magentoStoreId);
         $collection = $this->_syncCollection->create();
-        $collection->addFieldToFilter('mailchimp_store_id', ['eq'=>$mailchimpStoreId])
+        $collection->addFieldToFilter('sqmmc_store_id', ['eq'=>$mailchimpStoreId])
             ->addFieldToFilter('type', ['eq'=>\SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_PROMO_CODE])
-            ->addFieldToFilter('mailchimp_sync_deleted', ['eq'=>1]);
+            ->addFieldToFilter('sqmmc_sync_deleted', ['eq'=>1]);
         $collection->getSelect()->limit(self::MAX);
         $counter = 0;
         /**
@@ -131,17 +131,17 @@ class PromoCodes
             $inRoules = implode(',', $rulesId);
             $collection = $this->_couponCollection->create();
             $collection->getSelect()->joinLeft(
-                ['m4m' => $this->_helper->getTableName('mailchimp_sync_ecommerce')],
+                ['m4m' => $this->_helper->getTableName('sqmmc_sync_ecommerce')],
                 "m4m.related_id = main_table.coupon_id and m4m.type = '" .
                 \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_PROMO_CODE .
-                "' and m4m.mailchimp_store_id = '" . $mailchimpStoreId . "'",
+                "' and m4m.sqmmc_store_id = '" . $mailchimpStoreId . "'",
                 ['m4m.*']
             );
             $collection->getSelect()->joinLeft(
                 ['rules' => $this->_helper->getTableName('salesrule')],
                 'main_table.rule_id = rules.rule_id'
             );
-            $collection->getSelect()->where("m4m.mailchimp_sync_delta IS null and (rules.use_auto_generation = 1 and main_table.is_primary is null or rules.use_auto_generation = 0 and main_table.is_primary = 1) and main_table.rule_id in ($inRoules)");
+            $collection->getSelect()->where("m4m.sqmmc_sync_delta IS null and (rules.use_auto_generation = 1 and main_table.is_primary is null or rules.use_auto_generation = 0 and main_table.is_primary = 1) and main_table.rule_id in ($inRoules)");
             $collection->getSelect()->limit(self::MAX);
             $counter = 0;
             /**
