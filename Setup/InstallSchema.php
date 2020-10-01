@@ -205,7 +205,7 @@ class InstallSchema implements InstallSchemaInterface
                 \Magento\Framework\DB\Ddl\Table::TYPE_BOOLEAN,
                 null,
                 [],
-                'If the object was deleted in mailchimp'
+                'If the object was deleted in squalomail'
             )->addColumn(
                 'sqmmc_token',
                 \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
@@ -229,7 +229,7 @@ class InstallSchema implements InstallSchemaInterface
             [
                 'type' => \Magento\Framework\DB\Ddl\Table::TYPE_BOOLEAN,
                 'default' => 0,
-                'comment' => 'Retrieved from Mailchimp'
+                'comment' => 'Retrieved from SqualoMail'
             ]
         );
         if ($this->_deploymentConfig->get(
@@ -244,11 +244,11 @@ class InstallSchema implements InstallSchemaInterface
             [
                 'type' => \Magento\Framework\DB\Ddl\Table::TYPE_BOOLEAN,
                 'default' => 0,
-                'comment' => 'Retrieved from Mailchimp'
+                'comment' => 'Retrieved from SqualoMail'
             ]
         );
 
-        $path = BP . DIRECTORY_SEPARATOR . 'var' . DIRECTORY_SEPARATOR . 'Mailchimp';
+        $path = BP . DIRECTORY_SEPARATOR . 'var' . DIRECTORY_SEPARATOR . 'SqualoMail';
         if (!$this->_driver->isDirectory($path)) {
             $this->_driver->createDirectory($path);
         }

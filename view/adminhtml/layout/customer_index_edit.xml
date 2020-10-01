@@ -15,11 +15,11 @@
     <body>
         <referenceContainer name="content">
             <referenceBlock name="customer_form">
-                <block class="SqualoMail\SqmMcMagentoTwo\Block\Adminhtml\Customer\Edit\Tabs\Sqmmc" name="customer_edit_tab_mailchimp" template="tab/view.phtml" ifconfig="mailchimp/general/active">
+                <block class="SqualoMail\SqmMcMagentoTwo\Block\Adminhtml\Customer\Edit\Tabs\Sqmmc" name="customer_edit_tab_sqmmc" template="tab/view.phtml" ifconfig="sqmmc/general/active">
                     <arguments>
                         <argument name="sort_order" xsi:type="number">50</argument>
                     </arguments>
-                    <block class="SqualoMail\SqmMcMagentoTwo\Block\Adminhtml\Customer\Edit\Tabs\View\Customer" name="mailchimp"  template="customer/edit/tabs/sqmmc.phtml" />
+                    <block class="SqualoMail\SqmMcMagentoTwo\Block\Adminhtml\Customer\Edit\Tabs\View\Customer" name="sqmmc"  template="customer/edit/tabs/sqmmc.phtml" />
                 </block>
             </referenceBlock>
         </referenceContainer>

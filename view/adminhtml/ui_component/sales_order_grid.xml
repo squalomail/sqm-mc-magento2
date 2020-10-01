@@ -3,14 +3,14 @@
     <columns name="sales_order_columns">
         <column name="sqmmc_status" class="\SqualoMail\SqmMcMagentoTwo\Ui\Component\Listing\Column\Monkey">
             <settings>
-                <label translate="true">Mailchimp</label>
+                <label translate="true">SqualoMail</label>
                 <bodyTmpl>ui/grid/cells/html</bodyTmpl>
                 <sortable>false</sortable>
             </settings>
         </column>
         <column name="sqmmc_sync">
             <settings>
-                <label translate="true">Mailchimp Sync</label>
+                <label translate="true">SqualoMail Sync</label>
                 <bodyTmpl>ui/grid/cells/html</bodyTmpl>
                 <sortable>false</sortable>
             </settings>

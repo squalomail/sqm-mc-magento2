@@ -1,6 +1,6 @@
 <?php
 /**
- * MailChimp Magento Component
+ * SqmMc Magento Component
  *
  * @category SqualoMail
  * @package SqmMcMagentoTwo
@@ -59,6 +59,6 @@ class Newsletter extends \Magento\Framework\View\Element\Template
     }
     public function getFormUrl()
     {
-        return  $this->getUrl('mailchimp/accountmanage/save');
+        return  $this->getUrl('sqmmc/accountmanage/save');
     }
 }

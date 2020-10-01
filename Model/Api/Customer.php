@@ -121,10 +121,10 @@ class Customer
                     } else {
                         $this->_helper->modifyCounter(\SqualoMail\SqmMcMagentoTwo\Helper\Data::CUS_NEW);
                     }
-                    $customerMailchimpId = hash('md5', strtolower($customer->getEmail()));
+                    $customerSqmmcId = hash('md5', strtolower($customer->getEmail()));
                     $customerArray[$counter]['method'] = "PUT";
                     $customerArray[$counter]['path'] = "/ecommerce/stores/" . $sqmmcStoreId . "/customers/" .
-                        $customerMailchimpId;
+                        $customerSqmmcId;
                     $customerArray[$counter]['operation_id'] = $this->_batchId . '_' . $customer->getId();
                     $customerArray[$counter]['body'] = $customerJson;
                     $counter++;
@@ -134,7 +134,7 @@ class Customer
                         if ($subscriberJson !==false) {
                             $customerArray[$counter]['method'] = "PATCH";
                             $customerArray[$counter]['path'] = "/lists/" . $listId . "/members/" .
-                                $customerMailchimpId;
+                                $customerSqmmcId;
                             $customerArray[$counter]['operation_id'] = $this->_batchId . '_' .
                                 $customer->getId().'_SUB';
                             $customerArray[$counter]['body'] = $subscriberJson;

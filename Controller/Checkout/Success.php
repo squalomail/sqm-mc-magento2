@@ -1,6 +1,6 @@
 <?php
 /**
- * MailChimp Magento Component
+ * SqmMc Magento Component
  *
  * @category SqualoMail
  * @package SqmMcMagentoTwo

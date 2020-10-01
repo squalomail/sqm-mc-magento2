@@ -9,7 +9,7 @@
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
     <router id="standard">
-        <route id="mailchimp" frontName="mailchimp">
+        <route id="sqmmc" frontName="sqmmc">
             <module name="SqualoMail_SqmMcMagentoTwo"/>
         </route>
     </router>

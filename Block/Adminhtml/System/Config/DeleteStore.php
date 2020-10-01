@@ -75,6 +75,6 @@ class DeleteStore extends \Magento\Config\Block\System\Config\Form\Field
         } elseif (isset($params['store'])) {
             $scope = ['store'=>$params['store']];
         }
-        return $this->_urlBuilder->getUrl('mailchimp/ecommerce/DeleteStore', $scope);
+        return $this->_urlBuilder->getUrl('sqmmc/ecommerce/DeleteStore', $scope);
     }
 }

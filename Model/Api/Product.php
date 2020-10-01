@@ -167,7 +167,7 @@ class Product
                     $sqmmcStoreId,
                     $product->getId(),
                     $this->_helper->getGmtDate(),
-                    "This product type is not supported on MailChimp.",
+                    "This product type is not supported on SqualoMail.",
                     0
                 );
             }

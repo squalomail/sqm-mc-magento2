@@ -45,16 +45,16 @@ define(
                     self._createWebhook(apiKey, listId);
                 });
                 $('#sqmmc_general_resync_subscribers').click(function () {
-                    var mailchimpStoreId = $('#sqmmc_general_monkeystore').find(':selected').val();
-                    self._resyncSubscribers(mailchimpStoreId);
+                    var sqmmcStoreId = $('#sqmmc_general_monkeystore').find(':selected').val();
+                    self._resyncSubscribers(sqmmcStoreId);
                 });
 
             },
-            _resyncSubscribers: function (mailchimpStoreId) {
+            _resyncSubscribers: function (sqmmcStoreId) {
                 var resyncSubscribersUrl = this.options.resyncSubscribersUrl;
                 $.ajax({
                     url: resyncSubscribersUrl,
-                    data: {'form_key': window.FORM_KEY, 'mailchimpStoreId': mailchimpStoreId},
+                    data: {'form_key': window.FORM_KEY, 'sqmmcStoreId': sqmmcStoreId},
                     type: 'GET',
                     dataType: 'json',
                     showLoader: true
@@ -90,11 +90,11 @@ define(
                 // get the selected apikey
                 $('#sqmmc_general_monkeystore').append($('<option>', {
                     value: -1,
-                    text: 'Select one Mailchimp Store'
+                    text: 'Select one SqualoMail Store'
                 }));
                 $('#sqmmc_general_monkeylist').append($('<option>', {
                     value: -1,
-                    text: 'Select one Mailchimp Store'
+                    text: 'Select one SqualoMail Store'
                 }));
                 // get the list for this apikey via ajax
                 $.ajax({

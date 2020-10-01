@@ -2,7 +2,7 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
     <menu>
         <add id="SqualoMail_SqmMcMagentoTwo::sqmmc_menu"
-             title="Mailchimp"
+             title="SqualoMail"
              module="SqualoMail_SqmMcMagentoTwo"
              sortOrder="110"
              dependsOnModule="SqualoMail_SqmMcMagentoTwo"
@@ -12,17 +12,17 @@
              title="Configuration"
              module="SqualoMail_SqmMcMagentoTwo"
              sortOrder="10"
-             resource="SqualoMail_SqmMcMagentoTwo::config_mailchimp"
+             resource="SqualoMail_SqmMcMagentoTwo::config_sqmmc"
              parent="SqualoMail_SqmMcMagentoTwo::sqmmc_menu"
-             action="adminhtml/system_config/edit/section/mailchimp"
+             action="adminhtml/system_config/edit/section/sqmmc"
         />
         <add id="SqualoMail_SqmMcMagentoTwo::store_menu"
-             title="Mailchimp Stores"
+             title="SqualoMail Stores"
              module="SqualoMail_SqmMcMagentoTwo"
              sortOrder="20"
              resource="SqualoMail_SqmMcMagentoTwo::stores_grid"
              parent="SqualoMail_SqmMcMagentoTwo::sqmmc_menu"
-             action="mailchimp/stores"
+             action="sqmmc/stores"
         />
         <add id="SqualoMail_SqmMcMagentoTwo::error_menu"
              title="Errors"
@@ -30,7 +30,7 @@
              sortOrder="30"
              resource="SqualoMail_SqmMcMagentoTwo::error_grid"
              parent="SqualoMail_SqmMcMagentoTwo::sqmmc_menu"
-             action="mailchimp/errors"
+             action="sqmmc/errors"
         />
     </menu>
 </config>

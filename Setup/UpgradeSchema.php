@@ -71,21 +71,21 @@ class UpgradeSchema implements UpgradeSchemaInterface
                     \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
                     50,
                     ['unsigned' => true, 'nullable' => false],
-                    'mailchimp apikey'
+                    'sqmmc apikey'
                 )
                 ->addColumn(
                     'storeid',
                     \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
                     50,
                     ['unsigned' => true, 'nullable' => false],
-                    'mailchimp store id'
+                    'sqmmc store id'
                 )
                 ->addColumn(
                     'list_id',
                     \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
                     50,
                     ['unsigned' => true, 'nullable' => false],
-                    'mailchimp store id'
+                    'sqmmc store id'
                 )
                 ->addColumn(
                     'name',
@@ -271,7 +271,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
                     'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
                     'length' => 64,
                     'default' => null,
-                    'comment' => 'Mailchimp Batch ID'
+                    'comment' => 'SqualoMail Batch ID'
                 ]
             );
         }
@@ -357,7 +357,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
                     'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
                     'length' => 64,
                     'default' => null,
-                    'comment' => 'Mailchimp batch Id'
+                    'comment' => 'SqualoMail batch Id'
                 ]
             );
         }
@@ -408,7 +408,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 [
                     'type' => \Magento\Framework\DB\Ddl\Table::TYPE_BOOLEAN,
                     'default' => 0,
-                    'comment' => 'Retrieved from Mailchimp'
+                    'comment' => 'Retrieved from SqualoMail'
                 ]
             );
             $salesConnection->addColumn(
@@ -417,7 +417,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 [
                     'type' => \Magento\Framework\DB\Ddl\Table::TYPE_BOOLEAN,
                     'default' => 0,
-                    'comment' => 'Retrieved from Mailchimp'
+                    'comment' => 'Retrieved from SqualoMail'
                 ]
             );
         }
@@ -524,7 +524,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
                     'type' => \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
                     'length' => 1,
                     'default' => 0,
-                    'comment' => 'Sent to Mailchimp'
+                    'comment' => 'Sent to SqualoMail'
                 ]
             );
         }

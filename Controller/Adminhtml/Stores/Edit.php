@@ -25,7 +25,7 @@ class Edit extends \SqualoMail\SqmMcMagentoTwo\Controller\Adminhtml\Stores
     {
         $storeId = $this->getRequest()->getParam('id');
         /** @var \SqualoMail\SqmMcMagentoTwo\Model\SqmMcStores $model */
-        $model = $this->_mailchimpStoresFactory->create();
+        $model = $this->_sqmmcStoresFactory->create();
 
         if ($storeId) {
             $model->getResource()->load($model, $storeId);
@@ -52,7 +52,7 @@ class Edit extends \SqualoMail\SqmMcMagentoTwo\Controller\Adminhtml\Stores
         /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
         $resultPage = $this->_resultPageFactory->create();
         $resultPage->setActiveMenu('SqualoMail_SqmMcMagentoTwo::main_menu');
-        $resultPage->getConfig()->getTitle()->prepend(__('Mailchimp Store'));
+        $resultPage->getConfig()->getTitle()->prepend(__('SqualoMail Store'));
 
         return $resultPage;
     }

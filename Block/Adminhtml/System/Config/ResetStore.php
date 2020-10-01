@@ -75,6 +75,6 @@ class ResetStore extends \Magento\Config\Block\System\Config\Form\Field
         } elseif (isset($params['store'])) {
             $scope = ['store'=>$params['store']];
         }
-        return $this->_urlBuilder->getUrl('mailchimp/ecommerce/ResetStore', $scope);
+        return $this->_urlBuilder->getUrl('sqmmc/ecommerce/ResetStore', $scope);
     }
 }

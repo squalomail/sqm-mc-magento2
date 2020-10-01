@@ -21,7 +21,7 @@ class Save extends \SqualoMail\SqmMcMagentoTwo\Controller\Adminhtml\Stores
         if ($isPost) {
             $resultRedirect = $this->resultRedirectFactory->create();
             $returnToEdit = (bool)$this->getRequest()->getParam('back', false);
-            $storeModel = $this->_mailchimpStoresFactory->create();
+            $storeModel = $this->_sqmmcStoresFactory->create();
             $formData = $this->getRequest()->getParam('stores');
             $storeId = isset($formData['id']) ? $formData['id'] : null;
             if ($storeId) {
@@ -36,14 +36,14 @@ class Save extends \SqualoMail\SqmMcMagentoTwo\Controller\Adminhtml\Stores
                     if (!$storeId) {
                         $storeId = $storeModel->getId();
                     }
-                    return $resultRedirect->setPath('mailchimp/stores/edit', ['id'=>$storeId]);
+                    return $resultRedirect->setPath('sqmmc/stores/edit', ['id'=>$storeId]);
                 } else {
-                    return $resultRedirect->setPath('mailchimp/stores');
+                    return $resultRedirect->setPath('sqmmc/stores');
                 }
             } catch (\SqualoMailMc_Error $e) {
                 $this->messageManager->addErrorMessage(__('Store could not be saved.'.$e->getMessage()));
                 $this->_helper->log($e->getFriendlyMessage());
-                return $resultRedirect->setPath('mailchimp/stores/edit', ['id'=>$storeId]);
+                return $resultRedirect->setPath('sqmmc/stores/edit', ['id'=>$storeId]);
             }
         }
     }

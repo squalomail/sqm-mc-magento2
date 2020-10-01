@@ -52,7 +52,7 @@ class Monkey extends Column
     /**
      * @var \SqualoMail\SqmMcMagentoTwo\Model\SqmMcErrorsFactory
      */
-    protected $_mailChimpErrorsFactory;
+    protected $_sqmMcErrorsFactory;
 
     /**
      * Monkey constructor.
@@ -91,7 +91,7 @@ class Monkey extends Column
         $this->_helper          = $helper;
         $this->_syncCommerceCF  = $syncCommerceCF;
         $this->_orderFactory    = $orderFactory;
-        $this->_mailChimpErrorsFactory  = $sqmMcErrorsFactory;
+        $this->_sqmMcErrorsFactory  = $sqmMcErrorsFactory;
         parent::__construct($context, $uiComponentFactory, $components, $data);
     }
 
@@ -187,7 +187,7 @@ class Monkey extends Column
         /**
          * @var $error \SqualoMail\SqmMcMagentoTwo\Model\SqmMcErrors
          */
-        $error = $this->_mailChimpErrorsFactory->create();
+        $error = $this->_sqmMcErrorsFactory->create();
         return $error->getByStoreIdType($storeId, $orderId, \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_ORDER);
     }
 }

@@ -32,7 +32,7 @@ class Stores extends Action
     /**
      * @var SqmMcStoresFactory
      */
-    protected $_mailchimpStoresFactory;
+    protected $_sqmmcStoresFactory;
     /**
      * @var \SqualoMail\SqmMcMagentoTwo\Helper\Data
      */
@@ -57,7 +57,7 @@ class Stores extends Action
         parent::__construct($context);
         $this->_coreRegistry            = $registry;
         $this->_resultPageFactory       = $resultPageFactory;
-        $this->_mailchimpStoresFactory  = $storesFactory;
+        $this->_sqmmcStoresFactory  = $storesFactory;
         $this->_helper                  = $helper;
     }
     public function execute()

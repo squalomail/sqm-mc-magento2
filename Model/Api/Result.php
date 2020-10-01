@@ -15,7 +15,7 @@ namespace SqualoMail\SqmMcMagentoTwo\Model\Api;
 
 class Result
 {
-    const SQM_MC_TEMP_DIR = 'Mailchimp';
+    const SQM_MC_TEMP_DIR = 'SqualoMail';
     /**
      * @var \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcSyncBatches\CollectionFactory
      */
@@ -66,7 +66,7 @@ class Result
         $this->_driver              = $driver;
         $this->_curlFactory         = $curlFactory;
     }
-    public function processResponses($storeId, $isMailChimpStoreId = false, $sqmmcStoreId)
+    public function processResponses($storeId, $isSqmMcStoreId = false, $sqmmcStoreId)
     {
         $collection = $this->_batchCollection->create();
         $collection

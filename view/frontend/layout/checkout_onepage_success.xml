@@ -13,7 +13,7 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceContainer name="order.success.additional.info">
-            <block class="SqualoMail\SqmMcMagentoTwo\Block\Checkout\Success" ifconfig="mailchimp/general/interest_in_success" name="mailchimp.order.success" template="SqualoMail_SqmMcMagentoTwo::checkout/order/success.phtml"/>
+            <block class="SqualoMail\SqmMcMagentoTwo\Block\Checkout\Success" ifconfig="sqmmc/general/interest_in_success" name="sqmmc.order.success" template="SqualoMail_SqmMcMagentoTwo::checkout/order/success.phtml"/>
         </referenceContainer>
     </body>
 </page>

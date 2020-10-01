@@ -1,6 +1,6 @@
 <?php
 /**
- * MailChimp Magento Component
+ * SqmMc Magento Component
  *
  * @category SqualoMail
  * @package SqmMcMagentoTwo
@@ -30,10 +30,10 @@ class BatchesClean
      */
     public function __construct(
         \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
-        \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncBatches $_mailChimpSyncBatches
+        \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncBatches $_sqmMcSyncBatches
     ) {
         $this->helper               = $helper;
-        $this->sqmMcSyncBatches = $_mailChimpSyncBatches;
+        $this->sqmMcSyncBatches = $_sqmMcSyncBatches;
     }
     public function execute()
     {

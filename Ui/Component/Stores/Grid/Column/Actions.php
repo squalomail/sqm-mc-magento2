@@ -59,7 +59,7 @@ class Actions extends Column
             foreach ($dataSource['data']['items'] as &$item) {
                 $item[$this->getData('name')]['edit'] = [
                     'href' => $this->urlBuilder->getUrl(
-                        'mailchimp/stores/edit',
+                        'sqmmc/stores/edit',
                         ['id' => $item['id']]
                     ),
                     'label' => __('Edit'),

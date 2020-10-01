@@ -1,6 +1,6 @@
 <?php
 /**
- * MailChimp Magento Component
+ * SqmMc Magento Component
  *
  * @category SqualoMail
  * @package SqmMcMagentoTwo
@@ -61,7 +61,7 @@ class Sqmmc extends \Magento\Backend\Block\Template implements TabInterface
      */
     public function getTabLabel()
     {
-        return __('MailChimp');
+        return __('SqualoMail');
     }
 
     /**
@@ -69,7 +69,7 @@ class Sqmmc extends \Magento\Backend\Block\Template implements TabInterface
      */
     public function getTabTitle()
     {
-        return __('MailChimp');
+        return __('SqualoMail');
     }
 
     /**

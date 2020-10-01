@@ -176,7 +176,7 @@ class Subscriber
         try {
             $md5HashEmail = hash('md5', strtolower($subscriber->getSubscriberEmail()));
             $api->lists->members->update($listId, $md5HashEmail, null, 'cleaned');
-        } catch (\MailChimp_Error $e) {
+        } catch (\SqualoMailMc_Error $e) {
             $this->_helper->log($e->getFriendlyMessage(), $storeId);
             $this->_message->addErrorMessage($e->getMessage());
         } catch (\Exception $e) {

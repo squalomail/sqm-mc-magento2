@@ -53,7 +53,7 @@ class MonkeyStore implements \Magento\Framework\Option\ArrayInterface
     {
         if (is_array($this->options)) {
             $rc = [];
-            $rc[] = ['value' => -1, 'label' => 'Select one Mailchimp Store'];
+            $rc[] = ['value' => -1, 'label' => 'Select one SqualoMail Store'];
             foreach ($this->options['stores'] as $store) {
                 if ($store['platform'] == \SqualoMail\SqmMcMagentoTwo\Helper\Data::PLATFORM) {
                     if ($store['list_id']=='') {

@@ -35,7 +35,7 @@ class Index extends \Magento\Backend\App\Action
     public function execute()
     {
         $page = $this->resultPageFactory->create();
-        $page->getConfig()->getTitle()->prepend(__('Mailchimp Errors'));
+        $page->getConfig()->getTitle()->prepend(__('SqualoMail Errors'));
         return $page;
     }
     protected function _isAllowed()

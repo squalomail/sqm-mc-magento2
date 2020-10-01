@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 /**
- * MailChimp Magento Component
+ * SqmMc Magento Component
  *
  * @category SqualoMail
  * @package SqmMcMagentoTwo
@@ -13,7 +13,7 @@
  */
  -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
-    <group id="mailchimp">
+    <group id="sqmmc">
        <job name="squalomail_ecommerce" instance="SqualoMail\SqmMcMagentoTwo\Cron\Ecommerce" method="execute">
             <schedule>*/5 * * * *</schedule>
         </job>

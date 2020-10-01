@@ -3,8 +3,8 @@
     <event name="sales_order_save_after">
         <observer name="sales_order_save_after" instance="\SqualoMail\SqmMcMagentoTwo\Observer\Sales\Order\SaveAfter"/>
     </event>
-    <event name="admin_system_config_changed_section_mailchimp">
-        <observer name="sqmmc_admin_system_config_changed_section_mailchimp" instance="SqualoMail\SqmMcMagentoTwo\Observer\ConfigObserver"/>
+    <event name="admin_system_config_changed_section_sqmmc">
+        <observer name="sqmmc_admin_system_config_changed_section_sqmmc" instance="SqualoMail\SqmMcMagentoTwo\Observer\ConfigObserver"/>
     </event>
     <event name="salesrule_rule_save_after">
         <observer name="sqmmc_salesrule_rule_save_after" instance="\SqualoMail\SqmMcMagentoTwo\Observer\SalesRule\Rule\SaveAfter"/>

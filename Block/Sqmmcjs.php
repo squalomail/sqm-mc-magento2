@@ -1,6 +1,6 @@
 <?php
 /**
- * MailChimp Magento Component
+ * SqmMc Magento Component
  *
  * @category SqualoMail
  * @package SqmMcMagentoTwo
@@ -57,7 +57,7 @@ class Sqmmcjs extends \Magento\Framework\View\Element\Template
         );
 
         // if we have URL cached or integration is disabled
-        // then avoid initialization of Mailchimp Helper and all linked classes (~30 classes)
+        // then avoid initialization of SqualoMail Helper and all linked classes (~30 classes)
         if ($active && !$url) {
             $url = $this->_helper->getJsUrl($storeId);
         }

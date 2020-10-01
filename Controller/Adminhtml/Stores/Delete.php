@@ -20,17 +20,17 @@ class Delete extends \SqualoMail\SqmMcMagentoTwo\Controller\Adminhtml\Stores
         $resultRedirect = $this->resultRedirectFactory->create();
         $storeId = (int) $this->getRequest()->getParam('id');
         if ($storeId) {
-            $storeModel = $this->_mailchimpStoresFactory->create();
+            $storeModel = $this->_sqmmcStoresFactory->create();
             $storeModel->getResource()->load($storeModel, $storeId);
             try {
                 $api = $this->_helper->getApiByApiKey($storeModel->getApikey(), true);
                 $api->ecommerce->stores->delete($storeModel->getStoreid());
                 $this->messageManager->addSuccess(__('You deleted the store.'));
-                return $resultRedirect->setPath('mailchimp/stores');
+                return $resultRedirect->setPath('sqmmc/stores');
             } catch (\SqualoMailMc_Error $e) {
                 $this->messageManager->addError(__('Store could not be deleted.'.$e->getMessage()));
                 $this->_helper->log($e->getFriendlyMessage());
-                return $resultRedirect->setPath('mailchimp/stores/edit', ['id'=>$storeId]);
+                return $resultRedirect->setPath('sqmmc/stores/edit', ['id'=>$storeId]);
             }
         }
     }

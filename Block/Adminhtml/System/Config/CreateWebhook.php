@@ -69,6 +69,6 @@ class CreateWebhook extends \Magento\Config\Block\System\Config\Form\Field
         } elseif (isset($params['store'])) {
             $scope = ['store'=>$params['store']];
         }
-        return $this->_urlBuilder->getUrl('mailchimp/ecommerce/CreateWebhook', $scope);
+        return $this->_urlBuilder->getUrl('sqmmc/ecommerce/CreateWebhook', $scope);
     }
 }

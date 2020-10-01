@@ -128,7 +128,7 @@ class Order
     }
 
     /**
-     * Set the request for orders to be created on MailChimp
+     * Set the request for orders to be created on SqualoMail
      *
      * @param $sqmmcStoreId
      * @param $magentoStoreId
@@ -166,7 +166,7 @@ class Order
             "' and m4m.sqmmc_store_id = '".$sqmmcStoreId."'",
             ['m4m.*']
         );
-        // be sure that the order are already in mailchimp and not deleted
+        // be sure that the order are already in squalomail and not deleted
         $modifiedOrders->getSelect()->where(
             "m4m.sqmmc_sync_modified = 1 AND m4m.sqmmc_store_id = '".$sqmmcStoreId."'"
         );
@@ -248,7 +248,7 @@ class Order
             "' and m4m.sqmmc_store_id = '".$sqmmcStoreId."'",
             ['m4m.*']
         );
-        // be sure that the quote are not in mailchimp
+        // be sure that the quote are not in squalomail
         $newOrders->getSelect()->where("m4m.sqmmc_sync_delta IS NULL");
         // limit the collection
         $newOrders->getSelect()->limit(self::BATCH_LIMIT);

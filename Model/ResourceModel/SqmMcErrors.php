@@ -8,7 +8,7 @@
  * @copyright Ebizmarts (http://ebizmarts.com)
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @date: 10/17/16 1:57 PM
- * @file: MailChimpError.php
+ * @file: SqmMcErrors.php
  */
 namespace SqualoMail\SqmMcMagentoTwo\Model\ResourceModel;
 

@@ -27,15 +27,15 @@ define(
                     var urlparams = null;
                     var isGet = path.search.search('\\?');
                     var mc_cid = null;
-                    var isMailchimp = false;
+                    var isSqmmc = false;
                     var checkCampaignUrl = self.options.checkCampaignUrl;
                     if(isGet != -1) {
                         urlparams = self.getUrlVars();
                         urlparams.forEach(function (item) {
                             if (item.key=='utm_source') {
-                                var reg = /^mailchimp$/;
+                                var reg = /^squalomail$/;
                                 if (reg.exec(item.value)) {
-                                    isMailchimp = true;
+                                    isSqmmc = true;
                                 }
                             } else {
                                 if (item.key=='mc_cid') {
@@ -49,9 +49,9 @@ define(
                         var mccidIndex = $.inArray('mc_cid', urlparams);
                         if (utmIndex != -1) {
                             var value = urlparams[utmIndex + 1];
-                            var reg = /^mailchimp$/;
+                            var reg = /^squalomail$/;
                             if (reg.exec(value)) {
-                                isMailchimp = true;
+                                isSqmmc = true;
                             }
                         } else {
                             if (mccidIndex != -1) {
@@ -59,7 +59,7 @@ define(
                             }
                         }
                     }
-                    if (mc_cid && !isMailchimp) {
+                    if (mc_cid && !isSqmmc) {
                         $.ajax({
                             url: checkCampaignUrl + 'mc_cid/' + mc_cid + '/',
                             type: 'GET',
@@ -77,7 +77,7 @@ define(
                         });
                     }
 
-                    if (isMailchimp) {
+                    if (isSqmmc) {
                         $.mage.cookies.clear('sqmmc_campaign_id');
                         $.mage.cookies.set('sqmmc_landing_page', location);
                     }

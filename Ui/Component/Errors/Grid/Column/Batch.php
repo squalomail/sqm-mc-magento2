@@ -49,7 +49,7 @@ class Batch extends Column
             foreach ($dataSource['data']['items'] as &$item) {
                 $item[$this->getData('name')]['batch_id'] = [
                     'href' => $this->urlBuilder->getUrl(
-                        'mailchimp/errors/getresponse',
+                        'sqmmc/errors/getresponse',
                         ['id' => $item['id']]
                     ),
                     'label' => $item['batch_id'],

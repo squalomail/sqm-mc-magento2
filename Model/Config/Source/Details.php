@@ -126,7 +126,7 @@ class Details implements \Magento\Framework\Option\ArrayInterface
                         [['label' => 'Total List Subscribers', 'value' => $this->_options['list_subscribers']]]
                     );
                 }
-                $ret = array_merge($ret, [['label' => 'Ecommerce Data uploaded to MailChimp', 'value' => '']]);
+                $ret = array_merge($ret, [['label' => 'Ecommerce Data uploaded to SqualoMail', 'value' => '']]);
                 if (isset($this->_options['store_exists']) && $this->_options['store_exists']) {
                     $ret = array_merge($ret, [
                         ['label' => '  Total Customers', 'value' => $this->_options['total_customers']],
@@ -145,7 +145,7 @@ class Details implements \Magento\Framework\Option\ArrayInterface
                     }
                 } else {
                     $ret = array_merge($ret, [
-                        ['label'=>'This MailChimp account is not connected to Magento.','value'=>'']
+                        ['label'=>'This SqualoMail account is not connected to Magento.','value'=>'']
                     ]);
                 }
             }

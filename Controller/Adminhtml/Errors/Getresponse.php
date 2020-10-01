@@ -74,7 +74,7 @@ class Getresponse extends \Magento\Backend\App\Action
             $counter++;
             $files = $this->_result->getBatchResponse($batchId, $errors->getStoreId());
             if ($files===false) {
-                $fileContent = "Response was deleted from MailChimp servers";
+                $fileContent = "Response was deleted from SqualoMail servers";
                 break;
             }
             foreach ($files as $file) {

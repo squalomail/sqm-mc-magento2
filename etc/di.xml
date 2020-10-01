@@ -17,10 +17,10 @@
         </arguments> 
     </type>
     <type name="Magento\Quote\Model\Quote">
-        <plugin name="mailchimp-save-quote" type="SqualoMail\SqmMcMagentoTwo\Model\Plugin\Quote" sortOrder="10"/>
+        <plugin name="sqmmc-save-quote" type="SqualoMail\SqmMcMagentoTwo\Model\Plugin\Quote" sortOrder="10"/>
     </type>
     <type name="Magento\Newsletter\Controller\Manage\Save">
-        <plugin name="mailchimp-account-interest-group" type="SqualoMail\SqmMcMagentoTwo\Model\Plugin\Newsletter\Save" sortOrder="10"/>
+        <plugin name="sqmmc-account-interest-group" type="SqualoMail\SqmMcMagentoTwo\Model\Plugin\Newsletter\Save" sortOrder="10"/>
     </type>
     <type name="SqualoMail\SqmMcMagentoTwo\Model\Logger\Handler">
         <arguments>
@@ -29,7 +29,7 @@
     </type>
     <type name="SqualoMail\SqmMcMagentoTwo\Model\Logger\Logger">
         <arguments>
-            <argument name="name" xsi:type="string">MailChimpLogger</argument>
+            <argument name="name" xsi:type="string">SqmMcLogger</argument>
             <argument name="handlers"  xsi:type="array">
                 <item name="system" xsi:type="object">SqualoMail\SqmMcMagentoTwo\Model\Logger\Handler</item>
             </argument>
@@ -56,7 +56,7 @@
         </arguments>
     </virtualType>
     <type name="Magento\Newsletter\Model\Subscriber">
-        <plugin name="mailchimp-subscriber" type="SqualoMail\SqmMcMagentoTwo\Model\Plugin\Subscriber" sortOrder="10"/>
+        <plugin name="sqmmc-subscriber" type="SqualoMail\SqmMcMagentoTwo\Model\Plugin\Subscriber" sortOrder="10"/>
     </type>
     <type name="Magento\Customer\Model\AccountManagement">
         <plugin name="abandoned-checkout-save-quote" type="SqualoMail\SqmMcMagentoTwo\Model\Plugin\AccountManagement" sortOrder="10"/>
@@ -69,7 +69,7 @@
         </arguments>
     </virtualType>
     <type name="Magento\SalesRule\Model\Coupon">
-        <plugin name="mailchimp-coupon" type="SqualoMail\SqmMcMagentoTwo\Model\Plugin\Coupon" sortOrder="10"/>
+        <plugin name="sqmmc-coupon" type="SqualoMail\SqmMcMagentoTwo\Model\Plugin\Coupon" sortOrder="10"/>
     </type>
     <type name="Magento\Sales\Model\Order\ShipmentRepository">
         <plugin name="sqmmc_save_shipment" type="SqualoMail\SqmMcMagentoTwo\Model\Plugin\Ship" sortOrder="10"/>

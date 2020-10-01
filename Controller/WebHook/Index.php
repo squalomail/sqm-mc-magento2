@@ -24,7 +24,7 @@ use Magento\Framework\Controller\ResultInterface;
 
 class Index extends Action implements CsrfAwareActionInterface
 {
-    const WEBHOOK__PATH = 'mailchimp/webhook/index';
+    const WEBHOOK__PATH = 'sqmmc/webhook/index';
     /**
      * @var ResultFactory
      */

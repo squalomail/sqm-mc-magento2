@@ -108,7 +108,7 @@ class Info extends Generic implements TabInterface
             foreach ($apikey as $a) {
                 $apikeyArray[$a['value']] = $a['label'];
             }
-            $url = $this->_urlBuilder->getUrl('mailchimp/stores/getList');
+            $url = $this->_urlBuilder->getUrl('sqmmc/stores/getList');
             $fieldset->addField(
                 'apikey',
                 'select',

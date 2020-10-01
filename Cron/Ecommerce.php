@@ -1,6 +1,6 @@
 <?php
 /**
- * MailChimp Magento Component
+ * SqmMc Magento Component
  *
  * @category SqualoMail
  * @package SqmMcMagentoTwo
@@ -46,7 +46,7 @@ class Ecommerce
     /**
      * @var \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncBatchesFactory
      */
-    private $_mailChimpSyncBatchesFactory;
+    private $_sqmMcSyncBatchesFactory;
     /**
      * @var \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncEcommerce
      */
@@ -103,7 +103,7 @@ class Ecommerce
         $this->_storeManager    = $storeManager;
         $this->_helper          = $helper;
         $this->_apiProduct      = $apiProduct;
-        $this->_mailChimpSyncBatchesFactory = $sqmMcSyncBatchesFactory;
+        $this->_sqmMcSyncBatchesFactory = $sqmMcSyncBatchesFactory;
         $this->_apiResult       = $apiResult;
         $this->_apiCustomer     = $apiCustomer;
         $this->_apiOrder        = $apiOrder;
@@ -128,7 +128,7 @@ class Ecommerce
         foreach ($this->_storeManager->getStores() as $storeId => $val) {
             if ($this->_helper->getConfigValue(\SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_ACTIVE, $storeId)) {
                 if (!$this->_ping($storeId)) {
-                    $this->_helper->log('MailChimp is not available');
+                    $this->_helper->log('SqualoMail is not available');
                     return;
                 }
                 $this->_storeManager->setCurrentStore($storeId);
@@ -254,7 +254,7 @@ class Ecommerce
                     if (!isset($batchResponse['id'])) {
                         $this->_helper->log('error in the call to batch');
                     } else {
-                        $syncBatches = $this->_mailChimpSyncBatchesFactory->create();
+                        $syncBatches = $this->_sqmMcSyncBatchesFactory->create();
                         $syncBatches->setStoreId($storeId);
                         $syncBatches->setBatchId($batchResponse['id']);
                         $syncBatches->setStatus(\SqualoMail\SqmMcMagentoTwo\Helper\Data::BATCH_PENDING);
@@ -328,7 +328,7 @@ class Ecommerce
                 false
             );
         } catch (\SqualoMailMc_Error $e) {
-            $this->_helper->log('MailChimp error when updating syncing flag for store ' . $storeId);
+            $this->_helper->log('SqualoMail error when updating syncing flag for store ' . $storeId);
             $this->_helper->log($e->getFriendlyMessage());
         }
     }

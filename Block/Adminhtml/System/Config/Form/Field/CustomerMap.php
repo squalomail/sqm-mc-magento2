@@ -19,7 +19,7 @@ class CustomerMap extends \Magento\Config\Block\System\Config\Form\Field\FieldAr
      * @var VarsMap
      */
     protected $_varsRenderer=null;
-    protected $_mailchimpRenderer=null;
+    protected $_sqmmcRenderer=null;
 
     protected function _getVarsRenderer()
     {
@@ -35,23 +35,23 @@ class CustomerMap extends \Magento\Config\Block\System\Config\Form\Field\FieldAr
     }
     protected function _getSqmmcRenderer()
     {
-        if (!$this->_mailchimpRenderer) {
-            $this->_mailchimpRenderer = $this->getLayout()->createBlock(
+        if (!$this->_sqmmcRenderer) {
+            $this->_sqmmcRenderer = $this->getLayout()->createBlock(
                 \SqualoMail\SqmMcMagentoTwo\Block\Adminhtml\System\Config\Form\Field\SqmmcMap::class,
                 '',
                 ['data' => ['is_render_to_js_template' => true]]
             );
-            $this->_mailchimpRenderer->setClass('sqmmc_field_select');
+            $this->_sqmmcRenderer->setClass('sqmmc_field_select');
         }
-        return $this->_mailchimpRenderer;
+        return $this->_sqmmcRenderer;
     }
 
     protected function _prepareToRender()
     {
-//        $this->addColumn('mailchimp', ['label' => __('Mailchimp')]);
+//        $this->addColumn('sqmmc', ['label' => __('SqualoMail')]);
         $this->addColumn(
             'sqmmc_field_id',
-            ['label' => __('Mailchimp'), 'renderer' => $this->_getSqmmcRenderer()]
+            ['label' => __('SqualoMail'), 'renderer' => $this->_getSqmmcRenderer()]
         );
         $this->addColumn(
             'customer_field_id',

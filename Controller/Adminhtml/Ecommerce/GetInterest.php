@@ -88,6 +88,6 @@ class GetInterest extends Action
      */
     protected function _isAllowed()
     {
-        return $this->_authorization->isAllowed('SqualoMail_SqmMcMagentoTwo::config_mailchimp');
+        return $this->_authorization->isAllowed('SqualoMail_SqmMcMagentoTwo::config_sqmmc');
     }
 }

@@ -125,7 +125,7 @@ class Cart
 
         $date = $this->_helper->getDateMicrotime();
         $this->_batchId =  \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_QUOTE.'_'.$date;
-        // get all the carts converted in orders (must be deleted on mailchimp)
+        // get all the carts converted in orders (must be deleted on squalomail)
         $allCarts = array_merge($allCarts, $this->_getConvertedQuotes($sqmmcStoreId, $magentoStoreId));
         // get all the carts modified but not converted in orders
         $allCarts = array_merge($allCarts, $this->_getModifiedQuotes($sqmmcStoreId, $magentoStoreId));
@@ -153,7 +153,7 @@ class Cart
             AND m4m.sqmmc_store_id = '" . $sqmmcStoreId . "'",
             ['m4m.*']
         );
-        // be sure that the quotes are already in mailchimp and not deleted
+        // be sure that the quotes are already in squalomail and not deleted
         $convertedCarts->getSelect()->where("m4m.sqmmc_sync_deleted is null and m4m.related_id is not null");
         // limit the collection
         $convertedCarts->getSelect()->limit(self::BATCH_LIMIT);
@@ -230,7 +230,7 @@ class Cart
             AND m4m.sqmmc_store_id = '" . $sqmmcStoreId . "'",
             ['m4m.*']
         );
-        // be sure that the quotes are already in mailchimp and not deleted
+        // be sure that the quotes are already in squalomail and not deleted
         $modifiedCarts->getSelect()->where(
             "(m4m.sqmmc_sync_deleted is null or m4m.sqmmc_sync_deleted = 0)".
             " AND m4m.sqmmc_sync_delta < main_table.updated_at"
@@ -363,7 +363,7 @@ class Cart
             AND m4m.sqmmc_store_id = '" . $sqmmcStoreId . "'",
             ['m4m.*']
         );
-        // be sure that the quotes are already in mailchimp and not deleted
+        // be sure that the quotes are already in squalomail and not deleted
         $newCarts->getSelect()->where("m4m.sqmmc_sync_delta IS NULL");
 
         // limit the collection
@@ -493,7 +493,7 @@ class Cart
             AND m4m.sqmmc_store_id = '" . $sqmmcStoreId . "'",
             ['m4m.*']
         );
-        // be sure that the quotes are already in mailchimp and not deleted
+        // be sure that the quotes are already in squalomail and not deleted
         $allCartsForEmail->getSelect()->where("m4m.sqmmc_sync_deleted = 0");
         return $allCartsForEmail;
     }

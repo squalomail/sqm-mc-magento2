@@ -20,7 +20,7 @@ class Index extends Stores
     {
         $this->_helper->loadStores();
         $page = $this->_resultPageFactory->create();
-        $page->getConfig()->getTitle()->prepend(__('Mailchimp Stores'));
+        $page->getConfig()->getTitle()->prepend(__('SqualoMail Stores'));
         return $page;
     }
     protected function _isAllowed()

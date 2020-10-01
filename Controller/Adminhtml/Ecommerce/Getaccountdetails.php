@@ -72,7 +72,7 @@ class Getaccountdetails extends Action
                     $list = $api->lists->getLists($storeData['list_id']);
                     $options['list_name'] = $list['name'];
                     $options['total_list_subscribers'] = ['label' => __('Total List Subscribers:'), 'value' => $list['stats']['member_count']];
-                    $options['subtitle'] = ['label' => __('Ecommerce Data uploaded to MailChimp:'), 'value' => ''];
+                    $options['subtitle'] = ['label' => __('Ecommerce Data uploaded to SqualoMail:'), 'value' => ''];
                     $totalCustomers = $api->ecommerce->customers->getAll($store, 'total_items');
                     $options['total_customers'] = ['label' => __('Total customers:'), 'value' => $totalCustomers['total_items']];
                     $totalProducts = $api->ecommerce->products->getAll($store, 'total_items');
@@ -81,9 +81,9 @@ class Getaccountdetails extends Action
                     $options['total_orders'] = ['label' => __('Total orders:'), 'value' => $totalOrders['total_items']];
                     $totalCarts = $api->ecommerce->carts->getAll($store, 'total_items');
                     $options['total_carts'] = ['label' => __('Total Carts:'), 'value' => $totalCarts['total_items']];
-                    $options['notsaved'] = ['label' => __('This MailChimp account is not connected to Magento.'), 'value' => ''];
+                    $options['notsaved'] = ['label' => __('This SqualoMail account is not connected to Magento.'), 'value' => ''];
                 } else {
-                    $options['nostore'] = ['label' => __('This MailChimp account is not connected to Magento.'), 'value' => ''];
+                    $options['nostore'] = ['label' => __('This SqualoMail account is not connected to Magento.'), 'value' => ''];
                 }
             }
         } catch (\SqualoMailMc_Error $e) {
@@ -97,6 +97,6 @@ class Getaccountdetails extends Action
     }
     protected function _isAllowed()
     {
-        return $this->_authorization->isAllowed('SqualoMail_SqmMcMagentoTwo::config_mailchimp');
+        return $this->_authorization->isAllowed('SqualoMail_SqmMcMagentoTwo::config_sqmmc');
     }
 }

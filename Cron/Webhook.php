@@ -307,7 +307,7 @@ class Webhook
                 } else {
                     if (is_array($mapFields)) {
                         foreach ($mapFields as $map) {
-                            if ($map['mailchimp'] == $key) {
+                            if ($map['sqmmc'] == $key) {
                                 if (!$map['isAddress']&&$map['customer_field'] != "dob") {
                                     if (count($map['options'])) {
                                         foreach($map['options'] as $option) {
