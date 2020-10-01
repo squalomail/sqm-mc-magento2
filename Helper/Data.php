@@ -467,7 +467,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     public function getCartUrl($storeId, $cartId, $token)
     {
         $rc = $this->_storeManager->getStore($storeId)->getUrl(
-            'mailchimp/cart/loadquote',
+            'sqmmc/cart/loadquote',
             [
                 'id' => $cartId,
                 'token' => $token,
