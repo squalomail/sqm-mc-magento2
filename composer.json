@@ -4,7 +4,7 @@
     "psr-4": {"SqualoMail\\SqmMcMagentoTwo\\":""},
     "files": ["registration.php"]
   },
-  "description": "Connect SqualoMail with Magento",
+  "description": "connect SqualoMail with Magento",
   "type": "magento2-module",
   "version": "102.3.41",
   "authors": [
