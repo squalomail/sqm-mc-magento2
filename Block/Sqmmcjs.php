@@ -8,14 +8,14 @@
  * @copyright Ebizmarts (http://ebizmarts.com)
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @date: 5/8/17 12:00 PM
- * @file: Mailchimpjs.php
+ * @file: Sqmmcjs.php
  */
 
 namespace SqualoMail\SqmMcMagentoTwo\Block;
 
 use Magento\Store\Model\ScopeInterface;
 
-class Mailchimpjs extends \Magento\Framework\View\Element\Template
+class Sqmmcjs extends \Magento\Framework\View\Element\Template
 {
     /**
      * @var \SqualoMail\SqmMcMagentoTwo\Helper\Data
@@ -28,7 +28,7 @@ class Mailchimpjs extends \Magento\Framework\View\Element\Template
     protected $_storeManager;
 
     /**
-     * Mailchimpjs constructor.
+     * Sqmmcjs constructor.
      * @param \Magento\Framework\View\Element\Template\Context $context
      * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      * @param array $data

@@ -11,7 +11,7 @@
  */
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-    <type name="SqualoMail\SqmMcMagentoTwo\Block\Mailchimpjs">
+    <type name="SqualoMail\SqmMcMagentoTwo\Block\Sqmmcjs">
         <arguments>
             <argument name="helper" xsi:type="object">SqualoMail\SqmMcMagentoTwo\Helper\Data\Proxy</argument> 
         </arguments> 

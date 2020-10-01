@@ -28,7 +28,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     const XML_PATH_LOG               = 'mailchimp/general/log';
     const XML_PATH_MAPPING           = 'mailchimp/general/mapping';
     const XML_SQM_MC_STORE        = 'mailchimp/general/monkeystore';
-    const XML_SQM_MC_JS_URL       = 'mailchimp/general/mailchimpjsurl';
+    const XML_SQM_MC_JS_URL       = 'mailchimp/general/sqmmcjsurl';
     const XML_PATH_CONFIRMATION_FLAG = 'newsletter/subscription/confirm';
     const XML_PATH_STORE             = 'mailchimp/ecommerce/store';
     const XML_PATH_ECOMMERCE_ACTIVE  = 'mailchimp/ecommerce/active';
