@@ -13,7 +13,7 @@ var config = {
         "*": {
             monkeyapikey: 'SqualoMail_SqmMcMagentoTwo/js/apikey',
             configmonkeyapikey: 'SqualoMail_SqmMcMagentoTwo/js/configapikey',
-            mailchimpconfirmation: 'SqualoMail_SqmMcMagentoTwo/js/mailchimpconfirmation'
+            sqmmcconfirmation: 'SqualoMail_SqmMcMagentoTwo/js/sqmmcconfirmation'
         }
     }
 };
