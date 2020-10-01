@@ -116,7 +116,7 @@ class Customer
             $customerJson = json_encode($data);
             if ($customerJson!==false) {
                 if (!empty($customerJson)) {
-                    if ($item->getMailchimpSyncModified() == 1) {
+                    if ($item->getSqmmcSyncModified() == 1) {
                         $this->_helper->modifyCounter(\SqualoMail\SqmMcMagentoTwo\Helper\Data::CUS_MOD);
                     } else {
                         $this->_helper->modifyCounter(\SqualoMail\SqmMcMagentoTwo\Helper\Data::CUS_NEW);

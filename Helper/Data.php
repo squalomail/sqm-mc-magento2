@@ -311,7 +311,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      * @param null $store
      * @return mixed
      */
-    public function isMailChimpEnabled($store = null)
+    public function isSqmMcEnabled($store = null)
     {
         return $this->getConfigValue(self::XML_PATH_ACTIVE, $store);
     }
@@ -525,7 +525,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     public function log($message, $store = null, $file = null)
     {
         if ($this->getConfigValue(self::XML_PATH_LOG, $store)) {
-            $this->_mlogger->mailchimpLog($message, $file);
+            $this->_mlogger->sqmmcLog($message, $file);
         }
     }
 
@@ -743,7 +743,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         return $this->getConfigValue(self::XML_PATH_LIST, $storeId);
     }
 
-    public function getListForMailChimpStore($sqmmcStoreId, $apiKey)
+    public function getListForSqmMcStore($sqmmcStoreId, $apiKey)
     {
         try {
             $api = $this->getApiByApiKey($apiKey);
@@ -802,29 +802,29 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             $chimpSyncEcommerce = $this->getChimpSyncEcommerce($storeId, $entityId, $type);
             if ($chimpSyncEcommerce->getRelatedId() == $entityId ||
                 !$chimpSyncEcommerce->getRelatedId() && $modified != 1) {
-                $chimpSyncEcommerce->setMailchimpStoreId($storeId);
+                $chimpSyncEcommerce->setSqmmcStoreId($storeId);
                 $chimpSyncEcommerce->setType($type);
                 $chimpSyncEcommerce->setRelatedId($entityId);
                 if ($modified) {
-                    $chimpSyncEcommerce->setMailchimpSyncModified($modified);
+                    $chimpSyncEcommerce->setSqmmcSyncModified($modified);
                 }
                 if ($date) {
-                    $chimpSyncEcommerce->setMailchimpSyncDelta($date);
+                    $chimpSyncEcommerce->setSqmmcSyncDelta($date);
                 } elseif ($modified != 1) {
                     $chimpSyncEcommerce->setBatchId(null);
                 }
                 if ($error) {
-                    $chimpSyncEcommerce->setMailchimpSyncError($error);
+                    $chimpSyncEcommerce->setSqmmcSyncError($error);
                 }
                 if ($deleted) {
-                    $chimpSyncEcommerce->setMailchimpSyncDeleted($deleted);
-                    $chimpSyncEcommerce->setMailchimpSyncModified(0);
+                    $chimpSyncEcommerce->setSqmmcSyncDeleted($deleted);
+                    $chimpSyncEcommerce->setSqmmcSyncModified(0);
                 }
                 if ($token) {
-                    $chimpSyncEcommerce->setMailchimpToken($token);
+                    $chimpSyncEcommerce->setSqmmcToken($token);
                 }
                 if ($sent) {
-                    $chimpSyncEcommerce->setMailchimpSent($sent);
+                    $chimpSyncEcommerce->setSqmmcSent($sent);
                 }
                 $chimpSyncEcommerce->getResource()->save($chimpSyncEcommerce);
             }
@@ -1051,7 +1051,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     {
         $storeIds = [];
         foreach ($this->_storeManager->getStores() as $storeId => $val) {
-            if ($this->isMailChimpEnabled($storeId)) {
+            if ($this->isSqmMcEnabled($storeId)) {
                 $storeListId = $this->getConfigValue(self::XML_PATH_LIST, $storeId);
                 if ($storeListId == $listId) {
                     $storeIds[] = $storeId;

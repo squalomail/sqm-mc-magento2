@@ -143,8 +143,8 @@ class Product
              * @var $product \Magento\Catalog\Model\Product
              */
             $product = $this->_productRepository->getById($item->getId());
-            if ($item->getMailchimpSyncModified() && $item->getMailchimpSyncDelta() &&
-                $item->getMailchimpSyncDelta() > $this->_helper->getMCMinSyncDateFlag()) {
+            if ($item->getSqmmcSyncModified() && $item->getSqmmcSyncDelta() &&
+                $item->getSqmmcSyncDelta() > $this->_helper->getMCMinSyncDateFlag()) {
                 $batchArray = array_merge($this->_buildOldProductRequest(
                     $product,
                     $this->_batchId,
@@ -319,7 +319,7 @@ class Product
                     $parentId,
                     \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_PRODUCT
                 );
-                if ($productSync->getMailchimpSyncDelta()) {
+                if ($productSync->getSqmmcSyncDelta()) {
                     $variendata = [];
                     $variendata["id"] = $data["id"];
                     $variendata["title"] = $data["title"];
@@ -572,15 +572,15 @@ class Product
                     '] is not supported ['.$product->getTypeId().']');
                 continue;
             }
-            if ($productSyncData->getMailchimpSyncModified() &&
-                $productSyncData->getMailchimpSyncDelta() > $this->_helper->getMCMinSyncDateFlag()) {
+            if ($productSyncData->getSqmmcSyncModified() &&
+                $productSyncData->getSqmmcSyncDelta() > $this->_helper->getMCMinSyncDateFlag()) {
                 $data = array_merge(
                     $data,
                     $this->_buildOldProductRequest($product, $batchId, $sqmmcStoreId, $magentoStoreId)
                 );
                 $this->_updateProduct($sqmmcStoreId, $product->getId());
-            } elseif (!$productSyncData->getMailchimpSyncDelta() ||
-                $productSyncData->getMailchimpSyncDelta() < $this->_helper->getMCMinSyncDateFlag()) {
+            } elseif (!$productSyncData->getSqmmcSyncDelta() ||
+                $productSyncData->getSqmmcSyncDelta() < $this->_helper->getMCMinSyncDateFlag()) {
                 $data[] = $this->_buildNewProductRequest($product, $sqmmcStoreId, $magentoStoreId);
                 $this->_updateProduct($sqmmcStoreId, $product->getId());
             }
@@ -615,15 +615,15 @@ class Product
                 continue;
             }
 
-            if ($productSyncData->getMailchimpSyncModified() &&
-                $productSyncData->getMailchimpSyncDelta() > $this->_helper->getMCMinSyncDateFlag()) {
+            if ($productSyncData->getSqmmcSyncModified() &&
+                $productSyncData->getSqmmcSyncDelta() > $this->_helper->getMCMinSyncDateFlag()) {
                 $data = array_merge(
                     $data,
                     $this->_buildOldProductRequest($product, $batchId, $sqmmcStoreId, $magentoStoreId)
                 );
                 $this->_updateProduct($sqmmcStoreId, $product->getId());
-            } elseif (!$productSyncData->getMailchimpSyncDelta() ||
-                $productSyncData->getMailchimpSyncDelta() < $this->_helper->getMCMinSyncDateFlag()) {
+            } elseif (!$productSyncData->getSqmmcSyncDelta() ||
+                $productSyncData->getSqmmcSyncDelta() < $this->_helper->getMCMinSyncDateFlag()) {
                 $data[] = $this->_buildNewProductRequest($product, $sqmmcStoreId, $magentoStoreId);
                 $this->_updateProduct($sqmmcStoreId, $product->getId());
             }

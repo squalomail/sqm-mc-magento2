@@ -33,7 +33,7 @@ class CustomerMap extends \Magento\Config\Block\System\Config\Form\Field\FieldAr
         }
         return $this->_varsRenderer;
     }
-    protected function _getMailchimpRenderer()
+    protected function _getSqmmcRenderer()
     {
         if (!$this->_mailchimpRenderer) {
             $this->_mailchimpRenderer = $this->getLayout()->createBlock(
@@ -51,7 +51,7 @@ class CustomerMap extends \Magento\Config\Block\System\Config\Form\Field\FieldAr
 //        $this->addColumn('mailchimp', ['label' => __('Mailchimp')]);
         $this->addColumn(
             'sqmmc_field_id',
-            ['label' => __('Mailchimp'), 'renderer' => $this->_getMailchimpRenderer()]
+            ['label' => __('Mailchimp'), 'renderer' => $this->_getSqmmcRenderer()]
         );
         $this->addColumn(
             'customer_field_id',
@@ -65,7 +65,7 @@ class CustomerMap extends \Magento\Config\Block\System\Config\Form\Field\FieldAr
         $optionExtraAttr = [];
         $optionExtraAttr['option_' . $this->_getVarsRenderer()->calcOptionHash($row->getData('customer_field_id'))] =
             'selected="selected"';
-        $optionExtraAttr['option_' . $this->_getMailchimpRenderer()->calcOptionHash(
+        $optionExtraAttr['option_' . $this->_getSqmmcRenderer()->calcOptionHash(
             $row->getData('sqmmc_field_id')
         )
         ] =

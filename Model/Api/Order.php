@@ -323,12 +323,12 @@ class Order
     ) {
         $data = [];
         $data['id'] = $order->getIncrementId();
-        if ($order->getMailchimpCampaignId()) {
-            $data['campaign_id'] = $order->getMailchimpCampaignId();
+        if ($order->getSqmmcCampaignId()) {
+            $data['campaign_id'] = $order->getSqmmcCampaignId();
         }
 
-        if ($order->getMailchimpLandingPage()) {
-            $data['landing_site'] = $order->getMailchimpLandingPage();
+        if ($order->getSqmmcLandingPage()) {
+            $data['landing_site'] = $order->getSqmmcLandingPage();
         }
         $data['currency_code'] = $order->getOrderCurrencyCode();
         $data['order_total'] = $order->getGrandTotal();
@@ -339,7 +339,7 @@ class Order
         if ($dataPromo !== null) {
             $data['promos'] = $dataPromo;
         }
-        $statusArray = $this->_getMailChimpStatus($order);
+        $statusArray = $this->_getSqmMcStatus($order);
         if (isset($statusArray['financial_status'])) {
             $data['financial_status'] = $statusArray['financial_status'];
         }
@@ -397,7 +397,7 @@ class Order
                 $variant = $item->getProductId();
             }
             if ($productSyncData->getRelatedId() == $item->getProductId() &&
-                $productSyncData->getMailchimpSyncError() == '' && $variant) {
+                $productSyncData->getSqmmcSyncError() == '' && $variant) {
                 $itemCount++;
                 $data["lines"][] = [
                     "id" => (string)$itemCount,
@@ -592,7 +592,7 @@ class Order
         return $jsonData;
     }
 
-    protected function _getMailChimpStatus(\Magento\Sales\Model\Order $order)
+    protected function _getSqmMcStatus(\Magento\Sales\Model\Order $order)
     {
         $sqmMcFinancialStatus = null;
         $sqmMcFulfillmentStatus = null;

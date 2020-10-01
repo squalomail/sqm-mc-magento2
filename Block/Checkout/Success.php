@@ -95,7 +95,7 @@ class Success extends \Magento\Framework\View\Element\Template
     }
     public function _toHtml()
     {
-        if (!$this->_helper->isMailChimpEnabled($this->_context->getStoreManager()->getStore()->getId())) {
+        if (!$this->_helper->isSqmMcEnabled($this->_context->getStoreManager()->getStore()->getId())) {
             return "";
         }
         return parent::_toHtml();

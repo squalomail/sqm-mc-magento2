@@ -157,8 +157,8 @@ class PromoCodes
                         $ruleId,
                         \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_PROMO_RULE
                     );
-                    if (!$promoRule->getMailchimpSyncDelta() ||
-                        $promoRule->getMailchimpSyncDelta() < $this->_helper->getMCMinSyncDateFlag($magentoStoreId)) {
+                    if (!$promoRule->getSqmmcSyncDelta() ||
+                        $promoRule->getSqmmcSyncDelta() < $this->_helper->getMCMinSyncDateFlag($magentoStoreId)) {
                         // must send the promorule before the promocode
                         $newPromoRule = $this->_promoRules->getNewPromoRule(
                             $ruleId,
@@ -180,7 +180,7 @@ class PromoCodes
                             continue;
                         }
                     }
-                    if ($promoRule->getMailchimpSyncError()) {
+                    if ($promoRule->getSqmmcSyncError()) {
                         // the promorule associated has an error
                         $error = __('Parent rule with id ' . $ruleId . 'has not been correctly sent.');
                         $this->_updateSyncData(

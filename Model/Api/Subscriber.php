@@ -87,7 +87,7 @@ class Subscriber
             $subscriberJson = json_encode($data);
             if ($subscriberJson!==false) {
                 if (!empty($subscriberJson)) {
-                    if ($subscriber->getMailchimpSyncModified() == 1) {
+                    if ($subscriber->getSqmmcSyncModified() == 1) {
                         $this->_helper->modifyCounter(\SqualoMail\SqmMcMagentoTwo\Helper\Data::SUB_MOD);
                     } else {
                         $this->_helper->modifyCounter(\SqualoMail\SqmMcMagentoTwo\Helper\Data::SUB_NEW);

@@ -14,7 +14,7 @@ namespace SqualoMail\SqmMcMagentoTwo\Model\Logger;
 class Logger extends \Monolog\Logger
 {
 
-    public function mailchimpLog($message, $file)
+    public function sqmmcLog($message, $file)
     {
         if ($file) {
             $fileName = BP. DIRECTORY_SEPARATOR .'var'. DIRECTORY_SEPARATOR.'log'.

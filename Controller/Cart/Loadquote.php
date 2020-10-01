@@ -104,7 +104,7 @@ class Loadquote extends Action
                 $params['id'],
                 \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_QUOTE
             );
-            if (!isset($params['token']) || $params['token'] != $syncCommerce->getMailchimpToken()) {
+            if (!isset($params['token']) || $params['token'] != $syncCommerce->getSqmmcToken()) {
                 // @error
                 $this->_message->addErrorMessage(__("You can't access this cart"));
                 $url = $this->_urlHelper->getUrl(

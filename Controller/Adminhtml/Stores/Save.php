@@ -28,7 +28,7 @@ class Save extends \SqualoMail\SqmMcMagentoTwo\Controller\Adminhtml\Stores
                 $storeModel->getResource()->load($storeModel, $storeId);
             }
             try {
-                $formData['storeid'] = $this->_updateMailchimp($formData);
+                $formData['storeid'] = $this->_updateSqmmc($formData);
                 $formData['platform'] = \SqualoMail\SqmMcMagentoTwo\Helper\Data::PLATFORM;
                 $storeModel->setData($formData);
                 $storeModel->getResource()->save($storeModel);
@@ -47,7 +47,7 @@ class Save extends \SqualoMail\SqmMcMagentoTwo\Controller\Adminhtml\Stores
             }
         }
     }
-    protected function _updateMailchimp($formData)
+    protected function _updateSqmmc($formData)
     {
         $api = $this->_helper->getApiByApiKey($formData['apikey'], true);
         // set the address

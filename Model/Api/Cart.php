@@ -242,7 +242,7 @@ class Cart
          * @var $cart \Magento\Quote\Model\Quote
          */
         foreach ($modifiedCarts as $cart) {
-            $this->_token = $cart->getMailchimpToken();
+            $this->_token = $cart->getSqmmcToken();
             $cartId = $cart->getEntityId();
             /**
              * @var $customer \Magento\Customer\Model\Customer
@@ -506,7 +506,7 @@ class Cart
      */
     protected function _makeCart(\Magento\Quote\Model\Quote $cart, $sqmmcStoreId, $magentoStoreId)
     {
-        $campaignId = $cart->getMailchimpCampaignId();
+        $campaignId = $cart->getSqmmcCampaignId();
         $oneCart = [];
         $oneCart['id'] = $cart->getEntityId();
         $oneCart['customer'] = $this->_getCustomer($cart, $sqmmcStoreId, $magentoStoreId);

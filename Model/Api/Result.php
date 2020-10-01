@@ -227,7 +227,7 @@ class Result
                         $sqmmcErrors->setRegtype($type);
                         $sqmmcErrors->setOriginalId($id);
                         $sqmmcErrors->setBatchId($batchId);
-                        $sqmmcErrors->setMailchimpStoreId($sqmmcStoreId);
+                        $sqmmcErrors->setSqmmcStoreId($sqmmcStoreId);
                         $sqmmcErrors->setOriginalId($id);
                         $sqmmcErrors->setBatchId($batchId);
                         $sqmmcErrors->setStoreId($storeId);
@@ -273,10 +273,10 @@ class Result
             $sqmmcStore = $sqmmcStoreId;
         }
         $chimpSync = $this->_helper->getChimpSyncEcommerce($sqmmcStore, $id, $type);
-        if ($chimpSync->getMailchimpStoreId() ==
+        if ($chimpSync->getSqmmcStoreId() ==
             $sqmmcStore && $chimpSync->getType() == $type && $chimpSync->getRelatedId() == $id) {
-            $chimpSync->setMailchimpSent($status);
-            $chimpSync->setMailchimpSyncError($error);
+            $chimpSync->setSqmmcSent($status);
+            $chimpSync->setSqmmcSyncError($error);
             $chimpSync->getResource()->save($chimpSync);
         } else {
             $this->_helper->log("Can't find original register for type $type and id $id");

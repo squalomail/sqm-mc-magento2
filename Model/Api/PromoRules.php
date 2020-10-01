@@ -243,8 +243,8 @@ class PromoRules
         }
         $promoAction = $rule->getSimpleAction();
         $shipping = $rule->getSimpleFreeShipping();
-        $data['type'] = $this->_getMailChimpType($promoAction, $shipping);
-        $data['target'] = $this->_getMailChimpTarget($promoAction, $shipping);
+        $data['type'] = $this->_getSqmMcType($promoAction, $shipping);
+        $data['target'] = $this->_getSqmMcTarget($promoAction, $shipping);
         switch ($data['type']) {
             case self::TYPE_PERCENTAGE:
                 $data['amount'] = $rule->getDiscountAmount()/100;
@@ -269,7 +269,7 @@ class PromoRules
      * @param $action
      * @return null|string
      */
-    private function _getMailChimpType($action, $shipping)
+    private function _getSqmMcType($action, $shipping)
     {
         $sqmMcType = null;
         if ($shipping==self::FREESHIPPING_NO) {
@@ -292,7 +292,7 @@ class PromoRules
      * @param $action
      * @return null|string
      */
-    private function _getMailChimpTarget($action, $shipping)
+    private function _getSqmMcTarget($action, $shipping)
     {
         $sqmMcTarget = null;
         if ($shipping==self::FREESHIPPING_NO) {

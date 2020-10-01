@@ -48,7 +48,7 @@ class SqmmcMap extends \Magento\Framework\View\Element\Html\Select
         $this->_request         = $context->getRequest();
     }
 
-    protected function _getMailchimpTags()
+    protected function _getSqmmcTags()
     {
         $ret = [];
         $storeId = (int) $this->_request->getParam("store", 0);
@@ -95,7 +95,7 @@ class SqmmcMap extends \Magento\Framework\View\Element\Html\Select
     public function _toHtml()
     {
         if (!$this->getOptions()) {
-            foreach ($this->_getMailchimpTags() as $attId => $attLabel) {
+            foreach ($this->_getSqmmcTags() as $attId => $attLabel) {
                 $this->addOption($attId, $this->escapeHtmlAttr($attLabel));
             }
         }

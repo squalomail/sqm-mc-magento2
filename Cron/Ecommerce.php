@@ -258,7 +258,7 @@ class Ecommerce
                         $syncBatches->setStoreId($storeId);
                         $syncBatches->setBatchId($batchResponse['id']);
                         $syncBatches->setStatus(\SqualoMail\SqmMcMagentoTwo\Helper\Data::BATCH_PENDING);
-                        $syncBatches->setMailchimpStoreId($sqmmcStoreId);
+                        $syncBatches->setSqmmcStoreId($sqmmcStoreId);
                         $syncBatches->setModifiedDate($this->_helper->getGmtDate());
                         $syncBatches->getResource()->save($syncBatches);
                         $batchId = $batchResponse['id'];

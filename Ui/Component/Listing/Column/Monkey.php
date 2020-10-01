@@ -113,7 +113,7 @@ class Monkey extends Column
                         \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_ORDER
                     );
                     $alt = '';
-                    if (!$syncData || $syncData->getMailchimpStoreId() != $sqmmcStoreId ||
+                    if (!$syncData || $syncData->getSqmmcStoreId() != $sqmmcStoreId ||
                         $syncData->getRelatedId() != $order->getId() ||
                         $syncData->getType() != \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_ORDER) {
                         $url = $this->_assetRepository->getUrlWithParams(
@@ -122,7 +122,7 @@ class Monkey extends Column
                         );
                         $text = __('Syncing');
                     } else {
-                        $sync = $syncData->getMailchimpSent();
+                        $sync = $syncData->getSqmmcSent();
                         switch ($sync) {
                             case \SqualoMail\SqmMcMagentoTwo\Helper\Data::SYNCED:
                                 $url = $this->_assetRepository->getUrlWithParams(
@@ -162,7 +162,7 @@ class Monkey extends Column
                                     $params
                                 );
                                 $text = __('With error');
-                                $alt = $syncData->getMailchimpSyncError();
+                                $alt = $syncData->getSqmmcSyncError();
                                 break;
                             default:
                                 $url ='';

@@ -107,7 +107,7 @@ class Subscriber
                 if (!$this->_helper->getConfigValue(\SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_MAGENTO_MAIL, $storeId)) {
                     $subscriber->setImportMode(true);
                 }
-                if ($this->_helper->isMailChimpEnabled($storeId)) {
+                if ($this->_helper->isSqmMcEnabled($storeId)) {
                     $customer = $this->_customer->getById($customerId);
                     $email = $customer->getEmail();
                     $mergeVars = $this->_helper->getMergeVarsBySubscriber($subscriber, $email);
@@ -160,7 +160,7 @@ class Subscriber
             }
             $storeId = $this->_storeManager->getStore()->getId();
 
-            if ($this->_helper->isMailChimpEnabled($storeId)) {
+            if ($this->_helper->isSqmMcEnabled($storeId)) {
                 $api = $this->_helper->getApi($storeId);
                 if ($this->_helper->isDoubleOptInEnabled($storeId)) {
                     $status = 'pending';
