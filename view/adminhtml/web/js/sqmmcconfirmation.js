@@ -15,7 +15,7 @@ define(
     ], function ($ , confirmation, alert) {
         'use strict';
 
-        window.mailchimpdeleteconfirmation = function (ajaxurl) {
+        window.sqmmcdeleteconfirmation = function (ajaxurl) {
             var message = 'Are you sure you want to do this?';
             confirmation( {
                 content: message,
