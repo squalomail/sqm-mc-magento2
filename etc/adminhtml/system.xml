@@ -199,7 +199,7 @@
                 </field>
                 <field id="delete_store" translate="button_label" type="button" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
                     <button_label>Delete Store</button_label>
-                    <comment>Proceed with caution, this delete the squalomail store for all the connected magento stores</comment>
+                    <comment>Proceed with caution, this will delete the squalomail store for all the connected magento stores</comment>
                     <frontend_model>SqualoMail\SqmMcMagentoTwo\Block\Adminhtml\System\Config\DeleteStore</frontend_model>
                     <depends>
                         <field id="*/*/active">1</field>
