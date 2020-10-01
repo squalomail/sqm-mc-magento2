@@ -34,12 +34,12 @@ class Invoice
         SalesInvoiceRepositoryInterface $subject,
         InvoiceInterface $invoice
     ) {
-        $mailchimpStoreId = $this->_helper->getConfigValue(
+        $sqmmcStoreId = $this->_helper->getConfigValue(
             \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_SQM_MC_STORE,
             $invoice->getStoreId()
         );
         $this->_helper->saveEcommerceData(
-            $mailchimpStoreId,
+            $sqmmcStoreId,
             $invoice->getOrderId(),
             \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_ORDER,
             null,

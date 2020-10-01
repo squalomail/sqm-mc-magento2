@@ -224,12 +224,12 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      * @param \SqualoMailMc $api
      * @param \Magento\Framework\App\Cache\TypeListInterface $cacheTypeList
      * @param \Magento\Customer\Model\ResourceModel\CustomerRepository $customer
-     * @param \SqualoMail\SqmMcMagentoTwo\Model\SqmMcErrors $mailChimpErrors
-     * @param \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncEcommerceFactory $mailChimpSyncEcommerce
-     * @param \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncEcommerce $mailChimpSyncE
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\SqmMcErrors $sqmMcErrors
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncEcommerceFactory $sqmMcSyncEcommerce
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncEcommerce $sqmMcSyncE
      * @param \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncBatches $syncBatches
-     * @param \SqualoMail\SqmMcMagentoTwo\Model\SqmMcStoresFactory $mailChimpStoresFactory
-     * @param \SqualoMail\SqmMcMagentoTwo\Model\SqmMcStores $mailChimpStores
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\SqmMcStoresFactory $sqmMcStoresFactory
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\SqmMcStores $sqmMcStores
      * @param \Magento\Customer\Model\ResourceModel\Attribute\CollectionFactory $attCollection
      * @param \Magento\Framework\Encryption\Encryptor $encryptor
      * @param \Magento\Newsletter\Model\ResourceModel\Subscriber\CollectionFactory $subscriberCollection
@@ -254,12 +254,12 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         \SqualoMailMc $api,
         \Magento\Framework\App\Cache\TypeListInterface $cacheTypeList,
         \Magento\Customer\Model\ResourceModel\CustomerRepository $customer,
-        \SqualoMail\SqmMcMagentoTwo\Model\SqmMcErrors $mailChimpErrors,
-        \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncEcommerceFactory $mailChimpSyncEcommerce,
-        \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncEcommerce $mailChimpSyncE,
+        \SqualoMail\SqmMcMagentoTwo\Model\SqmMcErrors $sqmMcErrors,
+        \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncEcommerceFactory $sqmMcSyncEcommerce,
+        \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncEcommerce $sqmMcSyncE,
         \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncBatches $syncBatches,
-        \SqualoMail\SqmMcMagentoTwo\Model\SqmMcStoresFactory $mailChimpStoresFactory,
-        \SqualoMail\SqmMcMagentoTwo\Model\SqmMcStores $mailChimpStores,
+        \SqualoMail\SqmMcMagentoTwo\Model\SqmMcStoresFactory $sqmMcStoresFactory,
+        \SqualoMail\SqmMcMagentoTwo\Model\SqmMcStores $sqmMcStores,
         \Magento\Customer\Model\ResourceModel\Attribute\CollectionFactory $attCollection,
         \Magento\Framework\Encryption\Encryptor $encryptor,
         \Magento\Newsletter\Model\ResourceModel\Subscriber\CollectionFactory $subscriberCollection,
@@ -284,12 +284,12 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         $this->_config        = $config;
         $this->_api           = $api;
         $this->_customer      = $customer;
-        $this->_mailChimpErrors         = $mailChimpErrors;
-        $this->_mailChimpSyncEcommerce  = $mailChimpSyncEcommerce;
-        $this->_mailChimpSyncE          = $mailChimpSyncE;
+        $this->_mailChimpErrors         = $sqmMcErrors;
+        $this->_mailChimpSyncEcommerce  = $sqmMcSyncEcommerce;
+        $this->_mailChimpSyncE          = $sqmMcSyncE;
         $this->_syncBatches             = $syncBatches;
-        $this->_mailChimpStores         = $mailChimpStores;
-        $this->_mailChimpStoresFactory  = $mailChimpStoresFactory;
+        $this->_mailChimpStores         = $sqmMcStores;
+        $this->_mailChimpStoresFactory  = $sqmMcStoresFactory;
         $this->_encryptor               = $encryptor;
         $this->_subscriberCollection    = $subscriberCollection;
         $this->_customerCollection      = $customerCollection;
@@ -392,9 +392,9 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             try {
                 $data = $this->unserialize($data);
                 if (is_array($data)) {
-                    foreach ($data as $customerFieldId => $mailchimpName) {
+                    foreach ($data as $customerFieldId => $sqmmcName) {
                         $this->_mapFields[] = [
-                            'mailchimp' => strtoupper($mailchimpName),
+                            'mailchimp' => strtoupper($sqmmcName),
                             'customer_field' => $customerAtt[$customerFieldId]['attCode'],
                             'isDate' => $customerAtt[$customerFieldId]['isDate'],
                             'isAddress' => $customerAtt[$customerFieldId]['isAddress'],
@@ -542,37 +542,37 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         }
         return $v;
     }
-    public function deleteStore($mailchimpStore)
+    public function deleteStore($sqmmcStore)
     {
         try {
 //            $storeId = $this->getConfigValue(self::XML_SQM_MC_STORE);
-            $this->getApi()->ecommerce->stores->delete($mailchimpStore);
-            $this->cancelAllPendingBatches($mailchimpStore);
+            $this->getApi()->ecommerce->stores->delete($sqmmcStore);
+            $this->cancelAllPendingBatches($sqmmcStore);
         } catch (\SqualoMailMc_Error $e) {
             $this->log($e->getFriendlyMessage());
         } catch (Exception $e) {
             $this->log($e->getMessage());
         }
     }
-    public function markAllBatchesAs($mailchimpStore, $fromStatus, $toStatus)
+    public function markAllBatchesAs($sqmmcStore, $fromStatus, $toStatus)
     {
         $connection = $this->_syncBatches->getResource()->getConnection();
         $tableName = $this->_syncBatches->getResource()->getMainTable();
         $connection->update(
             $tableName,
             ['status' => $toStatus],
-            "sqmmc_store_id = '" . $mailchimpStore . "' and status = '" . $fromStatus . "'"
+            "sqmmc_store_id = '" . $sqmmcStore . "' and status = '" . $fromStatus . "'"
         );
     }
 
-    public function cancelAllPendingBatches($mailchimpStore)
+    public function cancelAllPendingBatches($sqmmcStore)
     {
-        $this->markAllBatchesAs($mailchimpStore, self::BATCH_PENDING, self::BATCH_CANCELED);
+        $this->markAllBatchesAs($sqmmcStore, self::BATCH_PENDING, self::BATCH_CANCELED);
     }
 
-    public function restoreAllCanceledBatches($mailchimpStore)
+    public function restoreAllCanceledBatches($sqmmcStore)
     {
-        $this->markAllBatchesAs($mailchimpStore, self::BATCH_CANCELED, self::BATCH_PENDING);
+        $this->markAllBatchesAs($sqmmcStore, self::BATCH_CANCELED, self::BATCH_PENDING);
     }
 
     public function markRegisterAsModified($registerId, $type)
@@ -595,20 +595,20 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             //generate store id
             $date = date('Y-m-d-His');
             $baseUrl = $this->_storeManager->getStore($storeId)->getName();
-            $mailchimpStoreId = hash('md5', parse_url($baseUrl, PHP_URL_HOST) . '_' . $date);
+            $sqmmcStoreId = hash('md5', parse_url($baseUrl, PHP_URL_HOST) . '_' . $date);
             $currencyCode = $this->_storeManager->getStore($storeId)->getDefaultCurrencyCode();
             $name = $this->getMCStoreName($storeId);
 
             //create store in mailchimp
             try {
                 $this->getApi()->ecommerce->stores->add(
-                    $mailchimpStoreId,
+                    $sqmmcStoreId,
                     $listId,
                     $name,
                     $currencyCode,
                     self::PLATFORM
                 );
-                return $mailchimpStoreId;
+                return $sqmmcStoreId;
             } catch (\SqualoMailMc_Error $e) {
                 $this->log($e->getFriendlyMessage());
             } catch (Exception $e) {
@@ -743,11 +743,11 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         return $this->getConfigValue(self::XML_PATH_LIST, $storeId);
     }
 
-    public function getListForMailChimpStore($mailchimpStoreId, $apiKey)
+    public function getListForMailChimpStore($sqmmcStoreId, $apiKey)
     {
         try {
             $api = $this->getApiByApiKey($apiKey);
-            $store = $api->ecommerce->stores->get($mailchimpStoreId);
+            $store = $api->ecommerce->stores->get($sqmmcStoreId);
             if (isset($store['list_id'])) {
                 return $store['list_id'];
             }
@@ -765,19 +765,19 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         $date = date('Y-m-d-H-i-s') . '-' . $msecArray[1];
         return $date;
     }
-    public function resetErrors($mailchimpStore)
+    public function resetErrors($sqmmcStore)
     {
         try {
             // clean the errors table
             $connection = $this->_mailChimpErrors->getResource()->getConnection();
             $tableName = $this->_mailChimpErrors->getResource()->getMainTable();
-            $connection->delete($tableName, "sqmmc_store_id = '".$mailchimpStore."'");
+            $connection->delete($tableName, "sqmmc_store_id = '".$sqmmcStore."'");
             // clean the syncecommerce table with errors
             $connection = $this->_mailChimpSyncE->getResource()->getConnection();
             $tableName = $this->_mailChimpSyncE->getResource()->getMainTable();
             $connection->delete(
                 $tableName,
-                "sqmmc_store_id = '".$mailchimpStore."' and sqmmc_sync_error is not null"
+                "sqmmc_store_id = '".$sqmmcStore."' and sqmmc_sync_error is not null"
             );
         } catch (\Zend_Db_Exception $e) {
             throw new ValidatorException(__($e->getMessage()));
@@ -835,9 +835,9 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     {
         $this->_mailChimpSyncE->markAllAsDeleted($relatedId, $type, $relatedDeletedId);
     }
-    public function ecommerceDeleteAllByIdType($id, $type, $mailchimpStoreId)
+    public function ecommerceDeleteAllByIdType($id, $type, $sqmmcStoreId)
     {
-        $this->_mailChimpSyncE->deleteAllByIdType($id, $type, $mailchimpStoreId);
+        $this->_mailChimpSyncE->deleteAllByIdType($id, $type, $sqmmcStoreId);
     }
     public function deleteAllByBatchId($batchId)
     {
@@ -865,11 +865,11 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 
             try {
                 $apiStores = $this->_api->ecommerce->stores->get(null, null, null, self::MAXSTORES);
-            } catch (\SqualoMailMc_Error $mailchimpError) {
-                $this->log($mailchimpError->getFriendlyMessage());
+            } catch (\SqualoMailMc_Error $sqmmcError) {
+                $this->log($sqmmcError->getFriendlyMessage());
                 continue;
-            } catch (\SqualoMailMc_HttpError $mailchimpError) {
-                $this->log($mailchimpError->getMessage());
+            } catch (\SqualoMailMc_HttpError $sqmmcError) {
+                $this->log($sqmmcError->getMessage());
                 continue;
             }
 
@@ -920,7 +920,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             }
         }
     }
-    public function saveJsUrl($storeId, $scope = null, $mailChimpStoreId = null)
+    public function saveJsUrl($storeId, $scope = null, $sqmMcStoreId = null)
     {
         if (!$scope) {
             $scope = \Magento\Store\Model\ScopeInterface::SCOPE_STORES;
@@ -928,7 +928,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         if ($this->getConfigValue(self::XML_PATH_ACTIVE, $storeId, $scope)) {
             try {
                 $api = $this->getApi($storeId);
-                $storeData = $api->ecommerce->stores->get($mailChimpStoreId);
+                $storeData = $api->ecommerce->stores->get($sqmMcStoreId);
                 if (isset($storeData['connected_site']['site_script']['url'])) {
                     $url = $storeData['connected_site']['site_script']['url'];
                     $this->_config->saveConfig(
@@ -948,10 +948,10 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     {
         $url = $this->getConfigValue(self::XML_SQM_MC_JS_URL, $storeId);
         if ($this->getConfigValue(self::XML_PATH_ACTIVE, $storeId) && !$url) {
-            $mailChimpStoreId = $this->getConfigValue(self::XML_SQM_MC_STORE, $storeId);
+            $sqmMcStoreId = $this->getConfigValue(self::XML_SQM_MC_STORE, $storeId);
             try {
                 $api = $this->getApi($storeId);
-                $storeData = $api->ecommerce->stores->get($mailChimpStoreId);
+                $storeData = $api->ecommerce->stores->get($sqmMcStoreId);
                 if (isset($storeData['connected_site']['site_script']['url'])) {
                     $url = $storeData['connected_site']['site_script']['url'];
                     $this->_config->saveConfig(
@@ -1117,8 +1117,8 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
                     }
                 }
                 foreach ($interest as $interestId) {
-                    $mailchimpInterest = $api->lists->interestCategory->interests->getAll($listId, $interestId);
-                    foreach ($mailchimpInterest['interests'] as $mi) {
+                    $sqmmcInterest = $api->lists->interestCategory->interests->getAll($listId, $interestId);
+                    foreach ($sqmmcInterest['interests'] as $mi) {
                         $rc[$mi['category_id']]['category'][$mi['display_order']] =
                             ['id' => $mi['id'], 'name' => $mi['name'], 'checked' => false];
                     }
@@ -1228,14 +1228,14 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             $storeId
         );
     }
-    public function resyncAllSubscribers($mailchimpList)
+    public function resyncAllSubscribers($sqmmcList)
     {
         $connection = $this->_mailChimpSyncE->getResource()->getConnection();
         $tableName = $this->_mailChimpSyncE->getResource()->getMainTable();
         $connection->update(
             $tableName,
             ['sqmmc_sync_modified' => 1],
-            "type = '" . self::IS_SUBSCRIBER . "' and sqmmc_store_id = '$mailchimpList'"
+            "type = '" . self::IS_SUBSCRIBER . "' and sqmmc_store_id = '$sqmmcList'"
         );
     }
     public function decrypt($value)

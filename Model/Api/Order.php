@@ -130,7 +130,7 @@ class Order
     /**
      * Set the request for orders to be created on MailChimp
      *
-     * @param $mailchimpStoreId
+     * @param $sqmmcStoreId
      * @param $magentoStoreId
      * @return array
      */
@@ -152,7 +152,7 @@ class Order
     protected function _getModifiedOrders($magentoStoreId)
     {
         $batchArray = [];
-        $mailchimpStoreId = $this->_helper->getConfigValue(
+        $sqmmcStoreId = $this->_helper->getConfigValue(
             \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_SQM_MC_STORE,
             $magentoStoreId
         );
@@ -163,12 +163,12 @@ class Order
         $modifiedOrders->getSelect()->joinLeft(
             ['m4m' => $this->_helper->getTableName('sqmmc_sync_ecommerce')],
             "m4m.related_id = main_table.entity_id and m4m.type = '".\SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_ORDER.
-            "' and m4m.sqmmc_store_id = '".$mailchimpStoreId."'",
+            "' and m4m.sqmmc_store_id = '".$sqmmcStoreId."'",
             ['m4m.*']
         );
         // be sure that the order are already in mailchimp and not deleted
         $modifiedOrders->getSelect()->where(
-            "m4m.sqmmc_sync_modified = 1 AND m4m.sqmmc_store_id = '".$mailchimpStoreId."'"
+            "m4m.sqmmc_sync_modified = 1 AND m4m.sqmmc_store_id = '".$sqmmcStoreId."'"
         );
         // limit the collection
         $modifiedOrders->getSelect()->limit(self::BATCH_LIMIT);
@@ -182,11 +182,11 @@ class Order
                 $order = $this->_order->get($orderId);
                 //create missing products first
                 try {
-                    $productData = $this->_apiProduct->sendModifiedProduct($order, $mailchimpStoreId, $magentoStoreId);
+                    $productData = $this->_apiProduct->sendModifiedProduct($order, $sqmmcStoreId, $magentoStoreId);
                 } catch (\Exception $e) {
                     $error = $e->getMessage();
                     $this->_helper->log($error);
-                    $this->_updateOrder($mailchimpStoreId, $orderId, $this->_helper->getGmtDate(), $error, 0);
+                    $this->_updateOrder($sqmmcStoreId, $orderId, $this->_helper->getGmtDate(), $error, 0);
                     continue;
                 }
                 if (count($productData)) {
@@ -196,33 +196,33 @@ class Order
                     }
                 }
 
-                $orderJson = $this->generatePOSTPayload($order, $mailchimpStoreId, $magentoStoreId, true);
+                $orderJson = $this->generatePOSTPayload($order, $sqmmcStoreId, $magentoStoreId, true);
                 if ($orderJson!==false) {
                     if (!empty($orderJson)) {
                         $this->_helper->modifyCounter(\SqualoMail\SqmMcMagentoTwo\Helper\Data::ORD_MOD);
                         $batchArray[$this->_counter]['method'] = "PATCH";
-                        $batchArray[$this->_counter]['path'] = '/ecommerce/stores/' . $mailchimpStoreId . '/orders/' .
+                        $batchArray[$this->_counter]['path'] = '/ecommerce/stores/' . $sqmmcStoreId . '/orders/' .
                             $order->getIncrementId();
                         $batchArray[$this->_counter]['operation_id'] = $this->_batchId . '_' . $orderId;
                         $batchArray[$this->_counter]['body'] = $orderJson;
                     } else {
                         $error = __('Order ['.$order->getIncrementId().'] is empty');
                         $this->_helper->log($error);
-                        $this->_updateOrder($mailchimpStoreId, $orderId, $this->_helper->getGmtDate(), $error, 0);
+                        $this->_updateOrder($sqmmcStoreId, $orderId, $this->_helper->getGmtDate(), $error, 0);
                         continue;
                     }
                     //update order delta
-                    $this->_updateOrder($mailchimpStoreId, $orderId);
+                    $this->_updateOrder($sqmmcStoreId, $orderId);
                     $this->_counter++;
                 } else {
                     $error = __('Json error');
-                    $this->_updateOrder($mailchimpStoreId, $orderId, $this->_helper->getGmtDate(), $error, 0);
+                    $this->_updateOrder($sqmmcStoreId, $orderId, $this->_helper->getGmtDate(), $error, 0);
                     continue;
                 }
             } catch (Exception $e) {
                 $this->_helper->log($e->getMessage());
                 $error = $e->getMessage();
-                $this->_updateOrder($mailchimpStoreId, $orderId, $this->_helper->getGmtDate(), $error, 0);
+                $this->_updateOrder($sqmmcStoreId, $orderId, $this->_helper->getGmtDate(), $error, 0);
             }
         }
         return $batchArray;
@@ -231,7 +231,7 @@ class Order
     protected function _getNewOrders($magentoStoreId)
     {
         $batchArray = [];
-        $mailchimpStoreId = $this->_helper->getConfigValue(
+        $sqmmcStoreId = $this->_helper->getConfigValue(
             \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_SQM_MC_STORE,
             $magentoStoreId
         );
@@ -245,7 +245,7 @@ class Order
         $newOrders->getSelect()->joinLeft(
             ['m4m' => $this->_helper->getTableName('sqmmc_sync_ecommerce')],
             "m4m.related_id = main_table.entity_id and m4m.type = '".\SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_ORDER.
-            "' and m4m.sqmmc_store_id = '".$mailchimpStoreId."'",
+            "' and m4m.sqmmc_store_id = '".$sqmmcStoreId."'",
             ['m4m.*']
         );
         // be sure that the quote are not in mailchimp
@@ -263,11 +263,11 @@ class Order
                 $order = $this->_order->get($orderId);
                 //create missing products first
                 try {
-                    $productData = $this->_apiProduct->sendModifiedProduct($order, $mailchimpStoreId, $magentoStoreId);
+                    $productData = $this->_apiProduct->sendModifiedProduct($order, $sqmmcStoreId, $magentoStoreId);
                 } catch (\Exception $e) {
                     $error = $e->getMessage();
                     $this->_helper->log($error);
-                    $this->_updateOrder($mailchimpStoreId, $orderId, $this->_helper->getGmtDate(), $error, 0);
+                    $this->_updateOrder($sqmmcStoreId, $orderId, $this->_helper->getGmtDate(), $error, 0);
                     continue;
                 }
                 if (count($productData)) {
@@ -276,31 +276,31 @@ class Order
                         $this->_counter++;
                     }
                 }
-                $orderJson = $this->generatePOSTPayload($order, $mailchimpStoreId, $magentoStoreId);
+                $orderJson = $this->generatePOSTPayload($order, $sqmmcStoreId, $magentoStoreId);
                 if ($orderJson!==false) {
                     if (!empty($orderJson)) {
                         $this->_helper->modifyCounter(\SqualoMail\SqmMcMagentoTwo\Helper\Data::ORD_NEW);
                         $batchArray[$this->_counter]['method'] = "POST";
-                        $batchArray[$this->_counter]['path'] = '/ecommerce/stores/' . $mailchimpStoreId . '/orders';
+                        $batchArray[$this->_counter]['path'] = '/ecommerce/stores/' . $sqmmcStoreId . '/orders';
                         $batchArray[$this->_counter]['operation_id'] = $this->_batchId . '_' . $orderId;
                         $batchArray[$this->_counter]['body'] = $orderJson;
                         //update order delta
-                        $this->_updateOrder($mailchimpStoreId, $orderId);
+                        $this->_updateOrder($sqmmcStoreId, $orderId);
                         $this->_counter++;
                     } else {
                         $error = __('Order ['.$item->getIncrementId().'] is empty');
                         $this->_helper->log($error);
-                        $this->_updateOrder($mailchimpStoreId, $orderId, $this->_helper->getGmtDate(), $error, 0);
+                        $this->_updateOrder($sqmmcStoreId, $orderId, $this->_helper->getGmtDate(), $error, 0);
                     }
                 } else {
                     $error = __('Json error');
-                    $this->_updateOrder($mailchimpStoreId, $orderId, $this->_helper->getGmtDate(), $error, 0);
+                    $this->_updateOrder($sqmmcStoreId, $orderId, $this->_helper->getGmtDate(), $error, 0);
                     continue;
                 }
             } catch (Exception $e) {
                 $this->_helper->log($e->getMessage());
                 $error = $e->getMessage();
-                $this->_updateOrder($mailchimpStoreId, $orderId, $this->_helper->getGmtDate(), $error, 0);
+                $this->_updateOrder($sqmmcStoreId, $orderId, $this->_helper->getGmtDate(), $error, 0);
             }
         }
         return $batchArray;
@@ -310,14 +310,14 @@ class Order
      * Set all the data for each order to be sent
      *
      * @param $order
-     * @param $mailchimpStoreId
+     * @param $sqmmcStoreId
      * @param $magentoStoreId
      * @param $isModifiedOrder
      * @return string
      */
     protected function generatePOSTPayload(
         \Magento\Sales\Model\Order $order,
-        $mailchimpStoreId,
+        $sqmmcStoreId,
         $magentoStoreId,
         $isModifiedOrder = false
     ) {
@@ -378,7 +378,7 @@ class Order
         foreach ($items as $item) {
             $variant = null;
             $productSyncData = $this->_helper->getChimpSyncEcommerce(
-                $mailchimpStoreId,
+                $sqmmcStoreId,
                 $item->getProductId(),
                 \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_PRODUCT
             );
@@ -594,13 +594,13 @@ class Order
 
     protected function _getMailChimpStatus(\Magento\Sales\Model\Order $order)
     {
-        $mailChimpFinancialStatus = null;
-        $mailChimpFulfillmentStatus = null;
+        $sqmMcFinancialStatus = null;
+        $sqmMcFulfillmentStatus = null;
         $totalItemsOrdered = $order->getData('total_qty_ordered');
         $shippedItemAmount = 0;
         $invoicedItemAmount = 0;
         $refundedItemAmount = 0;
-        $mailChimpStatus = [];
+        $sqmMcStatus = [];
         /**
          * @var $item \Magento\Sales\Model\Order\Item
          */
@@ -612,47 +612,47 @@ class Order
 
         if ($shippedItemAmount > 0) {
             if ($totalItemsOrdered > $shippedItemAmount) {
-                $mailChimpFulfillmentStatus = self::PARTIALLY_SHIPPED;
+                $sqmMcFulfillmentStatus = self::PARTIALLY_SHIPPED;
             } else {
-                $mailChimpFulfillmentStatus = self::SHIPPED;
+                $sqmMcFulfillmentStatus = self::SHIPPED;
             }
         }
 
         if ($refundedItemAmount > 0) {
             if ($totalItemsOrdered > $refundedItemAmount) {
-                $mailChimpFinancialStatus = self::PARTIALLY_REFUNDED;
+                $sqmMcFinancialStatus = self::PARTIALLY_REFUNDED;
             } else {
-                $mailChimpFinancialStatus = self::REFUNDED;
+                $sqmMcFinancialStatus = self::REFUNDED;
             }
         }
 
         if ($invoicedItemAmount > 0) {
             if ($refundedItemAmount == 0 || $refundedItemAmount != $invoicedItemAmount) {
                 if ($totalItemsOrdered > $invoicedItemAmount) {
-                    $mailChimpFinancialStatus = self::PARTIALLY_PAID;
+                    $sqmMcFinancialStatus = self::PARTIALLY_PAID;
                 } else {
-                    $mailChimpFinancialStatus = self::PAID;
+                    $sqmMcFinancialStatus = self::PAID;
                 }
             }
         }
 
-        if (!$mailChimpFinancialStatus && $order->getState() == \Magento\Sales\Model\Order::STATE_CANCELED) {
-            $mailChimpFinancialStatus = self::CANCELED;
+        if (!$sqmMcFinancialStatus && $order->getState() == \Magento\Sales\Model\Order::STATE_CANCELED) {
+            $sqmMcFinancialStatus = self::CANCELED;
         }
 
-        if (!$mailChimpFinancialStatus) {
-            $mailChimpFinancialStatus = self::PENDING;
+        if (!$sqmMcFinancialStatus) {
+            $sqmMcFinancialStatus = self::PENDING;
         }
 
-        if ($mailChimpFinancialStatus) {
-            $mailChimpStatus['financial_status'] = $mailChimpFinancialStatus;
+        if ($sqmMcFinancialStatus) {
+            $sqmMcStatus['financial_status'] = $sqmMcFinancialStatus;
         }
 
-        if ($mailChimpFulfillmentStatus) {
-            $mailChimpStatus['fulfillment_status'] = $mailChimpFulfillmentStatus;
+        if ($sqmMcFulfillmentStatus) {
+            $sqmMcStatus['fulfillment_status'] = $sqmMcFulfillmentStatus;
         }
 
-        return $mailChimpStatus;
+        return $sqmMcStatus;
     }
 
     protected function _getPromoData(\Magento\Sales\Model\Order $order)

@@ -117,7 +117,7 @@ class Product
     {
         $batchArray = [];
         $counter = 0;
-        $mailchimpStoreId = $this->_helper->getConfigValue(
+        $sqmmcStoreId = $this->_helper->getConfigValue(
             \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_SQM_MC_STORE,
             $magentoStoreId
         );
@@ -125,13 +125,13 @@ class Product
             \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_INCLUDING_TAXES,
             $magentoStoreId
         );
-        $this->_markSpecialPrices($magentoStoreId, $mailchimpStoreId);
+        $this->_markSpecialPrices($magentoStoreId, $sqmmcStoreId);
         $collection = $this->_getCollection();
         $collection->addStoreFilter($magentoStoreId);
         $collection->getSelect()->joinLeft(
             ['m4m' => $this->_helper->getTableName('sqmmc_sync_ecommerce')],
             "m4m.related_id = e.entity_id and m4m.type = '".\SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_PRODUCT.
-            "' and m4m.sqmmc_store_id = '".$mailchimpStoreId."'",
+            "' and m4m.sqmmc_store_id = '".$sqmmcStoreId."'",
             ['m4m.*']
         );
         $collection->getSelect()->where("m4m.sqmmc_sync_delta IS null OR (m4m.sqmmc_sync_delta > '".
@@ -148,23 +148,23 @@ class Product
                 $batchArray = array_merge($this->_buildOldProductRequest(
                     $product,
                     $this->_batchId,
-                    $mailchimpStoreId,
+                    $sqmmcStoreId,
                     $magentoStoreId
                 ), $batchArray);
-                $this->_updateProduct($mailchimpStoreId, $product->getId());
+                $this->_updateProduct($sqmmcStoreId, $product->getId());
                 continue;
             } else {
-                $data = $this->_buildNewProductRequest($product, $mailchimpStoreId, $magentoStoreId);
+                $data = $this->_buildNewProductRequest($product, $sqmmcStoreId, $magentoStoreId);
             }
             if (!empty($data)) {
                 $batchArray[$counter] = $data;
                 $counter++;
 
                 //update product delta
-                $this->_updateProduct($mailchimpStoreId, $product->getId());
+                $this->_updateProduct($sqmmcStoreId, $product->getId());
             } else {
                 $this->_updateProduct(
-                    $mailchimpStoreId,
+                    $sqmmcStoreId,
                     $product->getId(),
                     $this->_helper->getGmtDate(),
                     "This product type is not supported on MailChimp.",
@@ -174,7 +174,7 @@ class Product
         }
         return $batchArray;
     }
-    protected function _markSpecialPrices($magentoStoreId, $mailchimpStoreId)
+    protected function _markSpecialPrices($magentoStoreId, $sqmmcStoreId)
     {
         /**
          * get the products with current special price that are not synced and mark it as modified
@@ -205,12 +205,12 @@ class Product
         $collection->getSelect()->joinLeft(
             ['mc' => $collection->getTable('sqmmc_sync_ecommerce')],
             "mc.type = 'PRO' AND mc.related_id = e.entity_id AND mc.sqmmc_sync_modified = 0 ".
-            $collection->getConnection()->quoteInto(" AND  mc.sqmmc_store_id = ?", $mailchimpStoreId) .
+            $collection->getConnection()->quoteInto(" AND  mc.sqmmc_store_id = ?", $sqmmcStoreId) .
             " and mc.sqmmc_sync_delta <  at_special_from_date.value"
         );
         $collection->getSelect()->where('mc.sqmmc_sync_delta is not null');
         foreach ($collection as $item) {
-            $this->_updateProduct($mailchimpStoreId, $item->getEntityId(), null, null, 1);
+            $this->_updateProduct($sqmmcStoreId, $item->getEntityId(), null, null, 1);
         }
         /**
          * get the products that was synced when it have special price and have no more special price
@@ -231,13 +231,13 @@ class Product
         $collection2->getSelect()->joinLeft(
             ['mc' => $collection2->getTable('sqmmc_sync_ecommerce')],
             "mc.type = 'PRO' and mc.related_id = e.entity_id and mc.sqmmc_sync_modified = 0 ".
-            $collection->getConnection()->quoteInto(" AND  mc.sqmmc_store_id = ?", $mailchimpStoreId) .
+            $collection->getConnection()->quoteInto(" AND  mc.sqmmc_store_id = ?", $sqmmcStoreId) .
             " and mc.sqmmc_sync_delta < at_special_to_date.value",
             []
         );
         $collection2->getSelect()->where('mc.sqmmc_sync_delta is not null');
         foreach ($collection2 as $item) {
-            $this->_updateProduct($mailchimpStoreId, $item->getEntityId(), null, null, 1);
+            $this->_updateProduct($sqmmcStoreId, $item->getEntityId(), null, null, 1);
         }
     }
     /**
@@ -249,7 +249,7 @@ class Product
     }
     protected function _buildNewProductRequest(
         \Magento\Catalog\Model\Product $product,
-        $mailchimpStoreId,
+        $sqmmcStoreId,
         $magentoStoreId
     ) {
 
@@ -289,7 +289,7 @@ class Product
             $this->_helper->modifyCounter(\SqualoMail\SqmMcMagentoTwo\Helper\Data::PRO_NEW);
             $data = [];
             $data['method'] = "POST";
-            $data['path'] = "/ecommerce/stores/" . $mailchimpStoreId . "/products";
+            $data['path'] = "/ecommerce/stores/" . $sqmmcStoreId . "/products";
             $data['operation_id'] = $this->_batchId . '_' . $product->getId();
             $data['body'] = $body;
             $this->productPrice = null;
@@ -299,7 +299,7 @@ class Product
     protected function _buildOldProductRequest(
         \Magento\Catalog\Model\Product $product,
         $batchId,
-        $mailchimpStoreId,
+        $sqmmcStoreId,
         $magentoStoreId
     ) {
         $operations = [];
@@ -315,7 +315,7 @@ class Product
             //add or update variant
             foreach ($parentIds as $parentId) {
                 $productSync = $this->_chimpSyncEcommerce->create()->getByStoreIdType(
-                    $mailchimpStoreId,
+                    $sqmmcStoreId,
                     $parentId,
                     \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_PRODUCT
                 );
@@ -332,7 +332,7 @@ class Product
                     $variendata["visibility"] = $data["visibility"];
                     $productdata = [];
                     $productdata['method'] = "PUT";
-                    $productdata['path'] = "/ecommerce/stores/" . $mailchimpStoreId . "/products/" .
+                    $productdata['path'] = "/ecommerce/stores/" . $sqmmcStoreId . "/products/" .
                         $parentId . '/variants/' . $data['id'];
                     $productdata['operation_id'] = $batchId . '_' . $parentId;
                     $body = json_encode($variendata);
@@ -369,7 +369,7 @@ class Product
         $this->_helper->modifyCounter(\SqualoMail\SqmMcMagentoTwo\Helper\Data::PRO_MOD);
         $data = [];
         $data['method'] = "PATCH";
-        $data['path'] = "/ecommerce/stores/" . $mailchimpStoreId . "/products/".$product->getId();
+        $data['path'] = "/ecommerce/stores/" . $sqmmcStoreId . "/products/".$product->getId();
         $data['operation_id'] = $this->_batchId . '_' . $product->getId();
         $data['body'] = $body;
         $operations[] = $data;
@@ -546,11 +546,11 @@ class Product
     }
     /**
      * @param \Magento\Sales\Model\Order $order
-     * @param $mailchimpStoreId
+     * @param $sqmmcStoreId
      * @return array
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    public function sendModifiedProduct(\Magento\Sales\Model\Order $order, $mailchimpStoreId, $magentoStoreId)
+    public function sendModifiedProduct(\Magento\Sales\Model\Order $order, $sqmmcStoreId, $magentoStoreId)
     {
         $data = [];
         $batchId = \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_PRODUCT . '_' . $this->_helper->getGmtTimeStamp();
@@ -559,7 +559,7 @@ class Product
             //@todo get from the store not the default
             $product = $this->_productRepository->getById($item->getProductId());
             $productSyncData = $this->_chimpSyncEcommerce->create()->getByStoreIdType(
-                $mailchimpStoreId,
+                $sqmmcStoreId,
                 $product->getId(),
                 \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_PRODUCT
             );
@@ -576,19 +576,19 @@ class Product
                 $productSyncData->getMailchimpSyncDelta() > $this->_helper->getMCMinSyncDateFlag()) {
                 $data = array_merge(
                     $data,
-                    $this->_buildOldProductRequest($product, $batchId, $mailchimpStoreId, $magentoStoreId)
+                    $this->_buildOldProductRequest($product, $batchId, $sqmmcStoreId, $magentoStoreId)
                 );
-                $this->_updateProduct($mailchimpStoreId, $product->getId());
+                $this->_updateProduct($sqmmcStoreId, $product->getId());
             } elseif (!$productSyncData->getMailchimpSyncDelta() ||
                 $productSyncData->getMailchimpSyncDelta() < $this->_helper->getMCMinSyncDateFlag()) {
-                $data[] = $this->_buildNewProductRequest($product, $mailchimpStoreId, $magentoStoreId);
-                $this->_updateProduct($mailchimpStoreId, $product->getId());
+                $data[] = $this->_buildNewProductRequest($product, $sqmmcStoreId, $magentoStoreId);
+                $this->_updateProduct($sqmmcStoreId, $product->getId());
             }
         }
         return $data;
     }
 
-    public function sendQuoteModifiedProduct(\Magento\Quote\Model\Quote $quote, $mailchimpStoreId, $magentoStoreId)
+    public function sendQuoteModifiedProduct(\Magento\Quote\Model\Quote $quote, $sqmmcStoreId, $magentoStoreId)
     {
         $data = [];
         $batchId = \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_PRODUCT . '_' . $this->_helper->getGmtTimeStamp();
@@ -600,7 +600,7 @@ class Product
             //@todo get from the store not the default
             $product = $this->_productRepository->getById($item->getProductId());
             $productSyncData = $this->_chimpSyncEcommerce->create()->getByStoreIdType(
-                $mailchimpStoreId,
+                $sqmmcStoreId,
                 $product->getId(),
                 \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_PRODUCT
             );
@@ -619,13 +619,13 @@ class Product
                 $productSyncData->getMailchimpSyncDelta() > $this->_helper->getMCMinSyncDateFlag()) {
                 $data = array_merge(
                     $data,
-                    $this->_buildOldProductRequest($product, $batchId, $mailchimpStoreId, $magentoStoreId)
+                    $this->_buildOldProductRequest($product, $batchId, $sqmmcStoreId, $magentoStoreId)
                 );
-                $this->_updateProduct($mailchimpStoreId, $product->getId());
+                $this->_updateProduct($sqmmcStoreId, $product->getId());
             } elseif (!$productSyncData->getMailchimpSyncDelta() ||
                 $productSyncData->getMailchimpSyncDelta() < $this->_helper->getMCMinSyncDateFlag()) {
-                $data[] = $this->_buildNewProductRequest($product, $mailchimpStoreId, $magentoStoreId);
-                $this->_updateProduct($mailchimpStoreId, $product->getId());
+                $data[] = $this->_buildNewProductRequest($product, $sqmmcStoreId, $magentoStoreId);
+                $this->_updateProduct($sqmmcStoreId, $product->getId());
             }
         }
         return $data;

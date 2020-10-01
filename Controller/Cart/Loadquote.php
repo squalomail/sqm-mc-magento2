@@ -95,12 +95,12 @@ class Loadquote extends Action
             $quote = $this->_quote->create();
             $quote->getResource()->load($quote, $params['id']);
             $magentoStoreId = $quote->getStoreId();
-            $mailchimpStoreId = $this->_helper->getConfigValue(
+            $sqmmcStoreId = $this->_helper->getConfigValue(
                 \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_SQM_MC_STORE,
                 $magentoStoreId
             );
             $syncCommerce = $this->_helper->getChimpSyncEcommerce(
-                $mailchimpStoreId,
+                $sqmmcStoreId,
                 $params['id'],
                 \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_QUOTE
             );

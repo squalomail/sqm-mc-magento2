@@ -86,7 +86,7 @@ class Customer
     }
     public function sendCustomers($storeId)
     {
-        $mailchimpStoreId = $this->_helper->getConfigValue(
+        $sqmmcStoreId = $this->_helper->getConfigValue(
             \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_SQM_MC_STORE,
             $storeId
         );
@@ -96,7 +96,7 @@ class Customer
         $collection->getSelect()->joinLeft(
             ['m4m' => $this->_helper->getTableName('sqmmc_sync_ecommerce')],
             "m4m.related_id = e.entity_id and m4m.type = '".\SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_CUSTOMER.
-            "' and m4m.sqmmc_store_id = '".$mailchimpStoreId."'",
+            "' and m4m.sqmmc_store_id = '".$sqmmcStoreId."'",
             ['m4m.*']
         );
         $collection->getSelect()->where("m4m.sqmmc_sync_delta IS null ".
@@ -123,7 +123,7 @@ class Customer
                     }
                     $customerMailchimpId = hash('md5', strtolower($customer->getEmail()));
                     $customerArray[$counter]['method'] = "PUT";
-                    $customerArray[$counter]['path'] = "/ecommerce/stores/" . $mailchimpStoreId . "/customers/" .
+                    $customerArray[$counter]['path'] = "/ecommerce/stores/" . $sqmmcStoreId . "/customers/" .
                         $customerMailchimpId;
                     $customerArray[$counter]['operation_id'] = $this->_batchId . '_' . $customer->getId();
                     $customerArray[$counter]['body'] = $customerJson;
@@ -142,10 +142,10 @@ class Customer
                         }
                     }
                     //update customers delta
-                    $this->_updateCustomer($mailchimpStoreId, $customer->getId());
+                    $this->_updateCustomer($sqmmcStoreId, $customer->getId());
                 } else {
                     $this->_updateCustomer(
-                        $mailchimpStoreId,
+                        $sqmmcStoreId,
                         $customer->getId(),
                         $this->_helper->getGmtDate(),
                         'Customer with no data',
@@ -154,7 +154,7 @@ class Customer
                 }
             } else {
                 $this->_updateCustomer(
-                    $mailchimpStoreId,
+                    $sqmmcStoreId,
                     $customer->getId(),
                     $this->_helper->getGmtDate(),
                     json_last_error_msg(),

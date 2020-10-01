@@ -34,12 +34,12 @@ class Ship
         SalesShipmentRepositoryInterface $subject,
         ShipmentInterface $shipment
     ) {
-        $mailchimpStoreId = $this->_helper->getConfigValue(
+        $sqmmcStoreId = $this->_helper->getConfigValue(
             \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_SQM_MC_STORE,
             $shipment->getStoreId()
         );
         $this->_helper->saveEcommerceData(
-            $mailchimpStoreId,
+            $sqmmcStoreId,
             $shipment->getOrderId(),
             \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_ORDER,
             null,

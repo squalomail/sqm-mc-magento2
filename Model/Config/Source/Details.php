@@ -72,29 +72,29 @@ class Details implements \Magento\Framework\Option\ArrayInterface
                     array_key_exists('member_count', $optionsList['stats'])) {
                     $this->_options['list_subscribers'] = $optionsList['stats']['member_count'];
                 }
-                $mailchimpStoreId = $this->_helper->getConfigValue(
+                $sqmmcStoreId = $this->_helper->getConfigValue(
                     \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_SQM_MC_STORE,
                     $storeId,
                     $scope
                 );
-                if ($mailchimpStoreId && $mailchimpStoreId!=-1 &&
+                if ($sqmmcStoreId && $sqmmcStoreId!=-1 &&
                     $this->_helper->getConfigValue(
                         \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_ECOMMERCE_ACTIVE,
                         $storeId,
                         $scope
                     )
                 ) {
-                    $storeInfo = $api->ecommerce->stores->get($mailchimpStoreId);
+                    $storeInfo = $api->ecommerce->stores->get($sqmmcStoreId);
                     $this->_options['is_syncing'] = $storeInfo['is_syncing'];
-                    $this->_options['date_sync'] = $this->getDateSync($mailchimpStoreId);
+                    $this->_options['date_sync'] = $this->getDateSync($sqmmcStoreId);
                     $this->_options['store_exists'] = true;
-                    $totalCustomers = $api->ecommerce->customers->getAll($mailchimpStoreId, 'total_items');
+                    $totalCustomers = $api->ecommerce->customers->getAll($sqmmcStoreId, 'total_items');
                     $this->_options['total_customers'] = $totalCustomers['total_items'];
-                    $totalProducts = $api->ecommerce->products->getAll($mailchimpStoreId, 'total_items');
+                    $totalProducts = $api->ecommerce->products->getAll($sqmmcStoreId, 'total_items');
                     $this->_options['total_products'] = $totalProducts['total_items'];
-                    $totalOrders = $api->ecommerce->orders->getAll($mailchimpStoreId, 'total_items');
+                    $totalOrders = $api->ecommerce->orders->getAll($sqmmcStoreId, 'total_items');
                     $this->_options['total_orders'] = $totalOrders['total_items'];
-                    $totalCarts = $api->ecommerce->carts->getAll($mailchimpStoreId, 'total_items');
+                    $totalCarts = $api->ecommerce->carts->getAll($sqmmcStoreId, 'total_items');
                     $this->_options['total_carts'] = $totalCarts['total_items'];
                 } else {
                     $this->_options['store_exists'] = false;
@@ -158,10 +158,10 @@ class Details implements \Magento\Framework\Option\ArrayInterface
         }
         return $ret;
     }
-    private function getDateSync($mailchimpStoreId)
+    private function getDateSync($sqmmcStoreId)
     {
         return $this->_helper->getConfigValue(
-            \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_IS_SYNC."/$mailchimpStoreId",
+            \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_IS_SYNC."/$sqmmcStoreId",
             0,
             "default"
         );

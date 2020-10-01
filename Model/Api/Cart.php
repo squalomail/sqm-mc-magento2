@@ -91,7 +91,7 @@ class Cart
     }
 
         /**
-         * @param $mailchimpStoreId
+         * @param $sqmmcStoreId
          * @param $magentoStoreId
          * @return array
          */
@@ -105,7 +105,7 @@ class Cart
         ) {
             return $allCarts;
         }
-        $mailchimpStoreId = $this->_helper->getConfigValue(
+        $sqmmcStoreId = $this->_helper->getConfigValue(
             \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_SQM_MC_STORE,
             $magentoStoreId
         );
@@ -116,7 +116,7 @@ class Cart
         );
         if (!$this->_firstDate) {
             $this->_firstDate = $this->_helper->getConfigValue(
-                \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_IS_SYNC . "/$mailchimpStoreId",
+                \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_IS_SYNC . "/$sqmmcStoreId",
                 0,
                 'default'
             );
@@ -126,20 +126,20 @@ class Cart
         $date = $this->_helper->getDateMicrotime();
         $this->_batchId =  \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_QUOTE.'_'.$date;
         // get all the carts converted in orders (must be deleted on mailchimp)
-        $allCarts = array_merge($allCarts, $this->_getConvertedQuotes($mailchimpStoreId, $magentoStoreId));
+        $allCarts = array_merge($allCarts, $this->_getConvertedQuotes($sqmmcStoreId, $magentoStoreId));
         // get all the carts modified but not converted in orders
-        $allCarts = array_merge($allCarts, $this->_getModifiedQuotes($mailchimpStoreId, $magentoStoreId));
+        $allCarts = array_merge($allCarts, $this->_getModifiedQuotes($sqmmcStoreId, $magentoStoreId));
         // get new carts
-        $allCarts = array_merge($allCarts, $this->_getNewQuotes($mailchimpStoreId, $magentoStoreId));
+        $allCarts = array_merge($allCarts, $this->_getNewQuotes($sqmmcStoreId, $magentoStoreId));
         return $allCarts;
     }
 
     /**
-     * @param $mailchimpStoreId
+     * @param $sqmmcStoreId
      * @param $magentoStoreId
      * @return array
      */
-    protected function _getConvertedQuotes($mailchimpStoreId, $magentoStoreId)
+    protected function _getConvertedQuotes($sqmmcStoreId, $magentoStoreId)
     {
         $allCarts = [];
         $convertedCarts = $this->_getQuoteCollection();
@@ -150,7 +150,7 @@ class Cart
         $convertedCarts->getSelect()->joinLeft(
             ['m4m' => $this->_helper->getTableName('sqmmc_sync_ecommerce')],
             "m4m.related_id = main_table.entity_id and m4m.type = '".\SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_QUOTE."'
-            AND m4m.sqmmc_store_id = '" . $mailchimpStoreId . "'",
+            AND m4m.sqmmc_store_id = '" . $sqmmcStoreId . "'",
             ['m4m.*']
         );
         // be sure that the quotes are already in mailchimp and not deleted
@@ -165,7 +165,7 @@ class Cart
             // we need to delete all the carts associated with this email
             $allCartsForEmail = $this->_getAllCartsByEmail(
                 $cart->getCustomerEmail(),
-                $mailchimpStoreId,
+                $sqmmcStoreId,
                 $magentoStoreId
             );
             /**
@@ -175,12 +175,12 @@ class Cart
                 $alreadySentCartId = $cartForEmail->getEntityId();
                 if ($alreadySentCartId != $cartId) {
                     $allCarts[$this->_counter]['method'] = 'DELETE';
-                    $allCarts[$this->_counter]['path'] = '/ecommerce/stores/' . $mailchimpStoreId . '/carts/' .
+                    $allCarts[$this->_counter]['path'] = '/ecommerce/stores/' . $sqmmcStoreId . '/carts/' .
                         $alreadySentCartId;
                     $allCarts[$this->_counter]['operation_id'] = $this->_batchId . '_' . $alreadySentCartId;
                     $allCarts[$this->_counter]['body'] = '';
                     $this->_updateQuote(
-                        $mailchimpStoreId,
+                        $sqmmcStoreId,
                         $alreadySentCartId,
                         null,
                         null,
@@ -193,11 +193,11 @@ class Cart
 
             $allCartsForEmail->clear();
             $allCarts[$this->_counter]['method'] = 'DELETE';
-            $allCarts[$this->_counter]['path'] = '/ecommerce/stores/' . $mailchimpStoreId . '/carts/' . $cartId;
+            $allCarts[$this->_counter]['path'] = '/ecommerce/stores/' . $sqmmcStoreId . '/carts/' . $cartId;
             $allCarts[$this->_counter]['operation_id'] = $this->_batchId . '_' . $cartId;
             $allCarts[$this->_counter]['body'] = '';
             $this->_updateQuote(
-                $mailchimpStoreId,
+                $sqmmcStoreId,
                 $cartId,
                 null,
                 null,
@@ -211,11 +211,11 @@ class Cart
     }
 
     /**
-     * @param $mailchimpStoreId
+     * @param $sqmmcStoreId
      * @param $magentoStoreId
      * @return array
      */
-    protected function _getModifiedQuotes($mailchimpStoreId, $magentoStoreId)
+    protected function _getModifiedQuotes($sqmmcStoreId, $magentoStoreId)
     {
         $allCarts = [];
         $modifiedCarts = $this->_getQuoteCollection();
@@ -227,7 +227,7 @@ class Cart
         $modifiedCarts->getSelect()->joinLeft(
             ['m4m' => $this->_helper->getTableName('sqmmc_sync_ecommerce')],
             "m4m.related_id = main_table.entity_id and m4m.type = '".\SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_QUOTE."'
-            AND m4m.sqmmc_store_id = '" . $mailchimpStoreId . "'",
+            AND m4m.sqmmc_store_id = '" . $sqmmcStoreId . "'",
             ['m4m.*']
         );
         // be sure that the quotes are already in mailchimp and not deleted
@@ -254,7 +254,7 @@ class Cart
             if ($customer->getEmail() != $cart->getCustomerEmail()) {
                 $allCartsForEmail = $this->_getAllCartsByEmail(
                     $cart->getCustomerEmail(),
-                    $mailchimpStoreId,
+                    $sqmmcStoreId,
                     $magentoStoreId
                 );
                 /**
@@ -264,12 +264,12 @@ class Cart
                     $alreadySentCartId = $cartForEmail->getEntityId();
                     if ($alreadySentCartId != $cartId) {
                         $allCarts[$this->_counter]['method'] = 'DELETE';
-                        $allCarts[$this->_counter]['path'] = '/ecommerce/stores/' . $mailchimpStoreId . '/carts/' .
+                        $allCarts[$this->_counter]['path'] = '/ecommerce/stores/' . $sqmmcStoreId . '/carts/' .
                             $alreadySentCartId;
                         $allCarts[$this->_counter]['operation_id'] = $this->_batchId . '_' . $alreadySentCartId;
                         $allCarts[$this->_counter]['body'] = '';
                         $this->_updateQuote(
-                            $mailchimpStoreId,
+                            $sqmmcStoreId,
                             $alreadySentCartId,
                             null,
                             null,
@@ -284,17 +284,17 @@ class Cart
             }
             // avoid carts abandoned as guests when customer email associated to a registered customer.
             if (!$cart->getCustomerId() && $customer->getEmail()==$cart->getCustomerEmail()) {
-                $this->_updateQuote($mailchimpStoreId, $cartId);
+                $this->_updateQuote($sqmmcStoreId, $cartId);
                 continue;
             }
 
             // send the products that not already sent
             try {
-                $productData = $this->_apiProduct->sendQuoteModifiedProduct($cart, $mailchimpStoreId, $magentoStoreId);
+                $productData = $this->_apiProduct->sendQuoteModifiedProduct($cart, $sqmmcStoreId, $magentoStoreId);
             } catch (\Exception $e) {
                 $error = $e->getMessage();
                 $this->_helper->log($error);
-                $this->_updateQuote($mailchimpStoreId, $cartId);
+                $this->_updateQuote($sqmmcStoreId, $cartId);
                 continue;
             }
             if (count($productData)) {
@@ -305,20 +305,20 @@ class Cart
             }
 
             if (count($cart->getAllVisibleItems())) {
-                $cartJson = $this->_makeCart($cart, $mailchimpStoreId, $magentoStoreId);
+                $cartJson = $this->_makeCart($cart, $sqmmcStoreId, $magentoStoreId);
                 if ($cartJson!==false) {
                     if (!empty($cartJson)) {
                         $this->_helper->modifyCounter(\SqualoMail\SqmMcMagentoTwo\Helper\Data::QUO_MOD);
                         $allCarts[$this->_counter]['method'] = 'PATCH';
-                        $allCarts[$this->_counter]['path'] = '/ecommerce/stores/' . $mailchimpStoreId .
+                        $allCarts[$this->_counter]['path'] = '/ecommerce/stores/' . $sqmmcStoreId .
                             '/carts/' . $cartId;
                         $allCarts[$this->_counter]['operation_id'] = $this->_batchId . '_' . $cartId;
                         $allCarts[$this->_counter]['body'] = $cartJson;
                         $this->_counter += 1;
-                        $this->_updateQuote($mailchimpStoreId, $cartId);
+                        $this->_updateQuote($sqmmcStoreId, $cartId);
                     } else {
                         $this->_updateQuote(
-                            $mailchimpStoreId,
+                            $sqmmcStoreId,
                             $cartId,
                             $this->_helper->getGmtDate(),
                             "Cart is empty",
@@ -327,7 +327,7 @@ class Cart
                     }
                 } else {
                     $this->_updateQuote(
-                        $mailchimpStoreId,
+                        $sqmmcStoreId,
                         $cartId,
                         $this->_helper->getGmtDate(),
                         "Json error",
@@ -340,10 +340,10 @@ class Cart
     }
 
     /**
-     * @param $mailchimpStoreId
+     * @param $sqmmcStoreId
      * @return array
      */
-    protected function _getNewQuotes($mailchimpStoreId, $magentoStoreId)
+    protected function _getNewQuotes($sqmmcStoreId, $magentoStoreId)
     {
         $allCarts = [];
         $newCarts = $this->_getQuoteCollection();
@@ -360,7 +360,7 @@ class Cart
         $newCarts->getSelect()->joinLeft(
             ['m4m' => $this->_helper->getTableName('sqmmc_sync_ecommerce')],
             "m4m.related_id = main_table.entity_id and m4m.type = '" . \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_QUOTE . "'
-            AND m4m.sqmmc_store_id = '" . $mailchimpStoreId . "'",
+            AND m4m.sqmmc_store_id = '" . $sqmmcStoreId . "'",
             ['m4m.*']
         );
         // be sure that the quotes are already in mailchimp and not deleted
@@ -379,7 +379,7 @@ class Cart
                 ->addFieldToFilter('main_table.updated_at', ['from' => $cart->getUpdatedAt()]);
             //if cart is empty or customer has an order made after the abandonment skip current cart.
             if (!count($cart->getAllVisibleItems()) || $orderCollection->getSize()) {
-                $this->_updateQuote($mailchimpStoreId, $cartId);
+                $this->_updateQuote($sqmmcStoreId, $cartId);
                 continue;
             }
             $customer = $this->_customerFactory->create();
@@ -389,18 +389,18 @@ class Cart
             if ($customer->getEmail() != $cart->getCustomerEmail()) {
                 $allCartsForEmail = $this->_getAllCartsByEmail(
                     $cart->getCustomerEmail(),
-                    $mailchimpStoreId,
+                    $sqmmcStoreId,
                     $magentoStoreId
                 );
                 foreach ($allCartsForEmail as $cartForEmail) {
                     $alreadySentCartId = $cartForEmail->getEntityId();
                     $allCarts[$this->_counter]['method'] = 'DELETE';
-                    $allCarts[$this->_counter]['path'] = '/ecommerce/stores/' . $mailchimpStoreId . '/carts/' .
+                    $allCarts[$this->_counter]['path'] = '/ecommerce/stores/' . $sqmmcStoreId . '/carts/' .
                         $alreadySentCartId;
                     $allCarts[$this->_counter]['operation_id'] = $this->_batchId . '_' . $alreadySentCartId;
                     $allCarts[$this->_counter]['body'] = '';
                     $this->_updateQuote(
-                        $mailchimpStoreId,
+                        $sqmmcStoreId,
                         $alreadySentCartId,
                         null,
                         null,
@@ -416,7 +416,7 @@ class Cart
             // don't send the carts for guest customers who are registered
             if (!$cart->getCustomerId() && $customer->getEmail()==$cart->getCustomerEmail()) {
                 $this->_updateQuote(
-                    $mailchimpStoreId,
+                    $sqmmcStoreId,
                     $cartId,
                     $this->_helper->getGmtDate(),
                     null,
@@ -427,10 +427,10 @@ class Cart
 
             // send the products that not already sent
             try {
-                $productData = $this->_apiProduct->sendQuoteModifiedProduct($cart, $mailchimpStoreId, $magentoStoreId);
+                $productData = $this->_apiProduct->sendQuoteModifiedProduct($cart, $sqmmcStoreId, $magentoStoreId);
             } catch (\Exception $e) {
                 $error = $e->getMessage();
-                $this->_updateQuote($mailchimpStoreId, $cartId, $this->_helper->getGmtDate(), $error, 0);
+                $this->_updateQuote($sqmmcStoreId, $cartId, $this->_helper->getGmtDate(), $error, 0);
                 continue;
             }
             if (count($productData)) {
@@ -440,19 +440,19 @@ class Cart
                 }
             }
 
-            $cartJson = $this->_makeCart($cart, $mailchimpStoreId, $magentoStoreId);
+            $cartJson = $this->_makeCart($cart, $sqmmcStoreId, $magentoStoreId);
             if ($cartJson!==false) {
                 if (!empty($cartJson)) {
                     $this->_helper->modifyCounter(\SqualoMail\SqmMcMagentoTwo\Helper\Data::QUO_NEW);
                     $allCarts[$this->_counter]['method'] = 'POST';
-                    $allCarts[$this->_counter]['path'] = '/ecommerce/stores/' . $mailchimpStoreId . '/carts';
+                    $allCarts[$this->_counter]['path'] = '/ecommerce/stores/' . $sqmmcStoreId . '/carts';
                     $allCarts[$this->_counter]['operation_id'] = $this->_batchId . '_' . $cartId;
                     $allCarts[$this->_counter]['body'] = $cartJson;
-                    $this->_updateQuote($mailchimpStoreId, $cartId);
+                    $this->_updateQuote($sqmmcStoreId, $cartId);
                     $this->_counter += 1;
                 } else {
                     $this->_updateQuote(
-                        $mailchimpStoreId,
+                        $sqmmcStoreId,
                         $cartId,
                         $this->_helper->getGmtDate(),
                         "Cart is empty",
@@ -461,7 +461,7 @@ class Cart
                 }
             } else {
                 $this->_updateQuote(
-                    $mailchimpStoreId,
+                    $sqmmcStoreId,
                     $cartId,
                     $this->_helper->getGmtDate(),
                     "Json error",
@@ -477,11 +477,11 @@ class Cart
      * Get all existing carts in the current store view for a given email address.
      *
      * @param $email
-     * @param $mailchimpStoreId
+     * @param $sqmmcStoreId
      * @param $magentoStoreId
      * @return object
      */
-    protected function _getAllCartsByEmail($email, $mailchimpStoreId, $magentoStoreId)
+    protected function _getAllCartsByEmail($email, $sqmmcStoreId, $magentoStoreId)
     {
         $allCartsForEmail = $this->_getQuoteCollection();
         $allCartsForEmail->addFieldToFilter('is_active', ['eq' => 1]);
@@ -490,7 +490,7 @@ class Cart
         $allCartsForEmail->getSelect()->joinLeft(
             ['m4m' => $this->_helper->getTableName('sqmmc_sync_ecommerce')],
             "m4m.related_id = main_table.entity_id and m4m.type = '".\SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_QUOTE."'
-            AND m4m.sqmmc_store_id = '" . $mailchimpStoreId . "'",
+            AND m4m.sqmmc_store_id = '" . $sqmmcStoreId . "'",
             ['m4m.*']
         );
         // be sure that the quotes are already in mailchimp and not deleted
@@ -500,16 +500,16 @@ class Cart
 
     /**
      * @param $cart
-     * @param $mailchimpStoreId
+     * @param $sqmmcStoreId
      * @param $magentoStoreId
      * @return string
      */
-    protected function _makeCart(\Magento\Quote\Model\Quote $cart, $mailchimpStoreId, $magentoStoreId)
+    protected function _makeCart(\Magento\Quote\Model\Quote $cart, $sqmmcStoreId, $magentoStoreId)
     {
         $campaignId = $cart->getMailchimpCampaignId();
         $oneCart = [];
         $oneCart['id'] = $cart->getEntityId();
-        $oneCart['customer'] = $this->_getCustomer($cart, $mailchimpStoreId, $magentoStoreId);
+        $oneCart['customer'] = $this->_getCustomer($cart, $sqmmcStoreId, $magentoStoreId);
         if ($campaignId) {
             $oneCart['campaign_id'] = $campaignId;
         }
@@ -581,7 +581,7 @@ class Cart
         $url = $this->_helper->getCartUrl($storeId, $cart->getId(), $this->_token);
         return $url;
     }
-    protected function _getCustomer(\Magento\Quote\Model\Quote $cart, $mailchimpStoreId, $magentoStoreId)
+    protected function _getCustomer(\Magento\Quote\Model\Quote $cart, $sqmmcStoreId, $magentoStoreId)
     {
         $customer = [
             'id' => hash('md5', strtolower($cart->getCustomerEmail())),

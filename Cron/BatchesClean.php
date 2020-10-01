@@ -21,25 +21,25 @@ class BatchesClean
     /**
      * @var \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncBatches
      */
-    protected $mailChimpSyncBatches;
+    protected $sqmMcSyncBatches;
 
     /**
      * BatchesClean constructor.
      * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
-     * @param \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncBatches $mailChimpSyncBatches
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncBatches $sqmMcSyncBatches
      */
     public function __construct(
         \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
         \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncBatches $_mailChimpSyncBatches
     ) {
         $this->helper               = $helper;
-        $this->mailChimpSyncBatches = $_mailChimpSyncBatches;
+        $this->sqmMcSyncBatches = $_mailChimpSyncBatches;
     }
     public function execute()
     {
         try {
-            $connection = $this->mailChimpSyncBatches->getResource()->getConnection();
-            $tableName = $this->mailChimpSyncBatches->getResource()->getMainTable();
+            $connection = $this->sqmMcSyncBatches->getResource()->getConnection();
+            $tableName = $this->sqmMcSyncBatches->getResource()->getMainTable();
             $quoteInto = $connection->quoteInto(
                 'status IN("completed","canceled") and ( date_add(modified_date, interval ? month) < now() OR modified_date IS NULL)',
                 1

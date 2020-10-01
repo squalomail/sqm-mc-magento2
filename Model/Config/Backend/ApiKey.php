@@ -80,7 +80,7 @@ class ApiKey extends \Magento\Framework\App\Config\Value
             $active = $data['ecommerce']['fields']['active']['inherit'];
         }
         if ($active && $this->isValueChanged()) {
-            $mailchimpStore = $this->_helper->getConfigValue(
+            $sqmmcStore = $this->_helper->getConfigValue(
                 \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_SQM_MC_STORE,
                 $this->getScopeId(),
                 $this->getScope()
@@ -92,12 +92,12 @@ class ApiKey extends \Magento\Framework\App\Config\Value
             );
             foreach ($this->_storeManager->getStores() as $storeId => $val) {
                 if ($this->_helper->getConfigValue(\SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_SQM_MC_STORE, $storeId) ==
-                    $mailchimpStore) {
+                    $sqmmcStore) {
                     $found++;
                 }
             }
             if ($found==1) {
-                $this->_helper->cancelAllPendingBatches($mailchimpStore);
+                $this->_helper->cancelAllPendingBatches($sqmmcStore);
             }
         }
         return parent::beforeSave();

@@ -55,11 +55,11 @@ class Check extends \Magento\Framework\App\Action\Action
             $api = $this->_helper->getApi($magentoStoreId);
             try {
                 $campaign =$api->campaigns->get($mc_cid);
-                $mailchimpList = $this->_helper->getConfigValue(
+                $sqmmcList = $this->_helper->getConfigValue(
                     \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_LIST,
                     $magentoStoreId
                 );
-                if ($mailchimpList == $campaign['recipients']['list_id']) {
+                if ($sqmmcList == $campaign['recipients']['list_id']) {
                     $valid = 1;
                 } else {
                     $valid = 0;

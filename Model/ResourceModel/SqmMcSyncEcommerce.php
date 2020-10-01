@@ -65,12 +65,12 @@ class SqmMcSyncEcommerce extends AbstractDb
         \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncEcommerce $chimp,
         $id,
         $type,
-        $mailchimpStoreId
+        $sqmmcStoreId
     ) {
         $connection = $this->getConnection();
         $connection->delete(
             $this->getTable('sqmmc_sync_ecommerce'),
-            ['related_id = ?'=> $id, 'type = ?'=>$type, 'sqmmc_store_id = ?' => $mailchimpStoreId]
+            ['related_id = ?'=> $id, 'type = ?'=>$type, 'sqmmc_store_id = ?' => $sqmmcStoreId]
         );
         return $this;
     }

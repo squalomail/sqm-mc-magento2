@@ -58,19 +58,19 @@ class ResetLocalErrors extends \Magento\Backend\App\Action
         $message = '';
         $params = $this->getRequest()->getParams();
         if (isset($params['website'])) {
-            $mailchimpStore = $this->helper->getConfigValue(
+            $sqmmcStore = $this->helper->getConfigValue(
                 \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_SQM_MC_STORE,
                 $params['website'],
                 'website'
             );
         } elseif (isset($params['store'])) {
-            $mailchimpStore = $this->helper->getConfigValue(
+            $sqmmcStore = $this->helper->getConfigValue(
                 \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_SQM_MC_STORE,
                 $params['store'],
                 'store'
             );
         } else {
-            $mailchimpStore = $this->helper->getConfigValue(
+            $sqmmcStore = $this->helper->getConfigValue(
                 \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_SQM_MC_STORE,
                 $this->storeManager->getStore()
             );
@@ -78,7 +78,7 @@ class ResetLocalErrors extends \Magento\Backend\App\Action
 
         $resultJson = $this->resultJsonFactory->create();
         try {
-            $this->helper->resetErrors($mailchimpStore);
+            $this->helper->resetErrors($sqmmcStore);
         } catch (ValidatorException $e) {
             $valid = 0;
             $message = $e->getMessage();

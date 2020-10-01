@@ -75,21 +75,21 @@ class PromoRules
     }
     public function sendRules($magentoStoreId)
     {
-        $mailchimpStoreId = $this->_helper->getConfigValue(
+        $sqmmcStoreId = $this->_helper->getConfigValue(
             \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_SQM_MC_STORE,
             $magentoStoreId
         );
         $batchArray = [];
 
-        $batchArray = array_merge($batchArray, $this->_getDeletedPromoRules($mailchimpStoreId, $magentoStoreId));
-        $batchArray = array_merge($batchArray, $this->_getModifiedPromoRules($mailchimpStoreId, $magentoStoreId));
+        $batchArray = array_merge($batchArray, $this->_getDeletedPromoRules($sqmmcStoreId, $magentoStoreId));
+        $batchArray = array_merge($batchArray, $this->_getModifiedPromoRules($sqmmcStoreId, $magentoStoreId));
         return $batchArray;
     }
-    protected function _getDeletedPromoRules($mailchimpStoreId, $magentoStoreId)
+    protected function _getDeletedPromoRules($sqmmcStoreId, $magentoStoreId)
     {
         $batchArray = [];
         $collection = $this->_syncCollection->create();
-        $collection->addFieldToFilter('sqmmc_store_id', ['eq'=>$mailchimpStoreId])
+        $collection->addFieldToFilter('sqmmc_store_id', ['eq'=>$sqmmcStoreId])
             ->addFieldToFilter('type', ['eq'=>\SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_PROMO_RULE])
             ->addFieldToFilter('sqmmc_sync_deleted', ['eq'=>1]);
         $collection->getSelect()->limit(self::MAX);
@@ -101,16 +101,16 @@ class PromoRules
         foreach ($collection as $rule) {
             $ruleId = $rule->getData('related_id');
             try {
-                $mailchimpRule = $api->ecommerce->promoCodes->getAll($mailchimpStoreId, $ruleId);
-                foreach ($mailchimpRule['promo_codes'] as $promoCode) {
+                $sqmmcRule = $api->ecommerce->promoCodes->getAll($sqmmcStoreId, $ruleId);
+                foreach ($sqmmcRule['promo_codes'] as $promoCode) {
                     $this->_helper->ecommerceDeleteAllByIdType(
                         $promoCode['id'],
                         \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_PROMO_CODE,
-                        $mailchimpStoreId
+                        $sqmmcStoreId
                     );
                 }
                 $batchArray[$count]['method'] = 'DELETE';
-                $batchArray[$count]['path'] = "/ecommerce/stores/$mailchimpStoreId/promo-rules/$ruleId";
+                $batchArray[$count]['path'] = "/ecommerce/stores/$sqmmcStoreId/promo-rules/$ruleId";
                 $batchArray[$count]['operation_id'] = $this->_batchId . '_' . $ruleId;
                 $count++;
             } catch (\SqualoMailMc_Error $e) {
@@ -119,12 +119,12 @@ class PromoRules
             $this->_helper->ecommerceDeleteAllByIdType(
                 $ruleId,
                 \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_PROMO_RULE,
-                $mailchimpStoreId
+                $sqmmcStoreId
             );
         }
         return $batchArray;
     }
-    protected function _getModifiedPromoRules($mailchimpStoreId, $magentoStoreId)
+    protected function _getModifiedPromoRules($sqmmcStoreId, $magentoStoreId)
     {
         $batchArray = [];
         $websiteId = $this->_helper->getWebsiteId($magentoStoreId);
@@ -137,7 +137,7 @@ class PromoRules
             ['m4m' => $this->_helper->getTableName('sqmmc_sync_ecommerce')],
             "m4m.related_id = main_table.rule_id and m4m.type = '".
             \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_PROMO_RULE.
-            "' and m4m.sqmmc_store_id = '".$mailchimpStoreId."'",
+            "' and m4m.sqmmc_store_id = '".$sqmmcStoreId."'",
             ['m4m.*']
         );
         $collection->getSelect()->where("m4m.sqmmc_sync_modified = 1");
@@ -150,12 +150,12 @@ class PromoRules
         foreach ($collection as $rule) {
             $ruleId = $rule->getRuleId();
             try {
-                $mailchimpRule = $api->ecommerce->promoCodes->getAll($mailchimpStoreId, $ruleId);
-                foreach ($mailchimpRule['promo_codes'] as $promoCode) {
+                $sqmmcRule = $api->ecommerce->promoCodes->getAll($sqmmcStoreId, $ruleId);
+                foreach ($sqmmcRule['promo_codes'] as $promoCode) {
                     $this->_helper->ecommerceDeleteAllByIdType(
                         $promoCode['id'],
                         \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_PROMO_CODE,
-                        $mailchimpStoreId
+                        $sqmmcStoreId
                     );
                 }
             } catch (\SqualoMailMc_Error $e) {
@@ -164,16 +164,16 @@ class PromoRules
             $this->_helper->ecommerceDeleteAllByIdType(
                 $rule->getRuleId(),
                 \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_PROMO_RULE,
-                $mailchimpStoreId
+                $sqmmcStoreId
             );
             $batchArray[$count]['method'] = 'DELETE';
-            $batchArray[$count]['path'] = "/ecommerce/stores/$mailchimpStoreId/promo-rules/$ruleId";
+            $batchArray[$count]['path'] = "/ecommerce/stores/$sqmmcStoreId/promo-rules/$ruleId";
             $batchArray[$count]['operation_id'] = $this->_batchId. '_' . $rule->getRuleId();
             $count++;
         }
         return $batchArray;
     }
-    public function getNewPromoRule($ruleId, $mailchimpStoreId, $magentoStoreId)
+    public function getNewPromoRule($ruleId, $sqmmcStoreId, $magentoStoreId)
     {
         $data = [];
         /**
@@ -187,14 +187,14 @@ class PromoRules
                 if ($promoRulesJson !== false) {
                     if (!empty($promoRulesJson)) {
                         $data['method'] = 'POST';
-                        $data['path'] = '/ecommerce/stores/' . $mailchimpStoreId . '/promo-rules';
+                        $data['path'] = '/ecommerce/stores/' . $sqmmcStoreId . '/promo-rules';
                         $data['operation_id'] = $this->_batchId . '_' . $ruleId;
                         $data['body'] = $promoRulesJson;
-                        $this->_updateSyncData($mailchimpStoreId, $ruleId);
+                        $this->_updateSyncData($sqmmcStoreId, $ruleId);
                     } else {
                         $error = __('Something went wrong when retrieving the information.');
                         $this->_updateSyncData(
-                            $mailchimpStoreId,
+                            $sqmmcStoreId,
                             $ruleId,
                             $this->_helper->getGmtDate(),
                             $error,
@@ -204,7 +204,7 @@ class PromoRules
                 } else {
                     $error = json_last_error_msg();
                     $this->_updateSyncData(
-                        $mailchimpStoreId,
+                        $sqmmcStoreId,
                         $ruleId,
                         $this->_helper->getGmtDate(),
                         $error,
@@ -214,7 +214,7 @@ class PromoRules
             } else {
                 $error = __('Something went wrong when retrieving the information.');
                 $this->_updateSyncData(
-                    $mailchimpStoreId,
+                    $sqmmcStoreId,
                     $ruleId,
                     $this->_helper->getGmtDate(),
                     $error,
@@ -271,21 +271,21 @@ class PromoRules
      */
     private function _getMailChimpType($action, $shipping)
     {
-        $mailChimpType = null;
+        $sqmMcType = null;
         if ($shipping==self::FREESHIPPING_NO) {
             switch ($action) {
                 case \Magento\SalesRule\Model\Rule::BY_PERCENT_ACTION:
-                    $mailChimpType = self::TYPE_PERCENTAGE;
+                    $sqmMcType = self::TYPE_PERCENTAGE;
                     break;
                 case \Magento\SalesRule\Model\Rule::BY_FIXED_ACTION:
                 case \Magento\SalesRule\Model\Rule::CART_FIXED_ACTION:
-                    $mailChimpType = self::TYPE_FIXED;
+                    $sqmMcType = self::TYPE_FIXED;
                     break;
             }
         } else {
-            $mailChimpType = self::TYPE_FIXED;
+            $sqmMcType = self::TYPE_FIXED;
         }
-        return $mailChimpType;
+        return $sqmMcType;
     }
 
     /**
@@ -294,21 +294,21 @@ class PromoRules
      */
     private function _getMailChimpTarget($action, $shipping)
     {
-        $mailChimpTarget = null;
+        $sqmMcTarget = null;
         if ($shipping==self::FREESHIPPING_NO) {
             switch ($action) {
                 case \Magento\SalesRule\Model\Rule::CART_FIXED_ACTION:
                 case \Magento\SalesRule\Model\Rule::BY_PERCENT_ACTION:
-                    $mailChimpTarget = self::TARGET_TOTAL;
+                    $sqmMcTarget = self::TARGET_TOTAL;
                     break;
                 case \Magento\SalesRule\Model\Rule::BY_FIXED_ACTION:
-                    $mailChimpTarget = self::TARGET_PER_ITEM;
+                    $sqmMcTarget = self::TARGET_PER_ITEM;
                     break;
             }
         } else {
-            $mailChimpTarget = self::TARGET_SHIPPING;
+            $sqmMcTarget = self::TARGET_SHIPPING;
         }
-        return $mailChimpTarget;
+        return $sqmMcTarget;
     }
 
     /**

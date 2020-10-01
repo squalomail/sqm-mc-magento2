@@ -48,12 +48,12 @@ class SaveBefore implements \Magento\Framework\Event\ObserverInterface
         $storeId  = $customer->getStoreId();
         if ($this->_helper->getConfigValue(\SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_ACTIVE)) {
             if ($this->_helper->getConfigValue(\SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_ECOMMERCE_ACTIVE)) {
-                $mailchimpStoreId = $this->_helper->getConfigValue(
+                $sqmmcStoreId = $this->_helper->getConfigValue(
                     \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_SQM_MC_STORE,
                     $storeId
                 );
                 $this->_helper->saveEcommerceData(
-                    $mailchimpStoreId,
+                    $sqmmcStoreId,
                     $customer->getId(),
                     \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_CUSTOMER,
                     null,

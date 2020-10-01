@@ -64,7 +64,7 @@ class Monkey extends Column
      * @param SearchCriteriaBuilder $criteria
      * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
      * @param \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcSyncEcommerce\CollectionFactory $syncCommerceCF
-     * @param \SqualoMail\SqmMcMagentoTwo\Model\SqmMcErrorsFactory $mailChimpErrorsFactory
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\SqmMcErrorsFactory $sqmMcErrorsFactory
      * @param \Magento\Sales\Model\OrderFactory $orderFactory
      * @param array $components
      * @param array $data
@@ -78,7 +78,7 @@ class Monkey extends Column
         SearchCriteriaBuilder $criteria,
         \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
         \SqualoMail\SqmMcMagentoTwo\Model\ResourceModel\SqmMcSyncEcommerce\CollectionFactory $syncCommerceCF,
-        \SqualoMail\SqmMcMagentoTwo\Model\SqmMcErrorsFactory $mailChimpErrorsFactory,
+        \SqualoMail\SqmMcMagentoTwo\Model\SqmMcErrorsFactory $sqmMcErrorsFactory,
         \Magento\Sales\Model\OrderFactory $orderFactory,
         array $components = [],
         array $data = []
@@ -91,7 +91,7 @@ class Monkey extends Column
         $this->_helper          = $helper;
         $this->_syncCommerceCF  = $syncCommerceCF;
         $this->_orderFactory    = $orderFactory;
-        $this->_mailChimpErrorsFactory  = $mailChimpErrorsFactory;
+        $this->_mailChimpErrorsFactory  = $sqmMcErrorsFactory;
         parent::__construct($context, $uiComponentFactory, $components, $data);
     }
 
@@ -103,17 +103,17 @@ class Monkey extends Column
                 $order = $this->_orderFactory->create()->loadByIncrementId($item['increment_id']);
                 $params = ['_secure' => $this->_requestInterfase->isSecure()];
                 if ($this->_helper->getConfigValue(\SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_ACTIVE, $order->getStoreId())) {
-                    $mailchimpStoreId = $this->_helper->getConfigValue(
+                    $sqmmcStoreId = $this->_helper->getConfigValue(
                         \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_SQM_MC_STORE,
                         $order->getStoreId()
                     );
                     $syncData = $this->_helper->getChimpSyncEcommerce(
-                        $mailchimpStoreId,
+                        $sqmmcStoreId,
                         $order->getId(),
                         \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_ORDER
                     );
                     $alt = '';
-                    if (!$syncData || $syncData->getMailchimpStoreId() != $mailchimpStoreId ||
+                    if (!$syncData || $syncData->getMailchimpStoreId() != $sqmmcStoreId ||
                         $syncData->getRelatedId() != $order->getId() ||
                         $syncData->getType() != \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_ORDER) {
                         $url = $this->_assetRepository->getUrlWithParams(

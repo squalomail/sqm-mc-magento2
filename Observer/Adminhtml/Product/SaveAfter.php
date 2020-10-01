@@ -43,7 +43,7 @@ class SaveAfter implements \Magento\Framework\Event\ObserverInterface
          * @var \Magento\Catalog\Model\Product $product
          */
         $product = $observer->getProduct();
-        $mailchimpStore = $this->helper->getConfigValue(
+        $sqmmcStore = $this->helper->getConfigValue(
             \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_SQM_MC_STORE,
             $product->getStoreId()
         );

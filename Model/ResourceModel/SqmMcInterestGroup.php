@@ -23,7 +23,7 @@ class SqmMcInterestGroup extends AbstractDb
         $this->_init('sqmmc_interest_group', 'id');
     }
     public function getBySubscriberIdStoreId(
-        \SqualoMail\SqmMcMagentoTwo\Model\SqmMcInterestGroup $mailChimpInterestGroup,
+        \SqualoMail\SqmMcMagentoTwo\Model\SqmMcInterestGroup $sqmMcInterestGroup,
         $subscriberId,
         $storeId
     ) {
@@ -36,8 +36,8 @@ class SqmMcInterestGroup extends AbstractDb
         );
         $data = $connection->fetchRow($select, $bind);
         if ($data) {
-            $mailChimpInterestGroup->setData($data);
+            $sqmMcInterestGroup->setData($data);
         }
-        return $mailChimpInterestGroup;
+        return $sqmMcInterestGroup;
     }
 }

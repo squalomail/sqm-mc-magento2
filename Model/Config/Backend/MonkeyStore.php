@@ -82,7 +82,7 @@ class MonkeyStore extends \Magento\Framework\App\Config\Value
             $active = 0;
         }
         if ($active && $this->isValueChanged()) {
-            $mailchimpStore     = $this->getOldValue();
+            $sqmmcStore     = $this->getOldValue();
             // charge the $newListId
             if (isset($data['general']['fields']['apikey']['value'])) {
                 $apiKey = $data['general']['fields']['apikey']['value'];
@@ -119,7 +119,7 @@ class MonkeyStore extends \Magento\Framework\App\Config\Value
                     \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_SQM_MC_STORE,
                     $storeId
                 );
-                if ($mstoreId == $mailchimpStore) {
+                if ($mstoreId == $sqmmcStore) {
                     $found++;
                 }
                 $listId = $this->_helper->getConfigValue(\SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_LIST, $storeId);
@@ -128,8 +128,8 @@ class MonkeyStore extends \Magento\Framework\App\Config\Value
                 }
             }
             if ($found==1) {
-                $this->_helper->cancelAllPendingBatches($mailchimpStore);
-                $this->_helper->resetErrors($mailchimpStore);
+                $this->_helper->cancelAllPendingBatches($sqmmcStore);
+                $this->_helper->resetErrors($sqmmcStore);
             }
             $this->_helper->restoreAllCanceledBatches($this->getValue());
             if ($createWebhook) {

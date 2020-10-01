@@ -34,12 +34,12 @@ class Creditmemo
         SalesCreditmemoRepositoryInterface $subject,
         CreditmemoInterface $creditmemo
     ) {
-        $mailchimpStoreId = $this->_helper->getConfigValue(
+        $sqmmcStoreId = $this->_helper->getConfigValue(
             \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_SQM_MC_STORE,
             $creditmemo->getStoreId()
         );
         $this->_helper->saveEcommerceData(
-            $mailchimpStoreId,
+            $sqmmcStoreId,
             $creditmemo->getOrderId(),
             \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_ORDER,
             null,

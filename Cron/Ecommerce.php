@@ -80,7 +80,7 @@ class Ecommerce
      * @param \SqualoMail\SqmMcMagentoTwo\Model\Api\Subscriber $apiSubscriber
      * @param \SqualoMail\SqmMcMagentoTwo\Model\Api\PromoCodes $apiPromoCodes
      * @param \SqualoMail\SqmMcMagentoTwo\Model\Api\PromoRules $apiPromoRules
-     * @param \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncBatchesFactory $mailChimpSyncBatchesFactory
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncBatchesFactory $sqmMcSyncBatchesFactory
      * @param \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncEcommerce $chimpSyncEcommerce
      * @param \Magento\Framework\Filesystem\DirectoryList $dir
      */
@@ -95,7 +95,7 @@ class Ecommerce
         \SqualoMail\SqmMcMagentoTwo\Model\Api\Subscriber $apiSubscriber,
         \SqualoMail\SqmMcMagentoTwo\Model\Api\PromoCodes $apiPromoCodes,
         \SqualoMail\SqmMcMagentoTwo\Model\Api\PromoRules $apiPromoRules,
-        \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncBatchesFactory $mailChimpSyncBatchesFactory,
+        \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncBatchesFactory $sqmMcSyncBatchesFactory,
         \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncEcommerce $chimpSyncEcommerce,
         \Magento\Framework\Filesystem\DirectoryList $dir
     ) {
@@ -103,7 +103,7 @@ class Ecommerce
         $this->_storeManager    = $storeManager;
         $this->_helper          = $helper;
         $this->_apiProduct      = $apiProduct;
-        $this->_mailChimpSyncBatchesFactory = $mailChimpSyncBatchesFactory;
+        $this->_mailChimpSyncBatchesFactory = $sqmMcSyncBatchesFactory;
         $this->_apiResult       = $apiResult;
         $this->_apiCustomer     = $apiCustomer;
         $this->_apiOrder        = $apiOrder;
@@ -133,13 +133,13 @@ class Ecommerce
                 }
                 $this->_storeManager->setCurrentStore($storeId);
                 $listId = $this->_helper->getGeneralList($storeId);
-                $mailchimpStoreId = $this->_helper->getConfigValue(
+                $sqmmcStoreId = $this->_helper->getConfigValue(
                     \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_SQM_MC_STORE,
                     $storeId
                 );
-                if ($mailchimpStoreId != -1 && $mailchimpStoreId != '') {
-                    $this->_apiResult->processResponses($storeId, true, $mailchimpStoreId);
-                    $batchId = $this->_processStore($storeId, $mailchimpStoreId, $listId);
+                if ($sqmmcStoreId != -1 && $sqmmcStoreId != '') {
+                    $this->_apiResult->processResponses($storeId, true, $sqmmcStoreId);
+                    $batchId = $this->_processStore($storeId, $sqmmcStoreId, $listId);
                     if ($batchId) {
                         $connection->update(
                             $tableName,
@@ -148,7 +148,7 @@ class Ecommerce
                                 'sqmmc_sync_modified' => 0,
                                 'sqmmc_sync_delta' => $this->_helper->getGmtDate()
                             ],
-                            "batch_id is null and sqmmc_store_id = '$mailchimpStoreId' and sqmmc_sync_error is null"
+                            "batch_id is null and sqmmc_store_id = '$sqmmcStoreId' and sqmmc_sync_error is null"
                         );
                         $connection->update(
                             $tableName,
@@ -164,41 +164,41 @@ class Ecommerce
         }
         $syncs = [];
         foreach ($this->_storeManager->getStores() as $storeId => $val) {
-            $mailchimpStoreId = $this->_helper->getConfigValue(
+            $sqmmcStoreId = $this->_helper->getConfigValue(
                 \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_SQM_MC_STORE,
                 $storeId
             );
-            if ($mailchimpStoreId != -1 && $mailchimpStoreId != '') {
+            if ($sqmmcStoreId != -1 && $sqmmcStoreId != '') {
                 $dateSync = $this->_helper->getConfigValue(
                     \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_IS_SYNC,
                     $storeId
                 );
-                if (isset($syncs[$mailchimpStoreId])) {
-                    if ($syncs[$mailchimpStoreId] && $syncs[$mailchimpStoreId]['datesync'] < $dateSync) {
-                        $syncs[$mailchimpStoreId]['datesync'] = $dateSync;
-                        $syncs[$mailchimpStoreId]['storeid'] = $storeId;
+                if (isset($syncs[$sqmmcStoreId])) {
+                    if ($syncs[$sqmmcStoreId] && $syncs[$sqmmcStoreId]['datesync'] < $dateSync) {
+                        $syncs[$sqmmcStoreId]['datesync'] = $dateSync;
+                        $syncs[$sqmmcStoreId]['storeid'] = $storeId;
                     }
                 } elseif ($dateSync) {
-                    $syncs[$mailchimpStoreId]['datesync'] = $dateSync;
-                    $syncs[$mailchimpStoreId]['storeid'] = $storeId;
+                    $syncs[$sqmmcStoreId]['datesync'] = $dateSync;
+                    $syncs[$sqmmcStoreId]['storeid'] = $storeId;
                 } else {
-                    $syncs[$mailchimpStoreId] = false;
+                    $syncs[$sqmmcStoreId] = false;
                 }
             }
         }
-        foreach ($syncs as $mailchimpStoreId => $val) {
+        foreach ($syncs as $sqmmcStoreId => $val) {
             if ($val && !$this->_helper->getConfigValue(
-                \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_IS_SYNC . "/$mailchimpStoreId",
+                \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_IS_SYNC . "/$sqmmcStoreId",
                 0,
                 'default'
             )
             ) {
-                $this->updateSyncFlagData($val['storeid'], $mailchimpStoreId);
+                $this->updateSyncFlagData($val['storeid'], $sqmmcStoreId);
             }
         }
     }
 
-    protected function _processStore($storeId, $mailchimpStoreId, $listId)
+    protected function _processStore($storeId, $sqmmcStoreId, $listId)
     {
         $batchId = null;
         $countCustomers = 0;
@@ -258,7 +258,7 @@ class Ecommerce
                         $syncBatches->setStoreId($storeId);
                         $syncBatches->setBatchId($batchResponse['id']);
                         $syncBatches->setStatus(\SqualoMail\SqmMcMagentoTwo\Helper\Data::BATCH_PENDING);
-                        $syncBatches->setMailchimpStoreId($mailchimpStoreId);
+                        $syncBatches->setMailchimpStoreId($sqmmcStoreId);
                         $syncBatches->setModifiedDate($this->_helper->getGmtDate());
                         $syncBatches->getResource()->save($syncBatches);
                         $batchId = $batchResponse['id'];
@@ -266,7 +266,7 @@ class Ecommerce
                     }
                 }
                 if (count($BadOperations)) {
-                    $this->markWithError($BadOperations, $mailchimpStoreId, $listId);
+                    $this->markWithError($BadOperations, $sqmmcStoreId, $listId);
                 }
 
             } catch (\SqualoMailMc_Error $e) {
@@ -292,13 +292,13 @@ class Ecommerce
 
     /**
      * @param $storeId
-     * @param $mailchimpStoreId
+     * @param $sqmmcStoreId
      */
-    protected function updateSyncFlagData($storeId, $mailchimpStoreId)
+    protected function updateSyncFlagData($storeId, $sqmmcStoreId)
     {
-        $this->apiUpdateSyncFlag($storeId, $mailchimpStoreId);
+        $this->apiUpdateSyncFlag($storeId, $sqmmcStoreId);
         $this->_helper->saveConfigValue(
-            \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_IS_SYNC . "/$mailchimpStoreId",
+            \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_IS_SYNC . "/$sqmmcStoreId",
             date('Y-m-d'),
             0,
             'default'
@@ -307,14 +307,14 @@ class Ecommerce
 
     /**
      * @param $storeId
-     * @param $mailchimpStoreId
+     * @param $sqmmcStoreId
      */
-    protected function apiUpdateSyncFlag($storeId, $mailchimpStoreId)
+    protected function apiUpdateSyncFlag($storeId, $sqmmcStoreId)
     {
         try {
             $api = $this->_helper->getApi($storeId);
             $api->ecommerce->stores->edit(
-                $mailchimpStoreId,
+                $sqmmcStoreId,
                 null,
                 null,
                 null,
@@ -385,7 +385,7 @@ class Ecommerce
         }
         return [$OKOperations, $BadOperations];
     }
-    protected function markWithError($operations, $mailchimpStoreId, $listId)
+    protected function markWithError($operations, $sqmmcStoreId, $listId)
     {
         $type = null;
         $relatedId = null;
@@ -411,7 +411,7 @@ class Ecommerce
                             if ($type == \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_SUBSCRIBER) {
                                 $storeId = $listId;
                             } else {
-                                $storeId = $mailchimpStoreId;
+                                $storeId = $sqmmcStoreId;
                             }
                         }
                     }

@@ -87,11 +87,11 @@ class Save extends \SqualoMail\SqmMcMagentoTwo\Controller\Adminhtml\Stores
             );
         } else {
             $date = $this->_helper->getDateMicrotime();
-            $mailchimpStoreId = hash('md5', $name. '_' . $date);
-            //$mailchimpStoreId = md5($name. '_' . $date);
+            $sqmmcStoreId = hash('md5', $name. '_' . $date);
+            //$sqmmcStoreId = md5($name. '_' . $date);
             $is_sync = true;
             $ret =$api->ecommerce->stores->add(
-                $mailchimpStoreId,
+                $sqmmcStoreId,
                 $formData['list_id'],
                 $name,
                 $currencyCode,
@@ -105,7 +105,7 @@ class Save extends \SqualoMail\SqmMcMagentoTwo\Controller\Adminhtml\Stores
                 $address,
                 $is_sync
             );
-            $formData['storeid'] = $mailchimpStoreId;
+            $formData['storeid'] = $sqmmcStoreId;
         }
         return $formData['storeid'];
     }

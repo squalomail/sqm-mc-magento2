@@ -66,13 +66,13 @@ class Result
         $this->_driver              = $driver;
         $this->_curlFactory         = $curlFactory;
     }
-    public function processResponses($storeId, $isMailChimpStoreId = false, $mailchimpStoreId)
+    public function processResponses($storeId, $isMailChimpStoreId = false, $sqmmcStoreId)
     {
         $collection = $this->_batchCollection->create();
         $collection
             ->addFieldToFilter('store_id', ['eq' => $storeId])
             ->addFieldToFilter('status', ['eq' => 'pending'])
-            ->addFieldToFilter('sqmmc_store_id', ['eq' => $mailchimpStoreId]);
+            ->addFieldToFilter('sqmmc_store_id', ['eq' => $sqmmcStoreId]);
         /**
          * @var $item \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncBatches
          */
@@ -81,7 +81,7 @@ class Result
             try {
                 $files = $this->getBatchResponse($item->getBatchId(), $storeId);
                 if (is_array($files) && count($files)) {
-                    $this->processEachResponseFile($files, $item->getBatchId(), $mailchimpStoreId, $storeId);
+                    $this->processEachResponseFile($files, $item->getBatchId(), $sqmmcStoreId, $storeId);
                     $item->setStatus(\SqualoMail\SqmMcMagentoTwo\Helper\Data::BATCH_COMPLETED);
                     $item->setModifiedDate($this->_helper->getGmtDate());
                     $item->getResource()->save($item);
@@ -173,7 +173,7 @@ class Result
         }
         return $files;
     }
-    protected function processEachResponseFile($files, $batchId, $mailchimpStoreId, $storeId)
+    protected function processEachResponseFile($files, $batchId, $sqmmcStoreId, $storeId)
     {
         $listId = $this->_helper->getDefaultList($storeId);
         foreach ($files as $file) {
@@ -188,7 +188,7 @@ class Result
                         $response = json_decode($item->response);
                         if (preg_match('/already exists/', $response->detail)) {
                             $this->_updateSyncData(
-                                $mailchimpStoreId,
+                                $sqmmcStoreId,
                                 $listId,
                                 $type,
                                 $id,
@@ -197,7 +197,7 @@ class Result
                             );
                             continue;
                         }
-                        $mailchimpErrors = $this->_chimpErrors->create();
+                        $sqmmcErrors = $this->_chimpErrors->create();
                         $errorDetails = "";
                         if (!empty($response->errors)) {
                             foreach ($response->errors as $error) {
@@ -213,28 +213,28 @@ class Result
 
                         $error = $response->title . " : " . $response->detail;
                         $this->_updateSyncData(
-                            $mailchimpStoreId,
+                            $sqmmcStoreId,
                             $listId,
                             $type,
                             $id,
                             $error,
                             \SqualoMail\SqmMcMagentoTwo\Helper\Data::SYNCERROR
                         );
-                        $mailchimpErrors->setType($response->type);
-                        $mailchimpErrors->setTitle($response->title);
-                        $mailchimpErrors->setStatus($item->status_code);
-                        $mailchimpErrors->setErrors($errorDetails);
-                        $mailchimpErrors->setRegtype($type);
-                        $mailchimpErrors->setOriginalId($id);
-                        $mailchimpErrors->setBatchId($batchId);
-                        $mailchimpErrors->setMailchimpStoreId($mailchimpStoreId);
-                        $mailchimpErrors->setOriginalId($id);
-                        $mailchimpErrors->setBatchId($batchId);
-                        $mailchimpErrors->setStoreId($storeId);
-                        $mailchimpErrors->getResource()->save($mailchimpErrors);
+                        $sqmmcErrors->setType($response->type);
+                        $sqmmcErrors->setTitle($response->title);
+                        $sqmmcErrors->setStatus($item->status_code);
+                        $sqmmcErrors->setErrors($errorDetails);
+                        $sqmmcErrors->setRegtype($type);
+                        $sqmmcErrors->setOriginalId($id);
+                        $sqmmcErrors->setBatchId($batchId);
+                        $sqmmcErrors->setMailchimpStoreId($sqmmcStoreId);
+                        $sqmmcErrors->setOriginalId($id);
+                        $sqmmcErrors->setBatchId($batchId);
+                        $sqmmcErrors->setStoreId($storeId);
+                        $sqmmcErrors->getResource()->save($sqmmcErrors);
                     } else {
                         $this->_updateSyncData(
-                            $mailchimpStoreId,
+                            $sqmmcStoreId,
                             $listId,
                             $type,
                             $id,
@@ -262,19 +262,19 @@ class Result
             $this->_driver->deleteFile($file);
         }
     }
-    private function _updateSyncData($mailchimpStoreId, $listId, $type, $id, $error, $status)
+    private function _updateSyncData($sqmmcStoreId, $listId, $type, $id, $error, $status)
     {
         /**
          * @var \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncEcommerce $chimpSync
          */
         if ($type == \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_SUBSCRIBER) {
-            $mailchimpStore = $listId;
+            $sqmmcStore = $listId;
         } else {
-            $mailchimpStore = $mailchimpStoreId;
+            $sqmmcStore = $sqmmcStoreId;
         }
-        $chimpSync = $this->_helper->getChimpSyncEcommerce($mailchimpStore, $id, $type);
+        $chimpSync = $this->_helper->getChimpSyncEcommerce($sqmmcStore, $id, $type);
         if ($chimpSync->getMailchimpStoreId() ==
-            $mailchimpStore && $chimpSync->getType() == $type && $chimpSync->getRelatedId() == $id) {
+            $sqmmcStore && $chimpSync->getType() == $type && $chimpSync->getRelatedId() == $id) {
             $chimpSync->setMailchimpSent($status);
             $chimpSync->setMailchimpSyncError($error);
             $chimpSync->getResource()->save($chimpSync);

@@ -92,9 +92,9 @@ class VarsMap extends \Magento\Framework\App\Helper\AbstractHelper
         $rc = '';
         if (is_array($value)) {
             $data = [];
-            foreach ($value as $customerFiledId => $mailchimpName) {
+            foreach ($value as $customerFiledId => $sqmmcName) {
                 if (!array_key_exists($customerFiledId, $data)) {
-                    $data[$customerFiledId] = $mailchimpName;
+                    $data[$customerFiledId] = $sqmmcName;
                 }
             }
             try {
@@ -120,9 +120,9 @@ class VarsMap extends \Magento\Framework\App\Helper\AbstractHelper
     protected function encodeArrayFieldValue(array $value)
     {
         $result = [];
-        foreach ($value as $customerFieldId => $mailchimpName) {
+        foreach ($value as $customerFieldId => $sqmmcName) {
             $resultId = $this->mathRandom->getUniqueHash('_');
-            $result[$resultId] = ['sqmmc_field_id' => $mailchimpName ,'customer_field_id' => $customerFieldId];
+            $result[$resultId] = ['sqmmc_field_id' => $sqmmcName ,'customer_field_id' => $customerFieldId];
         }
         return $result;
     }

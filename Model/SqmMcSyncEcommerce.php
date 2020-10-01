@@ -36,9 +36,9 @@ class SqmMcSyncEcommerce extends \Magento\Framework\Model\AbstractModel
         $this->getResource()->markAllAsModified($this, $id, $type);
         return $this;
     }
-    public function deleteAllByIdType($id, $type, $mailchimpStoreId)
+    public function deleteAllByIdType($id, $type, $sqmmcStoreId)
     {
-        $this->getResource()->deleteAllByIdType($this, $id, $type, $mailchimpStoreId);
+        $this->getResource()->deleteAllByIdType($this, $id, $type, $sqmmcStoreId);
         return $this;
     }
     public function deleteAllByBatchid($batchId)

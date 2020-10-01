@@ -58,19 +58,19 @@ class ResyncSubscribers extends \Magento\Backend\App\Action
         $message = '';
         $params = $this->getRequest()->getParams();
         if (isset($params['website'])) {
-            $mailchimpList = $this->helper->getConfigValue(
+            $sqmmcList = $this->helper->getConfigValue(
                 \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_LIST,
                 $params['website'],
                 'website'
             );
         } elseif (isset($params['store'])) {
-            $mailchimpList = $this->helper->getConfigValue(
+            $sqmmcList = $this->helper->getConfigValue(
                 \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_LIST,
                 $params['store'],
                 'store'
             );
         } else {
-            $mailchimpList = $this->helper->getConfigValue(
+            $sqmmcList = $this->helper->getConfigValue(
                 \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_LIST,
                 $this->storeManager->getStore()
             );
@@ -78,7 +78,7 @@ class ResyncSubscribers extends \Magento\Backend\App\Action
 
         $resultJson = $this->resultJsonFactory->create();
         try {
-            $this->helper->resyncAllSubscribers($mailchimpList);
+            $this->helper->resyncAllSubscribers($sqmmcList);
         } catch (ValidatorException $e) {
             $valid = 0;
             $message = $e->getMessage();
