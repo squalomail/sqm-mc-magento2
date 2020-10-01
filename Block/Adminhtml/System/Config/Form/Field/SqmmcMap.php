@@ -8,12 +8,12 @@
  * @copyright Ebizmarts (http://ebizmarts.com)
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @date: 10/9/18 1:17 PM
- * @file: MailchimpMap.php
+ * @file: SqmmcMap.php
  */
 
 namespace SqualoMail\SqmMcMagentoTwo\Block\Adminhtml\System\Config\Form\Field;
 
-class MailchimpMap extends \Magento\Framework\View\Element\Html\Select
+class SqmmcMap extends \Magento\Framework\View\Element\Html\Select
 {
     /**
      * @var \SqualoMail\SqmMcMagentoTwo\Helper\Data
@@ -29,7 +29,7 @@ class MailchimpMap extends \Magento\Framework\View\Element\Html\Select
     protected $_request;
 
     /**
-     * MailchimpMap constructor.
+     * SqmmcMap constructor.
      * @param \Magento\Framework\View\Element\Context $context
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper

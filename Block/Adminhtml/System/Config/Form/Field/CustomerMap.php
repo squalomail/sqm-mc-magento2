@@ -37,7 +37,7 @@ class CustomerMap extends \Magento\Config\Block\System\Config\Form\Field\FieldAr
     {
         if (!$this->_mailchimpRenderer) {
             $this->_mailchimpRenderer = $this->getLayout()->createBlock(
-                \SqualoMail\SqmMcMagentoTwo\Block\Adminhtml\System\Config\Form\Field\MailchimpMap::class,
+                \SqualoMail\SqmMcMagentoTwo\Block\Adminhtml\System\Config\Form\Field\SqmmcMap::class,
                 '',
                 ['data' => ['is_render_to_js_template' => true]]
             );
