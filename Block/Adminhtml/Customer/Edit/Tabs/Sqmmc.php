@@ -3,12 +3,12 @@
  * MailChimp Magento Component
  *
  * @category SqualoMail
- * @package MailChimp
+ * @package SqmMcMagentoTwo
  * @author Ebizmarts Team <info@ebizmarts.com>
  * @copyright Ebizmarts (http://ebizmarts.com)
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @date: 11/29/17 1:55 PM
- * @file: Mailchimp.php
+ * @file: Sqmmc.php
  */
 
 namespace SqualoMail\SqmMcMagentoTwo\Block\Adminhtml\Customer\Edit\Tabs;
@@ -18,7 +18,7 @@ use Magento\Ui\Component\Layout\Tabs\TabInterface;
 use Magento\Backend\Block\Widget\Form;
 use Magento\Backend\Block\Widget\Form\Generic;
 
-class Mailchimp extends \Magento\Backend\Block\Template implements TabInterface
+class Sqmmc extends \Magento\Backend\Block\Template implements TabInterface
 {
     /**
      * @var \Magento\Store\Model\System\Store
@@ -30,7 +30,7 @@ class Mailchimp extends \Magento\Backend\Block\Template implements TabInterface
     protected $_coreRegistry;
 
     /**
-     * Mailchimp constructor.
+     * Sqmmc constructor.
      * @param \Magento\Backend\Block\Template\Context $context
      * @param \Magento\Framework\Registry $registry
      * @param \Magento\Framework\Data\FormFactory $formFactory
