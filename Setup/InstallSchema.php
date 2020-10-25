@@ -83,7 +83,7 @@ class InstallSchema implements InstallSchemaInterface
             ->addColumn(
                 'batch_id',
                 \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
-                24,
+                64,
                 [],
                 'Batch Id'
             )
