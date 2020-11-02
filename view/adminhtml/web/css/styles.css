@@ -1,15 +1,21 @@
 @font-face {
     font-family: 'sqmmc';
-    src:  url('../fonts/sqmmc.eot?3g8ubh');
+    /*src:  url('../fonts/sqmmc.eot?3g8ubh');
     src:  url('../fonts/sqmmc.eot?3g8ubh#iefix') format('embedded-opentype'),
     url('../fonts/sqmmc.ttf?3g8ubh') format('truetype'),
     url('../fonts/sqmmc.woff?3g8ubh') format('woff'),
-    url('../fonts/sqmmc.svg?3g8ubh#sqmmc') format('svg');
+    url('../fonts/sqmmc.svg?3g8ubh#sqmmc') format('svg');*/
+    src:  url('../fonts/fonts/sqmmc.eot?vohtw7');
+    src:  url('../fonts/fonts/sqmmc.eot?vohtw7#iefix') format('embedded-opentype'),
+    url('../fonts/fonts/sqmmc.ttf?vohtw7') format('truetype'),
+    url('../fonts/fonts/sqmmc.woff?vohtw7') format('woff'),
+    url('../fonts/fonts/sqmmc.svg?vohtw7#sqmmc') format('svg');
     font-weight: normal;
     font-style: normal;}
 .admin__menu .item-sqmmc-menu.parent.level-0 > a:before {
     font-family: 'sqmmc';
-    content: "\e991"
+    /*content: "\e991"*/
+    content: "\e945";
 }
 
 .admin__data-grid-wrap .data-grid .data-grid-draggable .data-row .data-grid-thumbnail-cell .admin__control-thumbnail > img:before {
