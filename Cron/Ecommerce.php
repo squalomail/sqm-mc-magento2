@@ -203,6 +203,7 @@ class Ecommerce
         $batchId = null;
         $countCustomers = 0;
         $countProducts = 0;
+        $countProductCategories = 0;
         $countOrders = 0;
         $batchArray = [];
         $this->_helper->resetCounters();
@@ -212,6 +213,11 @@ class Ecommerce
             $products = $this->_apiProduct->_sendProducts($storeId);
             $countProducts = count($products);
             $results = array_merge($results, $products);
+            
+            $this->_helper->log('Generate Products Categories payload');
+            $categories = $this->_apiProduct->_sendProductCategories($storeId);
+            $countProductCategories = count($categories);
+            $results = array_merge($results, $categories);
 
             $this->_helper->log('Generate Customers payload');
             $customers = $this->_apiCustomer->sendCustomers($storeId);
@@ -277,7 +283,7 @@ class Ecommerce
         } else {
             $this->_helper->log("Nothing to sync for store $storeId");
         }
-        $countTotal = $countCustomers + $countProducts + $countOrders;
+        $countTotal = $countCustomers + $countProducts + $countProductCategories + $countOrders;
         $syncing = $this->_helper->getMCMinSyncing($storeId);
         if ($countTotal == 0 && $syncing) {
             $this->_helper->saveConfigValue(
