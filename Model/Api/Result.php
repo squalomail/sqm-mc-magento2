@@ -66,7 +66,7 @@ class Result
         $this->_driver              = $driver;
         $this->_curlFactory         = $curlFactory;
     }
-    public function processResponses($storeId, $isSqmMcStoreId = false, $sqmmcStoreId)
+    public function processResponses($storeId, $isSqmMcStoreId = false, $sqmmcStoreId=null)
     {
         $collection = $this->_batchCollection->create();
         $collection

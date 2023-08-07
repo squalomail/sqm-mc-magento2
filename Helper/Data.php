@@ -589,7 +589,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     {
         return $this->_storeManager->getStore($storeId)->getBaseUrl($type);
     }
-    public function createStore($listId = null, $storeId)
+    public function createStore(int $listId = null, $storeId)
     {
         if ($listId) {
             //generate store id
