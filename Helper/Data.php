@@ -619,7 +619,11 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     }
     public function getMCMinSyncDateFlag($storeId = null)
     {
-        return $this->getConfigValue(self::XML_PATH_SYNC_DATE, $storeId);
+        $syncDate = $this->getConfigValue(self::XML_PATH_SYNC_DATE, $storeId);
+        if ($syncDate=='') {
+            $syncDate = '1900-01-01';
+        }
+        return $syncDate;
     }
     public function getBaseDir()
     {
