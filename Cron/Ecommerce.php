@@ -206,27 +206,33 @@ class Ecommerce
         $countOrders = 0;
         $batchArray = [];
         $this->_helper->resetCounters();
+        $this->_helper->log('Generate Subscribers payload');
         $results = $this->_apiSubscribers->sendSubscribers($storeId, $listId);
+        $this->_helper->log('Subscribers payload size: ' . count($results));
         if ($this->_helper->getConfigValue(\SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_ECOMMERCE_ACTIVE, $storeId)) {
             $this->_helper->log('Generate Products payload');
             $products = $this->_apiProduct->_sendProducts($storeId);
             $countProducts = count($products);
             $results = array_merge($results, $products);
+            $this->_helper->log('Products payload size: ' . $countProducts);
 
             $this->_helper->log('Generate Customers payload');
             $customers = $this->_apiCustomer->sendCustomers($storeId);
             $countCustomers = count($customers);
             $results = array_merge($results, $customers);
+            $this->_helper->log('Customers payload size: ' . $countCustomers);
 
             $this->_helper->log('Generate Orders payload');
             $orders = $this->_apiOrder->sendOrders($storeId);
             $countOrders = count($orders);
             $results = array_merge($results, $orders);
+            $this->_helper->log('Orders payload size: ' . $countOrders);
 
             if ($this->_helper->getConfigValue(\SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_IS_SYNC, $storeId)) {
                 $this->_helper->log('Generate Carts payload');
                 $carts = $this->_apiCart->createBatchJson($storeId);
                 $results = array_merge($results, $carts);
+                $this->_helper->log('Carts payload size: ' . count($carts));
             } else {
                 $this->_helper->log('No Carts will be synced until the store is completely synced');
             }
@@ -234,11 +240,18 @@ class Ecommerce
                 $this->_helper->log('Generate Rules payload');
                 $rules = $this->_apiPromoRules->sendRules($storeId);
                 $results = array_merge($results, $rules);
+                $this->_helper->log('Rules payload size: ' . count($rules));
 
                 $this->_helper->log('Generate Coupons payload');
                 $coupons = $this->_apiPromoCodes->sendCoupons($storeId);
                 $results = array_merge($results, $coupons);
+                $this->_helper->log('Coupons payload size: ' . count($coupons));
             }
+        }
+
+        $this->_helper->log('Total payload size: ' . count($results));
+        if ($this->_helper->getConfigValue(\SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_INCREASE_BATCH, $storeId)) {
+            $this->_helper->log('Total batch count size: ' . $this->_helper->getBatchCount());
         }
 
         if (!empty($results)) {

@@ -137,7 +137,11 @@ class Product
         $collection->getSelect()->where("m4m.sqmmc_sync_delta IS null OR (m4m.sqmmc_sync_delta > '".
             $this->_helper->getMCMinSyncDateFlag().
             "' and m4m.sqmmc_sync_modified = 1)");
-        $collection->getSelect()->limit(self::MAX);
+        $batchLimit = self::MAX;
+        if ($this->_helper->getConfigValue(\SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_INCREASE_BATCH, $magentoStoreId)) {
+            $batchLimit = $this->_helper->getSizeLeftBatchCount(\SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_PRODUCT);
+        }
+        $collection->getSelect()->limit($batchLimit);
         foreach ($collection as $item) {
             /**
              * @var $product \Magento\Catalog\Model\Product
@@ -172,6 +176,7 @@ class Product
                 );
             }
         }
+        $this->_helper->addBatchCount(count($batchArray));
         return $batchArray;
     }
     protected function _markSpecialPrices($magentoStoreId, $sqmmcStoreId)

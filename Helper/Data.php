@@ -48,6 +48,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     const XML_MAGENTO_MAIL           = 'sqmmc/general/magentoemail';
     const XML_SEND_PROMO             = 'sqmmc/ecommerce/send_promo';
     const XML_INCLUDING_TAXES        = 'sqmmc/ecommerce/including_taxes';
+    const XML_INCREASE_BATCH         = 'sqmmc/ecommerce/increase_batch_size';
 
     const ORDER_STATE_OK             = 'complete';
 
@@ -89,7 +90,12 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 
     const MAX_MERGEFIELDS = 100;
 
+    const MAX_BATCHCOUNT = 2000;
+    const MAX_GROUP_BATCHCOUNT = 500;
+
     protected $counters = [];
+
+    protected $batchCount = 0;
     /**
      * @var \Magento\Store\Model\StoreManagerInterface
      */
@@ -1249,5 +1255,50 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     public function encrypt($value)
     {
         return $this->_encryptor->encrypt($value);
+    }
+    public function getSizeLeftBatchCount($type)
+    {
+        $batchSizeLeft = self::MAX_BATCHCOUNT;
+
+        switch ($type) {
+            case \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_PRODUCT:
+                $batchSizeLeft = self::MAX_GROUP_BATCHCOUNT + (self::MAX_GROUP_BATCHCOUNT - $this->batchCount);
+                break;
+            case \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_CUSTOMER:
+                $batchSizeLeft = self::MAX_GROUP_BATCHCOUNT + ((2 * self::MAX_GROUP_BATCHCOUNT) - $this->batchCount);
+                // for every PUT, there is also PATCH (if customer is subscribed), thats why we divide by 2
+                $batchSizeLeft = floor($batchSizeLeft / 2);
+                break;
+            case \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_ORDER . 'MODIFIED':
+                $batchSizeLeft = self::MAX_GROUP_BATCHCOUNT + ((3 * self::MAX_GROUP_BATCHCOUNT) - $this->batchCount);
+                // first we check modified orders, later new, thats why we divide by 2
+                $batchSizeLeft = floor($batchSizeLeft / 2);
+                break;
+            case \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_ORDER:
+                $batchSizeLeft = self::MAX_GROUP_BATCHCOUNT + ((3 * self::MAX_GROUP_BATCHCOUNT) - $this->batchCount);
+                break;
+            default:
+                $batchSizeLeft = self::MAX_GROUP_BATCHCOUNT;
+                break;
+        }
+
+        return $batchSizeLeft;
+
+    }
+    public function setBatchCount($count)
+    {
+        $this->batchCount = $count;
+    }
+    public function addBatchCount($count)
+    {
+        $this->batchCount += $count;
+    }
+    public function resetBatchCount()
+    {
+        $this->batchCount = 0;
+    }
+    public function getBatchCount()
+    {
+        return $this->batchCount;
     }
 }

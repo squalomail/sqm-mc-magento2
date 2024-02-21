@@ -190,6 +190,15 @@
                         <field id="*/*/active">1</field>
                     </depends>
                 </field>
+                <field id="increase_batch_size" translate="label" type="select" sortOrder="125" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Increase payload size (testing purpose only!)</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Set to yes for shops with a lot of data (orders, products, customers,..). Testing purpose only!]]></comment>
+
+                    <depends>
+                        <field id="*/*/active">1</field>
+                    </depends>
+                </field>
                 <field id="reset_errors" translate="button_label" type="button" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
                     <button_label>Reset Errors</button_label>
                     <frontend_model>SqualoMail\SqmMcMagentoTwo\Block\Adminhtml\System\Config\ResetErrors</frontend_model>

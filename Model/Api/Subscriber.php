@@ -71,7 +71,11 @@ class Subscriber
         $collection->getSelect()->where("m4m.sqmmc_sync_delta IS null ".
             "OR (m4m.sqmmc_sync_delta > '".$this->_helper->getMCMinSyncDateFlag().
             "' and m4m.sqmmc_sync_modified = 1)");
-        $collection->getSelect()->limit(self::BATCH_LIMIT);
+        $batchLimit = self::BATCH_LIMIT;
+        if ($this->_helper->getConfigValue(\SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_INCREASE_BATCH, $storeId)) {
+            $batchLimit = \SqualoMail\SqmMcMagentoTwo\Helper\Data::MAX_GROUP_BATCHCOUNT;
+        }
+        $collection->getSelect()->limit($batchLimit);
         $subscriberArray = [];
         $date = $this->_helper->getDateMicrotime();
         $batchId = \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_SUBSCRIBER . '_' . $date;
@@ -111,6 +115,8 @@ class Subscriber
                 );
             }
         }
+        $this->_helper->resetBatchCount();
+        $this->_helper->addBatchCount(count($subscriberArray));
         return $subscriberArray;
     }
 

@@ -171,7 +171,11 @@ class Order
             "m4m.sqmmc_sync_modified = 1 AND m4m.sqmmc_store_id = '".$sqmmcStoreId."'"
         );
         // limit the collection
-        $modifiedOrders->getSelect()->limit(self::BATCH_LIMIT);
+        $batchLimit = self::BATCH_LIMIT;
+        if ($this->_helper->getConfigValue(\SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_INCREASE_BATCH, $magentoStoreId)) {
+            $batchLimit = $this->_helper->getSizeLeftBatchCount(\SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_ORDER . 'MODIFIED');
+        }
+        $modifiedOrders->getSelect()->limit($batchLimit);
         /**
          * @var $order \Magento\Sales\Model\Order
          */
@@ -225,6 +229,7 @@ class Order
                 $this->_updateOrder($sqmmcStoreId, $orderId, $this->_helper->getGmtDate(), $error, 0);
             }
         }
+        $this->_helper->addBatchCount(count($batchArray));
         return $batchArray;
     }
 
@@ -251,7 +256,11 @@ class Order
         // be sure that the quote are not in squalomail
         $newOrders->getSelect()->where("m4m.sqmmc_sync_delta IS NULL");
         // limit the collection
-        $newOrders->getSelect()->limit(self::BATCH_LIMIT);
+        $batchLimit = self::BATCH_LIMIT;
+        if ($this->_helper->getConfigValue(\SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_INCREASE_BATCH, $magentoStoreId)) {
+            $batchLimit = $this->_helper->getSizeLeftBatchCount(\SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_ORDER);
+        }
+        $newOrders->getSelect()->limit($batchLimit);
 
         /**
          * @var $order \Magento\Sales\Model\Order
@@ -303,6 +312,7 @@ class Order
                 $this->_updateOrder($sqmmcStoreId, $orderId, $this->_helper->getGmtDate(), $error, 0);
             }
         }
+        $this->_helper->addBatchCount(count($batchArray));
         return $batchArray;
     }
 
