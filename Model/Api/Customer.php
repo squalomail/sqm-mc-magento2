@@ -102,7 +102,11 @@ class Customer
         $collection->getSelect()->where("m4m.sqmmc_sync_delta IS null ".
             "OR (m4m.sqmmc_sync_delta > '".$this->_helper->getMCMinSyncDateFlag().
             "' and m4m.sqmmc_sync_modified = 1)");
-        $collection->getSelect()->limit(self::MAX);
+        $batchLimit = self::MAX;
+        if ($this->_helper->getConfigValue(\SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_INCREASE_BATCH, $storeId)) {
+            $batchLimit = $this->_helper->getSizeLeftBatchCount(\SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_CUSTOMER);
+        }
+        $collection->getSelect()->limit($batchLimit);
         $counter = 0;
         $customerArray = [];
         $this->_helper->resetMapFields();
@@ -162,6 +166,7 @@ class Customer
                 );
             }
         }
+        $this->_helper->addBatchCount(count($customerArray));
         return $customerArray;
     }
     /**
