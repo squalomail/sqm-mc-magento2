@@ -589,6 +589,40 @@ class Product
                 $data[] = $this->_buildNewProductRequest($product, $sqmmcStoreId, $magentoStoreId);
                 $this->_updateProduct($sqmmcStoreId, $product->getId());
             }
+
+            //@todo get from the store not the default
+            try {
+                $product = $this->_productRepository->getById($item->getProductId(), false, $magentoStoreId);
+                $productSyncData = $this->_chimpSyncEcommerce->create()->getByStoreIdType(
+                    $sqmmcStoreId,
+                    $product->getId(),
+                    \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_PRODUCT
+                );
+                if ($product->getId() != $item->getProductId() || (
+                        $product->getTypeId() != \Magento\Catalog\Model\Product\Type::TYPE_SIMPLE &&
+                        $product->getTypeId() != \Magento\Catalog\Model\Product\Type::TYPE_VIRTUAL &&
+                        $product->getTypeId() != \Magento\ConfigurableProduct\Model\Product\Type\Configurable::TYPE_CODE &&
+                        $product->getTypeId() != "downloadable")) {
+                    $this->_helper->log('The product with id [' . $product->getId() .
+                        '] is not supported [' . $product->getTypeId() . ']');
+                    continue;
+                }
+                if ($productSyncData->getSqmmcSyncModified() &&
+                    $productSyncData->getSqmmcSyncDelta() > $this->_helper->getMCMinSyncDateFlag()) {
+                    $data = array_merge(
+                        $data,
+                        $this->_buildOldProductRequest($product, $batchId, $sqmmcStoreId, $magentoStoreId)
+                    );
+                    $this->_updateProduct($sqmmcStoreId, $product->getId());
+                } elseif (!$productSyncData->getSqmmcSyncDelta() ||
+                    $productSyncData->getSqmmcSyncDelta() < $this->_helper->getMCMinSyncDateFlag()) {
+                    $data[] = $this->_buildNewProductRequest($product, $sqmmcStoreId, $magentoStoreId);
+                    $this->_updateProduct($sqmmcStoreId, $product->getId());
+                }
+            } catch (\Exception $e) {
+                $this->_helper->log($e->getMessage());
+                $this->_helper->log("Skip product [".$item->getProductId()."]");
+            }
         }
         return $data;
     }
