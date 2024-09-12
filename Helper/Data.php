@@ -49,6 +49,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     const XML_SEND_PROMO             = 'sqmmc/ecommerce/send_promo';
     const XML_INCLUDING_TAXES        = 'sqmmc/ecommerce/including_taxes';
     const XML_INCREASE_BATCH         = 'sqmmc/ecommerce/increase_batch_size';
+    const XML_DISABLE_ERROR_LOG      = 'sqmmc/general/disable_error_log';
 
     const ORDER_STATE_OK             = 'complete';
 
