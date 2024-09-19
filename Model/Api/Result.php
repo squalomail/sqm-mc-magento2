@@ -197,7 +197,6 @@ class Result
                             );
                             continue;
                         }
-                        $sqmmcErrors = $this->_chimpErrors->create();
                         $errorDetails = "";
                         if (!empty($response->errors)) {
                             foreach ($response->errors as $error) {
@@ -220,18 +219,21 @@ class Result
                             $error,
                             \SqualoMail\SqmMcMagentoTwo\Helper\Data::SYNCERROR
                         );
-                        $sqmmcErrors->setType($response->type);
-                        $sqmmcErrors->setTitle($response->title);
-                        $sqmmcErrors->setStatus($item->status_code);
-                        $sqmmcErrors->setErrors($errorDetails);
-                        $sqmmcErrors->setRegtype($type);
-                        $sqmmcErrors->setOriginalId($id);
-                        $sqmmcErrors->setBatchId($batchId);
-                        $sqmmcErrors->setSqmmcStoreId($sqmmcStoreId);
-                        $sqmmcErrors->setOriginalId($id);
-                        $sqmmcErrors->setBatchId($batchId);
-                        $sqmmcErrors->setStoreId($storeId);
-                        $sqmmcErrors->getResource()->save($sqmmcErrors);
+                        if (!$this->_helper->getConfigValue(\SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_DISABLE_ERROR_LOG, $storeId)) {
+                            $sqmmcErrors = $this->_chimpErrors->create();
+                            $sqmmcErrors->setType($response->type);
+                            $sqmmcErrors->setTitle($response->title);
+                            $sqmmcErrors->setStatus($item->status_code);
+                            $sqmmcErrors->setErrors($errorDetails);
+                            $sqmmcErrors->setRegtype($type);
+                            $sqmmcErrors->setOriginalId($id);
+                            $sqmmcErrors->setBatchId($batchId);
+                            $sqmmcErrors->setSqmmcStoreId($sqmmcStoreId);
+                            $sqmmcErrors->setOriginalId($id);
+                            $sqmmcErrors->setBatchId($batchId);
+                            $sqmmcErrors->setStoreId($storeId);
+                            $sqmmcErrors->getResource()->save($sqmmcErrors);
+                        }
                     } else {
                         $this->_updateSyncData(
                             $sqmmcStoreId,

@@ -11,67 +11,69 @@
 
 namespace SqualoMail\SqmMcMagentoTwo\Model\Plugin;
 
-class Subscriber
+use Magento\Newsletter\Model\SubscriberFactory;
+use \SqualoMail\SqmMcMagentoTwo\Helper\Data as Helper;
+use \Magento\Customer\Model\ResourceModel\CustomerRepository;
+use \Magento\Customer\Model\Session;
+use \Magento\Store\Model\StoreManagerInterface;
+
+class SubscriptionManager
 {
     /**
-     * @var \SqualoMail\SqmMcMagentoTwo\Helper\Data
+     * @var Helper
      */
     protected $_helper;
     /**
-     * @var \Magento\Customer\Model\Customer
+     * @var CustomerRepository
      */
     protected $_customer;
     /**
-     * @var \Magento\Customer\Model\Session
+     * @var Session
      */
     protected $_customerSession;
     /**
-     * @var \Magento\Store\Model\StoreManagerInterface
+     * @var StoreManagerInterface
      */
     protected $_storeManager;
-    /**
-     * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
-     * @param \Magento\Customer\Model\ResourceModel\CustomerRepository $customer
-     * @param \Magento\Customer\Model\Session $customerSession
-     */
+    protected $_subscriberFactory;
     protected $_api = null;
 
     /**
-     * Subscriber constructor.
-     * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
-     * @param \Magento\Customer\Model\ResourceModel\CustomerRepository $customer
-     * @param \Magento\Customer\Model\Session $customerSession
-     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
+     * SubscriptionManager constructor.
+     * @param Helper $helper
+     * @param CustomerRepository $customer
+     * @param Session $customerSession
+     * @param StoreManagerInterface $storeManager
+     * @param SubscriberFactory $subscriberFactory
      */
     public function __construct(
-        \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
-        \Magento\Customer\Model\ResourceModel\CustomerRepository $customer,
-        \Magento\Customer\Model\Session $customerSession,
-        \Magento\Store\Model\StoreManagerInterface $storeManager
+        Helper $helper,
+        CustomerRepository $customer,
+        Session $customerSession,
+        StoreManagerInterface $storeManager,
+        SubscriberFactory $subscriberFactory
     ) {
-    
+
         $this->_helper          = $helper;
         $this->_customer        = $customer;
         $this->_customerSession = $customerSession;
         $this->_storeManager    = $storeManager;
+        $this->_subscriberFactory = $subscriberFactory;
     }
-
     /**
      * @param \Magento\Newsletter\Model\Subscriber $subscriber
      * @param $customerId
      * @return array
      * @throws \Magento\Framework\Exception\LocalizedException
      */
-    public function beforeUnsubscribeCustomerById(
-        \Magento\Newsletter\Model\Subscriber $subscriber,
-        $customerId
+    public function beforeUnsubscribeCustomer(
+        \Magento\Newsletter\Model\SubscriptionManager $subscriptionManager,
+        $customerId,
+        $storeId
     ) {
-        $storeId = $this->getStoreIdFromSubscriber($subscriber);
         if ($this->_helper->isSqmMcEnabled($storeId)) {
-            if (!$this->_helper->getConfigValue(\SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_MAGENTO_MAIL, $storeId)) {
-                $subscriber->setImportMode(true);
-            }
-            $subscriber->loadByCustomerId($customerId);
+            $websiteId = (int)$this->_storeManager->getStore($storeId)->getWebsiteId();
+            $subscriber = $this->_subscriberFactory->create()->loadByCustomer($customerId, $websiteId);
             if ($subscriber->isSubscribed()) {
                 $api = $this->_helper->getApi($storeId);
                 try {
@@ -87,7 +89,7 @@ class Subscriber
                 }
             }
         }
-        return [$customerId];
+        return [$customerId,$storeId];
     }
 
     /**
@@ -97,14 +99,14 @@ class Subscriber
      * @throws \Magento\Framework\Exception\LocalizedException
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    public function beforeSubscribeCustomerById(
-        \Magento\Newsletter\Model\Subscriber $subscriber,
-        $customerId
+    public function beforeSubscribeCustomer(
+        \Magento\Newsletter\Model\SubscriptionManager $subscriptionManager,
+        $customerId,
+        $storeId
     ) {
-
-        $storeId = $this->getStoreIdFromSubscriber($subscriber);
         if ($this->_helper->isSqmMcEnabled($storeId)) {
-            $subscriber->loadByCustomerId($customerId);
+            $websiteId = (int)$this->_storeManager->getStore($storeId)->getWebsiteId();
+            $subscriber = $this->_subscriberFactory->create()->loadByCustomer($customerId, $websiteId);
             if (!$subscriber->isSubscribed()) {
                 if (!$this->_helper->getConfigValue(\SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_MAGENTO_MAIL, $storeId)) {
                     $subscriber->setImportMode(true);
@@ -140,27 +142,25 @@ class Subscriber
                 }
             }
         }
-        return [$customerId];
+        return [$customerId, $storeId];
     }
 
     /**
      * @param \Magento\Newsletter\Model\Subscriber $subscriber
      * @param $email
-     * @return array
+     * @return mixed
      * @throws \Magento\Framework\Exception\LocalizedException
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function beforeSubscribe(
-        \Magento\Newsletter\Model\Subscriber $subscriber,
-        $email
+        \Magento\Newsletter\Model\SubscriptionManager $subscriptionManager,
+        $email,
+        $storeId
     ) {
-
-        $storeId = $this->getStoreIdFromSubscriber($subscriber);
         if ($this->_helper->isSqmMcEnabled($storeId)) {
-            if (!$this->_helper->getConfigValue(\SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_MAGENTO_MAIL, $storeId)) {
-                $subscriber->setImportMode(true);
-            }
-            $storeId = $this->_storeManager->getStore()->getId();
+            $websiteId = (int)$this->_storeManager->getStore($storeId)->getWebsiteId();
+
+            $subscriber = $this->_subscriberFactory->create()->loadBySubscriberEmail($email, $websiteId);
 
             if ($this->_helper->isSqmMcEnabled($storeId)) {
                 $api = $this->_helper->getApi($storeId);
@@ -172,7 +172,7 @@ class Subscriber
                 $mergeVars = $this->_helper->getMergeVarsBySubscriber($subscriber, $email);
                 try {
                     $md5HashEmail = hash('md5', strtolower($email));
-                    $return = $api->lists->members->addOrUpdate(
+                    $api->lists->members->addOrUpdate(
                         $this->_helper->getDefaultList($storeId),
                         $md5HashEmail,
                         null,
@@ -190,7 +190,7 @@ class Subscriber
                 }
             }
         }
-        return [$email];
+        return [$email, $storeId];
     }
 
     /**
@@ -199,16 +199,15 @@ class Subscriber
      * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function beforeUnsubscribe(
-        \Magento\Newsletter\Model\Subscriber $subscriber
+        \Magento\Newsletter\Model\SubscriptionManager $subscriptionManager,
+        $email,
+        $storeId,
+        $confirmCode
     ) {
-        $storeId = $this->getStoreIdFromSubscriber($subscriber);
         if ($this->_helper->isSqmMcEnabled($storeId)) {
-            if (!$this->_helper->getConfigValue(\SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_MAGENTO_MAIL, $storeId)) {
-                $subscriber->setImportMode(true);
-            } 
             $api = $this->_helper->getApi($storeId);
             try {
-                $md5HashEmail = hash('md5', strtolower($subscriber->getSubscriberEmail()));
+                $md5HashEmail = hash('md5', strtolower($email));
                 $api->lists->members->update(
                     $this->_helper->getDefaultList($storeId),
                     $md5HashEmail,
@@ -219,93 +218,6 @@ class Subscriber
                 $this->_helper->log($e->getFriendlyMessage());
             }
         }
+        return [$email,$storeId,$confirmCode];
     }
-
-    /**
-     * @param \Magento\Newsletter\Model\Subscriber $subscriber
-     * @return null
-     * @throws \Magento\Framework\Exception\LocalizedException
-     */
-    public function afterDelete(
-        \Magento\Newsletter\Model\Subscriber $subscriber
-    ) {
-
-        $storeId = $this->getStoreIdFromSubscriber($subscriber);
-        if ($this->_helper->isSqmMcEnabled($storeId)) {
-            $api = $this->_helper->getApi($storeId);
-            if ($subscriber->isSubscribed()) {
-                try {
-                    $md5HashEmail = hash('md5', strtolower($subscriber->getSubscriberEmail()));
-                    if ($subscriber->getCustomerId()) {
-                        $api->lists->members->update(
-                            $this->_helper->getDefaultList($storeId),
-                            $md5HashEmail,
-                            null,
-                            'unsubscribed'
-                        );
-                    } else {
-                        $api->lists->members->delete($this->_helper->getDefaultList($storeId), $md5HashEmail);
-                    }
-                } catch (\SqualoMailMc_Error $e) {
-                    $this->_helper->log($e->getFriendlyMessage());
-                }
-            }
-        }
-        return null;
-    }
-
-    /**
-     * @param \Magento\Newsletter\Model\Subscriber $subscriber
-     * @return int
-     */
-    protected function getStoreIdFromSubscriber(\Magento\Newsletter\Model\Subscriber $subscriber)
-    {
-        return $subscriber->getStoreId();
-    }
-
-    /**
-     * @param \Magento\Newsletter\Model\Subscriber $subscriber
-     * @param $email
-     * @param $websiteId
-     * @return \Magento\Newsletter\Model\Subscriber
-     */
-    public function afterLoadBySubscriberEmail(\Magento\Newsletter\Model\Subscriber $subscriber, $email, $websiteId)
-    {
-        if ($this->_helper->isSqmMcEnabled($subscriber->getStoreId())) {
-            try {
-                if (!$this->_helper->getConfigValue(
-                    \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_MAGENTO_MAIL,
-                    $subscriber->getStoreId()
-                )) {
-                    $subscriber->setImportMode(true);
-                }
-            } catch (\Exception $exception) {
-                $this->_helper->log($exception->getMessage());
-            }
-        }
-
-        return $subscriber;
-    }
-    
-    /**
-     * @param \Magento\Newsletter\Model\Subscriber $subscriber
-     * @param $customerId
-     * @param $websiteId
-     * @return \Magento\Newsletter\Model\Subscriber
-     */
-    public function afterLoadByCustomer(\Magento\Newsletter\Model\Subscriber $subscriber, $customerId, $websiteId)
-    {
-        try {
-            if (!$this->_helper->getConfigValue(
-                \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_MAGENTO_MAIL,
-                $subscriber->getStoreId()
-            )) {
-                $subscriber->setImportMode(true);
-            }
-        } catch (\Exception $exception) {
-            $this->_helper->log($exception->getMessage());
-        }
-
-        return $subscriber;
-    }
-}
+ }
