@@ -23,4 +23,7 @@
     <event name="catalog_product_save_after">
         <observer name="sqmmc_product_save_after" instance="\SqualoMail\SqmMcMagentoTwo\Observer\Adminhtml\Product\SaveAfter" />
     </event>
+    <event name="newsletter_subscriber_save_after">
+        <observer name="sqmmc_newsletter_subscriber_save_after" instance="\SqualoMail\SqmMcMagentoTwo\Observer\Subscriber\SaveAfter" />
+    </event>
 </config>

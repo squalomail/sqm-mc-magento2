@@ -6,7 +6,7 @@
   },
   "description": "connect SqualoMail with Magento",
   "type": "magento2-module",
-  "version": "102.5.06",
+  "version": "103.4.04",
   "authors": [
     {
       "name": "SqualoMail",
@@ -22,7 +22,7 @@
     "email": "info@squalomail.com"
   },
   "require" : {
-    "magento/framework": "102.0.*||103.0.*",
+    "magento/framework": "103.0.*",
     "squalomail/sqm-mc-api-lib": "3.1.*",
     "ext-json": "*"
   }
