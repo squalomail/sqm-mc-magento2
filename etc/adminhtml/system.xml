@@ -159,7 +159,7 @@
                     <comment><![CDATA[If table sqmmc_errors is growing too large, disable error logging]]></comment>
                     <depends>
                         <field id="*/*/active">1</field>
-                    </depends>s
+                    </depends>
                 </field>
             </group>
             <group id="ecommerce" translate="label" type="text" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">

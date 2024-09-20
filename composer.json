@@ -6,7 +6,7 @@
   },
   "description": "connect SqualoMail with Magento",
   "type": "magento2-module",
-  "version": "103.4.03",
+  "version": "103.4.04",
   "authors": [
     {
       "name": "SqualoMail",
