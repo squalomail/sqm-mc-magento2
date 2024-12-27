@@ -48,6 +48,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     const XML_MAGENTO_MAIL           = 'sqmmc/general/magentoemail';
     const XML_SEND_PROMO             = 'sqmmc/ecommerce/send_promo';
     const XML_INCLUDING_TAXES        = 'sqmmc/ecommerce/including_taxes';
+    const XML_SYNC_CATEGORIES        = 'sqmmc/ecommerce/sync_categories';
     const XML_INCREASE_BATCH         = 'sqmmc/ecommerce/increase_batch_size';
     const XML_DISABLE_ERROR_LOG      = 'sqmmc/general/disable_error_log';
 
@@ -57,6 +58,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     const IS_CUSTOMER   = "CUS";
     const IS_PRODUCT    = "PRO";
     const IS_ORDER      = "ORD";
+    const IS_CATEGORY   = "CAT";
     const IS_QUOTE      = "QUO";
     const IS_SUBSCRIBER = "SUB";
     const IS_PROMO_RULE = "PRL";
@@ -75,6 +77,8 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     const ORD_NEW       = "OrderNew";
     const QUO_MOD       = "QuoteModified";
     const QUO_NEW       = "QuoteNew";
+    const CAT_MOD       = "CategoryModified";
+    const CAT_NEW       = "CategoryNew";
 
     const SYNCED        = 1;
     const NEEDTORESYNC  = 2;
@@ -1278,6 +1282,9 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
                 break;
             case \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_ORDER:
                 $batchSizeLeft = self::MAX_GROUP_BATCHCOUNT + ((3 * self::MAX_GROUP_BATCHCOUNT) - $this->batchCount);
+                break;
+            case \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_CATEGORY:
+                $batchSizeLeft = self::MAX_GROUP_BATCHCOUNT + ((4 * self::MAX_GROUP_BATCHCOUNT) - $this->batchCount);
                 break;
             default:
                 $batchSizeLeft = self::MAX_GROUP_BATCHCOUNT;

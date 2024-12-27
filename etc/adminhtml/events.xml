@@ -15,4 +15,10 @@
     <event name="adminhtml_customer_save_after">
         <observer name="sqmmc_adminhtml_customer_save_after" instance="\SqualoMail\SqmMcMagentoTwo\Observer\Adminhtml\Customer\SaveAfter" />
     </event>
+    <event name="catalog_category_save_after">
+        <observer name="sqmmc_catalog_category_save_after" instance="\SqualoMail\SqmMcMagentoTwo\Observer\Adminhtml\Category\SaveAfter"/>
+    </event>
+    <event name="catalog_category_delete_after">
+        <observer name="sqmmc_catalog_category_delete_after" instance="\SqualoMail\SqmMcMagentoTwo\Observer\Adminhtml\Category\DeleteAfter"/>
+    </event>
 </config>
