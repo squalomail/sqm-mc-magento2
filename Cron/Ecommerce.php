@@ -40,6 +40,10 @@ class Ecommerce
      */
     private $_apiOrder;
     /**
+     * @var \SqualoMail\SqmMcMagentoTwo\Model\Api\Category
+     */
+    private $_apiCategory;
+    /**
      * @var \SqualoMail\SqmMcMagentoTwo\Model\Api\Cart
      */
     private $_apiCart;
@@ -76,6 +80,7 @@ class Ecommerce
      * @param \SqualoMail\SqmMcMagentoTwo\Model\Api\Result $apiResult
      * @param \SqualoMail\SqmMcMagentoTwo\Model\Api\Customer $apiCustomer
      * @param \SqualoMail\SqmMcMagentoTwo\Model\Api\Order $apiOrder
+     * @param \SqualoMail\SqmMcMagentoTwo\Model\Api\Category $apiCategory
      * @param \SqualoMail\SqmMcMagentoTwo\Model\Api\Cart $apiCart
      * @param \SqualoMail\SqmMcMagentoTwo\Model\Api\Subscriber $apiSubscriber
      * @param \SqualoMail\SqmMcMagentoTwo\Model\Api\PromoCodes $apiPromoCodes
@@ -91,6 +96,7 @@ class Ecommerce
         \SqualoMail\SqmMcMagentoTwo\Model\Api\Result $apiResult,
         \SqualoMail\SqmMcMagentoTwo\Model\Api\Customer $apiCustomer,
         \SqualoMail\SqmMcMagentoTwo\Model\Api\Order $apiOrder,
+        \SqualoMail\SqmMcMagentoTwo\Model\Api\Category $apiCategory,
         \SqualoMail\SqmMcMagentoTwo\Model\Api\Cart $apiCart,
         \SqualoMail\SqmMcMagentoTwo\Model\Api\Subscriber $apiSubscriber,
         \SqualoMail\SqmMcMagentoTwo\Model\Api\PromoCodes $apiPromoCodes,
@@ -107,6 +113,7 @@ class Ecommerce
         $this->_apiResult       = $apiResult;
         $this->_apiCustomer     = $apiCustomer;
         $this->_apiOrder        = $apiOrder;
+        $this->_apiCategory     = $apiCategory;
         $this->_apiCart         = $apiCart;
         $this->_apiSubscribers  = $apiSubscriber;
         $this->_chimpSyncEcommerce  = $chimpSyncEcommerce;
@@ -227,6 +234,13 @@ class Ecommerce
             $countOrders = count($orders);
             $results = array_merge($results, $orders);
             $this->_helper->log('Orders payload size: ' . $countOrders);
+
+            if ($this->_helper->getConfigValue(\SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_SYNC_CATEGORIES, $storeId)) {
+                $this->_helper->log('Generate Categories payload');
+                $categories = $this->_apiCategory->sendCategories($storeId);
+                $results = array_merge($results, $categories);
+                $this->_helper->log('Categories payload size: ' . count($categories));
+            }
 
             if ($this->_helper->getConfigValue(\SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_IS_SYNC, $storeId)) {
                 $this->_helper->log('Generate Carts payload');

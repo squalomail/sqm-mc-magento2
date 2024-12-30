@@ -193,7 +193,13 @@
                     <label>Prices including taxes</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <comment><![CDATA[You must configure Price Display Settings in Sales/Tax to "including taxes"]]></comment>
-
+                    <depends>
+                        <field id="*/*/active">1</field>
+                    </depends>
+                </field>
+                <field id="sync_categories" translate="label" type="select" sortOrder="121" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Sync categories</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <depends>
                         <field id="*/*/active">1</field>
                     </depends>
@@ -202,7 +208,6 @@
                     <label>Increase payload size (testing purpose only!)</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <comment><![CDATA[Set to yes for shops with a lot of data (orders, products, customers,..). Testing purpose only!]]></comment>
-
                     <depends>
                         <field id="*/*/active">1</field>
                     </depends>
