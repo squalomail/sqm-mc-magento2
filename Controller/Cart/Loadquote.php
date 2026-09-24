@@ -104,7 +104,10 @@ class Loadquote extends Action
                 $params['id'],
                 \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_QUOTE
             );
-            if (!isset($params['token']) || $params['token'] != $syncCommerce->getSqmmcToken()) {
+            // Carts without a stored token must never be restorable; compare in constant time.
+            $storedToken = (string)$syncCommerce->getSqmmcToken();
+            if (!$quote->getId() || $storedToken === '' || !isset($params['token']) || !is_string($params['token'])
+                || !hash_equals($storedToken, $params['token'])) {
                 // @error
                 $this->_message->addErrorMessage(__("You can't access this cart"));
                 $url = $this->_urlHelper->getUrl(

@@ -89,6 +89,11 @@ class Ecommerce
      * @param \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncEcommerce $chimpSyncEcommerce
      * @param \Magento\Framework\Filesystem\DirectoryList $dir
      */
+    /**
+     * @var \Magento\Framework\App\Cache\TypeListInterface
+     */
+    protected $_cacheTypeList;
+
     public function __construct(
         \Magento\Store\Model\StoreManager $storeManager,
         \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
@@ -103,7 +108,8 @@ class Ecommerce
         \SqualoMail\SqmMcMagentoTwo\Model\Api\PromoRules $apiPromoRules,
         \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncBatchesFactory $sqmMcSyncBatchesFactory,
         \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncEcommerce $chimpSyncEcommerce,
-        \Magento\Framework\Filesystem\DirectoryList $dir
+        \Magento\Framework\Filesystem\DirectoryList $dir,
+        \Magento\Framework\App\Cache\TypeListInterface $cacheTypeList
     ) {
 
         $this->_storeManager    = $storeManager;
@@ -120,6 +126,7 @@ class Ecommerce
         $this->_apiPromoCodes   = $apiPromoCodes;
         $this->_apiPromoRules   = $apiPromoRules;
         $this->_dir             = $dir;
+        $this->_cacheTypeList   = $cacheTypeList;
     }
 
     public function execute()
@@ -145,6 +152,7 @@ class Ecommerce
                     $storeId
                 );
                 if ($sqmmcStoreId != -1 && $sqmmcStoreId != '') {
+                    $this->_fetchJsUrl($storeId);
                     $this->_apiResult->processResponses($storeId, true, $sqmmcStoreId);
                     $batchId = $this->_processStore($storeId, $sqmmcStoreId, $listId);
                     if ($batchId) {
@@ -358,6 +366,19 @@ class Ecommerce
         } catch (\SqualoMailMc_Error $e) {
             $this->_helper->log('SqualoMail error when updating syncing flag for store ' . $storeId);
             $this->_helper->log($e->getFriendlyMessage());
+        }
+    }
+    /**
+     * The storefront never calls the API for the site script URL (see Block\Sqmmcjs);
+     * fetch it here if saving the store in admin didn't get one.
+     */
+    protected function _fetchJsUrl($storeId)
+    {
+        if ($this->_helper->getConfigValue(\SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_SQM_MC_JS_URL, $storeId)) {
+            return;
+        }
+        if ($this->_helper->getJsUrl($storeId)) {
+            $this->_cacheTypeList->cleanType('config');
         }
     }
     protected function _ping($storeId)

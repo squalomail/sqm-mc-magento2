@@ -576,7 +576,7 @@ class Cart
     protected function _getCheckoutUrl(\Magento\Quote\Model\Quote $cart, $storeId)
     {
         if (!$this->_token) {
-            $this->_token = hash('md5', rand(0, 9999999));
+            $this->_token = bin2hex(random_bytes(16));
         }
         $url = $this->_helper->getCartUrl($storeId, $cart->getId(), $this->_token);
         return $url;

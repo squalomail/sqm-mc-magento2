@@ -64,8 +64,18 @@ class Success extends \Magento\Framework\App\Action\Action
 
     public function execute()
     {
-        $params     = $this->getRequest()->getParams();
         $order = $this->_checkoutSession->getLastRealOrder();
+        // Only accept an explicit form submit (POST, form_key checked by Magento's CsrfValidator)
+        // for a real order, and only when the feature is enabled.
+        if (!$this->getRequest()->isPost() || !$order || !$order->getId() || !$order->getCustomerEmail()
+            || !$this->_helper->getConfigValue(
+                \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_INTEREST_IN_SUCCESS,
+                $order->getStoreId()
+            )) {
+            return $this->_redirect('');
+        }
+        $params     = $this->getRequest()->getParams();
+        unset($params['form_key']);
         /**
          * @var $subscriber \Magento\Newsletter\Model\Subscriber
          * @var $interestGroup \SqualoMail\SqmMcMagentoTwo\Model\SqmMcInterestGroup

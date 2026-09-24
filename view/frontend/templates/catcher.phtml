@@ -1,3 +1,26 @@
-<div id="monkey_campaign" style="display:none;"
-     data-mage-init='{"campaigncatcher":{"checkCampaignUrl": "<?php echo $this->getUrl('sqmmc/campaign/check');?>"}}'>
-</div>
+<?php
+/**
+ * @var $block \SqualoMail\SqmMcMagentoTwo\Block\Catcher
+ * @var $secureRenderer \Magento\Framework\View\Helper\SecureHtmlRenderer
+ */
+$checkUrl = json_encode(
+    $block->getUrl('sqmmc/campaign/check'),
+    JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_UNESCAPED_SLASHES
+);
+// The campaign catcher is only needed when a visitor lands from a campaign link, so don't make
+// every page load and initialise the widget (and its dependencies) just to find nothing.
+$script = <<<JS
+(function () {
+    var href = window.location.href;
+    if (!/[?&\/]mc_cid[=\/]/.test(href) && !/[?&\/]utm_source[=\/]squalomail/.test(href)) {
+        return;
+    }
+    require(['jquery', 'campaigncatcher'], function ($) {
+        $('<div id="monkey_campaign" style="display:none;"></div>')
+            .appendTo(document.body)
+            .campaigncatcher({checkCampaignUrl: {$checkUrl}});
+    });
+})();
+JS;
+?>
+<?= /* @noEscape */ $secureRenderer->renderTag('script', [], $script, false) ?>

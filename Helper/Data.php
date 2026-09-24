@@ -29,6 +29,8 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     const XML_PATH_MAPPING           = 'sqmmc/general/mapping';
     const XML_SQM_MC_STORE        = 'sqmmc/general/monkeystore';
     const XML_SQM_MC_JS_URL       = 'sqmmc/general/sqmmcjsurl';
+    const XML_LOAD_SITE_SCRIPT    = 'sqmmc/general/load_site_script';
+    const XML_POPUP_SNIPPET       = 'sqmmc/general/popup_snippet';
     const XML_PATH_CONFIRMATION_FLAG = 'newsletter/subscription/confirm';
     const XML_PATH_STORE             = 'sqmmc/ecommerce/store';
     const XML_PATH_ECOMMERCE_ACTIVE  = 'sqmmc/ecommerce/active';
@@ -222,6 +224,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 
     private $customerAtt    = null;
     private $_mapFields     = null;
+    private $_mapFieldsLoaded = false;
 
     /**
      * Data constructor.
@@ -394,12 +397,19 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     public function resetMapFields()
     {
         $this->_mapFields = null;
+        $this->_mapFieldsLoaded = false;
     }
     public function getMapFields($storeId = null)
     {
-        if (!$this->_mapFields) {
-            $customerAtt = $this->getCustomerAtts();
+        // Remember an empty mapping too: this is called for every synced customer and
+        // getCustomerAtts() loads all customer attributes each time.
+        if (!$this->_mapFieldsLoaded) {
+            $this->_mapFieldsLoaded = true;
             $data = $this->getConfigValue(self::XML_MERGEVARS, $storeId);
+            if (!$data) {
+                return $this->_mapFields;
+            }
+            $customerAtt = $this->getCustomerAtts();
             try {
                 $data = $this->unserialize($data);
                 if (is_array($data)) {
@@ -600,7 +610,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     {
         return $this->_storeManager->getStore($storeId)->getBaseUrl($type);
     }
-    public function createStore(int $listId = null, $storeId)
+    public function createStore(?int $listId, $storeId)
     {
         if ($listId) {
             //generate store id

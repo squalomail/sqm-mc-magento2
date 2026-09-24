@@ -89,7 +89,7 @@ class Index extends Action implements CsrfAwareActionInterface
             return $result;
         }
         $key = $this->_helper->getWebhooksKey();
-        if ($key!=$requestKey) {
+        if (!is_string($requestKey) || !hash_equals((string)$key, $requestKey)) {
             $this->_helper->log('wkey parameter is invalid from ip: '.$this->_remoteAddress->getRemoteAddress());
             $result->setHttpResponseCode(403);
             return $result;

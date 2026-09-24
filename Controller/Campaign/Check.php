@@ -18,6 +18,9 @@ use Magento\Framework\Controller\ResultFactory;
 
 class Check extends \Magento\Framework\App\Action\Action
 {
+    const CACHE_PREFIX = 'sqmmc_campaign_check_';
+    const CACHE_LIFETIME = 86400;
+
     /**
      * @var \SqualoMail\SqmMcMagentoTwo\Helper\Data
      */
@@ -27,48 +30,59 @@ class Check extends \Magento\Framework\App\Action\Action
      */
     protected $_resultFactory;
     protected $_storeManager;
+    /**
+     * @var \Magento\Framework\App\CacheInterface
+     */
+    protected $_cache;
 
     /**
      * Get constructor.
      * @param Context $context
      * @param \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper
+     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
+     * @param \Magento\Framework\App\CacheInterface $cache
      */
     public function __construct(
         Context $context,
         \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
-        \Magento\Store\Model\StoreManagerInterface $storeManager
+        \Magento\Store\Model\StoreManagerInterface $storeManager,
+        \Magento\Framework\App\CacheInterface $cache
     ) {
 
         parent::__construct($context);
         $this->_resultFactory       = $context->getResultFactory();
         $this->_helper              = $helper;
         $this->_storeManager        = $storeManager;
+        $this->_cache               = $cache;
     }
 
     public function execute()
     {
-        $param = $this->getRequest()->getParams();
-        $mc_cid = null;
-        if (key_exists('mc_cid', $param)) {
-            $mc_cid = $param['mc_cid'];
+        $mc_cid = $this->getRequest()->getParam('mc_cid');
+        $valid = 0;
+        // Public endpoint: reject malformed ids before they reach the API path and
+        // cache the answer so repeated/abusive requests don't hit the API every time.
+        if (is_string($mc_cid) && preg_match('/^[A-Za-z0-9_-]{1,32}$/', $mc_cid)) {
             $magentoStoreId = $this->_storeManager->getStore()->getId();
-            $api = $this->_helper->getApi($magentoStoreId);
-            try {
-                $campaign =$api->campaigns->get($mc_cid);
-                $sqmmcList = $this->_helper->getConfigValue(
-                    \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_LIST,
-                    $magentoStoreId
-                );
-                if ($sqmmcList == $campaign['recipients']['list_id']) {
-                    $valid = 1;
-                } else {
+            $cacheKey = self::CACHE_PREFIX . $magentoStoreId . '_' . $mc_cid;
+            $cached = $this->_cache->load($cacheKey);
+            if ($cached !== false) {
+                $valid = (int)$cached;
+            } else {
+                try {
+                    $api = $this->_helper->getApi($magentoStoreId);
+                    $campaign = $api->campaigns->get($mc_cid);
+                    $sqmmcList = $this->_helper->getConfigValue(
+                        \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_LIST,
+                        $magentoStoreId
+                    );
+                    $valid = (isset($campaign['recipients']['list_id'])
+                        && $sqmmcList == $campaign['recipients']['list_id']) ? 1 : 0;
+                } catch (\Exception $e) {
                     $valid = 0;
                 }
-            } catch (\Exception $e) {
-                $valid = 0;
+                $this->_cache->save((string)$valid, $cacheKey, [], self::CACHE_LIFETIME);
             }
-        } else {
-            $valid = 0;
         }
         $resultJson = $this->_resultFactory->create(ResultFactory::TYPE_JSON);
         $resultJson->setData(['valid' => $valid]);

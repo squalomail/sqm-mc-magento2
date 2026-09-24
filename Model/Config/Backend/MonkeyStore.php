@@ -55,11 +55,11 @@ class MonkeyStore extends \Magento\Framework\App\Config\Value
         \Magento\Framework\App\Config\ScopeConfigInterface $config,
         \Magento\Framework\App\Cache\TypeListInterface $cacheTypeList,
         \Magento\Config\Model\ResourceModel\Config $resourceConfig,
-        \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
-        \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
         \Magento\Framework\Stdlib\DateTime\DateTime $date,
         \SqualoMail\SqmMcMagentoTwo\Helper\Data $helper,
         \Magento\Store\Model\StoreManager $storeManager,
+        ?\Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
+        ?\Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
         array $data = []
     ) {
         $this->_helper          = $helper;

@@ -104,6 +104,25 @@
                         <field id="*/*/active">1</field>
                     </depends>
                 </field>
+                <field id="load_site_script" translate="label comment" type="select" sortOrder="72" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Load Connected Site Script</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>
+                        <![CDATA[Loads the store's connected_site script (ecommerce/stores/sitejs) after the page has loaded. Disable it if the URL does not return JavaScript.]]>
+                    </comment>
+                    <depends>
+                        <field id="*/*/active">1</field>
+                    </depends>
+                </field>
+                <field id="popup_snippet" translate="label comment" type="textarea" sortOrder="74" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Pop-up Code</label>
+                    <comment>
+                        <![CDATA[Code from Squalo: Forms &gt; Pop-ups &gt; Websites &gt; Save and get code (JavaScript). It is added before &lt;/body&gt; after the page has loaded, so it does not slow the page down.]]>
+                    </comment>
+                    <depends>
+                        <field id="*/*/active">1</field>
+                    </depends>
+                </field>
                 <field id="map_fields" translate="label comment tooltip" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Customer Fields Mapping</label>
                     <frontend_model>SqualoMail\SqmMcMagentoTwo\Block\Adminhtml\System\Config\Form\Field\CustomerMap</frontend_model>

@@ -1,4 +1,92 @@
 <?php
-    $url = $this->getJsUrl();
+/**
+ * @var $block \SqualoMail\SqmMcMagentoTwo\Block\Sqmmcjs
+ * @var $secureRenderer \Magento\Framework\View\Helper\SecureHtmlRenderer
+ */
+$url = $block->getJsUrl();
+$snippet = $block->getPopupSnippet();
+if (!$url && !$snippet) {
+    return;
+}
+// JSON_HEX_* makes the literals safe inside an inline <script>.
+$jsonFlags = JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_UNESCAPED_SLASHES;
+$jsUrl = json_encode((string)$url, $jsonFlags);
+// The pop-up code is passed as a JSON string, not as markup: "move JS to bottom" (and similar
+// optimisers) would otherwise pull its <script> tags out and run them immediately.
+$jsSnippet = json_encode((string)$snippet, $jsonFlags);
+// Load the SqualoMail site script and the pop-up code only after the page has fully loaded and
+// the browser is idle, so they never compete with the shop's own resources or delay rendering.
+// The pop-up <script> elements are re-created so the browser executes them.
+$script = <<<JS
+(function () {
+    var nonce = document.currentScript && document.currentScript.nonce;
+    // Re-create <script> elements (scripts parsed via innerHTML never run).
+    var activate = function (node) {
+        if (node.nodeName === 'SCRIPT') {
+            var s = document.createElement('script');
+            for (var i = 0; i < node.attributes.length; i++) {
+                s.setAttribute(node.attributes[i].name, node.attributes[i].value);
+            }
+            if (nonce) {
+                s.nonce = nonce;
+            }
+            s.text = node.text;
+            return s;
+        }
+        if (node.querySelectorAll) {
+            var inner = node.querySelectorAll('script');
+            for (var j = 0; j < inner.length; j++) {
+                inner[j].parentNode.replaceChild(activate(inner[j]), inner[j]);
+            }
+        }
+        return node;
+    };
+    // Insert the snippet's nodes one by one and, like the HTML parser, wait for each external
+    // non-async script before running what follows it.
+    var insert = function (nodes, k) {
+        for (; k < nodes.length; k++) {
+            var node = activate(nodes[k]);
+            var wait = node.nodeName === 'SCRIPT' && node.src && !node.hasAttribute('async');
+            if (wait) {
+                node.async = false;
+                node.onload = node.onerror = function () {
+                    insert(nodes, k + 1);
+                };
+            }
+            document.body.appendChild(node);
+            if (wait) {
+                return;
+            }
+        }
+    };
+    var load = function () {
+        var url = {$jsUrl};
+        if (url) {
+            var s = document.createElement('script');
+            s.src = url;
+            s.async = true;
+            document.body.appendChild(s);
+        }
+        var snippet = {$jsSnippet};
+        if (snippet) {
+            var tpl = document.createElement('template');
+            tpl.innerHTML = snippet;
+            insert(Array.prototype.slice.call(tpl.content.childNodes), 0);
+        }
+    };
+    var idle = function () {
+        if ('requestIdleCallback' in window) {
+            window.requestIdleCallback(load, {timeout: 3000});
+        } else {
+            setTimeout(load, 1);
+        }
+    };
+    if (document.readyState === 'complete') {
+        idle();
+    } else {
+        window.addEventListener('load', idle);
+    }
+})();
+JS;
 ?>
-<script type="text/javascript" src="<?php echo $url;?>" defer></script>
+<?= /* @noEscape */ $secureRenderer->renderTag('script', [], $script, false) ?>

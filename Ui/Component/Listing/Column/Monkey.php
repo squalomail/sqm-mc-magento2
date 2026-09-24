@@ -98,23 +98,23 @@ class Monkey extends Column
     public function prepareDataSource(array $dataSource)
     {
         if (isset($dataSource['data']['items'])) {
+            // The grid row already has entity_id/store_id: don't load every order, and fetch the
+            // sync state of all rows with one query instead of one per row.
+            $syncRows = $this->_getSyncRows(array_column($dataSource['data']['items'], 'entity_id'));
             foreach ($dataSource['data']['items'] as & $item) {
                 $status = $item['sqmmc_flag'];
-                $order = $this->_orderFactory->create()->loadByIncrementId($item['increment_id']);
+                $orderId = $item['entity_id'];
+                $orderStoreId = $item['store_id'];
                 $params = ['_secure' => $this->_requestInterfase->isSecure()];
-                if ($this->_helper->getConfigValue(\SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_ACTIVE, $order->getStoreId())) {
+                if ($this->_helper->getConfigValue(\SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_PATH_ACTIVE, $orderStoreId)) {
                     $sqmmcStoreId = $this->_helper->getConfigValue(
                         \SqualoMail\SqmMcMagentoTwo\Helper\Data::XML_SQM_MC_STORE,
-                        $order->getStoreId()
+                        $orderStoreId
                     );
-                    $syncData = $this->_helper->getChimpSyncEcommerce(
-                        $sqmmcStoreId,
-                        $order->getId(),
-                        \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_ORDER
-                    );
+                    $syncData = $syncRows[$sqmmcStoreId . '_' . $orderId] ?? null;
                     $alt = '';
                     if (!$syncData || $syncData->getSqmmcStoreId() != $sqmmcStoreId ||
-                        $syncData->getRelatedId() != $order->getId() ||
+                        $syncData->getRelatedId() != $orderId ||
                         $syncData->getType() != \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_ORDER) {
                         $url = $this->_assetRepository->getUrlWithParams(
                             'SqualoMail_SqmMcMagentoTwo::images/no.png',
@@ -144,7 +144,7 @@ class Monkey extends Column
                                     $params
                                 );
                                 $text = __('Error');
-                                $orderError = $this->_getError($order->getId(), $order->getStoreId());
+                                $orderError = $this->_getError($orderId, $orderStoreId);
                                 if ($orderError) {
                                     $alt = $orderError->getErrors();
                                 }
@@ -170,7 +170,7 @@ class Monkey extends Column
                         }
                     }
                     $item['sqmmc_sync'] =
-                        "<div style='width: 50%;margin: 0 auto;text-align: center'><img src='".$url."' style='border: none; width: 5rem; text-align: center; max-width: 100%' title='$alt' />$text</div>";
+                        "<div style='width: 50%;margin: 0 auto;text-align: center'><img src='".$url."' style='border: none; width: 5rem; text-align: center; max-width: 100%' title='" . htmlspecialchars((string)$alt, ENT_QUOTES) . "' />$text</div>";
                     if ($status) {
                         $url = $this->_assetRepository->getUrlWithParams('SqualoMail_SqmMcMagentoTwo::images/freddie.png', $params);
                         $item['sqmmc_status'] =
@@ -181,6 +181,24 @@ class Monkey extends Column
         }
 
         return $dataSource;
+    }
+    /**
+     * @param array $orderIds
+     * @return \SqualoMail\SqmMcMagentoTwo\Model\SqmMcSyncEcommerce[] keyed by "<sqmmc store id>_<order id>"
+     */
+    private function _getSyncRows(array $orderIds)
+    {
+        $rows = [];
+        if (!$orderIds) {
+            return $rows;
+        }
+        $collection = $this->_syncCommerceCF->create()
+            ->addFieldToFilter('type', \SqualoMail\SqmMcMagentoTwo\Helper\Data::IS_ORDER)
+            ->addFieldToFilter('related_id', ['in' => $orderIds]);
+        foreach ($collection as $row) {
+            $rows[$row->getSqmmcStoreId() . '_' . $row->getRelatedId()] = $row;
+        }
+        return $rows;
     }
     private function _getError($orderId, $storeId)
     {

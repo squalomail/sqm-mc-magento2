@@ -5,6 +5,7 @@
         <sqmmc>
             <general>
                 <disable_error_log>0</disable_error_log>
+                <load_site_script>1</load_site_script>
             </general>
             <ecommerce>
                 <sync_categories>0</sync_categories>
